@@ -1,0 +1,61 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { HiOutlineBell, HiOutlineChatAlt2 } from "react-icons/hi";
+import { SIDEBAR_LINKS } from "../../constants/navigation";
+import logo from "../../assets/icons/Logo.svg";
+
+const Sidebar: React.FC = () => {
+  return (
+    <aside className="w-[102px] h-screen bg-white border-r border-gray-100 flex flex-col items-center py-8 shrink-0">
+      {/* Top: Logo */}
+      <div className="mb-12">
+        <img src={logo} alt="InstaVisit" className="w-12 h-12" />
+      </div>
+
+      {/* Middle: Navigation Links */}
+      <nav className="flex flex-col gap-8 flex-1">
+        {SIDEBAR_LINKS.map((link) => (
+          <NavLink
+            key={link.path}
+            to={link.path}
+            className={({ isActive }) =>
+              `flex flex-col items-center gap-1 transition-colors ${
+                isActive
+                  ? "text-[#705295]"
+                  : "text-[#999999] hover:text-[#705295]"
+              }`
+            }
+          >
+            <link.icon size={28} />
+            <span className="text-[12px] font-medium">{link.label}</span>
+          </NavLink>
+        ))}
+      </nav>
+
+      {/* Bottom: Utilities & Profile */}
+      <div className="flex flex-col items-center gap-6 mt-auto">
+        {/* Notification with Badge */}
+        <button className="relative p-3 rounded-full border border-gray-100 text-[#999999] hover:bg-gray-50 transition-all">
+          <HiOutlineBell size={24} />
+          <span className="absolute top-3 right-3 w-3 h-3 bg-[#F76D00] border-2 border-white rounded-full"></span>
+        </button>
+
+        {/* Chat */}
+        <button className="p-3 rounded-full border border-gray-100 text-[#999999] hover:bg-gray-50 transition-all">
+          <HiOutlineChatAlt2 size={24} />
+        </button>
+
+        {/* Profile Avatar */}
+        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-100 mt-2">
+          <img
+            src="https://via.placeholder.com/150"
+            alt="Doctor Profile"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </aside>
+  );
+};
+
+export default Sidebar;
