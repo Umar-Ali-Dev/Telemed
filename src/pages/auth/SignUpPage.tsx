@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Heading from "../../components/ui/headings/Heading";
 import InputField from "../../components/ui/inputs/InputField";
 import Button from "../../components/ui/button/Button";
-
 import SelectField from "../../components/ui/inputs/SelectField";
+import CheckboxField from "../../components/ui/inputs/CheckboxField";
 
 interface SignUpPageProps {
   onNavigate: (page: "login") => void;
@@ -18,7 +18,36 @@ const SignUpPage: React.FC<SignUpPageProps> = ({
   onNavigate,
   onSignUpSuccess,
 }) => {
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, watch, setValue } = useForm();
+
+  const sameAsHomeAddress = watch("sameAsHomeAddress");
+  const homeStreetAddress = watch("homeStreetAddress");
+  const homeCity = watch("homeCity");
+  const homeState = watch("homeState");
+  const homeZipCode = watch("homeZipCode");
+
+  useEffect(() => {
+    if (sameAsHomeAddress) {
+      const combinedAddress = [
+        homeStreetAddress,
+        homeCity,
+        homeState,
+        homeZipCode,
+      ]
+        .filter(Boolean)
+        .join(", ");
+      setValue("practiceAddress", combinedAddress);
+    } else {
+      setValue("practiceAddress", "");
+    }
+  }, [
+    sameAsHomeAddress,
+    homeStreetAddress,
+    homeCity,
+    homeState,
+    homeZipCode,
+    setValue,
+  ]);
 
   const onSubmit = (data: any) => {
     const loadToast = toast.loading("Processing request...");
@@ -32,13 +61,14 @@ const SignUpPage: React.FC<SignUpPageProps> = ({
     <div className="max-h-[80vh] overflow-y-auto pr-2 custom-scrollbar">
       <Heading title="Sign Up" className="mb-6 text-center" />
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        {/* Personal Information */}
         <div className="grid grid-cols-2 gap-4">
           <InputField
             label="First name"
             name="firstName"
             type="text"
             control={control}
-            placeholder="First name"
+            placeholder="Enter your first name"
             required
           />
           <InputField
@@ -46,7 +76,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({
             name="lastName"
             type="text"
             control={control}
-            placeholder="Last name"
+            placeholder="Enter your last name"
             required
           />
         </div>
@@ -55,7 +85,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({
           name="email"
           type="email"
           control={control}
-          placeholder="email@example.com"
+          placeholder="e.g. abc_john@email.com"
           required
         />
         <InputField
@@ -66,14 +96,102 @@ const SignUpPage: React.FC<SignUpPageProps> = ({
           placeholder="(000) 000 0000"
           required
         />
+
+        {/* Professional Information */}
+        <InputField
+          label="NPI Number"
+          name="npiNumber"
+          type="tel"
+          control={control}
+          placeholder="(000) 000 0000"
+          required
+        />
         <SelectField
           label="Credentials"
           name="credentials"
           control={control}
           options={[{ value: "md", label: "MD" }]}
-          placeholder="Select"
+          placeholder="Select Credentials"
           required
         />
+        <InputField
+          label="License Number"
+          name="licenseNumber"
+          type="text"
+          control={control}
+          placeholder="Enter license number"
+          required
+        />
+        <div className="grid grid-cols-2 gap-4">
+          <InputField
+            label="License Expiration Date"
+            name="licenseExpirationDate"
+            type="text"
+            control={control}
+            placeholder="MM/DD/YYYY"
+            required
+          />
+          <InputField
+            label="License State"
+            name="licenseState"
+            type="text"
+            control={control}
+            placeholder="e.g. AL"
+            required
+          />
+        </div>
+
+        {/* Address Information */}
+        <InputField
+          label="Home Street Address"
+          name="homeStreetAddress"
+          type="text"
+          control={control}
+          placeholder="Enter home street address"
+          required
+        />
+        <div className="grid grid-cols-2 gap-4">
+          <InputField
+            label="City"
+            name="homeCity"
+            type="text"
+            control={control}
+            placeholder="Enter city"
+            required
+          />
+          <InputField
+            label="State"
+            name="homeState"
+            type="text"
+            control={control}
+            placeholder="Enter state"
+            required
+          />
+        </div>
+        <InputField
+          label="Zip Code"
+          name="homeZipCode"
+          type="text"
+          control={control}
+          placeholder="Enter zip code"
+          required
+        />
+        <InputField
+          label="Practice Address"
+          name="practiceAddress"
+          type="text"
+          control={control}
+          placeholder="Enter Practice Address"
+          required
+          disabled={sameAsHomeAddress}
+        />
+        <CheckboxField
+          label="Same as Home Address"
+          name="sameAsHomeAddress"
+          control={control}
+          id="same-as-home-address"
+        />
+
         <div className="mt-4">
           <Button type="submit" label="Send Request" />
         </div>
