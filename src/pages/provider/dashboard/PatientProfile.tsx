@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import SectionWrapper from "../../../components/ui/common/SectionWrapper";
 import Heading from "../../../components/ui/headings/Heading";
 import Button from "../../../components/ui/button/Button";
 import Tabs from "../../../components/ui/tabs/Tabs";
 import PatientDataContent from "./profile-components/PatientDataContent";
+import HealthHistory from "./profile-components/HealthHistory";
 import {
   PATIENT_PROFILE_TABS,
   DUMMY_PATIENT_DATA,
 } from "../../../constants/commonData";
-import SectionWrapper from "../../../components/ui/common/SectionWrapper";
+import MedicationHistory from "./profile-components/MedicationHistory";
 
-const PatientProfile: React.FC = () => {
+const PatientProfile = () => {
   const [activeTab, setActiveTab] = useState(PATIENT_PROFILE_TABS[0]);
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "Patient Info":
+        return <PatientDataContent data={DUMMY_PATIENT_DATA} />;
+      case "Health History":
+        return <HealthHistory />;
+      case "Medication History":
+        return <MedicationHistory />;
+      default:
+        return <PatientDataContent data={DUMMY_PATIENT_DATA} />;
+    }
+  };
 
   return (
     <SectionWrapper>
@@ -29,17 +44,17 @@ const PatientProfile: React.FC = () => {
         />
       </div>
 
-      {/* Reusable Tabs Component */}
+      {/* Tabs Component */}
       <Tabs
         tabs={PATIENT_PROFILE_TABS}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
 
-      {/* Data populated via props for future API integration */}
-      <PatientDataContent data={DUMMY_PATIENT_DATA} />
+      {/* Dynamic Content based on active tab */}
+      <div className="min-h-[300px]">{renderContent()}</div>
 
-      {/* Navigation Actions using the renamed Button component */}
+      {/* Footer Actions */}
       <div className="flex justify-end gap-4 mt-12">
         <Button
           label="Back"
@@ -48,11 +63,7 @@ const PatientProfile: React.FC = () => {
           textColor="text-gray-400"
           className="hover:bg-gray-50 !font-medium"
         />
-        <Button
-          label="Next"
-          width="w-[120px]"
-          bgColor="bg-[#705295]" // Standard theme color from your AuthButton
-        />
+        <Button label="Next" width="w-[120px]" bgColor="bg-[#705295]" />
       </div>
     </SectionWrapper>
   );
