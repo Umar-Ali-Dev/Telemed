@@ -42,6 +42,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
       <style>{`
         .react-datepicker-popper { z-index: 9999 !important; }
+        .react-datepicker-wrapper { width: 100% !important; } /* Fixes full width issue */
         .react-datepicker { 
           background-color: #FFFFFF !important; 
           border: 1px solid #D4CFCC !important; 
@@ -88,6 +89,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                 border ${error ? "border-red-500" : isFocused ? "border-[#705295]" : "border-[#D4CFCC]"}
               `}
             />
+            {/* Positioned inside the input padding */}
             <LuCalendarDays className="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#999999] text-[20px] pointer-events-none" />
             {error && (
               <div className="mt-1">
