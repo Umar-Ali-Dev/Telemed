@@ -1,46 +1,39 @@
 import { useState } from "react";
 import DataTable from "react-data-table-component";
 import {
-  MEDICATION_COLUMNS,
-  MEDICATION_DUMMY_DATA,
+  ALLERGIES_COLUMNS,
+  ALLERGIES_DUMMY_DATA,
 } from "../../../../constants/commonData";
 import { commonTableStyles } from "../../../../components/ui/table/TableStyles";
 import Pagination from "../../../../components/ui/table/Pagination";
 import Heading from "../../../../components/ui/headings/Heading";
 
-const MedicationHistory = () => {
+const Allergies = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-
-  const totalRows = MEDICATION_DUMMY_DATA.length;
-  const totalPages = Math.ceil(totalRows / limit);
 
   return (
     <div className="mt-6">
       <Heading
-        title="Currently Taking Medications"
+        title="Allergies"
         textSize="text-[20px]"
         className="font-bold text-[#1A202C] mb-6"
       />
-
       <div className="rounded-xl overflow-hidden ">
         <DataTable
-          columns={MEDICATION_COLUMNS}
-          data={MEDICATION_DUMMY_DATA.slice((page - 1) * limit, page * limit)}
+          columns={ALLERGIES_COLUMNS}
+          data={ALLERGIES_DUMMY_DATA}
           customStyles={commonTableStyles}
           responsive
           pagination
           paginationComponent={() => (
             <Pagination
-              totalRows={totalRows}
+              totalRows={ALLERGIES_DUMMY_DATA.length}
               currentPage={page}
-              totalPages={totalPages}
+              totalPages={Math.ceil(ALLERGIES_DUMMY_DATA.length / limit)}
               limit={limit}
-              onChangePage={(p: number) => setPage(p)}
-              onChangeLimit={(l: number) => {
-                setLimit(l);
-                setPage(1);
-              }}
+              onChangePage={(p) => setPage(p)}
+              onChangeLimit={(l) => setLimit(l)}
             />
           )}
         />
@@ -49,4 +42,4 @@ const MedicationHistory = () => {
   );
 };
 
-export default MedicationHistory;
+export default Allergies;

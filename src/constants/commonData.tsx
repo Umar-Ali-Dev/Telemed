@@ -1,5 +1,9 @@
 import type { TableColumn } from "react-data-table-component";
-import { HiOutlineDocumentText } from "react-icons/hi";
+import {
+  HiOutlineDocumentText,
+  HiOutlinePencil,
+  HiOutlineTrash,
+} from "react-icons/hi";
 
 export interface PatientRecord {
   id: number;
@@ -266,5 +270,85 @@ export const MEDICATION_DUMMY_DATA = [
       "Take as directed by your physician; regular blood tests required.",
     status: "Currently Taking",
     lastUpdated: "01/20/2024",
+  },
+];
+export const ALLERGIES_COLUMNS = [
+  { name: "Reactant", selector: (row: any) => row.reactant, sortable: true },
+  { name: "Symptoms", selector: (row: any) => row.symptoms },
+  { name: "Severity", selector: (row: any) => row.severity, sortable: true },
+  { name: "Reaction Type", selector: (row: any) => row.type },
+  { name: "On Set Date", selector: (row: any) => row.date, sortable: true },
+];
+
+export const ALLERGIES_DUMMY_DATA = Array(5)
+  .fill({
+    reactant: "Ecallantide",
+    symptoms: "Rash",
+    severity: "High",
+    type: "Allergy",
+    date: "01/22/2024",
+  })
+  .map((item, index) => ({ ...item, id: index + 1 }));
+
+export const ATTACHMENTS_DATA = [
+  {
+    date: "Dec 21, 2025",
+    files: [
+      {
+        id: 1,
+        name: "lab_results_v1.jpeg",
+        url: "https://images.pexels.com/photos/3825539/pexels-photo-3825539.jpeg?auto=compress&cs=tinysrgb&w=400",
+      },
+      {
+        id: 2,
+        name: "prescription_scan.jpeg",
+        url: "https://images.pexels.com/photos/3652103/pexels-photo-3652103.jpeg?auto=compress&cs=tinysrgb&w=400",
+      },
+      {
+        id: 3,
+        name: "xray_report.jpeg",
+        url: "https://images.pexels.com/photos/4226256/pexels-photo-4226256.jpeg?auto=compress&cs=tinysrgb&w=400",
+      },
+    ],
+  },
+  {
+    date: "Jan 21, 2026",
+    files: [
+      {
+        id: 4,
+        name: "blood_test_results.jpeg",
+        url: "https://images.pexels.com/photos/3825527/pexels-photo-3825527.jpeg?auto=compress&cs=tinysrgb&w=400",
+      },
+      {
+        id: 5,
+        name: "clinical_notes.jpeg",
+        url: "https://images.pexels.com/photos/5910956/pexels-photo-5910956.jpeg?auto=compress&cs=tinysrgb&w=400",
+      },
+    ],
+  },
+];
+
+export const PRESCRIPTION_COLUMNS = [
+  {
+    name: "Name/Strength/Form",
+    selector: (row: any) => row.name,
+    sortable: true,
+  },
+  { name: "Instructions", selector: (row: any) => row.instructions, grow: 2 },
+  { name: "RXStatus", selector: (row: any) => row.status },
+  { name: "Qty", selector: (row: any) => row.qty, width: "80px" },
+  {
+    name: "Actions",
+    cell: () => (
+      <div className="flex gap-4">
+        <button className="text-gray-400 hover:text-blue-500">
+          <HiOutlinePencil size={18} />
+        </button>
+        <button className="text-orange-500 hover:text-red-700">
+          <HiOutlineTrash size={18} />
+        </button>
+      </div>
+    ),
+    width: "100px",
   },
 ];

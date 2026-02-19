@@ -10,6 +10,9 @@ import {
   DUMMY_PATIENT_DATA,
 } from "../../../constants/commonData";
 import MedicationHistory from "./profile-components/MedicationHistory";
+import Attachments from "./profile-components/Attachments";
+import Allergies from "./profile-components/Allergies";
+import VisitNote from "./profile-components/VisitNote";
 
 const PatientProfile = () => {
   const [activeTab, setActiveTab] = useState(PATIENT_PROFILE_TABS[0]);
@@ -22,6 +25,12 @@ const PatientProfile = () => {
         return <HealthHistory />;
       case "Medication History":
         return <MedicationHistory />;
+      case "Allergies":
+        return <Allergies />;
+      case "Attachment":
+        return <Attachments />;
+      case "Visit Note":
+        return <VisitNote />;
       default:
         return <PatientDataContent data={DUMMY_PATIENT_DATA} />;
     }
