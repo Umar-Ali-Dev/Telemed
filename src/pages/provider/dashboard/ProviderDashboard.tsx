@@ -18,16 +18,14 @@ import {
 
 const ProviderDashboard: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white p-8 space-y-10">
-      {/* Top Header Section */}
-      <header className="space-y-6">
+    <div className=" bg-white space-y-10">
+      <div className="space-y-6">
         <Heading
           title="Welcome, Dr. Alina Star."
           textSize="text-[24px]"
           className="font-bold"
         />
 
-        {/* Updated Grid: 4 columns, gap of 6 (1.5rem) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
             label="Total Requests"
@@ -52,49 +50,48 @@ const ProviderDashboard: React.FC = () => {
             icon={<HiOutlineHeart size={22} />}
           />
 
-          {/* Empty 4th Column */}
           <div className="hidden lg:block"></div>
         </div>
-      </header>
+      </div>
 
-      {/* Care Queue Section */}
-      <section>
-        <Heading
-          title="Care Queue Visits"
-          textSize="text-[18px]"
-          className="font-bold mb-4"
-        />
-        <div className="rounded-xl overflow-hidden border border-[#D4CFCC]">
-          <DataTable
-            columns={CARE_QUEUE_COLUMNS}
-            data={DUMMY_DATA}
-            customStyles={commonTableStyles}
-            responsive
-          />
-        </div>
-      </section>
-
-      {/* Past Visits Section */}
-      <section>
-        <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col gap-7 bg-base p-4 rounded-2xl">
+        <div>
           <Heading
-            title="Past Visits"
+            title="Care Queue Visits"
             textSize="text-[18px]"
-            className="font-bold"
+            className="font-bold mb-2"
           />
-          <button className="text-gray-400 text-sm font-medium hover:underline">
-            Review All
-          </button>
+          <div className="rounded-xl overflow-hidden border border-[#D4CFCC]">
+            <DataTable
+              columns={CARE_QUEUE_COLUMNS}
+              data={DUMMY_DATA}
+              customStyles={commonTableStyles}
+              responsive
+            />
+          </div>
         </div>
-        <div className="rounded-xl overflow-hidden border border-[#D4CFCC]">
-          <DataTable
-            columns={PAST_VISITS_COLUMNS}
-            data={DUMMY_DATA}
-            customStyles={commonTableStyles}
-            responsive
-          />
+
+        <div>
+          <div className="flex justify-between items-center mb-2">
+            <Heading
+              title="Past Visits"
+              textSize="text-[18px]"
+              className="font-bold"
+            />
+            <button className="text-gray-400 text-sm font-medium hover:underline">
+              Review All
+            </button>
+          </div>
+          <div className="rounded-xl overflow-hidden border border-[#D4CFCC]">
+            <DataTable
+              columns={PAST_VISITS_COLUMNS}
+              data={DUMMY_DATA}
+              customStyles={commonTableStyles}
+              responsive
+            />
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

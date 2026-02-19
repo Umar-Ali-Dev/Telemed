@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+.bg-base {
+  background-color: #fffaf7;
+}
 @layer utilities {
   /* 1. Target the scrollbar and force the track/buttons to disappear */
   .custom-scrollbar::-webkit-scrollbar {
