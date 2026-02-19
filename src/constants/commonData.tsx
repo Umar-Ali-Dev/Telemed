@@ -3,7 +3,10 @@ import {
   HiOutlineDocumentText,
   HiOutlinePencil,
   HiOutlineTrash,
+  HiOutlineUser,
 } from "react-icons/hi";
+import fileTextIcon from "../assets/icons/fileText.svg";
+import userDoctorFillIcon from "../assets/icons/userDoctorFill.svg";
 
 export interface PatientRecord {
   id: number;
@@ -464,7 +467,7 @@ export const GET_PATIENT_COLUMNS = (navigate: (path: string) => void) => [
         onClick={(e) => {
           e.stopPropagation();
           // Adding a query parameter to hide the Visit Note tab
-          navigate(`/dashboard/patient/${row.id}?hideVisitNote=true`);
+          navigate(`/provider/dashboard/patient/${row.id}?hideVisitNote=true`);
         }}
         className="text-[#705295] hover:opacity-80 transition-opacity"
       >
@@ -660,5 +663,173 @@ export const NOTIFICATION_DATA = [
         text: "New attachment: A JPEG image 'myReport.jpeg' has been added to the health history of patient Robert Brown.",
       },
     ],
+  },
+];
+
+// Admin Dashboard - Queue Requests
+export interface QueueRequestRecord {
+  id: number;
+  fullName: string;
+  email: string;
+  phone: string;
+  provider: string;
+  status: string;
+}
+
+export const PROVIDER_COLUMNS = [
+  {
+    name: "Provider Name",
+    selector: (row: any) => row.name,
+    sortable: true,
+    grow: 2,
+  },
+  { name: "Specialty", selector: (row: any) => row.specialty },
+  { name: "Email", selector: (row: any) => row.email, grow: 1.5 },
+  { name: "Phone", selector: (row: any) => row.phone },
+  {
+    name: "Assign",
+    cell: () => (
+      <button className="bg-[#705295] text-white px-4 py-1.5 rounded-lg text-[12px] font-semibold hover:bg-[#5e447e]">
+        Select
+      </button>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
+];
+
+export interface ProviderData {
+  id: number;
+  name: string;
+  specialty: string;
+  email?: string;
+  phone?: string;
+}
+
+export const PROVIDER_DUMMY_DATA: ProviderData[] = [
+  {
+    id: 1,
+    name: "Dr. John Doe",
+    specialty: "Orthopedic surgeon",
+  },
+  {
+    id: 2,
+    name: "Dr. Devid Doe",
+    specialty: "Orthopedic surgeon",
+  },
+  {
+    id: 3,
+    name: "Dr. Khuram Doe",
+    specialty: "Orthopedic surgeon",
+  },
+  {
+    id: 4,
+    name: "Dr. Alina Satr",
+    specialty: "Orthopedic surgeon",
+  },
+  {
+    id: 5,
+    name: "Dr. Alisba Anais",
+    specialty: "Orthopedic surgeon",
+  },
+];
+
+export const GET_QUEUE_REQUESTS_COLUMNS = (
+  onProviderClick?: (row: QueueRequestRecord) => void,
+): TableColumn<QueueRequestRecord>[] => [
+  { name: "Full Name", selector: (row) => row.fullName, sortable: true },
+  { name: "Email", selector: (row) => row.email, sortable: true },
+  { name: "Phone", selector: (row) => row.phone, sortable: true },
+  { name: "Provider", selector: (row) => row.provider, sortable: true },
+  {
+    name: "Status",
+    cell: (row) => {
+      const statusColors: any = {
+        "Waiting provider": "text-[#F97316]",
+        "Waiting Response": "text-[#FBBF24]",
+      };
+      return (
+        <span
+          className={`${statusColors[row.status] || "text-gray-600"} font-medium`}
+        >
+          {row.status}
+        </span>
+      );
+    },
+  },
+  {
+    name: "Action",
+    cell: (row: QueueRequestRecord) => (
+      <div className="flex gap-3 items-center">
+        <img
+          src={userDoctorFillIcon}
+          alt="User Doctor"
+          className="w-5 h-5 cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (onProviderClick) {
+              onProviderClick(row);
+            }
+          }}
+        />
+        <img
+          src={fileTextIcon}
+          alt="File Text"
+          className="w-5 h-5 cursor-pointer hover:opacity-80 transition-opacity"
+        />
+      </div>
+    ),
+  },
+];
+
+export const QUEUE_REQUESTS_DATA: QueueRequestRecord[] = [
+  {
+    id: 1,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "----",
+    status: "Waiting provider",
+  },
+  {
+    id: 2,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
+  },
+  {
+    id: 3,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "----",
+    status: "Waiting provider",
+  },
+  {
+    id: 4,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
+  },
+  {
+    id: 5,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "----",
+    status: "Waiting provider",
+  },
+  {
+    id: 6,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
   },
 ];
