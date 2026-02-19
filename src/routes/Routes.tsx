@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import AuthModal from "../pages/auth/AuthModal";
 import MainLayout from "../layouts/MainLayout";
 import ProviderDashboard from "../pages/provider/dashboard/ProviderDashboard";
-import PatientProfile from "../pages/provider/dashboard/PatientProfile"; //
+import PatientProfile from "../pages/provider/dashboard/PatientProfile";
+import AllVisits from "../pages/provider/dashboard/AllVisits"; // New Page Import
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,11 @@ export const router = createBrowserRouter([
         element: <ProviderDashboard />,
       },
       {
-        path: "/dashboard/patient/:id", // New route for the profile
+        path: "/dashboard/all-visits", // Added route
+        element: <AllVisits />,
+      },
+      {
+        path: "/dashboard/patient/:id",
         element: <PatientProfile />,
       },
     ],

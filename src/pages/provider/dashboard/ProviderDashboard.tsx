@@ -87,7 +87,10 @@ const ProviderDashboard: React.FC = () => {
               textSize="text-[18px]"
               className="font-bold"
             />
-            <button className="text-gray-400 text-sm font-medium hover:underline">
+            <button
+              onClick={() => navigate("/dashboard/all-visits")}
+              className="text-gray-400 text-sm font-medium hover:underline"
+            >
               Review All
             </button>
           </div>
