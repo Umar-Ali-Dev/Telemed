@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { LuClock } from "react-icons/lu";
 
 interface NavbarProps {
@@ -38,13 +39,16 @@ const Navbar: React.FC<NavbarProps> = ({ title }) => {
           </button>
         </div>
 
-        <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+        <Link
+          to="/dashboard/my-account"
+          className="w-10 h-10 rounded-full overflow-hidden border border-gray-200 transition-opacity hover:opacity-80"
+        >
           <img
             src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150&h=150&auto=format&fit=crop"
             alt="User Profile"
             className="w-full h-full object-cover"
           />
-        </div>
+        </Link>
       </div>
     </header>
   );

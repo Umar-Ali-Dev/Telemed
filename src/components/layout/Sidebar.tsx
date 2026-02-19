@@ -16,7 +16,6 @@ const Sidebar: React.FC = () => {
           <NavLink
             key={link.path}
             to={link.path}
-            // end={link.path === "/dashboard"} ensures dashboard is only active on exact path
             end={link.path === "/dashboard"}
             className={({ isActive }) =>
               `flex flex-col items-center gap-1 transition-colors ${
@@ -33,7 +32,6 @@ const Sidebar: React.FC = () => {
       </nav>
 
       <div className="flex flex-col items-center gap-6 mt-auto">
-        {/* Notification Icon */}
         <NavLink
           to="/notifications"
           className={({ isActive }) =>
@@ -45,11 +43,9 @@ const Sidebar: React.FC = () => {
           }
         >
           <HiOutlineBell size={26} />
-          {/* Specific Orange Notification Badge */}
           <span className="absolute top-0 right-0 w-4 h-4 bg-[#F76D00] border-2 border-white rounded-full"></span>
         </NavLink>
 
-        {/* Chat Icon */}
         <NavLink
           to="/chat"
           className={({ isActive }) =>
@@ -63,14 +59,20 @@ const Sidebar: React.FC = () => {
           <HiOutlineChatAlt2 size={26} />
         </NavLink>
 
-        {/* Doctor Profile */}
-        <div className="w-[54px] h-[54px] rounded-full overflow-hidden border-2 border-[#EFE9E6] p-0.5">
+        <NavLink
+          to="/dashboard/my-account"
+          className={({ isActive }) =>
+            `w-[54px] h-[54px] rounded-full overflow-hidden border-2 p-0.5 transition-all ${
+              isActive ? "border-[#705295]" : "border-[#EFE9E6]"
+            }`
+          }
+        >
           <img
             src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150&h=150&auto=format&fit=crop"
             alt="Doctor Profile"
             className="w-full h-full rounded-full object-cover"
           />
-        </div>
+        </NavLink>
       </div>
     </aside>
   );
