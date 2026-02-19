@@ -25,15 +25,15 @@ export const commonTableStyles: TableStyles = {
     style: {
       minHeight: "60px",
       fontSize: "14px",
-      color: "#666666", // Table content text color
-      backgroundColor: "#FFFFFF", // White rows for contrast
+      color: "#666666",
+      backgroundColor: "#FFFFFF",
       borderBottomStyle: "solid",
       borderBottomWidth: "1px",
-      borderBottomColor: "#D4CFCC", // Border between rows
-      boxShadow: "none", // Removing shadows
+      borderBottomColor: "#D4CFCC",
+      boxShadow: "none",
       "&:hover": {
         backgroundColor: "#F9FAFB",
-        cursor: "pointer",
+        cursor: "pointer !important",
       },
     },
   },
@@ -41,6 +41,7 @@ export const commonTableStyles: TableStyles = {
     style: {
       padding: "8px 16px",
       border: "none",
+      cursor: "pointer",
     },
   },
 };

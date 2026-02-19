@@ -6,7 +6,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Heading from "../../components/ui/headings/Heading";
 import InputField from "../../components/ui/inputs/InputField";
-import { AuthButton } from "../../components/ui/button/AuthButton";
+import Button from "../../components/ui/button/Button";
 
 interface ForgotProps {
   onNavigate: (page: any) => void;
@@ -51,7 +51,7 @@ const ForgotPasswordPage: React.FC<ForgotProps> = ({
           />
         </div>
         <div className="mt-4">
-          <AuthButton type="submit" label="Next" />
+          <Button type="submit" label="Next" />
         </div>
       </form>
     </>

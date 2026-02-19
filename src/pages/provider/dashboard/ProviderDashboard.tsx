@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "react-data-table-component";
+import { useNavigate } from "react-router-dom"; // Import navigate hook
 import {
   CARE_QUEUE_COLUMNS,
   PAST_VISITS_COLUMNS,
@@ -15,8 +16,15 @@ import {
   HiOutlineDocumentText,
   HiOutlineHeart,
 } from "react-icons/hi";
+import SectionWrapper from "../../../components/ui/common/SectionWrapper";
 
 const ProviderDashboard: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleRowClick = (row: any) => {
+    navigate(`/dashboard/patient/${row.id}`);
+  };
+
   return (
     <div className=" bg-white space-y-10">
       <div className="space-y-6">
@@ -49,12 +57,10 @@ const ProviderDashboard: React.FC = () => {
             color="#D1D1D1"
             icon={<HiOutlineHeart size={22} />}
           />
-
           <div className="hidden lg:block"></div>
         </div>
       </div>
-
-      <div className="flex flex-col gap-7 bg-base p-4 rounded-2xl">
+      <SectionWrapper padding="p-4" className="flex flex-col gap-7">
         <div>
           <Heading
             title="Care Queue Visits"
@@ -66,6 +72,9 @@ const ProviderDashboard: React.FC = () => {
               columns={CARE_QUEUE_COLUMNS}
               data={DUMMY_DATA}
               customStyles={commonTableStyles}
+              onRowClicked={handleRowClick} // Redirect trigger
+              pointerOnHover // Visual feedback
+              highlightOnHover
               responsive
             />
           </div>
@@ -87,11 +96,14 @@ const ProviderDashboard: React.FC = () => {
               columns={PAST_VISITS_COLUMNS}
               data={DUMMY_DATA}
               customStyles={commonTableStyles}
+              onRowClicked={handleRowClick} // Also redirect for past visits
+              pointerOnHover
+              highlightOnHover
               responsive
             />
           </div>
         </div>
-      </div>
+      </SectionWrapper>
     </div>
   );
 };

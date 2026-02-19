@@ -104,3 +104,34 @@ export const CHART_DATA_BAR = [
   { pv: 85 },
   { pv: 60 },
 ];
+
+// ... existing constants like CARE_QUEUE_COLUMNS, DUMMY_DATA, etc.
+
+export const PATIENT_PROFILE_TABS = [
+  "Patient Info",
+  "Health History",
+  "Medication History",
+  "Allergies",
+  "Attachment",
+  "Visit Note",
+];
+
+export const DUMMY_PATIENT_DATA = {
+  firstName: "Alexis",
+  lastName: "Jhon",
+  email: "alexisjhon@gmail.com",
+  dob: "09/23/2003",
+  phone: "(876) 876 9876",
+  address: "72 Caisson Trace, Spanish Fort, AL, 732846, USA",
+  age: 32,
+  height: "5'7\"",
+  weight: 90,
+  bmi: 24.4,
+  birthGender: "Female",
+  currentGender: "Female",
+  race: "Asian",
+  ethnicity: "South Asian",
+  pronouns: "She/Her",
+  orientation: "Straight",
+  profileImage: "https://i.imgur.com/8K9mS9E.png",
+};

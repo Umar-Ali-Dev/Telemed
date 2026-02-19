@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Heading from "../../components/ui/headings/Heading";
 import InputField from "../../components/ui/inputs/InputField";
-import { AuthButton } from "../../components/ui/button/AuthButton";
+import Button from "../../components/ui/button/Button";
+
 import SelectField from "../../components/ui/inputs/SelectField";
 
 interface SignUpPageProps {
@@ -74,7 +75,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({
           required
         />
         <div className="mt-4">
-          <AuthButton type="submit" label="Send Request" />
+          <Button type="submit" label="Send Request" />
         </div>
       </form>
       <div className="mt-6 text-center text-[14px] text-[#999999] mb-4">
