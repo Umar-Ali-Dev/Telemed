@@ -37,7 +37,7 @@ const AuthModal = () => {
       </div>
 
       <div className="flex min-h-screen w-full items-center justify-center bg-white p-4">
-        <div className="w-full max-w-[550px] p-8 bg-white rounded-lg shadow-sm border border-gray-50">
+        <div className="w-full max-w-[550px] p-8 bg-white rounded-lg">
           {currentPage === "login" && (
             <LoginPage
               onNavigate={navigateTo}
