@@ -16,7 +16,7 @@ const Sidebar: React.FC = () => {
           <NavLink
             key={link.path}
             to={link.path}
-            end={link.path === "/dashboard"}
+            end={link.path === "/provider/dashboard"}
             className={({ isActive }) =>
               `flex flex-col items-center gap-1 transition-colors ${
                 isActive
@@ -33,7 +33,7 @@ const Sidebar: React.FC = () => {
 
       <div className="flex flex-col items-center gap-6 mt-auto">
         <NavLink
-          to="/notifications"
+          to="/provider/notifications"
           className={({ isActive }) =>
             `relative w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
               isActive
@@ -47,7 +47,7 @@ const Sidebar: React.FC = () => {
         </NavLink>
 
         <NavLink
-          to="/chat"
+          to="/provider/chat"
           className={({ isActive }) =>
             `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
               isActive
@@ -60,7 +60,7 @@ const Sidebar: React.FC = () => {
         </NavLink>
 
         <NavLink
-          to="/dashboard/my-account"
+          to="/provider/dashboard/my-account"
           className={({ isActive }) =>
             `w-[54px] h-[54px] rounded-full overflow-hidden border-2 p-0.5 transition-all ${
               isActive ? "border-[#705295]" : "border-[#EFE9E6]"

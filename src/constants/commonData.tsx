@@ -3,6 +3,7 @@ import {
   HiOutlineDocumentText,
   HiOutlinePencil,
   HiOutlineTrash,
+  HiOutlineUser,
 } from "react-icons/hi";
 
 export interface PatientRecord {
@@ -464,7 +465,7 @@ export const GET_PATIENT_COLUMNS = (navigate: (path: string) => void) => [
         onClick={(e) => {
           e.stopPropagation();
           // Adding a query parameter to hide the Visit Note tab
-          navigate(`/dashboard/patient/${row.id}?hideVisitNote=true`);
+          navigate(`/provider/dashboard/patient/${row.id}?hideVisitNote=true`);
         }}
         className="text-[#705295] hover:opacity-80 transition-opacity"
       >
@@ -660,5 +661,98 @@ export const NOTIFICATION_DATA = [
         text: "New attachment: A JPEG image 'myReport.jpeg' has been added to the health history of patient Robert Brown.",
       },
     ],
+  },
+];
+
+// Admin Dashboard - Queue Requests
+export interface QueueRequestRecord {
+  id: number;
+  fullName: string;
+  email: string;
+  phone: string;
+  provider: string;
+  status: string;
+}
+
+export const QUEUE_REQUESTS_COLUMNS: TableColumn<QueueRequestRecord>[] = [
+  { name: "Full Name", selector: (row) => row.fullName, sortable: true },
+  { name: "Email", selector: (row) => row.email, sortable: true },
+  { name: "Phone", selector: (row) => row.phone, sortable: true },
+  { name: "Provider", selector: (row) => row.provider, sortable: true },
+  {
+    name: "Status",
+    cell: (row) => {
+      const statusColors: any = {
+        "Waiting provider": "text-[#F97316]",
+        "Waiting Response": "text-[#FBBF24]",
+      };
+      return (
+        <span
+          className={`${statusColors[row.status] || "text-gray-600"} font-medium`}
+        >
+          {row.status}
+        </span>
+      );
+    },
+  },
+  {
+    name: "Action",
+    cell: () => (
+      <div className="flex gap-3 items-center">
+        <HiOutlineUser className="text-[#705295] text-xl cursor-pointer" />
+        <HiOutlineDocumentText className="text-[#705295] text-xl cursor-pointer" />
+      </div>
+    ),
+  },
+];
+
+export const QUEUE_REQUESTS_DATA: QueueRequestRecord[] = [
+  {
+    id: 1,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "----",
+    status: "Waiting provider",
+  },
+  {
+    id: 2,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
+  },
+  {
+    id: 3,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "----",
+    status: "Waiting provider",
+  },
+  {
+    id: 4,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
+  },
+  {
+    id: 5,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "----",
+    status: "Waiting provider",
+  },
+  {
+    id: 6,
+    fullName: "Jospan Franklin",
+    email: "Jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
   },
 ];

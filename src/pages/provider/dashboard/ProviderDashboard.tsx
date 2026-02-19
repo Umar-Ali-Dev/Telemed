@@ -22,7 +22,7 @@ const ProviderDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleRowClick = (row: any) => {
-    navigate(`/dashboard/patient/${row.id}`);
+    navigate(`/provider/dashboard/patient/${row.id}`);
   };
 
   return (
@@ -88,7 +88,7 @@ const ProviderDashboard: React.FC = () => {
               className="font-bold"
             />
             <button
-              onClick={() => navigate("/dashboard/all-visits")}
+              onClick={() => navigate("/provider/dashboard/all-visits")}
               className="text-gray-400 text-sm font-medium hover:underline"
             >
               Review All

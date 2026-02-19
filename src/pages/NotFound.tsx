@@ -34,7 +34,7 @@ const NotFound: React.FC = () => {
         <div className="pt-4 flex justify-center">
           <Button
             label="Back to Dashboard"
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/provider/dashboard")}
             bgColor="bg-[#705295]"
           />
         </div>
