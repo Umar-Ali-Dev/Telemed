@@ -352,3 +352,83 @@ export const PRESCRIPTION_COLUMNS = [
     width: "100px",
   },
 ];
+
+export const PRESCRIPTION_DUMMY_DATA = [
+  {
+    id: 1,
+    name: "Zoloft 50 MG Tablet",
+    instructions: "Take 1 cap orally once a day",
+    status: "Entered",
+    qty: 30,
+  },
+  {
+    id: 2,
+    name: "Zoloft 50 MG Tablet",
+    instructions: "Take 1 cap orally once a day",
+    status: "Entered",
+    qty: 90,
+  },
+  {
+    id: 3,
+    name: "Zoloft 50 MG Tablet",
+    instructions: "Take 1 cap orally once a day",
+    status: "Entered",
+    qty: 60,
+  },
+  {
+    id: 4,
+    name: "Zoloft 50 MG Tablet",
+    instructions: "Take 1 cap orally once a day",
+    status: "Entered",
+    qty: 60,
+  },
+];
+export const PHARMACY_COLUMNS = [
+  {
+    name: "Pharmacy",
+    selector: (row: any) => row.name,
+    sortable: true,
+    grow: 2,
+  },
+  { name: "City", selector: (row: any) => row.city },
+  { name: "State", selector: (row: any) => row.state, width: "80px" },
+  { name: "Street Address", selector: (row: any) => row.address, grow: 2 },
+  { name: "Zip Code", selector: (row: any) => row.zip },
+  { name: "Phone#", selector: (row: any) => row.phone },
+  { name: "Fax #", selector: (row: any) => row.fax },
+  {
+    name: "Change",
+    cell: () => (
+      <button className="bg-[#705295] text-white px-4 py-1.5 rounded-lg text-[12px] font-semibold hover:bg-[#5e447e]">
+        Select
+      </button>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
+];
+
+export const PHARMACY_DUMMY_DATA = [
+  {
+    id: 1,
+    name: "QS/1 PA TEST PHARMACY",
+    city: "MOORES",
+    state: "SC",
+    address: "110 SOUTH MAIN STREET",
+    zip: "29303",
+    phone: "(877) 290-1812",
+    fax: "(877) 290-1812",
+  },
+  {
+    id: 2,
+    name: "Nob Hill Pharmacy #605",
+    city: "West Sacramento",
+    state: "CA",
+    address: "501 West Capital Avenue",
+    zip: "45685",
+    phone: "(877) 290-1812",
+    fax: "(877) 290-1812",
+  },
+  // Add more rows to match image_1e1520.png
+];
