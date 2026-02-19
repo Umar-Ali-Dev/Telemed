@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
         element: <PatientProfile />,
       },
       {
-        path: "/dashboard/my-account", // New Route
+        path: "dashboard/my-account",
         element: <MyAccount />,
       },
     ],

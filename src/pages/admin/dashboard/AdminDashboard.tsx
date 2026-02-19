@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import {
-  QUEUE_REQUESTS_COLUMNS,
+  GET_QUEUE_REQUESTS_COLUMNS,
   QUEUE_REQUESTS_DATA,
   CHART_DATA_LINE,
   CHART_DATA_BAR,
@@ -18,13 +18,24 @@ import {
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
 import Pagination from "../../../components/ui/table/Pagination";
 import SearchInput from "../../../components/ui/inputs/SearchInput";
+import AssignProviderModal from "../../../components/ui/modals/AssignProviderModal";
 
 const AdminDashboard: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isProviderModalOpen, setIsProviderModalOpen] = useState(false);
+  const [selectedRequest, setSelectedRequest] =
+    useState<QueueRequestRecord | null>(null);
 
   const filteredData = QUEUE_REQUESTS_DATA.filter((item) =>
     item.fullName.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleProviderClick = (row: QueueRequestRecord) => {
+    setSelectedRequest(row);
+    setIsProviderModalOpen(true);
+  };
+
+  const QUEUE_REQUESTS_COLUMNS = GET_QUEUE_REQUESTS_COLUMNS(handleProviderClick);
 
   return (
     <div className="bg-white space-y-10">
@@ -105,6 +116,15 @@ const AdminDashboard: React.FC = () => {
 
         </div>
       </SectionWrapper>
+
+      <AssignProviderModal
+        isOpen={isProviderModalOpen}
+        onClose={() => {
+          setIsProviderModalOpen(false);
+          setSelectedRequest(null);
+        }}
+        requestData={selectedRequest || undefined}
+      />
     </div>
   );
 };
