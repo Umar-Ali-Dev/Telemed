@@ -16,6 +16,8 @@ const Sidebar: React.FC = () => {
           <NavLink
             key={link.path}
             to={link.path}
+            // end={link.path === "/dashboard"} ensures dashboard is only active on exact path
+            end={link.path === "/dashboard"}
             className={({ isActive }) =>
               `flex flex-col items-center gap-1 transition-colors ${
                 isActive
@@ -31,20 +33,42 @@ const Sidebar: React.FC = () => {
       </nav>
 
       <div className="flex flex-col items-center gap-6 mt-auto">
-        <button className="relative p-3 rounded-full border border-gray-100 text-[#999999] hover:bg-gray-50 transition-all">
-          <HiOutlineBell size={24} />
-          <span className="absolute top-3 right-3 w-3 h-3 bg-[#F76D00] border-2 border-white rounded-full"></span>
-        </button>
+        {/* Notification Icon */}
+        <NavLink
+          to="/notifications"
+          className={({ isActive }) =>
+            `relative w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
+              isActive
+                ? "border-[#705295] text-[#705295] bg-[#705295]/5"
+                : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"
+            }`
+          }
+        >
+          <HiOutlineBell size={26} />
+          {/* Specific Orange Notification Badge */}
+          <span className="absolute top-0 right-0 w-4 h-4 bg-[#F76D00] border-2 border-white rounded-full"></span>
+        </NavLink>
 
-        <button className="p-3 rounded-full border border-gray-100 text-[#999999] hover:bg-gray-50 transition-all">
-          <HiOutlineChatAlt2 size={24} />
-        </button>
+        {/* Chat Icon */}
+        <NavLink
+          to="/chat"
+          className={({ isActive }) =>
+            `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
+              isActive
+                ? "border-[#705295] text-[#705295] bg-[#705295]/5"
+                : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"
+            }`
+          }
+        >
+          <HiOutlineChatAlt2 size={26} />
+        </NavLink>
 
-        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-100 mt-2">
+        {/* Doctor Profile */}
+        <div className="w-[54px] h-[54px] rounded-full overflow-hidden border-2 border-[#EFE9E6] p-0.5">
           <img
             src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150&h=150&auto=format&fit=crop"
             alt="Doctor Profile"
-            className="w-full h-full object-cover"
+            className="w-full h-full rounded-full object-cover"
           />
         </div>
       </div>

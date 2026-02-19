@@ -618,3 +618,47 @@ export const PATIENT_LIST_DATA = [
     dob: "01/30/1996",
   },
 ];
+export const NOTIFICATION_DATA = [
+  {
+    date: "14 Jun, 2023.",
+    items: [
+      {
+        id: 1,
+        text: "A new lab report has been uploaded for patient Jospan Franklin regarding the Sinus infection consultation.",
+      },
+      {
+        id: 2,
+        text: "Prescription for Flu (Influenza) has been successfully sent to the requested pharmacy for Dr. Alina's review.",
+      },
+      {
+        id: 3,
+        text: "New message received from John Doe: 'The medication seems to be working well, thank you doctor.'",
+      },
+      {
+        id: 4,
+        text: "Reminder: You have 3 pending consultation notes that need to be finalized by the end of today.",
+      },
+    ],
+  },
+  {
+    date: "10 Jun, 2023.",
+    items: [
+      {
+        id: 5,
+        text: "Patient Jospan Franklin has requested a follow-up appointment for their persistent cough symptoms.",
+      },
+      {
+        id: 6,
+        text: "Urgent: Prescription Failed for Sarah Connor due to an insurance authorization issue at the pharmacy.",
+      },
+      {
+        id: 7,
+        text: "System Update: The patient portal will be undergoing maintenance tonight from 12:00 AM to 02:00 AM.",
+      },
+      {
+        id: 8,
+        text: "New attachment: A JPEG image 'myReport.jpeg' has been added to the health history of patient Robert Brown.",
+      },
+    ],
+  },
+];
