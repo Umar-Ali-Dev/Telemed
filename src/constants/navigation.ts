@@ -10,5 +10,5 @@ export interface NavItem {
 export const SIDEBAR_LINKS: NavItem[] = [
   { label: "Dashboard", path: "/dashboard", icon: LuLayoutDashboard },
   { label: "Consultations", path: "/consultations", icon: LuStethoscope },
-  { label: "Patients", path: "/patients", icon: LuUsers },
+  { label: "Patients", path: "/dashboard/all-patients", icon: LuUsers },
 ];

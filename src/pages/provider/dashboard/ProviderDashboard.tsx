@@ -72,8 +72,8 @@ const ProviderDashboard: React.FC = () => {
               columns={CARE_QUEUE_COLUMNS}
               data={DUMMY_DATA}
               customStyles={commonTableStyles}
-              onRowClicked={handleRowClick} // Redirect trigger
-              pointerOnHover // Visual feedback
+              onRowClicked={handleRowClick}
+              pointerOnHover
               highlightOnHover
               responsive
             />

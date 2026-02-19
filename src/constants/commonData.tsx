@@ -432,3 +432,189 @@ export const PHARMACY_DUMMY_DATA = [
   },
   // Add more rows to match image_1e1520.png
 ];
+
+export const GET_PATIENT_COLUMNS = (navigate: (path: string) => void) => [
+  {
+    name: "First Name",
+    selector: (row: any) => row.firstName,
+    sortable: true,
+  },
+  {
+    name: "Last Name",
+    selector: (row: any) => row.lastName,
+    sortable: true,
+  },
+  {
+    name: "Email",
+    selector: (row: any) => row.email,
+    grow: 1.5,
+  },
+  {
+    name: "Phone",
+    selector: (row: any) => row.phone,
+  },
+  {
+    name: "DOB",
+    selector: (row: any) => row.dob,
+  },
+  {
+    name: "Action",
+    cell: (row: any) => (
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          // Adding a query parameter to hide the Visit Note tab
+          navigate(`/dashboard/patient/${row.id}?hideVisitNote=true`);
+        }}
+        className="text-[#705295] hover:opacity-80 transition-opacity"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+        </svg>
+      </button>
+    ),
+    width: "80px",
+    center: true,
+  },
+];
+
+export const PATIENT_DUMMY_DATA = [
+  {
+    id: 1,
+    firstName: "Jospan",
+    lastName: "Franklin",
+    email: "Jospan@gmail.com",
+    phone: "123 123 1234",
+    dob: "08/23/2002",
+  },
+  {
+    id: 2,
+    firstName: "Jospan",
+    lastName: "Franklin",
+    email: "Jospan@gmail.com",
+    phone: "123 123 1234",
+    dob: "08/23/2002",
+  },
+];
+export const PATIENT_LIST_DATA = [
+  {
+    id: 1,
+    firstName: "Jospan",
+    lastName: "Franklin",
+    email: "jospan@gmail.com",
+    phone: "123 123 1234",
+    dob: "08/23/2002",
+  },
+  {
+    id: 2,
+    firstName: "Alina",
+    lastName: "Star",
+    email: "alina@gmail.com",
+    phone: "123 123 1234",
+    dob: "11/24/1995",
+  },
+  {
+    id: 3,
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phone: "123 123 1234",
+    dob: "01/12/1988",
+  },
+  {
+    id: 4,
+    firstName: "Sarah",
+    lastName: "Connor",
+    email: "sarah@gmail.com",
+    phone: "123 123 1234",
+    dob: "05/05/1990",
+  },
+  {
+    id: 5,
+    firstName: "Robert",
+    lastName: "Brown",
+    email: "robert@gmail.com",
+    phone: "123 123 1234",
+    dob: "12/10/1985",
+  },
+  {
+    id: 6,
+    firstName: "Emily",
+    lastName: "Davis",
+    email: "emily@gmail.com",
+    phone: "123 123 1234",
+    dob: "03/22/1992",
+  },
+  {
+    id: 7,
+    firstName: "Michael",
+    lastName: "Wilson",
+    email: "michael@gmail.com",
+    phone: "123 123 1234",
+    dob: "07/14/1982",
+  },
+  {
+    id: 8,
+    firstName: "Jessica",
+    lastName: "Taylor",
+    email: "jessica@gmail.com",
+    phone: "123 123 1234",
+    dob: "09/30/1994",
+  },
+  {
+    id: 9,
+    firstName: "David",
+    lastName: "Anderson",
+    email: "david@gmail.com",
+    phone: "123 123 1234",
+    dob: "11/05/1979",
+  },
+  {
+    id: 10,
+    firstName: "Ashley",
+    lastName: "Thomas",
+    email: "ashley@gmail.com",
+    phone: "123 123 1234",
+    dob: "02/18/1991",
+  },
+  {
+    id: 11,
+    firstName: "James",
+    lastName: "Jackson",
+    email: "james@gmail.com",
+    phone: "123 123 1234",
+    dob: "06/25/1984",
+  },
+  {
+    id: 12,
+    firstName: "Linda",
+    lastName: "White",
+    email: "linda@gmail.com",
+    phone: "123 123 1234",
+    dob: "10/08/1987",
+  },
+  {
+    id: 13,
+    firstName: "Chris",
+    lastName: "Harris",
+    email: "chris@gmail.com",
+    phone: "123 123 1234",
+    dob: "04/12/1993",
+  },
+  {
+    id: 14,
+    firstName: "Karen",
+    lastName: "Martin",
+    email: "karen@gmail.com",
+    phone: "123 123 1234",
+    dob: "08/19/1981",
+  },
+  {
+    id: 15,
+    firstName: "Matthew",
+    lastName: "Thompson",
+    email: "matthew@gmail.com",
+    phone: "123 123 1234",
+    dob: "01/30/1996",
+  },
+];

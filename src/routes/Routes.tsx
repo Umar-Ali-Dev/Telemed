@@ -2,8 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import AuthModal from "../pages/auth/AuthModal";
 import MainLayout from "../layouts/MainLayout";
 import ProviderDashboard from "../pages/provider/dashboard/ProviderDashboard";
-import PatientProfile from "../pages/provider/dashboard/PatientProfile";
 import AllVisits from "../pages/provider/dashboard/AllVisits"; // New Page Import
+import AllPatients from "../pages/provider/dashboard/AllPatients";
+import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/all-visits", // Added route
         element: <AllVisits />,
       },
+      { path: "/dashboard/all-patients", element: <AllPatients /> },
       {
         path: "/dashboard/patient/:id",
         element: <PatientProfile />,
