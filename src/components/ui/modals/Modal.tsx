@@ -32,7 +32,7 @@ const Modal = ({
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
         </Transition.Child>
 
-        <div className="fixed inset-0 overflow-y-auto">
+        <div className="fixed inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
           <div className="flex min-h-full items-center justify-center p-4">
             <Transition.Child
               as={Fragment}
@@ -44,9 +44,10 @@ const Modal = ({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                className={`w-full ${width} transform overflow-hidden rounded-[25px] bg-white text-left align-middle shadow-2xl transition-all`}
+                className={`w-full ${width} transform overflow-hidden rounded-[25px] bg-white text-left align-middle shadow-2xl transition-all flex flex-col max-h-[90vh]`}
               >
-                <div className="flex justify-between items-center p-6 border-b border-gray-100">
+                {/* Fixed Header */}
+                <div className="flex justify-between items-center p-6 border-b border-gray-100 bg-white">
                   <Dialog.Title
                     as="h3"
                     className="text-[22px] font-bold text-[#1A202C]"
@@ -60,7 +61,23 @@ const Modal = ({
                     <IoCloseOutline size={28} />
                   </button>
                 </div>
-                <div className="p-8">{children}</div>
+
+                {/* Content Area - Scrollbar Hidden */}
+                <div
+                  className="p-8 overflow-y-auto overflow-x-hidden flex-1 no-scrollbar"
+                  style={{
+                    scrollbarWidth: "none" /* Firefox */,
+                    msOverflowStyle: "none" /* IE/Edge */,
+                  }}
+                >
+                  {/* Webkit specific style for Chrome/Safari */}
+                  <style>{`
+                    .no-scrollbar::-webkit-scrollbar {
+                      display: none;
+                    }
+                  `}</style>
+                  {children}
+                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>

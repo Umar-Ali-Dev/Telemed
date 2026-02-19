@@ -15,17 +15,17 @@ import InfoCard from "../../../../components/ui/cards/InfoCard";
 import Heading from "../../../../components/ui/headings/Heading";
 import { commonTableStyles } from "../../../../components/ui/table/TableStyles";
 import { PRESCRIPTION_DUMMY_DATA } from "../../../../constants/commonData";
-import UpdatePharmacyModal from "../../../../components/ui/modals/UpdatePharmacyModal";
 import PrescriptionBuilderModal from "../../../../components/ui/modals/PrescriptionBuilderModal";
+import UpdatePharmacyModal from "../../../../components/ui/modals/UpdatePharmacyModal";
 
 const VisitNote = () => {
   const [isRxModalOpen, setRxModalOpen] = useState(false);
   const [isPharmacyModalOpen, setPharmacyModalOpen] = useState(false);
   const [selectedRx, setSelectedRx] = useState<any>(null);
 
-  const handleEditRx = (row: any) => {
+  const handleEditRow = (row: any) => {
     setSelectedRx(row);
-    setRxModalOpen(true);
+    setPharmacyModalOpen(true);
   };
 
   const handleAddNewRx = () => {
@@ -49,7 +49,7 @@ const VisitNote = () => {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              handleEditRx(row);
+              handleEditRow(row);
             }}
             className="text-gray-400 hover:text-blue-500"
           >
@@ -132,7 +132,7 @@ const VisitNote = () => {
             columns={PRESCRIPTION_COLUMNS}
             data={PRESCRIPTION_DUMMY_DATA}
             customStyles={commonTableStyles}
-            onRowClicked={handleEditRx}
+            onRowClicked={handleEditRow}
             pointerOnHover
             highlightOnHover
           />
