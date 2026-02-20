@@ -1,9 +1,9 @@
 import type { TableColumn } from "react-data-table-component";
 import {
-  HiOutlineDocumentText,
   HiOutlinePencil,
   HiOutlineTrash,
 } from "react-icons/hi";
+import fileTextIcon from "../assets/icons/fileText.svg";
 
 export interface PatientRecord {
   id: number;
@@ -31,7 +31,7 @@ export const CARE_QUEUE_COLUMNS: TableColumn<PatientRecord>[] = [
     cell: () => (
       <div className="flex gap-3">
         <button className="text-[#F97316] font-semibold text-sm">Remove</button>
-        <button className="bg-[#EBE5F1] text-[#705295] px-4 py-1 rounded-lg font-semibold text-sm">
+        <button className="bg-[#EBE5F1] text-[#705295] border border-[#705295] px-4 py-1 rounded-[30px] font-semibold text-sm">
           Accept
         </button>
       </div>
@@ -65,7 +65,11 @@ export const PAST_VISITS_COLUMNS: TableColumn<PatientRecord>[] = [
   {
     name: "Action",
     cell: () => (
-      <HiOutlineDocumentText className="text-[#705295] text-2xl cursor-pointer" />
+      <img 
+        src={fileTextIcon} 
+        alt="Document" 
+        className="cursor-pointer w-6 h-6" 
+      />
     ),
   },
 ];
@@ -459,22 +463,13 @@ export const GET_PATIENT_COLUMNS = (navigate: (path: string) => void) => [
   },
   {
     name: "Action",
-    cell: (row: any) => (
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          // Adding a query parameter to hide the Visit Note tab
-          navigate(`/dashboard/patient/${row.id}?hideVisitNote=true`);
-        }}
-        className="text-[#705295] hover:opacity-80 transition-opacity"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
-        </svg>
-      </button>
+    cell: () => (
+      <img 
+        src={fileTextIcon} 
+        alt="Document" 
+        className="cursor-pointer w-6 h-6" 
+      />
     ),
-    width: "80px",
-    center: true,
   },
 ];
 

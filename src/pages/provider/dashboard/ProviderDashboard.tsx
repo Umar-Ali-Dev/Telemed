@@ -11,12 +11,10 @@ import {
 import Heading from "../../../components/ui/headings/Heading";
 import { commonTableStyles } from "../../../components/ui/table/TableStyles";
 import StatCard from "../../../components/ui/cards/StatCard";
-import {
-  HiOutlineBriefcase,
-  HiOutlineDocumentText,
-  HiOutlineHeart,
-} from "react-icons/hi";
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
+import briefcaseMedicalIcon from "../../../assets/icons/briefcaseMedical.svg";
+import fileWaveformIcon from "../../../assets/icons/fileWaveform.svg";
+import heartPulseIcon from "../../../assets/icons/heartPulse.svg";
 
 const ProviderDashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -40,14 +38,14 @@ const ProviderDashboard: React.FC = () => {
             value="18"
             chartType="bar"
             chartData={CHART_DATA_BAR}
-            icon={<HiOutlineBriefcase size={22} />}
+            icon={<img src={briefcaseMedicalIcon} alt="Briefcase" className="w-[22px] h-[22px]" />}
           />
           <StatCard
             label="In Queue"
             value="12"
             chartType="line"
             chartData={CHART_DATA_LINE}
-            icon={<HiOutlineDocumentText size={22} />}
+            icon={<img src={fileWaveformIcon} alt="File Waveform" className="w-[22px] h-[22px]" />}
           />
           <StatCard
             label="Completed"
@@ -55,7 +53,7 @@ const ProviderDashboard: React.FC = () => {
             chartType="line"
             chartData={CHART_DATA_LINE}
             color="#D1D1D1"
-            icon={<HiOutlineHeart size={22} />}
+            icon={<img src={heartPulseIcon} alt="Heart Pulse" className="w-[22px] h-[22px]" />}
           />
           <div className="hidden lg:block"></div>
         </div>
