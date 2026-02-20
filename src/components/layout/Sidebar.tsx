@@ -7,12 +7,8 @@ import logo from "../../assets/icons/Logo.svg";
 
 const Sidebar: React.FC = () => {
   const { pathname } = useLocation();
-
-  // Determine role based on the URL prefix
   const isAdmin = pathname.startsWith("/admin");
   const links = isAdmin ? ADMIN_LINKS : PROVIDER_LINKS;
-
-  // Track which sub-menu is open
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
 
   const toggleMenu = (label: string) => {
@@ -23,18 +19,20 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <aside className="w-[102px] h-screen bg-white border-r border-gray-100 flex flex-col items-center py-8 shrink-0 overflow-y-auto no-scrollbar">
-      {/* Brand Logo */}
+    <aside className="w-[102px] h-screen bg-white border-r border-gray-100 flex flex-col items-center py-8 shrink-0 overflow-y-auto scrollbar-hide">
+      <style>{`
+        aside::-webkit-scrollbar { display: none; }
+        aside { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
+
       <div className="mb-12">
         <img src={logo} alt="InstaVisit" className="w-12 h-12" />
       </div>
 
-      {/* Navigation Links */}
       <nav className="flex flex-col gap-8 flex-1 w-full">
         {links.map((link) => (
           <div key={link.label} className="flex flex-col items-center w-full">
             {link.subItems ? (
-              // Collapsible Menu for Admin
               <div className="flex flex-col items-center w-full">
                 <button
                   onClick={() => toggleMenu(link.label)}
@@ -51,7 +49,6 @@ const Sidebar: React.FC = () => {
                   )}
                 </button>
 
-                {/* Sub-items list */}
                 {openMenus[link.label] && (
                   <div className="flex flex-col items-center gap-3 mt-4 w-full bg-[#F9F9F9] py-3">
                     {link.subItems.map((sub) => (
@@ -71,7 +68,6 @@ const Sidebar: React.FC = () => {
                 )}
               </div>
             ) : (
-              // Standard Link
               <NavLink
                 to={link.path!}
                 end={
@@ -94,8 +90,7 @@ const Sidebar: React.FC = () => {
         ))}
       </nav>
 
-      {/* Bottom Action Icons */}
-      <div className="flex flex-col items-center gap-6 mt-auto pt-8">
+      <div className="flex flex-col items-center gap-6 mt-12 pt-12 border-t border-gray-50 w-full">
         <NavLink
           to="/notifications"
           className={({ isActive }) =>

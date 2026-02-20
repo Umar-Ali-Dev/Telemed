@@ -88,7 +88,143 @@ export const DUMMY_DATA: PatientRecord[] = [
     status: "Pending Review",
   },
 ];
-
+export const ADMIN_DASHBOARD_DATA = [
+  {
+    id: 1,
+    name: "Jospan Franklin",
+    email: "jospan@gmail.com",
+    phone: "(987) 876 8768",
+    provider: "----",
+    status: "Waiting provider",
+    updatedAt: "02/10/2026",
+  },
+  {
+    id: 2,
+    name: "Sarah Jenkins",
+    email: "s.jenkins@outlook.com",
+    phone: "(415) 555 0123",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
+    updatedAt: "02/12/2026",
+  },
+  {
+    id: 3,
+    name: "Michael Chen",
+    email: "mchen88@gmail.com",
+    phone: "(212) 555 9876",
+    provider: "Dr. Marcus Thorne",
+    status: "Scheduled",
+    updatedAt: "02/14/2026",
+  },
+  {
+    id: 4,
+    name: "Elena Rodriguez",
+    email: "elena.r@healthmail.com",
+    phone: "(305) 555 4433",
+    provider: "----",
+    status: "Waiting provider",
+    updatedAt: "02/15/2026",
+  },
+  {
+    id: 5,
+    name: "David Wilson",
+    email: "dwilson@techcorp.com",
+    phone: "(617) 555 2211",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
+    updatedAt: "02/15/2026",
+  },
+  {
+    id: 6,
+    name: "Amanda Brooks",
+    email: "abrooks@gmail.com",
+    phone: "(512) 555 8899",
+    provider: "Dr. Sarah Miller",
+    status: "Completed",
+    updatedAt: "02/16/2026",
+  },
+  {
+    id: 7,
+    name: "Robert Taylor",
+    email: "rtaylor@provider.net",
+    phone: "(702) 555 7766",
+    provider: "----",
+    status: "Waiting provider",
+    updatedAt: "02/17/2026",
+  },
+  {
+    id: 8,
+    name: "Lisa Thompson",
+    email: "lisa.t@icloud.com",
+    phone: "(206) 555 3344",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
+    updatedAt: "02/18/2026",
+  },
+  {
+    id: 9,
+    name: "Kevin Adams",
+    email: "kadams@gmail.com",
+    phone: "(404) 555 5500",
+    provider: "Dr. James Lee",
+    status: "In Progress",
+    updatedAt: "02/18/2026",
+  },
+  {
+    id: 10,
+    name: "Sophie Garcia",
+    email: "s.garcia@gmail.com",
+    phone: "(619) 555 1122",
+    provider: "----",
+    status: "Waiting provider",
+    updatedAt: "02/19/2026",
+  },
+  {
+    id: 11,
+    name: "James Anderson",
+    email: "j.anderson@yahoo.com",
+    phone: "(312) 555 4455",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
+    updatedAt: "02/19/2026",
+  },
+  {
+    id: 12,
+    name: "Rachel Moore",
+    email: "rachel.m@webmail.com",
+    phone: "(215) 555 6677",
+    provider: "Dr. Robert Fox",
+    status: "Completed",
+    updatedAt: "02/20/2026",
+  },
+  {
+    id: 13,
+    name: "Brian White",
+    email: "brian.white@gmail.com",
+    phone: "(602) 555 8800",
+    provider: "----",
+    status: "Waiting provider",
+    updatedAt: "02/20/2026",
+  },
+  {
+    id: 14,
+    name: "Michelle King",
+    email: "m.king@outlook.com",
+    phone: "(503) 555 9911",
+    provider: "Dr. Alina Star",
+    status: "Waiting Response",
+    updatedAt: "02/20/2026",
+  },
+  {
+    id: 15,
+    name: "Jason Scott",
+    email: "jason.scott@gmail.com",
+    phone: "(415) 555 0099",
+    provider: "Dr. Emily Blunt",
+    status: "Scheduled",
+    updatedAt: "02/20/2026",
+  },
+];
 export const CHART_DATA_LINE = [
   { pv: 10 },
   { pv: 20 },
@@ -665,3 +801,70 @@ export const NOTIFICATION_DATA = [
 export const FORM_LAYOUT_CLASS = "max-w-full lg:max-w-[650px] space-y-6";
 export const BUTTON_GROUP_CLASS =
   "flex justify-end gap-4 mt-12 pt-4 border-t border-gray-50";
+
+import { HiOutlineUser } from "react-icons/hi";
+
+export const ADMIN_QUEUE_COLUMNS = [
+  {
+    name: "Full Name",
+    selector: (row: any) => row.name,
+    sortable: true,
+    cell: (row: any) => (
+      <span className="font-medium text-[#271100]">{row.name}</span>
+    ),
+  },
+  {
+    name: "Email",
+    selector: (row: any) => row.email,
+    sortable: true,
+  },
+  {
+    name: "Phone",
+    selector: (row: any) => row.phone,
+  },
+  {
+    name: "Provider",
+    selector: (row: any) => row.provider || "----",
+    sortable: true,
+    cell: (row: any) => (
+      <span className="text-[#A3948C]">{row.provider || "----"}</span>
+    ),
+  },
+  {
+    name: "Status",
+    selector: (row: any) => row.status,
+    sortable: true,
+    cell: (row: any) => {
+      // Logic for status colors from image_b88118.png
+      const getStatusColor = (status: string) => {
+        switch (status?.toLowerCase()) {
+          case "waiting provider":
+            return "text-[#F76D00]";
+          case "waiting response":
+            return "text-[#FFC107]";
+          default:
+            return "text-[#705295]";
+        }
+      };
+      return (
+        <span className={`font-semibold ${getStatusColor(row.status)}`}>
+          {row.status}
+        </span>
+      );
+    },
+  },
+  {
+    name: "Action",
+    button: true,
+    cell: (row: any) => (
+      <div className="flex items-center gap-3">
+        <button className="text-[#271100] hover:text-[#705295]">
+          <HiOutlineUser size={20} />
+        </button>
+        <button className="text-[#705295] hover:opacity-80">
+          <HiOutlineDocumentText size={20} />
+        </button>
+      </div>
+    ),
+  },
+];

@@ -12,9 +12,9 @@ import Notifications from "../pages/notifications/Notifications";
 import AllPatients from "../pages/provider/dashboard/AllPatients";
 import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
 import { MyAccount } from "../pages/provider/dashboard/account/MyAccount";
+import AdminDashboard from "../pages/admin/AdminDashboard";
 
 // Admin Page Placeholders (Create these files in src/pages/admin/)
-const AdminDashboard = () => <div>Admin Dashboard</div>;
 const AllProviders = () => <div>All Providers</div>;
 const ProviderRequests = () => <div>Provider Requests</div>;
 const PrescriptionsManagement = () => <div>Prescriptions Management</div>;
