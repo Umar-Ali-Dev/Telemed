@@ -5,8 +5,10 @@ import ProviderDashboard from "../pages/provider/dashboard/ProviderDashboard";
 import AdminDashboard from "../pages/admin/dashboard/AdminDashboard";
 import AllVisits from "../pages/provider/dashboard/AllVisits";
 import AllPatients from "../pages/provider/dashboard/AllPatients";
-import { MyAccount } from "../pages/provider/dashboard/account/MyAccount"; // New Import
+import { MyAccount } from "../pages/provider/dashboard/account/MyAccount";
 import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
+import Notifications from "../pages/notifications/Notifications";
+import Chat from "../pages/chat/Chat";
 import NotFound from "../pages/NotFound";
 
 export const router = createBrowserRouter([
@@ -25,6 +27,14 @@ export const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <AdminDashboard />,
+      },
+      {
+        path: "notifications",
+        element: <Notifications />,
+      },
+      {
+        path: "chat",
+        element: <Chat />,
       },
     ],
   },
@@ -54,6 +64,14 @@ export const router = createBrowserRouter([
       {
         path: "dashboard/my-account",
         element: <MyAccount />,
+      },
+      {
+        path: "notifications",
+        element: <Notifications />,
+      },
+      {
+        path: "chat",
+        element: <Chat />,
       },
     ],
   },
