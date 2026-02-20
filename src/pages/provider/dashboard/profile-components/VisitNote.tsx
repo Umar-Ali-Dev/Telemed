@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import {
-  HiOutlineShieldCheck,
-  HiOutlinePencilAlt,
   HiOutlinePlus,
   HiOutlineRefresh,
   HiOutlineDocumentText,
 } from "react-icons/hi";
+import shieldPlusIcon from "../../../../assets/icons/shieldPlus.svg";
+import pillIcon from "../../../../assets/icons/pill.svg";
 import DataTable from "react-data-table-component";
 import InfoCard from "../../../../components/ui/cards/InfoCard";
 import Heading from "../../../../components/ui/headings/Heading";
@@ -45,12 +45,12 @@ const VisitNote = () => {
       <div className="lg:col-span-8 space-y-8">
         <div className="flex gap-4">
           <InfoCard
-            icon={<HiOutlineShieldCheck size={20} />}
+            icon={<img src={shieldPlusIcon} alt="Shield" className="w-5 h-5" />}
             title="Condition & Symptoms"
             content="Fever, Fatigue, Chest Pain"
           />
           <InfoCard
-            icon={<HiOutlinePencilAlt size={20} />}
+            icon={<img src={pillIcon} alt="Pill" className="w-5 h-5" />}
             title="Medications Needed"
             content="I need the refill of Zoloft."
           />

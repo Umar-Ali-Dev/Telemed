@@ -11,6 +11,8 @@ import {
   PHARMACY_COLUMNS,
   PHARMACY_DUMMY_DATA,
 } from "../../../constants/commonData";
+import mapImage from "../../../assets/icons/map.svg";
+import pharmacyIcon from "../../../assets/icons/pharmacy.svg";
 
 interface UpdatePharmacyProps {
   isOpen: boolean;
@@ -67,7 +69,11 @@ const UpdatePharmacyModal = ({ isOpen, onClose }: UpdatePharmacyProps) => {
               </label>
               <div className="bg-[#E8F8F0] p-6 rounded-[25px] border border-[#27C273]/10 space-y-3">
                 <p className="text-[#27C273] font-bold text-[16px] flex items-center gap-2">
-                  <span className="text-[20px]">🌿</span> Pharmacy:
+                  <img 
+                    src={pharmacyIcon} 
+                    alt="Pharmacy" 
+                    className="w-5 h-5" 
+                  /> Pharmacy:
                   <span className="text-[#271100]"> ABC Hawaii Pharmacy.</span>
                 </p>
                 <div className="space-y-2 text-[14px] text-[#271100] font-medium">
@@ -90,7 +96,7 @@ const UpdatePharmacyModal = ({ isOpen, onClose }: UpdatePharmacyProps) => {
 
           <div className="rounded-[25px] overflow-hidden border border-[#D4CFCC] h-[340px] shadow-sm">
             <img
-              src="https://picsum.photos/id/164/800/400"
+              src={mapImage}
               className="w-full h-full object-cover"
               alt="Map View"
             />
@@ -103,7 +109,7 @@ const UpdatePharmacyModal = ({ isOpen, onClose }: UpdatePharmacyProps) => {
             textSize="text-[20px]"
             className="font-bold text-[#1A202C]"
           />
-          <div className="border border-[#D4CFCC] rounded-[15px] overflow-hidden bg-white min-h-[300px]">
+          <div className="rounded-[15px] overflow-hidden bg-[#FFFAF7] min-h-[300px]">
             <DataTable
               columns={PHARMACY_COLUMNS}
               data={PHARMACY_DUMMY_DATA}
