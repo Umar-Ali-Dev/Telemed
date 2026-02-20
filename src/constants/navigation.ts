@@ -30,7 +30,7 @@ export const PROVIDER_LINKS: NavItem[] = [
 export const ADMIN_LINKS: NavItem[] = [
   { label: "Dashboard", path: "/admin/dashboard", icon: LuLayoutDashboard },
   { label: "Consultations", path: "/admin/consultations", icon: LuStethoscope },
-  { label: "Patients", path: "/admin/patients", icon: LuUsers },
+  { label: "Patients", path: "/admin/all-patients", icon: LuUsers },
   {
     label: "Providers",
     icon: LuUserPlus,

@@ -5,17 +5,21 @@ import AuthModal from "../pages/auth/AuthModal";
 // Provider Page Imports
 import ProviderDashboard from "../pages/provider/dashboard/ProviderDashboard";
 import AllVisits from "../pages/provider/consultation/AllVisits";
+import AllPatients from "../pages/provider/dashboard/AllPatients";
+import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
+import { MyAccount } from "../pages/provider/dashboard/account/MyAccount";
 
 // Shared Page Imports
 import Chat from "../pages/chat/Chat";
 import Notifications from "../pages/notifications/Notifications";
-import AllPatients from "../pages/provider/dashboard/AllPatients";
-import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
-import { MyAccount } from "../pages/provider/dashboard/account/MyAccount";
+
+// Admin Page Imports
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminConsultations from "../pages/admin/AdminConsultations";
+import AdminPatients from "../pages/admin/AdminPatients";
+import EditPatient from "../pages/admin/patients/EditPatient";
 
-// Admin Page Placeholders (Create these files in src/pages/admin/)
+// Admin Page Placeholders
 const AllProviders = () => <div>All Providers</div>;
 const ProviderRequests = () => <div>Provider Requests</div>;
 const PrescriptionsManagement = () => <div>Prescriptions Management</div>;
@@ -28,7 +32,7 @@ export const router = createBrowserRouter([
     element: <AuthModal />,
   },
 
-  // Provider Section
+  // --- Provider Section ---
   {
     path: "/provider",
     element: <MainLayout />,
@@ -43,14 +47,19 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // Admin Section
+  // --- Admin Section ---
   {
     path: "/admin",
     element: <MainLayout />,
     children: [
       { path: "dashboard", element: <AdminDashboard /> },
       { path: "consultations", element: <AdminConsultations /> },
+
+      // Patient Management Routes
+      { path: "all-patients", element: <AdminPatients /> },
+      { path: "patients/edit/:id", element: <EditPatient /> },
       { path: "patient/:id", element: <PatientProfile /> },
+
       { path: "providers/all", element: <AllProviders /> },
       { path: "providers/requests", element: <ProviderRequests /> },
       {

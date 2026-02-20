@@ -28,7 +28,6 @@ import { commonTableStyles } from "../../components/ui/table/TableStyles";
 import AssignProviderModal from "../../components/ui/modals/AssignProviderModal";
 
 const AdminDashboard: React.FC = () => {
-  const navigate = useNavigate();
   const { control } = useForm();
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -13,6 +13,7 @@ import Attachments from "../profile-components/Attachments";
 import Allergies from "../profile-components/Allergies";
 import VisitNote from "../profile-components/VisitNote";
 import ProviderInfo from "../profile-components/ProviderInfo";
+import InternalAdminNotes from "../profile-components/InternalAdminNotes"; // New
 
 import {
   PATIENT_PROFILE_TABS,
@@ -24,23 +25,30 @@ const PatientProfile = () => {
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
 
-  // Automatically detect admin status from URL path
-  const isAdmin = location.pathname.startsWith("/admin");
+  // State detection based on URL
+  const isAdminPath = location.pathname.startsWith("/admin");
+  const showAdminDetail = queryParams.get("showAdminDetail") === "true";
   const hideVisitNote = queryParams.get("hideVisitNote") === "true";
 
   const availableTabs = useMemo(() => {
+    // Mode 1: Admin Patient Detail (Alexis John view)
+    if (showAdminDetail) {
+      return ["Patient Info", "Internal Admin Notes"];
+    }
+
+    // Mode 2: Standard Provider or Admin Consultation view
     let tabs = [...PATIENT_PROFILE_TABS];
 
-    // Show Provider Info if on an admin route
-    if (isAdmin) {
+    if (isAdminPath) {
       tabs.splice(1, 0, "Provider Info");
     }
 
     if (hideVisitNote) {
       return tabs.filter((tab) => tab !== "Visit Note");
     }
+
     return tabs;
-  }, [isAdmin, hideVisitNote]);
+  }, [isAdminPath, showAdminDetail, hideVisitNote]);
 
   const [activeTab, setActiveTab] = useState(availableTabs[0]);
 
@@ -50,6 +58,8 @@ const PatientProfile = () => {
         return <PatientDataContent data={DUMMY_PATIENT_DATA} />;
       case "Provider Info":
         return <ProviderInfo />;
+      case "Internal Admin Notes":
+        return <InternalAdminNotes />; //
       case "Health History":
         return <HealthHistory />;
       case "Medication History":
@@ -67,6 +77,7 @@ const PatientProfile = () => {
 
   return (
     <SectionWrapper>
+      {/* Dynamic Header */}
       <div className="flex items-center gap-4 mb-8">
         <div className="w-14 h-14 rounded-xl overflow-hidden bg-gray-100">
           <img
@@ -76,7 +87,11 @@ const PatientProfile = () => {
           />
         </div>
         <Heading
-          title={`${DUMMY_PATIENT_DATA.firstName} ${DUMMY_PATIENT_DATA.lastName}`}
+          title={
+            showAdminDetail
+              ? "Alexis John"
+              : `${DUMMY_PATIENT_DATA.firstName} ${DUMMY_PATIENT_DATA.lastName}`
+          }
           className="font-bold text-[#3a2014]"
         />
       </div>
@@ -89,13 +104,14 @@ const PatientProfile = () => {
 
       <div className="min-h-[300px] mt-8">{renderContent()}</div>
 
+      {/* Standardized Footer */}
       <div className="flex justify-end gap-4 mt-12">
         <Button
           label="Back"
           width="w-[120px]"
           bgColor="bg-transparent"
-          textColor="text-gray-400"
-          className="hover:bg-gray-50 !font-medium"
+          textColor="text-[#A3948C]"
+          className="hover:bg-gray-50 !font-bold"
           onClick={() => navigate(-1)}
         />
         <Button

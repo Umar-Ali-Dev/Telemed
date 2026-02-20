@@ -939,3 +939,72 @@ export const ADMIN_CONSULTATION_COLUMNS = [
     ),
   },
 ];
+import ActionMenu from "../components/ui/table/ActionMenu";
+
+export const ADMIN_PATIENT_COLUMNS = (
+  onEdit: (id: any) => void,
+  onFlag: (id: any) => void,
+) => [
+  {
+    name: "First Name",
+    selector: (row: any) => row.name.split(" ")[0],
+    sortable: true,
+  },
+  {
+    name: "Last Name",
+    selector: (row: any) => row.name.split(" ")[1],
+    sortable: true,
+  },
+  {
+    name: "Email",
+    selector: (row: any) => row.email,
+    sortable: true,
+  },
+  {
+    name: "Phone",
+    selector: (row: any) => row.phone,
+  },
+  {
+    name: "DOB",
+    selector: (row: any) => row.updatedAt,
+  },
+  {
+    name: "Status",
+    cell: (row: any) => {
+      // Logic for status colors from image_c44e06.png
+      const colors: any = {
+        Active: "text-[#34C759]",
+        Inactive: "text-[#FF3B30]",
+        Flagged: "text-[#FFCC00]",
+      };
+      return (
+        <span
+          className={`font-semibold ${colors[row.status] || "text-[#34C759]"}`}
+        >
+          {row.status || "Active"}
+        </span>
+      );
+    },
+  },
+  {
+    name: "Action",
+    cell: (row: any) => (
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          {/* Custom Toggle and Document Icon */}
+          <div className="w-8 h-4 bg-[#34C759] rounded-full relative cursor-pointer">
+            <div className="absolute right-1 top-1 w-2 h-2 bg-white rounded-full" />
+          </div>
+          <HiOutlineDocumentText
+            size={20}
+            className="text-[#705295] cursor-pointer"
+          />
+        </div>
+        <ActionMenu
+          onEdit={() => onEdit(row.id)}
+          onFlag={() => onFlag(row.id)}
+        />
+      </div>
+    ),
+  },
+];
