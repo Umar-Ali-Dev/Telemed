@@ -24,8 +24,17 @@ const AllVisits: React.FC = () => {
     { label: "Last 3 months", value: "3_months" },
   ];
 
-  // Filtering logic based on debounced search query
-  const filteredData = DUMMY_DATA.filter((item: any) =>
+  const expandedData = React.useMemo(() => {
+    return Array(50)
+      .fill(null)
+      .map((_, index) => ({
+        ...DUMMY_DATA[index % DUMMY_DATA.length],
+        id: index + 1,
+        date: `Feb ${((index % 28) + 1).toString().padStart(2, "0")}, 2026`,
+      }));
+  }, []);
+
+  const filteredData = expandedData.filter((item: any) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
@@ -34,48 +43,55 @@ const AllVisits: React.FC = () => {
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <Heading
-            title="All Visits"
+            title="Consultation History"
             textSize="text-[24px]"
             className="font-bold text-[#1A202C]"
           />
 
           <div className="flex items-center gap-3">
-            {/* Refined SelectField without external label */}
             <SelectField
               name="timeFilter"
               control={control}
               options={timeOptions}
               className="min-w-[160px]"
             />
-
-            {/* New Debounced SearchInput */}
             <SearchInput
               value={searchQuery}
               onChange={(val) => setSearchQuery(val)}
-              placeholder="Patient name"
+              placeholder="Search by patient name..."
             />
           </div>
         </div>
 
-        <DataTable
-          columns={PAST_VISITS_COLUMNS}
-          data={filteredData}
-          customStyles={commonTableStyles}
-          pagination
-          paginationComponent={() => (
-            <Pagination
-              totalRows={filteredData.length > 0 ? 995 : 0}
-              currentPage={1}
-              totalPages={8}
-              limit={15}
-              onChangePage={() => {}}
-              onChangeLimit={() => {}}
-            />
-          )}
-          responsive
-          highlightOnHover
-          pointerOnHover
-        />
+        {/* Professional Table Container */}
+        <div className="rounded-xl overflow-hidden border border-[#D4CFCC] bg-white">
+          <DataTable
+            columns={PAST_VISITS_COLUMNS}
+            data={filteredData}
+            customStyles={commonTableStyles}
+            pagination
+            paginationPerPage={10}
+            paginationComponentOptions={{
+              rowsPerPageText: "Rows per page:",
+              rangeSeparatorText: "of",
+              noRowsPerPage: false,
+              selectAllRowsItem: false,
+            }}
+            paginationComponent={() => (
+              <Pagination
+                totalRows={filteredData.length}
+                currentPage={1}
+                totalPages={Math.ceil(filteredData.length / 10)}
+                limit={10}
+                onChangePage={() => {}}
+                onChangeLimit={() => {}}
+              />
+            )}
+            responsive
+            highlightOnHover
+            pointerOnHover
+          />
+        </div>
       </div>
     </SectionWrapper>
   );

@@ -662,3 +662,6 @@ export const NOTIFICATION_DATA = [
     ],
   },
 ];
+export const FORM_LAYOUT_CLASS = "max-w-full lg:max-w-[650px] space-y-6";
+export const BUTTON_GROUP_CLASS =
+  "flex justify-end gap-4 mt-12 pt-4 border-t border-gray-50";
