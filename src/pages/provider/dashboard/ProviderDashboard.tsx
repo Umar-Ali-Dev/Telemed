@@ -67,7 +67,7 @@ const ProviderDashboard: React.FC = () => {
             textSize="text-[18px]"
             className="font-bold mb-2"
           />
-          <div className="rounded-xl overflow-hidden border border-[#D4CFCC]">
+          <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
             <DataTable
               columns={CARE_QUEUE_COLUMNS}
               data={DUMMY_DATA}
@@ -94,7 +94,7 @@ const ProviderDashboard: React.FC = () => {
               Review All
             </button>
           </div>
-          <div className="rounded-xl overflow-hidden border border-[#D4CFCC]">
+          <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
             <DataTable
               columns={PAST_VISITS_COLUMNS}
               data={DUMMY_DATA}

@@ -64,7 +64,7 @@ const AllVisits: React.FC = () => {
         </div>
 
         {/* Professional Table Container */}
-        <div className="rounded-xl overflow-hidden border border-[#D4CFCC] bg-white">
+        <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
             columns={PAST_VISITS_COLUMNS}
             data={filteredData}
