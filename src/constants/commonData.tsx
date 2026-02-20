@@ -868,3 +868,74 @@ export const ADMIN_QUEUE_COLUMNS = [
     ),
   },
 ];
+export const ADMIN_CONSULTATION_COLUMNS = [
+  {
+    name: "Full Name",
+    selector: (row: any) => row.name,
+    sortable: true,
+  },
+  {
+    name: "Email",
+    selector: (row: any) => row.email,
+    sortable: true,
+  },
+  {
+    name: "Phone",
+    selector: (row: any) => row.phone,
+  },
+  {
+    name: "Provider",
+    selector: (row: any) => row.provider,
+    sortable: true,
+    cell: (row: any) => (
+      <span className="text-[#A3948C]">{row.provider || "----"}</span>
+    ),
+  },
+  {
+    name: "Status",
+    selector: (row: any) => row.status,
+    sortable: true,
+    cell: (row: any) => {
+      const getStatusStyle = (status: string) => {
+        switch (status) {
+          case "Waiting provider":
+            return "text-[#F76D00]";
+          case "Provider Respond":
+            return "text-[#00A3FF]";
+          case "Completed":
+            return "text-[#34C759]";
+          case "Resend Prescription":
+            return "text-[#A3948C]";
+          case "Prescription Sent":
+            return "text-[#D149D1]";
+          case "Prescription Failed":
+            return "text-[#FF3B30]";
+          default:
+            return "text-gray-500";
+        }
+      };
+      return (
+        <span className={`font-semibold ${getStatusStyle(row.status)}`}>
+          {row.status}
+        </span>
+      );
+    },
+  },
+  {
+    name: "Action",
+    button: true,
+    cell: (row: any) => (
+      <div className="flex items-center gap-3">
+        <button
+          className="text-[#271100] hover:text-[#705295] disabled:opacity-30"
+          disabled={row.provider !== "----"}
+        >
+          <HiOutlineUser size={20} />
+        </button>
+        <button className="text-[#705295]">
+          <HiOutlineDocumentText size={20} />
+        </button>
+      </div>
+    ),
+  },
+];

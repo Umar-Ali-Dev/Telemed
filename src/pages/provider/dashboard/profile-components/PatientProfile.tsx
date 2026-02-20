@@ -1,15 +1,19 @@
 import { useState, useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SectionWrapper from "../../../../components/ui/common/SectionWrapper";
 import Heading from "../../../../components/ui/headings/Heading";
 import Button from "../../../../components/ui/button/Button";
 import Tabs from "../../../../components/ui/tabs/Tabs";
+
+// Shared Profile Components
 import PatientDataContent from "../profile-components/PatientDataContent";
 import HealthHistory from "../profile-components/HealthHistory";
 import MedicationHistory from "../profile-components/MedicationHistory";
 import Attachments from "../profile-components/Attachments";
 import Allergies from "../profile-components/Allergies";
 import VisitNote from "../profile-components/VisitNote";
+import ProviderInfo from "../profile-components/ProviderInfo";
+
 import {
   PATIENT_PROFILE_TABS,
   DUMMY_PATIENT_DATA,
@@ -17,15 +21,26 @@ import {
 
 const PatientProfile = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
+
+  // Automatically detect admin status from URL path
+  const isAdmin = location.pathname.startsWith("/admin");
   const hideVisitNote = queryParams.get("hideVisitNote") === "true";
 
   const availableTabs = useMemo(() => {
-    if (hideVisitNote) {
-      return PATIENT_PROFILE_TABS.filter((tab) => tab !== "Visit Note");
+    let tabs = [...PATIENT_PROFILE_TABS];
+
+    // Show Provider Info if on an admin route
+    if (isAdmin) {
+      tabs.splice(1, 0, "Provider Info");
     }
-    return PATIENT_PROFILE_TABS;
-  }, [hideVisitNote]);
+
+    if (hideVisitNote) {
+      return tabs.filter((tab) => tab !== "Visit Note");
+    }
+    return tabs;
+  }, [isAdmin, hideVisitNote]);
 
   const [activeTab, setActiveTab] = useState(availableTabs[0]);
 
@@ -33,6 +48,8 @@ const PatientProfile = () => {
     switch (activeTab) {
       case "Patient Info":
         return <PatientDataContent data={DUMMY_PATIENT_DATA} />;
+      case "Provider Info":
+        return <ProviderInfo />;
       case "Health History":
         return <HealthHistory />;
       case "Medication History":
@@ -70,7 +87,7 @@ const PatientProfile = () => {
         setActiveTab={setActiveTab}
       />
 
-      <div className="min-h-[300px]">{renderContent()}</div>
+      <div className="min-h-[300px] mt-8">{renderContent()}</div>
 
       <div className="flex justify-end gap-4 mt-12">
         <Button
@@ -79,10 +96,19 @@ const PatientProfile = () => {
           bgColor="bg-transparent"
           textColor="text-gray-400"
           className="hover:bg-gray-50 !font-medium"
+          onClick={() => navigate(-1)}
         />
-        {!hideVisitNote && (
-          <Button label="Next" width="w-[120px]" bgColor="bg-[#705295]" />
-        )}
+        <Button
+          label="Next"
+          width="w-[120px]"
+          bgColor="bg-[#705295]"
+          onClick={() => {
+            const currentIndex = availableTabs.indexOf(activeTab);
+            if (currentIndex < availableTabs.length - 1) {
+              setActiveTab(availableTabs[currentIndex + 1]);
+            }
+          }}
+        />
       </div>
     </SectionWrapper>
   );

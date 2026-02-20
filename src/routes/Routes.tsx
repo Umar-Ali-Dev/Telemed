@@ -13,6 +13,7 @@ import AllPatients from "../pages/provider/dashboard/AllPatients";
 import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
 import { MyAccount } from "../pages/provider/dashboard/account/MyAccount";
 import AdminDashboard from "../pages/admin/AdminDashboard";
+import AdminConsultations from "../pages/admin/AdminConsultations";
 
 // Admin Page Placeholders (Create these files in src/pages/admin/)
 const AllProviders = () => <div>All Providers</div>;
@@ -48,6 +49,8 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "dashboard", element: <AdminDashboard /> },
+      { path: "consultations", element: <AdminConsultations /> },
+      { path: "patient/:id", element: <PatientProfile /> },
       { path: "providers/all", element: <AllProviders /> },
       { path: "providers/requests", element: <ProviderRequests /> },
       {
