@@ -7,12 +7,21 @@ const MainLayout: React.FC = () => {
   const location = useLocation();
 
   const getTitle = () => {
-    const path = location.pathname.split("/")[1];
-    return path ? path.charAt(0).toUpperCase() + path.slice(1) : "Dashboard";
+    const path = location.pathname;
+
+    if (path.includes("/dashboard/all-visits")) return "Consultations";
+    if (path.includes("/dashboard/my-account")) return "My Account";
+    if (path.includes("/notifications")) return "Notifications";
+    if (path.includes("/chat")) return "Messages";
+    if (path.includes("/dashboard/patient/")) return "Patient Profile";
+    if (path === "/dashboard") return "Dashboard";
+
+    const segment = path.split("/").pop() || "Dashboard";
+    return segment.charAt(0).toUpperCase() + segment.slice(1);
   };
 
   return (
-    <div className="flex h-screen w-full  ">
+    <div className="flex h-screen w-full ">
       <Sidebar />
 
       <div className="flex flex-1 flex-col overflow-hidden">

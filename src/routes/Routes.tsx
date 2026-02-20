@@ -7,6 +7,8 @@ import AllPatients from "../pages/provider/dashboard/AllPatients";
 import { MyAccount } from "../pages/provider/dashboard/account/MyAccount"; // New Import
 import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
 import NotFound from "../pages/NotFound";
+import Chat from "../pages/chat/Chat";
+import Notifications from "../pages/notifications/Notifications";
 
 export const router = createBrowserRouter([
   {
@@ -33,9 +35,11 @@ export const router = createBrowserRouter([
         element: <PatientProfile />,
       },
       {
-        path: "/dashboard/my-account", // New Route
+        path: "/dashboard/my-account",
         element: <MyAccount />,
       },
+      { path: "/chat", element: <Chat /> },
+      { path: "/notifications", element: <Notifications /> },
     ],
   },
   {
