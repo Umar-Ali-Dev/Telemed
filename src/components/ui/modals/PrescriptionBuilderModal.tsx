@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import InputField from "../inputs/InputField";
 import TextAreaField from "../inputs/TextAreaField";
 import CheckboxField from "../inputs/CheckboxField"; // Import new component
+import nobPharmacyIcon from "../../../assets/icons/nobPharmacy.svg";
 
 const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
   const isEdit = !!initialData;
@@ -80,7 +81,11 @@ const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
               Note For Pharmacy
             </label>
             <span className="text-[12px] text-gray-500 flex items-center gap-1">
-              💊 Nob Hill Pharmacy
+              <img 
+                src={nobPharmacyIcon} 
+                alt="Nob Hill Pharmacy" 
+                className="w-4 h-4" 
+              /> Nob Hill Pharmacy
             </span>
           </div>
           <TextAreaField

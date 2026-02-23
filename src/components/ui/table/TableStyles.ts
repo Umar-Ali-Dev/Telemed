@@ -3,7 +3,7 @@ import type { TableStyles } from "react-data-table-component";
 export const commonTableStyles: TableStyles = {
   table: {
     style: {
-      // backgroundColor: "#D4CFCC",
+      backgroundColor: "#FFFAF7",
     },
   },
   headRow: {
@@ -26,7 +26,7 @@ export const commonTableStyles: TableStyles = {
       minHeight: "60px",
       fontSize: "14px",
       color: "#666666",
-      backgroundColor: "#FFFFFF",
+      backgroundColor: "##FFFAF7",
       borderBottomStyle: "solid",
       borderBottomWidth: "1px",
       borderBottomColor: "#D4CFCC",
