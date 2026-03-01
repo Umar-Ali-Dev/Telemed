@@ -38,14 +38,26 @@ const ProviderDashboard: React.FC = () => {
             value="18"
             chartType="bar"
             chartData={CHART_DATA_BAR}
-            icon={<img src={briefcaseMedicalIcon} alt="Briefcase" className="w-[22px] h-[22px]" />}
+            icon={
+              <img
+                src={briefcaseMedicalIcon}
+                alt="Briefcase"
+                className="w-[22px] h-[22px]"
+              />
+            }
           />
           <StatCard
             label="In Queue"
             value="12"
             chartType="line"
             chartData={CHART_DATA_LINE}
-            icon={<img src={fileWaveformIcon} alt="File Waveform" className="w-[22px] h-[22px]" />}
+            icon={
+              <img
+                src={fileWaveformIcon}
+                alt="File Waveform"
+                className="w-[22px] h-[22px]"
+              />
+            }
           />
           <StatCard
             label="Completed"
@@ -53,7 +65,13 @@ const ProviderDashboard: React.FC = () => {
             chartType="line"
             chartData={CHART_DATA_LINE}
             color="#D1D1D1"
-            icon={<img src={heartPulseIcon} alt="Heart Pulse" className="w-[22px] h-[22px]" />}
+            icon={
+              <img
+                src={heartPulseIcon}
+                alt="Heart Pulse"
+                className="w-[22px] h-[22px]"
+              />
+            }
           />
           <div className="hidden lg:block"></div>
         </div>
@@ -86,7 +104,7 @@ const ProviderDashboard: React.FC = () => {
               className="font-bold"
             />
             <button
-              onClick={() => navigate("/dashboard/all-visits")}
+              onClick={() => navigate("/provider/all-visits")}
               className="text-gray-400 text-sm font-medium hover:underline"
             >
               Review All
