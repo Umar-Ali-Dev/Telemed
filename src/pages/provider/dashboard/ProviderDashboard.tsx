@@ -3,18 +3,20 @@ import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom"; // Import navigate hook
 import {
   CARE_QUEUE_COLUMNS,
-  PAST_VISITS_COLUMNS,
   DUMMY_DATA,
-  CHART_DATA_LINE,
-  CHART_DATA_BAR,
 } from "../../../constants/commonData";
 import Heading from "../../../components/ui/headings/Heading";
 import { commonTableStyles } from "../../../components/ui/table/TableStyles";
-import StatCard from "../../../components/ui/cards/StatCard";
+import NavigationCard from "../../../components/ui/cards/NavigationCard";
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
-import briefcaseMedicalIcon from "../../../assets/icons/briefcaseMedical.svg";
-import fileWaveformIcon from "../../../assets/icons/fileWaveform.svg";
-import heartPulseIcon from "../../../assets/icons/heartPulse.svg";
+import newVisitsIcon from "../../../assets/icons/newVisits.svg";
+import allVisitsIcon from "../../../assets/icons/allVisits.svg";
+import allPatientsIcon from "../../../assets/icons/allPatients.svg";
+import flaggedPatientsIcon from "../../../assets/icons/faggedPatients.svg";
+import chatMessagesIcon from "../../../assets/icons/chatMessages.svg";
+import statisticsIcon from "../../../assets/icons/statistics.svg";
+import profileSettingsIcon from "../../../assets/icons/profileSettings.svg";
+import activityLogsIcon from "../../../assets/icons/activityLogs.svg";
 
 const ProviderDashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -24,59 +26,63 @@ const ProviderDashboard: React.FC = () => {
   };
 
   return (
-    <div className=" bg-white space-y-10">
+    <div className="bg-white space-y-10">
       <div className="space-y-6">
         <Heading
           title="Welcome, Dr. Alina Star."
           textSize="text-[24px]"
           className="font-bold"
         />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard
-            label="Total Requests"
-            value="18"
-            chartType="bar"
-            chartData={CHART_DATA_BAR}
-            icon={
-              <img
-                src={briefcaseMedicalIcon}
-                alt="Briefcase"
-                className="w-[22px] h-[22px]"
-              />
-            }
-          />
-          <StatCard
-            label="In Queue"
-            value="12"
-            chartType="line"
-            chartData={CHART_DATA_LINE}
-            icon={
-              <img
-                src={fileWaveformIcon}
-                alt="File Waveform"
-                className="w-[22px] h-[22px]"
-              />
-            }
-          />
-          <StatCard
-            label="Completed"
-            value="6"
-            chartType="line"
-            chartData={CHART_DATA_LINE}
-            color="#D1D1D1"
-            icon={
-              <img
-                src={heartPulseIcon}
-                alt="Heart Pulse"
-                className="w-[22px] h-[22px]"
-              />
-            }
-          />
-          <div className="hidden lg:block"></div>
-        </div>
       </div>
+
       <SectionWrapper padding="p-4" className="flex flex-col gap-7">
+        {/* Navigation Cards Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+          <NavigationCard
+            label="New Visits"
+            path="/provider/new-visits"
+            icon={newVisitsIcon}
+            badge={5}
+          />
+          <NavigationCard
+            label="All Visits"
+            path="/provider/all-visits"
+            icon={allVisitsIcon}
+          />
+          <NavigationCard
+            label="All Patients"
+            path="/provider/all-patients"
+            icon={allPatientsIcon}
+          />
+          <NavigationCard
+            label="Flagged Patients"
+            path="/provider/flagged-patients"
+            icon={flaggedPatientsIcon}
+          />
+          <NavigationCard
+            label="Chat Messages"
+            path="/chat"
+            icon={chatMessagesIcon}
+            badge={5}
+          />
+          <NavigationCard
+            label="Statistics"
+            path="/provider/statistics"
+            icon={statisticsIcon}
+          />
+          <NavigationCard
+            label="Profile Settings"
+            path="/my-account"
+            icon={profileSettingsIcon}
+          />
+          <NavigationCard
+            label="Activity Logs"
+            path="/provider/activity-logs"
+            icon={activityLogsIcon}
+          />
+        </div>
+
+        {/* Statistics Cards */}
         <div>
           <Heading
             title="Care Queue Visits"
@@ -96,32 +102,6 @@ const ProviderDashboard: React.FC = () => {
           </div>
         </div>
 
-        <div>
-          <div className="flex justify-between items-center mb-2">
-            <Heading
-              title="Past Visits"
-              textSize="text-[18px]"
-              className="font-bold"
-            />
-            <button
-              onClick={() => navigate("/provider/all-visits")}
-              className="text-gray-400 text-sm font-medium hover:underline"
-            >
-              Review All
-            </button>
-          </div>
-          <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
-            <DataTable
-              columns={PAST_VISITS_COLUMNS}
-              data={DUMMY_DATA}
-              customStyles={commonTableStyles}
-              onRowClicked={handleRowClick} // Also redirect for past visits
-              pointerOnHover
-              highlightOnHover
-              responsive
-            />
-          </div>
-        </div>
       </SectionWrapper>
     </div>
   );
