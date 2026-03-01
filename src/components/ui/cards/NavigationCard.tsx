@@ -26,7 +26,7 @@ const NavigationCard: React.FC<NavigationCardProps> = ({
       className="relative bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-200 hover:border-[#705295] group"
     >
       <div className="flex flex-col items-center gap-3">
-        <div className="w-16 h-16 rounded-lg bg-[#EBE5F1] flex items-center justify-center overflow-hidden">
+        <div className="w-16 h-16 rounded-lg flex items-center justify-center overflow-hidden">
           <img
             src={icon}
             alt={label}

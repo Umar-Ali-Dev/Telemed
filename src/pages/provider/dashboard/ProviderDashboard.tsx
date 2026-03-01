@@ -9,14 +9,14 @@ import Heading from "../../../components/ui/headings/Heading";
 import { commonTableStyles } from "../../../components/ui/table/TableStyles";
 import NavigationCard from "../../../components/ui/cards/NavigationCard";
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
-import newVisitsIcon from "../../../assets/placeholders/new-visits.svg";
-import allVisitsIcon from "../../../assets/placeholders/all-visits.svg";
-import allPatientsIcon from "../../../assets/placeholders/all-patients.svg";
-import flaggedPatientsIcon from "../../../assets/placeholders/flagged-patients.svg";
-import chatMessagesIcon from "../../../assets/placeholders/chat-messages.svg";
-import statisticsIcon from "../../../assets/placeholders/statistics.svg";
-import profileSettingsIcon from "../../../assets/placeholders/profile-settings.svg";
-import activityLogsIcon from "../../../assets/placeholders/activity-logs.svg";
+import newVisitsIcon from "../../../assets/icons/newVisits.svg";
+import allVisitsIcon from "../../../assets/icons/allVisits.svg";
+import allPatientsIcon from "../../../assets/icons/allPatients.svg";
+import flaggedPatientsIcon from "../../../assets/icons/faggedPatients.svg";
+import chatMessagesIcon from "../../../assets/icons/chatMessages.svg";
+import statisticsIcon from "../../../assets/icons/statistics.svg";
+import profileSettingsIcon from "../../../assets/icons/profileSettings.svg";
+import activityLogsIcon from "../../../assets/icons/activityLogs.svg";
 
 const ProviderDashboard: React.FC = () => {
   const navigate = useNavigate();
