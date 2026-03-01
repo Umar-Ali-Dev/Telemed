@@ -1049,3 +1049,89 @@ export const ADMIN_PATIENT_COLUMNS = (
     ),
   },
 ];
+import { LuPencil, LuPause, LuClipboardList } from "react-icons/lu";
+
+export const ADMIN_PROVIDER_COLUMNS = (
+  handleEdit: (id: any) => void,
+  handleViewProfile: (id: any) => void,
+) => [
+  {
+    name: "Name",
+    selector: (row: any) => row.name,
+    sortable: true,
+    cell: (row: any) => (
+      <span
+        className="cursor-pointer hover:text-[#705295] font-medium"
+        onClick={() => handleViewProfile(row.id)}
+      >
+        {row.name}
+      </span>
+    ),
+  },
+  { name: "Email", selector: (row: any) => row.email, sortable: true },
+  { name: "Phone", selector: (row: any) => row.phone },
+  {
+    name: "Education",
+    selector: (row: any) => row.education || "MBBS, BDS", // Matches design
+  },
+  {
+    name: "Patient Attended",
+    selector: (row: any) => row.attended || "256", // Matches design
+  },
+  {
+    name: "Status",
+    cell: (row: any) => {
+      const colors: any = {
+        Active: "text-[#34C759]",
+        Inactive: "text-[#FF3B30]",
+        Paused: "text-[#F76D00]",
+      };
+      return (
+        <span
+          className={`font-semibold ${colors[row.status] || "text-[#34C759]"}`}
+        >
+          {row.status || "Active"}
+        </span>
+      );
+    },
+  },
+  {
+    name: "Action",
+    cell: (row: any) => (
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          {/* Status Toggle Visual */}
+          <div className="w-8 h-4 bg-[#34C759] rounded-full relative cursor-pointer">
+            <div className="absolute right-1 top-1 w-2 h-2 bg-white rounded-full" />
+          </div>
+          <HiOutlineDocumentText
+            size={20}
+            className="text-[#705295] cursor-pointer"
+            onClick={() => handleViewProfile(row.id)}
+          />
+        </div>
+
+        {/* Reusable ActionMenu with Provider actions */}
+        <ActionMenu
+          items={[
+            {
+              label: "Edit Details",
+              icon: <LuPencil size={16} />,
+              onClick: () => handleEdit(row.id),
+            },
+            {
+              label: "Paused",
+              icon: <LuPause size={16} />,
+              onClick: () => console.log("Paused", row.id),
+            },
+            {
+              label: "Visits",
+              icon: <LuClipboardList size={16} />,
+              onClick: () => handleViewProfile(row.id),
+            },
+          ]}
+        />
+      </div>
+    ),
+  },
+];

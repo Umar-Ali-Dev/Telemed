@@ -35,7 +35,7 @@ export const ADMIN_LINKS: NavItem[] = [
     label: "Providers",
     icon: LuUserPlus,
     subItems: [
-      { label: "All Providers", path: "/admin/providers/all" },
+      { label: "All Providers", path: "/admin/all-providers" },
       { label: "Provider Requests", path: "/admin/providers/requests" },
     ],
   },

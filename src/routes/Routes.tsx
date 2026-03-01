@@ -14,6 +14,7 @@ import EditPatient from "../pages/admin/patients/EditPatient";
 import EditProvider from "../pages/admin/providers/EditProvider";
 import AdminProviderProfile from "../pages/admin/profile-components/AdminProviderProfile";
 import MyAccount from "../pages/provider/dashboard/account/MyAccount";
+import AdminProviders from "../pages/admin/providers/AdminProviders";
 
 const ProviderRequests = () => <div>Provider Requests</div>;
 const PrescriptionsManagement = () => <div>Prescriptions Management</div>;
@@ -49,6 +50,7 @@ export const router = createBrowserRouter([
           { path: "all-patients", element: <AdminPatients /> },
           { path: "patients/edit/:id", element: <EditPatient /> },
           { path: "patient/:id", element: <PatientProfile /> },
+          { path: "all-providers", element: <AdminProviders /> },
           { path: "providers/add", element: <EditProvider /> },
           { path: "providers/edit/:id", element: <EditProvider /> },
           { path: "provider-profile/:id", element: <AdminProviderProfile /> },
