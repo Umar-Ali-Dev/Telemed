@@ -1,5 +1,7 @@
 import type { TableColumn } from "react-data-table-component";
 import {
+  HiOutlineDocumentText,
+  HiOutlineFlag,
   HiOutlinePencil,
   HiOutlineTrash,
 } from "react-icons/hi";
@@ -65,10 +67,10 @@ export const PAST_VISITS_COLUMNS: TableColumn<PatientRecord>[] = [
   {
     name: "Action",
     cell: () => (
-      <img 
-        src={fileTextIcon} 
-        alt="Document" 
-        className="cursor-pointer w-6 h-6" 
+      <img
+        src={fileTextIcon}
+        alt="Document"
+        className="cursor-pointer w-6 h-6"
       />
     ),
   },
@@ -600,10 +602,10 @@ export const GET_PATIENT_COLUMNS = (navigate: (path: string) => void) => [
   {
     name: "Action",
     cell: () => (
-      <img 
-        src={fileTextIcon} 
-        alt="Document" 
-        className="cursor-pointer w-6 h-6" 
+      <img
+        src={fileTextIcon}
+        alt="Document"
+        className="cursor-pointer w-6 h-6"
       />
     ),
   },
@@ -996,8 +998,18 @@ export const ADMIN_PATIENT_COLUMNS = (
           />
         </div>
         <ActionMenu
-          onEdit={() => onEdit(row.id)}
-          onFlag={() => onFlag(row.id)}
+          items={[
+            {
+              label: "Edit",
+              icon: <HiOutlinePencil size={18} />,
+              onClick: () => onEdit(row.id),
+            },
+            {
+              label: "Flag",
+              icon: <HiOutlineFlag size={18} />,
+              onClick: () => onFlag(row.id),
+            },
+          ]}
         />
       </div>
     ),
