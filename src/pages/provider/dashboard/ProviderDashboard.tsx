@@ -40,7 +40,7 @@ const ProviderDashboard: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
           <NavigationCard
             label="New Visits"
-            path="/provider/dashboard"
+            path="/provider/new-visits"
             icon={newVisitsIcon}
             badge={5}
           />
