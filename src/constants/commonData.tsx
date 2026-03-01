@@ -14,30 +14,44 @@ export interface PatientRecord {
   phone: string;
   updatedAt: string;
   status: string;
+  state?: string; // For Care Queue table
 }
 
 // Table 1 Columns: Care Queue
 export const CARE_QUEUE_COLUMNS: TableColumn<PatientRecord>[] = [
   { name: "Full Name", selector: (row) => row.name, sortable: true },
   { name: "Email", selector: (row) => row.email, sortable: true },
-  { name: "Phone", selector: (row) => row.phone },
-  { name: "Updated At", selector: (row) => row.updatedAt },
+  { name: "Phone", selector: (row) => row.phone, sortable: true },
+  { name: "Updated At", selector: (row) => row.updatedAt, sortable: true },
   {
-    name: "Status",
-    cell: (row) => (
-      <span className="text-[#FBBF24] font-medium">{row.status}</span>
-    ),
+    name: "State",
+    selector: (row) => row.state || row.status,
+    sortable: true,
   },
   {
     name: "Action",
-    cell: () => (
-      <div className="flex gap-3">
-        <button className="text-[#F97316] font-semibold text-sm">Remove</button>
-        <button className="bg-[#EBE5F1] text-[#705295] border border-[#705295] px-4 py-1 rounded-[30px] font-semibold text-sm">
-          Accept
-        </button>
-      </div>
-    ),
+    cell: (row, rowIndex) => {
+      const showAccept = rowIndex < 2; // First two rows show Accept
+      const showReview = rowIndex >= 2; // Last two rows show Review
+      
+      return (
+        <div className="flex gap-3">
+          <button className="px-4 py-1.5 font-medium text-sm">
+            Cancel
+          </button>
+          {showAccept && (
+            <button className="bg-[#705295] text-white px-4 py-1.5 rounded-md font-medium text-sm hover:bg-[#5a3f7a] transition-colors">
+              Accept
+            </button>
+          )}
+          {showReview && (
+            <button className="text-[#705295] bg-[#EBE5F1] border border-[#705295] px-4 py-1.5 rounded-md font-medium text-sm hover:bg-[#EBE5F1] transition-colors">
+              Review
+            </button>
+          )}
+        </div>
+      );
+    },
   },
 ];
 
@@ -84,6 +98,7 @@ export const DUMMY_DATA: PatientRecord[] = [
     phone: "123 123 1234",
     updatedAt: "01/22/2024",
     status: "Pending Review",
+    state: "AL",
   },
   {
     id: 2,
@@ -92,6 +107,25 @@ export const DUMMY_DATA: PatientRecord[] = [
     phone: "123 123 1234",
     updatedAt: "01/22/2024",
     status: "Pending Review",
+    state: "AL",
+  },
+  {
+    id: 3,
+    name: "Jospan Franklin",
+    email: "jospan@gmail.com",
+    phone: "123 123 1234",
+    updatedAt: "01/22/2024",
+    status: "Pending Review",
+    state: "AL",
+  },
+  {
+    id: 4,
+    name: "Jospan Franklin",
+    email: "jospan@gmail.com",
+    phone: "123 123 1234",
+    updatedAt: "01/22/2024",
+    status: "Pending Review",
+    state: "AL",
   },
 ];
 export const ADMIN_DASHBOARD_DATA = [
