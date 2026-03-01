@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { HiOutlineBell, HiOutlineChatAlt2 } from "react-icons/hi";
+import {
+  HiOutlineBell,
+  HiOutlineChatAlt2,
+  HiOutlineUserCircle,
+} from "react-icons/hi";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { PROVIDER_LINKS, ADMIN_LINKS } from "../../constants/navigation";
 import logo from "../../assets/icons/Logo.svg";
@@ -119,18 +123,17 @@ const Sidebar: React.FC = () => {
         </NavLink>
 
         <NavLink
-          to={isAdmin ? "/admin/my-account" : "/provider/my-account"}
+          to="/my-account"
+          end
           className={({ isActive }) =>
-            `w-[54px] h-[54px] rounded-full overflow-hidden border-2 p-0.5 transition-all ${
-              isActive ? "border-[#705295]" : "border-[#EFE9E6]"
+            `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
+              isActive
+                ? "border-[#705295] text-[#705295] bg-[#705295]/5"
+                : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"
             }`
           }
         >
-          <img
-            src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150&h=150&auto=format&fit=crop"
-            alt="User Profile"
-            className="w-full h-full rounded-full object-cover"
-          />
+          <HiOutlineUserCircle size={32} />
         </NavLink>
       </div>
     </aside>

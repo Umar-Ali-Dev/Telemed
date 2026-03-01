@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { LuClock } from "react-icons/lu";
+import { HiOutlineUserCircle } from "react-icons/hi";
 
 interface NavbarProps {
   title: string;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ title }) => {
+  const { pathname } = useLocation();
+
   const [isAvailable, setIsAvailable] = useState(true);
+  const isAdmin = pathname.startsWith("/admin");
 
   return (
     <header className="h-[80px] w-full bg-white border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-10">
@@ -40,14 +44,10 @@ const Navbar: React.FC<NavbarProps> = ({ title }) => {
         </div>
 
         <Link
-          to="/dashboard/my-account"
-          className="w-10 h-10 rounded-full overflow-hidden border border-gray-200 transition-opacity hover:opacity-80"
+          to="/my-account"
+          className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 transition-all hover:bg-gray-50 text-[#999999] hover:text-[#705295]"
         >
-          <img
-            src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150&h=150&auto=format&fit=crop"
-            alt="User Profile"
-            className="w-full h-full object-cover"
-          />
+          <HiOutlineUserCircle size={28} />
         </Link>
       </div>
     </header>

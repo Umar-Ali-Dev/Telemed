@@ -21,7 +21,7 @@ export const PROVIDER_LINKS: NavItem[] = [
   { label: "Dashboard", path: "/provider/dashboard", icon: LuLayoutDashboard },
   {
     label: "Consultations",
-    path: "/provider/consultations",
+    path: "/provider/all-visits",
     icon: LuStethoscope,
   },
   { label: "Patients", path: "/provider/all-patients", icon: LuUsers },

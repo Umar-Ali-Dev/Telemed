@@ -22,7 +22,7 @@ const ProviderDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleRowClick = (row: any) => {
-    navigate(`/dashboard/patient/${row.id}`);
+    navigate(`/provider/patient/${row.id}`);
   };
 
   return (

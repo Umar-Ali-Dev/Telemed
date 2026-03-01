@@ -17,7 +17,8 @@ const MY_ACCOUNT_TABS = [
   "Experience",
 ];
 
-export const MyAccount = () => {
+// Removed "export" from here
+const MyAccount = () => {
   const [activeTab, setActiveTab] = useState(MY_ACCOUNT_TABS[0]);
 
   const renderContent = () => {
@@ -65,3 +66,6 @@ export const MyAccount = () => {
     </SectionWrapper>
   );
 };
+
+// Add this line at the very bottom
+export default MyAccount;
