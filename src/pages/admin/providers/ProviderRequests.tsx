@@ -5,21 +5,19 @@ import Heading from "../../../components/ui/headings/Heading";
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
 import SearchInput from "../../../components/ui/inputs/SearchInput";
 import Pagination from "../../../components/ui/table/Pagination";
-import Button from "../../../components/ui/button/Button";
 import { commonTableStyles } from "../../../components/ui/table/TableStyles";
 import {
-  ADMIN_PROVIDER_COLUMNS,
-  ADMIN_DASHBOARD_DATA,
+  PROVIDER_REQUESTS_COLUMNS,
+  ADMIN_DASHBOARD_DATA, // Replace with actual request data if available
 } from "../../../constants/commonData";
 
-const AdminProviders: React.FC = () => {
+const ProviderRequests: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Handlers passed to the column definition
-  const handleEdit = (id: any) => navigate(`/admin/providers/edit/${id}`);
-  const handleViewProfile = (id: any) =>
-    navigate(`/admin/provider-profile/${id}`);
+  const handleViewRequest = (id: any) => {
+    navigate(`/admin/provider-profile/${id}?isRequest=true`);
+  };
 
   const filteredData = ADMIN_DASHBOARD_DATA.filter((item: any) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -28,37 +26,27 @@ const AdminProviders: React.FC = () => {
   return (
     <SectionWrapper padding="p-6">
       <div className="space-y-6">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <Heading
-            title="All Providers"
+            title="Provider Requests"
             textSize="text-[24px]"
             className="font-bold text-[#0A1E25]"
           />
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <SearchInput
-              value={searchQuery}
-              onChange={setSearchQuery}
-              placeholder="Search by name"
-              className="w-full sm:w-[300px]"
-            />
-            <Button
-              label="Add New Provider"
-              onClick={() => navigate("/admin/providers/add")}
-              bgColor="bg-[#F2EFFF]"
-              textColor="text-[#705295]"
-              width="w-full sm:w-auto"
-              className="px-6 font-bold border-none"
-            />
-          </div>
+          <SearchInput
+            value={searchQuery}
+            onChange={(val) => setSearchQuery(val)}
+            placeholder="Patient name"
+            className="w-[300px]"
+          />
         </div>
 
         <div className="rounded-xl overflow-hidden border border-[#D4CFCC] bg-white">
           <DataTable
-            columns={ADMIN_PROVIDER_COLUMNS(handleEdit, handleViewProfile)}
+            columns={PROVIDER_REQUESTS_COLUMNS(handleViewRequest)}
             data={filteredData}
             customStyles={commonTableStyles}
+            onRowClicked={handleViewRequest}
             responsive
-            onRowClicked={handleViewProfile}
             highlightOnHover
             pointerOnHover
           />
@@ -67,7 +55,7 @@ const AdminProviders: React.FC = () => {
         <Pagination
           totalRows={filteredData.length}
           currentPage={1}
-          totalPages={5}
+          totalPages={8}
           limit={10}
           onChangePage={() => {}}
           onChangeLimit={() => {}}
@@ -77,4 +65,4 @@ const AdminProviders: React.FC = () => {
   );
 };
 
-export default AdminProviders;
+export default ProviderRequests;

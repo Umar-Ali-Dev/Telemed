@@ -33,12 +33,10 @@ export const CARE_QUEUE_COLUMNS: TableColumn<PatientRecord>[] = [
     cell: (row, rowIndex) => {
       const showAccept = rowIndex < 2; // First two rows show Accept
       const showReview = rowIndex >= 2; // Last two rows show Review
-      
+
       return (
         <div className="flex gap-3">
-          <button className="px-4 py-1.5 font-medium text-sm">
-            Cancel
-          </button>
+          <button className="px-4 py-1.5 font-medium text-sm">Cancel</button>
           {showAccept && (
             <button className="bg-[#705295] text-white px-4 py-1.5 rounded-md font-medium text-sm hover:bg-[#5a3f7a] transition-colors">
               Accept
@@ -1130,6 +1128,50 @@ export const ADMIN_PROVIDER_COLUMNS = (
               onClick: () => handleViewProfile(row.id),
             },
           ]}
+        />
+      </div>
+    ),
+  },
+];
+
+export const PROVIDER_REQUESTS_COLUMNS = (
+  handleViewRequest: (id: any) => void,
+) => [
+  {
+    name: "Name",
+    selector: (row: any) => row.name,
+    sortable: true,
+  },
+  { name: "Email", selector: (row: any) => row.email, sortable: true },
+  { name: "Phone", selector: (row: any) => row.phone },
+  { name: "Education", selector: (row: any) => row.education || "MBBS, BDS" },
+  { name: "Patient Attended", selector: (row: any) => row.attended || "256" },
+  {
+    name: "Status",
+    cell: (row: any) => {
+      // Logic for request-specific status colors
+      const colors: any = {
+        Pending: "text-[#F76D00]", // Orange for pending
+        Decline: "text-[#FF3B30]", // Red for decline
+      };
+      return (
+        <span
+          className={`font-semibold ${colors[row.status] || "text-[#F76D00]"}`}
+        >
+          {row.status || "Pending"}
+        </span>
+      );
+    },
+  },
+  {
+    name: "Action",
+    cell: (row: any) => (
+      <div className="flex items-center justify-center">
+        {/* Document Icon for viewing request details */}
+        <HiOutlineDocumentText
+          size={20}
+          className="text-[#705295] cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => handleViewRequest(row.id)}
         />
       </div>
     ),

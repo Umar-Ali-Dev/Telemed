@@ -1,11 +1,9 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
 import Heading from "../../../components/ui/headings/Heading";
 import Button from "../../../components/ui/button/Button";
 import Tabs from "../../../components/ui/tabs/Tabs";
-
-// Updated Imports from the new admin subfolder
 import ProviderPersonal from "./ProviderPersonal";
 import ProviderSpeciality from "./ProviderSpeciality";
 import ProviderEducation from "./ProviderEducation";
@@ -14,13 +12,15 @@ import ActivityLogs from "./ActivityLogs";
 
 const AdminProviderProfile = () => {
   const navigate = useNavigate();
-  const tabs = [
-    "Personal Info",
-    "Speciality",
-    "Education",
-    "Experience",
-    "Activity Logs",
-  ]; //
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const isRequestMode = queryParams.get("isRequest") === "true";
+
+  const tabs = useMemo(() => {
+    const baseTabs = ["Personal Info", "Speciality", "Education", "Experience"];
+    return isRequestMode ? baseTabs : [...baseTabs, "Activity Logs"];
+  }, [isRequestMode]);
+
   const [activeTab, setActiveTab] = useState("Personal Info");
 
   const renderContent = () => {
@@ -42,7 +42,6 @@ const AdminProviderProfile = () => {
 
   return (
     <SectionWrapper>
-      {/* Header logic remains identical to support Dr. Alina Star design */}
       <div className="flex items-center gap-4 mb-8">
         <div className="w-16 h-16 rounded-xl overflow-hidden border border-gray-100 bg-gray-50">
           <img

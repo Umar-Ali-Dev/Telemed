@@ -16,8 +16,8 @@ import EditProvider from "../pages/admin/providers/EditProvider";
 import AdminProviderProfile from "../pages/admin/profile-components/AdminProviderProfile";
 import MyAccount from "../pages/provider/dashboard/account/MyAccount";
 import AdminProviders from "../pages/admin/providers/AdminProviders";
+import ProviderRequests from "../pages/admin/providers/ProviderRequests";
 
-const ProviderRequests = () => <div>Provider Requests</div>;
 const PrescriptionsManagement = () => <div>Prescriptions Management</div>;
 const RefundRequests = () => <div>Refund Requests</div>;
 const SystemControls = () => <div>System Controls</div>;
