@@ -20,15 +20,9 @@ const MainLayout: React.FC = () => {
     return segment.charAt(0).toUpperCase() + segment.slice(1);
   };
 
-  // Hide sidebar for provider routes
-  const isProviderRoute = location.pathname.startsWith("/provider") || 
-                          location.pathname === "/chat" || 
-                          location.pathname === "/notifications" || 
-                          location.pathname === "/my-account";
-
   return (
     <div className="flex h-screen w-full ">
-      {!isProviderRoute && <Sidebar />}
+      <Sidebar />
 
       <div className="flex flex-1 flex-col overflow-hidden">
         <Navbar title={getTitle()} />
