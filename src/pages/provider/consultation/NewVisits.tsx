@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import DataTable from "react-data-table-component";
+import DataTable, { type TableColumn } from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import Heading from "../../../components/ui/headings/Heading";
@@ -7,6 +7,7 @@ import SectionWrapper from "../../../components/ui/common/SectionWrapper";
 import { commonTableStyles } from "../../../components/ui/table/TableStyles";
 import SearchInput from "../../../components/ui/inputs/SearchInput";
 import Pagination from "../../../components/ui/table/Pagination";
+import CancelReasonModal from "../../../components/ui/modals/CancelReasonModal";
 import {
   CARE_QUEUE_COLUMNS,
   DUMMY_DATA,
@@ -16,6 +17,8 @@ import type { PatientRecord } from "../../../constants/commonData";
 const NewVisits: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<PatientRecord | null>(null);
 
   // Expand dummy data to 50 rows like AllVisits
   const expandedData = useMemo(() => {
@@ -32,8 +35,61 @@ const NewVisits: React.FC = () => {
     item.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Use CARE_QUEUE_COLUMNS and only override Action column with Cancel handler
+  const columns: TableColumn<PatientRecord>[] = useMemo(() => {
+    return CARE_QUEUE_COLUMNS.map((col) => {
+      if (col.name === "Action") {
+        return {
+          ...col,
+          cell: (row: PatientRecord, rowIndex?: number) => {
+            const isOddRow = (rowIndex || 0) % 2 === 0; // 0-indexed: 0,2,4 = odd rows (1st, 3rd, 5th)
+            const showAccept = isOddRow;
+            const showReview = !isOddRow;
+
+            return (
+              <div className="flex gap-3">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedRow(row);
+                    setIsCancelModalOpen(true);
+                  }}
+                  className="px-4 py-1.5 rounded-md font-medium text-sm"
+                >
+                  Cancel
+                </button>
+                {showAccept && (
+                  <button
+                    onClick={(e) => e.stopPropagation()}
+                    className="bg-[#705295] text-white px-4 py-1.5 rounded-md font-medium text-sm hover:bg-[#5a3f7a] transition-colors"
+                  >
+                    Accept
+                  </button>
+                )}
+                {showReview && (
+                  <button
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-[#705295] bg-[#EBE5F1] border border-[#705295] px-4 py-1.5 rounded-md font-medium text-sm hover:bg-[#EBE5F1] transition-colors"
+                  >
+                    Review
+                  </button>
+                )}
+              </div>
+            );
+          },
+        };
+      }
+      return col;
+    });
+  }, []);
+
   const handleRowClick = (row: PatientRecord) => {
     navigate(`/provider/patient/${row.id}`);
+  };
+
+  const handleCancelSubmit = (reason: string) => {
+    // Handle cancel logic here
+    console.log("Cancelling visit for:", selectedRow, "Reason:", reason);
   };
 
   return (
@@ -66,7 +122,7 @@ const NewVisits: React.FC = () => {
         {/* Professional Table Container */}
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={CARE_QUEUE_COLUMNS}
+            columns={columns}
             data={filteredData}
             customStyles={commonTableStyles}
             onRowClicked={handleRowClick}
@@ -94,6 +150,16 @@ const NewVisits: React.FC = () => {
           />
         </div>
       </div>
+
+      {/* Cancel Reason Modal */}
+      <CancelReasonModal
+        isOpen={isCancelModalOpen}
+        onClose={() => {
+          setIsCancelModalOpen(false);
+          setSelectedRow(null);
+        }}
+        onSubmit={handleCancelSubmit}
+      />
     </SectionWrapper>
   );
 };
