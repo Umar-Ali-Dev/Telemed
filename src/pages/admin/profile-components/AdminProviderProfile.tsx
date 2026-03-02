@@ -41,7 +41,7 @@ const AdminProviderProfile = () => {
   };
 
   return (
-    <SectionWrapper>
+    <SectionWrapper className="m-6">
       <div className="flex items-center gap-4 mb-8">
         <div className="w-16 h-16 rounded-xl overflow-hidden border border-gray-100 bg-gray-50">
           <img

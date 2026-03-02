@@ -19,7 +19,7 @@ const Allergies = () => {
         textSize="text-[20px]"
         className="font-bold text-[#1A202C] mb-6"
       />
-      <div className="rounded-xl overflow-hidden ">
+      <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
         <DataTable
           columns={ALLERGIES_COLUMNS}
           data={ALLERGIES_DUMMY_DATA}

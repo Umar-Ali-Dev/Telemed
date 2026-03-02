@@ -23,7 +23,7 @@ const MedicationHistory = () => {
         className="font-bold text-[#1A202C] mb-6"
       />
 
-      <div className="rounded-xl overflow-hidden ">
+      <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
         <DataTable
           columns={MEDICATION_COLUMNS}
           data={MEDICATION_DUMMY_DATA.slice((page - 1) * limit, page * limit)}

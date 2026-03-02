@@ -17,7 +17,7 @@ const EditProvider = () => {
   };
 
   return (
-    <SectionWrapper padding="p-8">
+    <SectionWrapper className="m-6">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <ImageUploadField
           name="profileImage"

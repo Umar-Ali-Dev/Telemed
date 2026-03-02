@@ -25,7 +25,7 @@ const SystemControls: React.FC = () => {
   };
 
   return (
-    <SectionWrapper>
+    <SectionWrapper className="m-6">
       <div className="mb-6">
         <Heading title="System Controls" className="font-bold text-[#0A1E25]" />
       </div>

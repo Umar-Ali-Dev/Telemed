@@ -44,7 +44,7 @@ const AllPrescriptions: React.FC = () => {
           />
         </div>
 
-        <div className="rounded-xl overflow-hidden border border-[#D4CFCC] bg-white">
+        <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
             columns={ALL_PRESCRIPTIONS_COLUMNS(handleViewDetails)}
             data={filteredData}

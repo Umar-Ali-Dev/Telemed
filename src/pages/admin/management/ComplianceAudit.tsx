@@ -18,7 +18,7 @@ const ComplianceAudit: React.FC = () => {
   );
 
   return (
-    <SectionWrapper padding="p-6">
+    <SectionWrapper className="m-6">
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <Heading
@@ -34,7 +34,7 @@ const ComplianceAudit: React.FC = () => {
           />
         </div>
 
-        <div className="rounded-xl overflow-hidden border border-[#D4CFCC] bg-white">
+        <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
             columns={COMPLIANCE_AUDIT_COLUMNS}
             data={filteredData}

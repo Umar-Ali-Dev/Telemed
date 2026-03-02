@@ -41,7 +41,7 @@ const DocumentHandling = () => {
   ];
 
   return (
-    <SectionWrapper padding="p-8">
+    <SectionWrapper className="m-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-10">
         <h2 className="text-[24px] font-bold text-[#0A1E25]">Documents</h2>

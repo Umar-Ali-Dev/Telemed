@@ -76,7 +76,7 @@ const PatientProfile = () => {
   };
 
   return (
-    <SectionWrapper>
+    <SectionWrapper className="m-6">
       {/* Dynamic Header */}
       <div className="flex items-center gap-4 mb-8">
         <div className="w-14 h-14 rounded-xl overflow-hidden bg-gray-100">

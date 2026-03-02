@@ -21,7 +21,7 @@ const AllRefundRequests: React.FC = () => {
   );
 
   return (
-    <SectionWrapper>
+    <SectionWrapper className="m-6">
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <Heading
@@ -37,7 +37,7 @@ const AllRefundRequests: React.FC = () => {
           />
         </div>
 
-        <div className="rounded-xl overflow-hidden border border-[#D4CFCC] bg-white">
+        <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
             columns={REFUND_REQUESTS_COLUMNS(handleApprove, handleDecline)}
             data={filteredData}

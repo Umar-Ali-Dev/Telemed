@@ -91,7 +91,7 @@ const VisitNote = () => {
           />
         </div>
 
-        <div className="border border-[#D4CFCC] rounded-[15px] overflow-hidden bg-white shadow-sm p-4">
+        <div className="bg-[#D4CFCC] rounded-[15px] overflow-hidden shadow-sm p-4">
           <div className="flex justify-between items-center pb-4">
             <div className="flex items-center gap-2">
               <HiOutlineDocumentText className="text-[#271100]" size={22} />
