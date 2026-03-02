@@ -1304,3 +1304,65 @@ export const ALL_PRESCRIPTIONS_COLUMNS = (
     ),
   },
 ];
+export const REFUND_REQUESTS_COLUMNS = (
+  handleApprove: (id: any) => void,
+  handleDecline: (id: any) => void,
+) => [
+  {
+    name: "Patient",
+    selector: (row: any) => row.patientName,
+    sortable: true,
+  },
+  {
+    name: "Date & Time",
+    selector: (row: any) => row.dateTime,
+    sortable: true,
+  },
+  {
+    name: "Status",
+    cell: (row: any) => {
+      const colors: any = {
+        Pending: "text-[#F76D00]",
+        Decline: "text-[#FF3B30]",
+      };
+      return (
+        <span
+          className={`font-semibold ${colors[row.status] || "text-[#F76D00]"}`}
+        >
+          {row.status}
+        </span>
+      );
+    },
+  },
+  {
+    name: "Actions",
+    cell: (row: any) => (
+      <div className="flex items-center gap-3">
+        <button
+          onClick={() => handleDecline(row.id)}
+          className="text-[#FF3B30] text-[14px] font-bold hover:underline"
+        >
+          Decline
+        </button>
+        <button
+          onClick={() => handleApprove(row.id)}
+          className="bg-[#EBE5F1] text-[#705295] px-4 py-1.5 rounded-lg font-bold text-[14px] hover:bg-[#d8cce4] transition-colors"
+        >
+          Approve
+        </button>
+      </div>
+    ),
+  },
+];
+
+export const DUMMY_REFUND_DATA = Array(10)
+  .fill({
+    patientName: "Jhon Smith",
+    dateTime: "24/01/2023 at 6:00 PM EST",
+    status: "Pending",
+  })
+  .map((item, index) => ({
+    ...item,
+    id: index + 1,
+    status: index === 5 ? "Decline" : "Pending", // Match design where 6th item is Decline
+  }));

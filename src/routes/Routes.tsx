@@ -24,9 +24,8 @@ import EditProvider from "../pages/admin/providers/EditProvider";
 import ProviderRequests from "../pages/admin/providers/ProviderRequests";
 import AdminProviderProfile from "../pages/admin/profile-components/AdminProviderProfile";
 import AllPrescriptions from "../pages/admin/management/AllPrescriptions";
-
-const RefundRequests = () => <div>Refund Requests</div>;
-const SystemControls = () => <div>System Controls</div>;
+import AllRefundRequests from "../pages/admin/management/AllRefundRequests";
+import SystemControls from "../pages/admin/management/SystemControls";
 
 export const router = createBrowserRouter([
   {
@@ -67,7 +66,7 @@ export const router = createBrowserRouter([
             path: "management/prescriptions",
             element: <AllPrescriptions />,
           },
-          { path: "management/refunds", element: <RefundRequests /> },
+          { path: "management/refunds", element: <AllRefundRequests /> },
           { path: "management/controls", element: <SystemControls /> },
         ],
       },
