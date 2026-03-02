@@ -1177,3 +1177,130 @@ export const PROVIDER_REQUESTS_COLUMNS = (
     ),
   },
 ];
+export const DUMMY_PRESCRIPTIONS = [
+  {
+    id: 1,
+    dateTime: "24/01/2023 at 6:00 PM EST",
+    patientName: "Jhon Smith",
+    providerName: "Dr. Jhon Smith",
+    pharmacyName: "ABC Pharmacy",
+    status: "Prescription Sent",
+  },
+  {
+    id: 2,
+    dateTime: "24/01/2023 at 6:15 PM EST",
+    patientName: "Sarah Jenkins",
+    providerName: "Dr. Alina Star",
+    pharmacyName: "HealthPlus Pharmacy",
+    status: "Resend Prescription",
+  },
+  {
+    id: 3,
+    dateTime: "24/01/2023 at 6:30 PM EST",
+    patientName: "Michael Ross",
+    providerName: "Dr. Jhon Smith",
+    pharmacyName: "ABC Pharmacy",
+    status: "Prescription Failed",
+  },
+  {
+    id: 4,
+    dateTime: "25/01/2023 at 10:00 AM EST",
+    patientName: "Emily Davis",
+    providerName: "Dr. Alina Star",
+    pharmacyName: "CVS Pharmacy",
+    status: "Prescription Sent",
+  },
+  {
+    id: 5,
+    dateTime: "25/01/2023 at 11:20 AM EST",
+    patientName: "David Wilson",
+    providerName: "Dr. Robert Fox",
+    pharmacyName: "Walgreens",
+    status: "Prescription Sent",
+  },
+  {
+    id: 6,
+    dateTime: "25/01/2023 at 1:45 PM EST",
+    patientName: "Jessica Brown",
+    providerName: "Dr. Alina Star",
+    pharmacyName: "ABC Pharmacy",
+    status: "Prescription Failed",
+  },
+  {
+    id: 7,
+    dateTime: "26/01/2023 at 9:15 AM EST",
+    patientName: "Kevin Parker",
+    providerName: "Dr. Jhon Smith",
+    pharmacyName: "HealthPlus Pharmacy",
+    status: "Prescription Sent",
+  },
+  {
+    id: 8,
+    dateTime: "26/01/2023 at 12:00 PM EST",
+    patientName: "Linda White",
+    providerName: "Dr. Robert Fox",
+    pharmacyName: "CVS Pharmacy",
+    status: "Resend Prescription",
+  },
+  {
+    id: 9,
+    dateTime: "26/01/2023 at 3:30 PM EST",
+    patientName: "Thomas Miller",
+    providerName: "Dr. Alina Star",
+    pharmacyName: "Walgreens",
+    status: "Prescription Sent",
+  },
+  {
+    id: 10,
+    dateTime: "27/01/2023 at 10:45 AM EST",
+    patientName: "Sophia Taylor",
+    providerName: "Dr. Jhon Smith",
+    pharmacyName: "ABC Pharmacy",
+    status: "Prescription Sent",
+  },
+];
+export const ALL_PRESCRIPTIONS_COLUMNS = (
+  handleViewDetails: (id: any) => void,
+) => [
+  {
+    name: "Date & Time",
+    selector: (row: any) => row.dateTime,
+    sortable: true,
+  },
+  { name: "Patient", selector: (row: any) => row.patientName, sortable: true },
+  {
+    name: "Provider",
+    selector: (row: any) => row.providerName,
+    sortable: true,
+  },
+  { name: "Pharmacy", selector: (row: any) => row.pharmacyName },
+  {
+    name: "Prescription Status",
+    cell: (row: any) => {
+      const colors: any = {
+        "Prescription Sent": "text-[#34C759]",
+        "Resend Prescription": "text-[#A3948C]",
+        "Prescription Failed": "text-[#F76D00]",
+      };
+      return (
+        <span
+          className={`font-semibold ${colors[row.status] || "text-[#34C759]"}`}
+        >
+          {row.status}
+        </span>
+      );
+    },
+  },
+  {
+    name: "Actions",
+    cell: (row: any) => (
+      <div className="flex items-center justify-center">
+        <HiOutlineDocumentText
+          size={20}
+          className="text-[#705295] cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => handleViewDetails(row.id)}
+        />
+      </div>
+    ),
+  },
+];

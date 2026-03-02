@@ -1,24 +1,30 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import AuthModal from "../pages/auth/AuthModal";
+
+// Provider Pages
 import ProviderDashboard from "../pages/provider/dashboard/ProviderDashboard";
 import AllVisits from "../pages/provider/consultation/AllVisits";
 import NewVisits from "../pages/provider/consultation/NewVisits";
 import AllPatients from "../pages/provider/dashboard/AllPatients";
 import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
+import MyAccount from "../pages/provider/dashboard/account/MyAccount";
+
+// Shared Pages
 import Chat from "../pages/chat/Chat";
 import Notifications from "../pages/notifications/Notifications";
+
+// Admin Pages
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminConsultations from "../pages/admin/AdminConsultations";
 import AdminPatients from "../pages/admin/AdminPatients";
 import EditPatient from "../pages/admin/patients/EditPatient";
-import EditProvider from "../pages/admin/providers/EditProvider";
-import AdminProviderProfile from "../pages/admin/profile-components/AdminProviderProfile";
-import MyAccount from "../pages/provider/dashboard/account/MyAccount";
 import AdminProviders from "../pages/admin/providers/AdminProviders";
+import EditProvider from "../pages/admin/providers/EditProvider";
 import ProviderRequests from "../pages/admin/providers/ProviderRequests";
+import AdminProviderProfile from "../pages/admin/profile-components/AdminProviderProfile";
+import AllPrescriptions from "../pages/admin/management/AllPrescriptions";
 
-const PrescriptionsManagement = () => <div>Prescriptions Management</div>;
 const RefundRequests = () => <div>Refund Requests</div>;
 const SystemControls = () => <div>System Controls</div>;
 
@@ -59,7 +65,7 @@ export const router = createBrowserRouter([
           { path: "providers/requests", element: <ProviderRequests /> },
           {
             path: "management/prescriptions",
-            element: <PrescriptionsManagement />,
+            element: <AllPrescriptions />,
           },
           { path: "management/refunds", element: <RefundRequests /> },
           { path: "management/controls", element: <SystemControls /> },
