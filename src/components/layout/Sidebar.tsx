@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
   HiOutlineBell,
@@ -8,24 +8,94 @@ import {
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { PROVIDER_LINKS, ADMIN_LINKS } from "../../constants/navigation";
 
+const ROLE_STORAGE_KEY = "user_role_context";
+
+// In-memory fallback for role when sessionStorage is not available
+let roleMemory: "admin" | "provider" | null = null;
+
 const Sidebar: React.FC = () => {
   const { pathname } = useLocation();
-  const isAdmin = pathname.startsWith("/admin");
-  const links = isAdmin ? ADMIN_LINKS : PROVIDER_LINKS;
+  const [userRole, setUserRole] = useState<"admin" | "provider">("provider");
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
+  const sessionStorageAvailable = useRef<boolean | null>(null);
+
+  useEffect(() => {
+    // Check if sessionStorage is available (only check once)
+    if (sessionStorageAvailable.current === null) {
+      try {
+        sessionStorage.getItem("test");
+        sessionStorageAvailable.current = true;
+      } catch (error) {
+        sessionStorageAvailable.current = false;
+      }
+    }
+
+    // Determine role based on current pathname
+    if (pathname.startsWith("/admin")) {
+      setUserRole("admin");
+      roleMemory = "admin";
+      // Safely store role in sessionStorage if available
+      if (sessionStorageAvailable.current) {
+        try {
+          sessionStorage.setItem(ROLE_STORAGE_KEY, "admin");
+        } catch (error) {
+          sessionStorageAvailable.current = false;
+        }
+      }
+    } else if (pathname.startsWith("/provider")) {
+      setUserRole("provider");
+      roleMemory = "provider";
+      // Safely store role in sessionStorage if available
+      if (sessionStorageAvailable.current) {
+        try {
+          sessionStorage.setItem(ROLE_STORAGE_KEY, "provider");
+        } catch (error) {
+          sessionStorageAvailable.current = false;
+        }
+      }
+    } else {
+      // For shared routes, use stored role from sessionStorage or memory
+      if (sessionStorageAvailable.current) {
+        try {
+          const storedRole = sessionStorage.getItem(ROLE_STORAGE_KEY) as "admin" | "provider" | null;
+          if (storedRole === "admin" || storedRole === "provider") {
+            setUserRole(storedRole);
+            roleMemory = storedRole;
+          } else if (roleMemory) {
+            // Fallback to memory if sessionStorage doesn't have it
+            setUserRole(roleMemory);
+          }
+        } catch (error) {
+          sessionStorageAvailable.current = false;
+          // Fallback to memory
+          if (roleMemory) {
+            setUserRole(roleMemory);
+          }
+        }
+      } else {
+        // Use memory fallback when sessionStorage is not available
+        if (roleMemory) {
+          setUserRole(roleMemory);
+        }
+      }
+    }
+  }, [pathname]);
+
+  const isAdmin = userRole === "admin";
+  const links = isAdmin ? ADMIN_LINKS : PROVIDER_LINKS;
 
   const toggleMenu = (label: string) => {
     setOpenMenus((prev) => ({ ...prev, [label]: !prev[label] }));
   };
 
   return (
-    <aside className="w-[102px] h-full bg-white border-r border-gray-100 flex flex-col items-center py-6 shrink-0 overflow-y-auto scrollbar-hide relative z-20">
+    <aside className="w-[102px] h-full bg-white border-r border-gray-100 flex flex-col items-center shrink-0 relative z-20">
       <style>{`
-        aside::-webkit-scrollbar { display: none; }
-        aside { -ms-overflow-style: none; scrollbar-width: none; }
+        aside nav::-webkit-scrollbar { display: none; }
+        aside nav { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
-      <nav className="flex flex-col gap-8 flex-1 w-full">
+      <nav className="flex flex-col gap-8 flex-1 w-full py-6 overflow-y-auto scrollbar-hide min-h-0">
         {links.map((link) => (
           <div key={link.label} className="flex flex-col items-center w-full">
             {link.subItems ? (
@@ -84,7 +154,7 @@ const Sidebar: React.FC = () => {
       </nav>
 
       {isAdmin && (
-        <div className="flex flex-col items-center gap-6 mt-12 pt-12 border-t border-gray-50 w-full">
+        <div className="flex flex-col items-center gap-6 py-6 pt-12 border-t border-gray-50 w-full shrink-0">
           <NavLink
             to="/notifications"
             className={({ isActive }) =>

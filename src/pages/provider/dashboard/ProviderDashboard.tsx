@@ -27,7 +27,7 @@ const ProviderDashboard: React.FC = () => {
 
   return (
     <div className="bg-white space-y-10">
-      <div className="space-y-6">
+      <div className="space-y-6 m-6">
         <Heading
           title="Welcome, Dr. Alina Star."
           textSize="text-[24px]"
@@ -35,7 +35,7 @@ const ProviderDashboard: React.FC = () => {
         />
       </div>
 
-      <SectionWrapper padding="p-4" className="flex flex-col gap-7">
+      <SectionWrapper padding="p-4" className="flex m-6 flex-col gap-7">
         {/* Navigation Cards Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
           <NavigationCard
