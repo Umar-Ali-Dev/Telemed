@@ -39,7 +39,7 @@ const MyAccount = () => {
   };
 
   return (
-    <SectionWrapper>
+    <SectionWrapper className="m-6">
       <div className="flex items-center gap-4 mb-8">
         <div className="relative w-20 h-20">
           <img

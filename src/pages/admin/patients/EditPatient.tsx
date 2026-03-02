@@ -35,7 +35,7 @@ const EditPatient: React.FC = () => {
   };
 
   return (
-    <SectionWrapper padding="p-8">
+    <SectionWrapper className="m-8">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         <div className="flex items-center gap-6">
           <div className="relative w-20 h-20">

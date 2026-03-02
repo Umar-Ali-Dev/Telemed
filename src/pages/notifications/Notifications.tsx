@@ -6,7 +6,7 @@ import { NOTIFICATION_DATA } from "../../constants/commonData";
 
 const Notifications: React.FC = () => {
   return (
-    <SectionWrapper>
+    <SectionWrapper className="m-6">
       <div className="space-y-10">
         <Heading
           title="Notifications"

@@ -5,7 +5,7 @@ import SectionWrapper from "../../components/ui/common/SectionWrapper";
 
 const Chat: React.FC = () => {
   return (
-    <SectionWrapper className="flex  gap-5 min-h-[calc(100vh-200px)]">
+    <SectionWrapper className="flex m-6 gap-5 min-h-[calc(100vh-200px)]">
       <ChatSidebar />
       <ChatWindow />
     </SectionWrapper>

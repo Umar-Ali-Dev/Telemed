@@ -116,7 +116,7 @@ const AdminDashboard: React.FC = () => {
           />
         </div>
 
-        <div className="rounded-xl overflow-hidden border border-[#D4CFCC]">
+        <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
             columns={ADMIN_QUEUE_COLUMNS}
             data={ADMIN_DASHBOARD_DATA}
