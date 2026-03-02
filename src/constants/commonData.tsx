@@ -1366,3 +1366,69 @@ export const DUMMY_REFUND_DATA = Array(10)
     id: index + 1,
     status: index === 5 ? "Decline" : "Pending", // Match design where 6th item is Decline
   }));
+export const COMPLIANCE_AUDIT_COLUMNS = [
+  {
+    name: "Date & Time",
+    selector: (row: any) => row.dateTime,
+    sortable: true,
+    width: "300px",
+  },
+  {
+    name: "Action Performed",
+    selector: (row: any) => row.action,
+    sortable: true,
+  },
+];
+
+export const DUMMY_AUDIT_LOGS = [
+  {
+    id: 1,
+    dateTime: "Jan 22, 2026 at 6:00 pm EST",
+    action: "Logging in to the platform",
+  },
+  {
+    id: 2,
+    dateTime: "Jan 22, 2026 at 6:00 pm EST",
+    action: "Send prescription",
+  },
+  {
+    id: 3,
+    dateTime: "Jan 22, 2026 at 6:00 pm EST",
+    action: "Send prescription",
+  },
+  {
+    id: 4,
+    dateTime: "Jan 22, 2026 at 6:00 pm EST",
+    action: "Send prescription",
+  },
+  {
+    id: 5,
+    dateTime: "Jan 22, 2026 at 6:00 pm EST",
+    action: "Send prescription",
+  },
+  {
+    id: 6,
+    dateTime: "Jan 22, 2026 at 6:00 pm EST",
+    action: "Send prescription",
+  },
+  {
+    id: 7,
+    dateTime: "Jan 22, 2026 at 6:00 pm EST",
+    action: "Send prescription",
+  },
+  {
+    id: 8,
+    dateTime: "Jan 22, 2026 at 6:00 pm EST",
+    action: "Send prescription",
+  },
+  {
+    id: 9,
+    dateTime: "Jan 22, 2026 at 6:00 pm EST",
+    action: "Add New Provider",
+  },
+  {
+    id: 10,
+    dateTime: "Jan 22, 2026 at 6:00 pm EST",
+    action: "Update Patient Record",
+  },
+];

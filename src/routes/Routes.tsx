@@ -26,6 +26,9 @@ import AdminProviderProfile from "../pages/admin/profile-components/AdminProvide
 import AllPrescriptions from "../pages/admin/management/AllPrescriptions";
 import AllRefundRequests from "../pages/admin/management/AllRefundRequests";
 import SystemControls from "../pages/admin/management/SystemControls";
+import Analytics from "../pages/admin/management/Analytics";
+import ComplianceAudit from "../pages/admin/management/ComplianceAudit";
+import DocumentHandling from "../pages/admin/management/DocumentHandling";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +71,9 @@ export const router = createBrowserRouter([
           },
           { path: "management/refunds", element: <AllRefundRequests /> },
           { path: "management/controls", element: <SystemControls /> },
+          { path: "management/analytics", element: <Analytics /> },
+          { path: "management/audit", element: <ComplianceAudit /> },
+          { path: "management/docs", element: <DocumentHandling /> },
         ],
       },
     ],

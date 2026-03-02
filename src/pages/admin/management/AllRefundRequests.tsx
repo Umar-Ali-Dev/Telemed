@@ -21,7 +21,7 @@ const AllRefundRequests: React.FC = () => {
   );
 
   return (
-    <SectionWrapper padding="p-6">
+    <SectionWrapper>
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <Heading

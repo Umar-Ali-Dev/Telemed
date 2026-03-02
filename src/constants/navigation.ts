@@ -27,12 +27,24 @@ export interface NavItem {
 export const PROVIDER_LINKS: NavItem[] = [
   { label: "Dashboard", path: "/provider/dashboard", icon: LuLayoutDashboard },
   { label: "New Visits", path: "/provider/new-visits", icon: shieldPlusIcon },
-  { label: "All Visits", path: "/provider/all-visits", icon: briefcaseMedicalIcon },
+  {
+    label: "All Visits",
+    path: "/provider/all-visits",
+    icon: briefcaseMedicalIcon,
+  },
   { label: "All Patients", path: "/provider/all-patients", icon: userListIcon },
-  { label: "Flagged Patients", path: "/provider/flagged-patients", icon: unionIcon },
+  {
+    label: "Flagged Patients",
+    path: "/provider/flagged-patients",
+    icon: unionIcon,
+  },
   { label: "Messages", path: "/chat", icon: chatCircleDotsIcon },
   { label: "Statistics", path: "/provider/statistics", icon: chartLineUpIcon },
-  { label: "Activity Logs", path: "/provider/activity-logs", icon: notebookIcon },
+  {
+    label: "Activity Logs",
+    path: "/provider/activity-logs",
+    icon: notebookIcon,
+  },
 ];
 
 export const ADMIN_LINKS: NavItem[] = [
@@ -54,17 +66,9 @@ export const ADMIN_LINKS: NavItem[] = [
       { label: "Prescriptions", path: "/admin/management/prescriptions" },
       { label: "Refund Requests", path: "/admin/management/refunds" },
       { label: "System Controls", path: "/admin/management/controls" },
-      { label: "Reporting & Analytics", path: "/admin/management/reports" },
+      { label: "Reporting & Analytics", path: "/admin/management/analytics" },
+      { label: "Compliance & Audit Logs", path: "/admin/management/audit" },
+      { label: "Document Handling", path: "/admin/management/docs" },
     ],
   },
-  {
-    label: "Compliance",
-    icon: LuShieldCheck,
-    subItems: [
-      { label: "Audit Logs", path: "/admin/compliance/audit" },
-      { label: "Document Handling", path: "/admin/compliance/docs" },
-    ],
-  },
-  { label: "Website", path: "/admin/website", icon: LuGlobe },
-  { label: "Blogs", path: "/admin/blogs", icon: LuFileText },
 ];

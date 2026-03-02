@@ -46,7 +46,7 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="bg-white space-y-10">
+    <div className="bg-white space-y-10 p-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <Heading
           title="Welcome, Mr. Jhon"
