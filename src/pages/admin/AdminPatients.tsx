@@ -23,7 +23,9 @@ const AdminPatients: React.FC = () => {
   const filteredData = ADMIN_DASHBOARD_DATA.filter((item: any) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
-
+  const handleRowClick = (row: any) => {
+    navigate(`/admin/provider-profile/${row.id}`);
+  };
   return (
     <SectionWrapper padding="p-6">
       <div className="space-y-6">
@@ -48,6 +50,7 @@ const AdminPatients: React.FC = () => {
             customStyles={commonTableStyles}
             responsive
             highlightOnHover
+            onRowClicked={handleRowClick}
             pointerOnHover
           />
         </div>

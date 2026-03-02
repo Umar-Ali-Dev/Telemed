@@ -7,6 +7,7 @@ import InputField from "../../../components/ui/inputs/InputField";
 import SelectField from "../../../components/ui/inputs/SelectField";
 import Button from "../../../components/ui/button/Button";
 import { LuImagePlus } from "react-icons/lu";
+import ImageUploadField from "../../../components/ui/inputs/ImageUploadField";
 
 const EditPatient: React.FC = () => {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ const EditPatient: React.FC = () => {
       bmi: "24.4",
       gender: "Female",
       address: "72 Caisson Trace, Spanish Fort, AL 36527, USA",
+      profileImage:
+        "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150&h=150&auto=format&fit=crop",
     },
   });
 
@@ -36,10 +39,10 @@ const EditPatient: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         <div className="flex items-center gap-6">
           <div className="relative w-20 h-20">
-            <img
-              src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150&h=150&auto=format&fit=crop"
-              alt="David Petersburg"
-              className="w-full h-full rounded-xl object-cover"
+            <ImageUploadField
+              name="profileImage"
+              control={control}
+              defaultValue="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150&h=150&auto=format&fit=crop"
             />
             <button
               type="button"

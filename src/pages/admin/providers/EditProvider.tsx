@@ -5,7 +5,7 @@ import InputField from "../../../components/ui/inputs/InputField";
 import SelectField from "../../../components/ui/inputs/SelectField";
 import CheckboxField from "../../../components/ui/inputs/CheckboxField";
 import Button from "../../../components/ui/button/Button";
-import { LuImagePlus } from "react-icons/lu";
+import ImageUploadField from "../../../components/ui/inputs/ImageUploadField";
 
 const EditProvider = () => {
   const navigate = useNavigate();
@@ -19,15 +19,11 @@ const EditProvider = () => {
   return (
     <SectionWrapper padding="p-8">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="relative w-24 h-24 bg-[#F5F5F5] rounded-xl flex items-center justify-center border border-dashed border-gray-300">
-          <LuImagePlus size={32} className="text-gray-400" />
-          <button
-            type="button"
-            className="absolute -bottom-2 -right-2 bg-white p-1.5 rounded-lg shadow-md border border-gray-100"
-          >
-            <LuImagePlus size={16} className="text-[#705295]" />
-          </button>
-        </div>
+        <ImageUploadField
+          name="profileImage"
+          control={control}
+          defaultValue="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150&h=150&auto=format&fit=crop"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 max-w-5xl">
           <InputField
