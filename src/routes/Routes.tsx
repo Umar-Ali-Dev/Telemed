@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 import AuthModal from "../pages/auth/AuthModal";
 import ProviderDashboard from "../pages/provider/dashboard/ProviderDashboard";
 import AllVisits from "../pages/provider/consultation/AllVisits";
+import NewVisits from "../pages/provider/consultation/NewVisits";
 import AllPatients from "../pages/provider/dashboard/AllPatients";
 import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
 import Chat from "../pages/chat/Chat";
@@ -37,6 +38,7 @@ export const router = createBrowserRouter([
         path: "provider",
         children: [
           { path: "dashboard", element: <ProviderDashboard /> },
+          { path: "new-visits", element: <NewVisits /> },
           { path: "all-visits", element: <AllVisits /> },
           { path: "all-patients", element: <AllPatients /> },
           { path: "patient/:id", element: <PatientProfile /> },

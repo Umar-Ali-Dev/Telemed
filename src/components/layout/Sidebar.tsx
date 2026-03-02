@@ -44,7 +44,11 @@ const Sidebar: React.FC = () => {
                     openMenus[link.label] ? "text-[#705295]" : "text-[#999999]"
                   }`}
                 >
-                  <link.icon size={28} />
+                  {typeof link.icon === "string" ? (
+                    <img src={link.icon} alt={link.label} className="w-7 h-7" />
+                  ) : (
+                    <link.icon size={28} />
+                  )}
                   <span className="text-[12px] font-medium">{link.label}</span>
                   {openMenus[link.label] ? (
                     <FaChevronUp size={10} className="mt-1" />
@@ -86,7 +90,11 @@ const Sidebar: React.FC = () => {
                   }`
                 }
               >
-                <link.icon size={28} />
+                {typeof link.icon === "string" ? (
+                  <img src={link.icon} alt={link.label} className="w-7 h-7" />
+                ) : (
+                  <link.icon size={28} />
+                )}
                 <span className="text-[12px] font-medium">{link.label}</span>
               </NavLink>
             )}
@@ -94,48 +102,50 @@ const Sidebar: React.FC = () => {
         ))}
       </nav>
 
-      <div className="flex flex-col items-center gap-6 mt-12 pt-12 border-t border-gray-50 w-full">
-        <NavLink
-          to="/notifications"
-          className={({ isActive }) =>
-            `relative w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
-              isActive
-                ? "border-[#705295] text-[#705295] bg-[#705295]/5"
-                : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"
-            }`
-          }
-        >
-          <HiOutlineBell size={26} />
-          <span className="absolute top-0 right-0 w-4 h-4 bg-[#F76D00] border-2 border-white rounded-full"></span>
-        </NavLink>
+      {isAdmin && (
+        <div className="flex flex-col items-center gap-6 mt-12 pt-12 border-t border-gray-50 w-full">
+          <NavLink
+            to="/notifications"
+            className={({ isActive }) =>
+              `relative w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
+                isActive
+                  ? "border-[#705295] text-[#705295] bg-[#705295]/5"
+                  : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"
+              }`
+            }
+          >
+            <HiOutlineBell size={26} />
+            <span className="absolute top-0 right-0 w-4 h-4 bg-[#F76D00] border-2 border-white rounded-full"></span>
+          </NavLink>
 
-        <NavLink
-          to="/chat"
-          className={({ isActive }) =>
-            `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
-              isActive
-                ? "border-[#705295] text-[#705295] bg-[#705295]/5"
-                : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"
-            }`
-          }
-        >
-          <HiOutlineChatAlt2 size={26} />
-        </NavLink>
+          <NavLink
+            to="/chat"
+            className={({ isActive }) =>
+              `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
+                isActive
+                  ? "border-[#705295] text-[#705295] bg-[#705295]/5"
+                  : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"
+              }`
+            }
+          >
+            <HiOutlineChatAlt2 size={26} />
+          </NavLink>
 
-        <NavLink
-          to="/my-account"
-          end
-          className={({ isActive }) =>
-            `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
-              isActive
-                ? "border-[#705295] text-[#705295] bg-[#705295]/5"
-                : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"
-            }`
-          }
-        >
-          <HiOutlineUserCircle size={32} />
-        </NavLink>
-      </div>
+          <NavLink
+            to="/my-account"
+            end
+            className={({ isActive }) =>
+              `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${
+                isActive
+                  ? "border-[#705295] text-[#705295] bg-[#705295]/5"
+                  : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"
+              }`
+            }
+          >
+            <HiOutlineUserCircle size={32} />
+          </NavLink>
+        </div>
+      )}
     </aside>
   );
 };
