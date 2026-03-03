@@ -14,13 +14,26 @@ import { useNavigate } from "react-router-dom";
 const AdminPatients: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  const [patientToggleStates, setPatientToggleStates] = useState<Record<number, string>>({});
 
   const handleEdit = (id: any) => {
     navigate(`/admin/patients/edit/${id}`);
   };
   const handleFlag = (id: any) => console.log("Flag patient:", id);
+  const handleStatusChange = (id: any, newStatus: string) => {
+    setPatientToggleStates((prev) => ({
+      ...prev,
+      [id]: newStatus,
+    }));
+  };
 
-  const filteredData = ADMIN_DASHBOARD_DATA.filter((item: any) =>
+  // Map data and add toggleStatus, then filter
+  const mappedData = ADMIN_DASHBOARD_DATA.map((item: any) => ({
+    ...item,
+    toggleStatus: patientToggleStates[item.id] || "Active", // Default to Active
+  }));
+
+  const filteredData = mappedData.filter((item: any) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
   const handleRowClick = (row: any) => {
@@ -45,7 +58,7 @@ const AdminPatients: React.FC = () => {
 
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={ADMIN_PATIENT_COLUMNS(handleEdit, handleFlag)}
+            columns={ADMIN_PATIENT_COLUMNS(handleEdit, handleFlag, handleStatusChange)}
             data={filteredData}
             customStyles={commonTableStyles}
             responsive
