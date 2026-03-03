@@ -1,68 +1,89 @@
 import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
+import { HiOutlineArrowLeft } from "react-icons/hi";
 import Heading from "../../../components/ui/headings/Heading";
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
 import SearchInput from "../../../components/ui/inputs/SearchInput";
 import Pagination from "../../../components/ui/table/Pagination";
 import { commonTableStyles } from "../../../components/ui/table/TableStyles";
 import {
-  PATIENT_LIST_DATA,
-  GET_PATIENT_COLUMNS,
+  ALL_PATIENTS_DATA,
+  ALL_PATIENTS_COLUMNS,
 } from "../../../constants/commonData";
 
 const AllPatients: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(15);
 
-  const PATIENT_COLUMNS = GET_PATIENT_COLUMNS(navigate);
-
-  const filteredPatients = PATIENT_LIST_DATA.filter((p) =>
+  const filteredPatients = ALL_PATIENTS_DATA.filter((p) =>
     `${p.firstName} ${p.lastName}`
       .toLowerCase()
       .includes(searchQuery.toLowerCase()),
   );
 
+  const handleRowClick = (row: any) => {
+    navigate(`/provider/all-patients/${row.id}`);
+  };
+
   return (
-    <SectionWrapper className="flex flex-col gap-5">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <Heading
-          title="All Patients"
-          textSize="text-[24px]"
-          className="font-bold text-[#1A202C]"
-        />
+    <SectionWrapper className="m-6">
+      <div className="space-y-6">
+        {/* Header with Back Arrow and Title */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate("/provider/dashboard")}
+              className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              <HiOutlineArrowLeft size={24} className="text-[#271100]" />
+            </button>
+            <Heading
+              title="All Patients"
+              textSize="text-[24px]"
+              className="font-bold text-[#1A202C]"
+            />
+          </div>
 
-        <SearchInput
-          value={searchQuery}
-          onChange={(val) => setSearchQuery(val)}
-          placeholder="Patient name"
-        />
-      </div>
-
-      <DataTable
-        columns={PATIENT_COLUMNS}
-        data={filteredPatients}
-        customStyles={commonTableStyles}
-        onRowClicked={(row) =>
-          navigate(`/provider/all-patients/${row.id}`)
-        }
-        pagination
-        paginationComponent={() => (
-          <Pagination
-            totalRows={filteredPatients.length}
-            currentPage={currentPage}
-            totalPages={Math.ceil(filteredPatients.length / rowsPerPage)}
-            limit={rowsPerPage}
-            onChangePage={(page) => setCurrentPage(page)}
-            onChangeLimit={(limit) => setRowsPerPage(limit)}
+          {/* Search Bar */}
+          <SearchInput
+            value={searchQuery}
+            onChange={(val) => setSearchQuery(val)}
+            placeholder="Patient name"
           />
-        )}
-        responsive
-        highlightOnHover
-        pointerOnHover
-      />
+        </div>
+
+        {/* Professional Table Container */}
+        <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
+          <DataTable
+            columns={ALL_PATIENTS_COLUMNS}
+            data={filteredPatients}
+            customStyles={commonTableStyles}
+            onRowClicked={handleRowClick}
+            pagination
+            paginationPerPage={15}
+            paginationComponentOptions={{
+              rowsPerPageText: "Rows per page:",
+              rangeSeparatorText: "of",
+              noRowsPerPage: false,
+              selectAllRowsItem: false,
+            }}
+            paginationComponent={() => (
+              <Pagination
+                totalRows={filteredPatients.length}
+                currentPage={1}
+                totalPages={Math.ceil(filteredPatients.length / 15)}
+                limit={15}
+                onChangePage={() => {}}
+                onChangeLimit={() => {}}
+              />
+            )}
+            responsive
+            highlightOnHover
+            pointerOnHover
+          />
+        </div>
+      </div>
     </SectionWrapper>
   );
 };
