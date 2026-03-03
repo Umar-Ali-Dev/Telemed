@@ -46,7 +46,7 @@ const AllPatients: React.FC = () => {
         data={filteredPatients}
         customStyles={commonTableStyles}
         onRowClicked={(row) =>
-          navigate(`/provider/patient/${row.id}?hideVisitNote=true`)
+          navigate(`/provider/all-patients/${row.id}`)
         }
         pagination
         paginationComponent={() => (

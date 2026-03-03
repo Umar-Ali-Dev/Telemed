@@ -1,6 +1,5 @@
 import React from "react";
 import DataTable from "react-data-table-component";
-import { useNavigate } from "react-router-dom"; // Import navigate hook
 import {
   CARE_QUEUE_COLUMNS,
   DUMMY_DATA,
@@ -19,11 +18,6 @@ import profileSettingsIcon from "../../../assets/icons/profileSettings.svg";
 import activityLogsIcon from "../../../assets/icons/activityLogs.svg";
 
 const ProviderDashboard: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleRowClick = (row: any) => {
-    navigate(`/provider/patient/${row.id}`);
-  };
 
   return (
     <div className="bg-white space-y-10">
@@ -94,9 +88,6 @@ const ProviderDashboard: React.FC = () => {
               columns={CARE_QUEUE_COLUMNS}
               data={DUMMY_DATA}
               customStyles={commonTableStyles}
-              onRowClicked={handleRowClick}
-              pointerOnHover
-              highlightOnHover
               responsive
             />
           </div>

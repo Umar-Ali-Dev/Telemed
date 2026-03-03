@@ -84,7 +84,7 @@ const NewVisits: React.FC = () => {
   }, []);
 
   const handleRowClick = (row: PatientRecord) => {
-    navigate(`/provider/patient/${row.id}`);
+    navigate(`/provider/new-visits/${row.id}`);
   };
 
   const handleCancelSubmit = (reason: string) => {

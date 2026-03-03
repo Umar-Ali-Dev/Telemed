@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import Heading from "../../../components/ui/headings/Heading";
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
@@ -8,8 +9,10 @@ import { PAST_VISITS_COLUMNS, DUMMY_DATA } from "../../../constants/commonData";
 import Pagination from "../../../components/ui/table/Pagination";
 import SelectField from "../../../components/ui/inputs/SelectField";
 import SearchInput from "../../../components/ui/inputs/SearchInput";
+import type { PatientRecord } from "../../../constants/commonData";
 
 const AllVisits: React.FC = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
   const { control } = useForm({
@@ -69,6 +72,7 @@ const AllVisits: React.FC = () => {
             columns={PAST_VISITS_COLUMNS}
             data={filteredData}
             customStyles={commonTableStyles}
+            onRowClicked={(row: PatientRecord) => navigate(`/provider/all-visits/${row.id}`)}
             pagination
             paginationPerPage={10}
             paginationComponentOptions={{

@@ -11,6 +11,8 @@ import PatientProfile from "../pages/provider/dashboard/profile-components/Patie
 import MyAccount from "../pages/provider/dashboard/account/MyAccount";
 import Statistics from "../pages/provider/dashboard/Statistics";
 import ActivityLogs from "../pages/provider/dashboard/ActivityLogs";
+import DetailPage1 from "../pages/provider/consultation/DetailPage1";
+import DetailPage2 from "../pages/provider/consultation/DetailPage2";
 
 // Shared Pages
 import Chat from "../pages/chat/Chat";
@@ -49,8 +51,14 @@ export const router = createBrowserRouter([
         children: [
           { path: "dashboard", element: <ProviderDashboard /> },
           { path: "new-visits", element: <NewVisits /> },
+          { path: "new-visits/:id", element: <DetailPage1 /> },
+          { path: "new-visits/:id/details", element: <DetailPage2 /> },
           { path: "all-visits", element: <AllVisits /> },
+          { path: "all-visits/:id", element: <DetailPage1 /> },
+          { path: "all-visits/:id/details", element: <DetailPage2 /> },
           { path: "all-patients", element: <AllPatients /> },
+          { path: "all-patients/:id", element: <DetailPage1 /> },
+          { path: "all-patients/:id/details", element: <DetailPage2 /> },
           { path: "statistics", element: <Statistics /> },
           { path: "activity-logs", element: <ActivityLogs /> },
           { path: "patient/:id", element: <PatientProfile /> },
