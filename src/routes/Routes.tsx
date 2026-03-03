@@ -7,6 +7,7 @@ import ProviderDashboard from "../pages/provider/dashboard/ProviderDashboard";
 import AllVisits from "../pages/provider/consultation/AllVisits";
 import NewVisits from "../pages/provider/consultation/NewVisits";
 import AllPatients from "../pages/provider/dashboard/AllPatients";
+import FlaggedPatients from "../pages/provider/dashboard/FlaggedPatients";
 import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
 import MyAccount from "../pages/provider/dashboard/account/MyAccount";
 import Statistics from "../pages/provider/dashboard/Statistics";
@@ -59,6 +60,9 @@ export const router = createBrowserRouter([
           { path: "all-patients", element: <AllPatients /> },
           { path: "all-patients/:id", element: <DetailPage1 /> },
           { path: "all-patients/:id/details", element: <DetailPage2 /> },
+          { path: "flagged-patients", element: <FlaggedPatients /> },
+          { path: "flagged-patients/:id", element: <DetailPage1 /> },
+          { path: "flagged-patients/:id/details", element: <DetailPage2 /> },
           { path: "statistics", element: <Statistics /> },
           { path: "activity-logs", element: <ActivityLogs /> },
           { path: "patient/:id", element: <PatientProfile /> },

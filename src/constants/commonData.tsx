@@ -699,6 +699,7 @@ export const ALL_PATIENTS_COLUMNS: TableColumn<any>[] = [
         </span>
       );
     },
+    sortable: true,
   },
   {
     name: "Status",
@@ -709,6 +710,48 @@ export const ALL_PATIENTS_COLUMNS: TableColumn<any>[] = [
       };
       return (
         <span className={`${statusColors[row.status] || "text-gray-600"} font-medium`}>
+          {row.status}
+        </span>
+      );
+    },
+    sortable: true,
+  },
+  {
+    name: "Action",
+    cell: () => (
+      <img
+        src={fileTextIcon}
+        alt="Document"
+        className="cursor-pointer w-6 h-6"
+      />
+    ),
+  },
+];
+
+// Flagged Patients Columns - Similar to All Patients but with Flagged status
+export const FLAGGED_PATIENTS_COLUMNS: TableColumn<any>[] = [
+  { name: "Full Name", selector: (row) => `${row.firstName} ${row.lastName}`, sortable: true },
+  { name: "Email", selector: (row) => row.email, sortable: true },
+  { name: "Phone", selector: (row) => row.phone, sortable: true },
+  { name: "DOB", selector: (row) => row.dob, sortable: true },
+  { 
+    name: "Release Patient", 
+    cell: (row) => {
+      const text = row.releasePatient || "------";
+      const displayText = text.length > 25 ? `${text.substring(0, 25)}...` : text;
+      return (
+        <span className="text-gray-600">
+          {displayText}
+        </span>
+      );
+    },
+    sortable: true,
+  },
+  {
+    name: "Status",
+    cell: (row) => {
+      return (
+        <span className="text-[#F97316] font-medium">
           {row.status}
         </span>
       );
@@ -885,7 +928,7 @@ export const ALL_PATIENTS_DATA: any[] = (() => {
   
   const statuses = ["Active", "Inactive", "Active", "Active", "Inactive", "Active", "Active", "Inactive", "Active", "Active"];
   
-  return Array(90)
+  return Array(995)
     .fill(null)
     .map((_, index) => {
       const baseData = PATIENT_LIST_DATA[index % PATIENT_LIST_DATA.length];
@@ -897,6 +940,36 @@ export const ALL_PATIENTS_DATA: any[] = (() => {
         id: index + 1,
         releasePatient: releasePatientOptions[releaseIndex],
         status: statuses[statusIndex],
+      };
+    });
+})();
+
+// Flagged Patients Data - Expanded dataset with all patients having "Flagged" status
+export const FLAGGED_PATIENTS_DATA: any[] = (() => {
+  const releasePatientOptions = [
+    "Treatment completed.",
+    "------",
+    "------",
+    "Treatment completed.",
+    "------",
+    "Patient requested discharge...",
+    "------",
+    "Treatment completed.",
+    "------",
+    "------",
+  ];
+  
+  return Array(90)
+    .fill(null)
+    .map((_, index) => {
+      const baseData = PATIENT_LIST_DATA[index % PATIENT_LIST_DATA.length];
+      const releaseIndex = index % releasePatientOptions.length;
+      
+      return {
+        ...baseData,
+        id: index + 1,
+        releasePatient: releasePatientOptions[releaseIndex],
+        status: "Flagged",
       };
     });
 })();

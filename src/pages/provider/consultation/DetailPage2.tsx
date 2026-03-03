@@ -18,6 +18,8 @@ const DetailPage2: React.FC = () => {
       return "All Visits Details";
     } else if (location.pathname.includes("/all-patients/")) {
       return "Patient Details";
+    } else if (location.pathname.includes("/flagged-patients/")) {
+      return "Flagged Patient Details";
     }
     return "Details";
   };
@@ -30,6 +32,8 @@ const DetailPage2: React.FC = () => {
       return `/provider/all-visits/${id}`;
     } else if (location.pathname.includes("/all-patients/")) {
       return `/provider/all-patients/${id}`;
+    } else if (location.pathname.includes("/flagged-patients/")) {
+      return `/provider/flagged-patients/${id}`;
     }
     return `/provider/new-visits/${id}`;
   };
