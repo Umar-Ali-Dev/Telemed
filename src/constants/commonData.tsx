@@ -1,11 +1,12 @@
 import type { TableColumn } from "react-data-table-component";
 import {
-  HiOutlineDocumentText,
   HiOutlineFlag,
   HiOutlinePencil,
   HiOutlineTrash,
 } from "react-icons/hi";
 import fileTextIcon from "../assets/icons/fileText.svg";
+import userDoctorIcon from "../assets/icons/userDoctor.svg";
+import userDoctorFillIcon from "../assets/icons/userDoctorFill.svg";
 
 export interface PatientRecord {
   id: number;
@@ -831,8 +832,6 @@ export const FORM_LAYOUT_CLASS = "max-w-full lg:max-w-[650px] space-y-6";
 export const BUTTON_GROUP_CLASS =
   "flex justify-end gap-4 mt-12 pt-4 border-t border-gray-50";
 
-import { HiOutlineUser } from "react-icons/hi";
-
 export const ADMIN_QUEUE_COLUMNS = [
   {
     name: "Full Name",
@@ -887,11 +886,19 @@ export const ADMIN_QUEUE_COLUMNS = [
     button: true,
     cell: (row: any) => (
       <div className="flex items-center gap-3">
-        <button className="text-[#271100] hover:text-[#705295]">
-          <HiOutlineUser size={20} />
+        <button className="hover:opacity-80 transition-opacity">
+          <img
+            src={userDoctorIcon}
+            alt="Doctor"
+            className="w-6 h-6 object-contain"
+          />
         </button>
-        <button className="text-[#705295] hover:opacity-80">
-          <HiOutlineDocumentText size={20} />
+        <button className="hover:opacity-80 transition-opacity">
+          <img
+            src={fileTextIcon}
+            alt="Document"
+            className="w-6 h-6 object-contain"
+          />
         </button>
       </div>
     ),
@@ -953,19 +960,34 @@ export const ADMIN_CONSULTATION_COLUMNS = [
   {
     name: "Action",
     button: true,
-    cell: (row: any) => (
-      <div className="flex items-center gap-3">
-        <button
-          className="text-[#271100] hover:text-[#705295] disabled:opacity-30"
-          disabled={row.provider !== "----"}
-        >
-          <HiOutlineUser size={20} />
-        </button>
-        <button className="text-[#705295]">
-          <HiOutlineDocumentText size={20} />
-        </button>
-      </div>
-    ),
+    cell: (row: any) => {
+      const hasProvider = row.provider && row.provider !== "----";
+      return (
+        <div className="flex items-center gap-3">
+          <button
+            className={`${
+              hasProvider
+                ? "hover:opacity-80"
+                : "cursor-not-allowed opacity-100"
+            } transition-opacity`}
+            disabled={!hasProvider}
+          >
+            <img
+              src={hasProvider ? userDoctorFillIcon : userDoctorIcon}
+              alt="Doctor"
+              className="w-6 h-6 object-contain"
+            />
+          </button>
+          <button className="hover:opacity-80 transition-opacity">
+            <img
+              src={fileTextIcon}
+              alt="Document"
+              className="w-6 h-6 object-contain"
+            />
+          </button>
+        </div>
+      );
+    },
   },
 ];
 import ActionMenu from "../components/ui/table/ActionMenu";
@@ -1024,9 +1046,10 @@ export const ADMIN_PATIENT_COLUMNS = (
           <div className="w-8 h-4 bg-[#34C759] rounded-full relative cursor-pointer">
             <div className="absolute right-1 top-1 w-2 h-2 bg-white rounded-full" />
           </div>
-          <HiOutlineDocumentText
-            size={20}
-            className="text-[#705295] cursor-pointer"
+          <img
+            src={fileTextIcon}
+            alt="Document"
+            className="w-5 h-5 cursor-pointer"
           />
         </div>
         <ActionMenu
@@ -1102,9 +1125,10 @@ export const ADMIN_PROVIDER_COLUMNS = (
           <div className="w-8 h-4 bg-[#34C759] rounded-full relative cursor-pointer">
             <div className="absolute right-1 top-1 w-2 h-2 bg-white rounded-full" />
           </div>
-          <HiOutlineDocumentText
-            size={20}
-            className="text-[#705295] cursor-pointer"
+          <img
+            src={fileTextIcon}
+            alt="Document"
+            className="w-5 h-5 cursor-pointer"
             onClick={() => handleViewProfile(row.id)}
           />
         </div>
@@ -1168,9 +1192,10 @@ export const PROVIDER_REQUESTS_COLUMNS = (
     cell: (row: any) => (
       <div className="flex items-center justify-center">
         {/* Document Icon for viewing request details */}
-        <HiOutlineDocumentText
-          size={20}
-          className="text-[#705295] cursor-pointer hover:opacity-80 transition-opacity"
+        <img
+          src={fileTextIcon}
+          alt="Document"
+          className="w-5 h-5 cursor-pointer hover:opacity-80 transition-opacity"
           onClick={() => handleViewRequest(row.id)}
         />
       </div>
@@ -1295,9 +1320,10 @@ export const ALL_PRESCRIPTIONS_COLUMNS = (
     name: "Actions",
     cell: (row: any) => (
       <div className="flex items-center justify-center">
-        <HiOutlineDocumentText
-          size={20}
-          className="text-[#705295] cursor-pointer hover:opacity-80 transition-opacity"
+        <img
+          src={fileTextIcon}
+          alt="Document"
+          className="w-5 h-5 cursor-pointer hover:opacity-80 transition-opacity"
           onClick={() => handleViewDetails(row.id)}
         />
       </div>
