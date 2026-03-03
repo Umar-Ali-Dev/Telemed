@@ -26,7 +26,7 @@ const OTPVerificationPage: React.FC<OTPProps> = ({
     setTimeout(() => {
       toast.success("Verified!", { id: loadToast });
       if (nextStep === "dashboard") {
-        window.location.href = "/provider/dashboard";
+        window.location.href = "/admin/dashboard";
       } else {
         onNavigate("resetPassword");
       }

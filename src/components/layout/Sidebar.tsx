@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import {
-  HiOutlineBell,
-  HiOutlineChatAlt2,
-} from "react-icons/hi";
+import { HiOutlineBell, HiOutlineChatAlt2 } from "react-icons/hi";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { PROVIDER_LINKS, ADMIN_LINKS } from "../../constants/navigation";
 import profileImage from "../../assets/icons/profile.jpg";
@@ -57,7 +54,10 @@ const Sidebar: React.FC = () => {
       // For shared routes, use stored role from sessionStorage or memory
       if (sessionStorageAvailable.current) {
         try {
-          const storedRole = sessionStorage.getItem(ROLE_STORAGE_KEY) as "admin" | "provider" | null;
+          const storedRole = sessionStorage.getItem(ROLE_STORAGE_KEY) as
+            | "admin"
+            | "provider"
+            | null;
           if (storedRole === "admin" || storedRole === "provider") {
             setUserRole(storedRole);
             roleMemory = storedRole;
@@ -107,10 +107,19 @@ const Sidebar: React.FC = () => {
                   }`}
                 >
                   {(() => {
-                    const isActive = link.subItems?.some(sub => pathname === sub.path || pathname.startsWith(sub.path + "/"));
-                    const iconToUse = isActive && link.activeIcon ? link.activeIcon : link.icon;
+                    const isActive = link.subItems?.some(
+                      (sub) =>
+                        pathname === sub.path ||
+                        pathname.startsWith(sub.path + "/"),
+                    );
+                    const iconToUse =
+                      isActive && link.activeIcon ? link.activeIcon : link.icon;
                     return typeof iconToUse === "string" ? (
-                      <img src={iconToUse} alt={link.label} className="w-7 h-7" />
+                      <img
+                        src={iconToUse}
+                        alt={link.label}
+                        className="w-7 h-7"
+                      />
                     ) : (
                       React.createElement(iconToUse, { size: 28 })
                     );
@@ -146,15 +155,22 @@ const Sidebar: React.FC = () => {
                 }
               >
                 {({ isActive }) => {
-                  const iconToUse = isActive && link.activeIcon ? link.activeIcon : link.icon;
+                  const iconToUse =
+                    isActive && link.activeIcon ? link.activeIcon : link.icon;
                   return (
                     <>
                       {typeof iconToUse === "string" ? (
-                        <img src={iconToUse} alt={link.label} className="w-7 h-7" />
+                        <img
+                          src={iconToUse}
+                          alt={link.label}
+                          className="w-7 h-7"
+                        />
                       ) : (
                         React.createElement(iconToUse, { size: 28 })
                       )}
-                      <span className="text-[12px] font-medium">{link.label}</span>
+                      <span className="text-[12px] font-medium">
+                        {link.label}
+                      </span>
                     </>
                   );
                 }}
@@ -167,31 +183,35 @@ const Sidebar: React.FC = () => {
       {isAdmin && (
         <div className="flex flex-col items-center gap-6 py-6 pt-12 border-t border-gray-50 w-full shrink-0">
           <NavLink
-            to="/notifications"
+            to="admin/notifications"
             className={({ isActive }) =>
-              `relative w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${isActive ? "border-[#705295] text-[#705295] bg-[#705295]/5" : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"}`
+              `relative w-[39px] h-[39px] rounded-full flex items-center justify-center border-2 transition-all ${isActive ? "border-[#705295] text-[#705295] bg-[#705295]/5" : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"}`
             }
           >
             <HiOutlineBell size={26} />
             <span className="absolute top-0 right-0 w-4 h-4 bg-[#F76D00] border-2 border-white rounded-full"></span>
           </NavLink>
           <NavLink
-            to="/chat"
+            to="admin/chat"
             className={({ isActive }) =>
-              `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${isActive ? "border-[#705295] text-[#705295] bg-[#705295]/5" : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"}`
+              `w-[39px] h-[39px] rounded-full flex items-center justify-center border-2 transition-all ${isActive ? "border-[#705295] text-[#705295] bg-[#705295]/5" : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"}`
             }
           >
             <HiOutlineChatAlt2 size={26} />
           </NavLink>
           <NavLink
-            to="/my-account"
+            to="/admin/my-account?admin=true"
             className={({ isActive }) =>
-              `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all overflow-hidden ${isActive ? "border-[#705295] text-[#705295] bg-[#705295]/5" : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"}`
+              `w-[50px] h-[50px] rounded-full flex items-center justify-center border-2 transition-all overflow-hidden ${
+                isActive
+                  ? "border-[#705295] text-[#705295] bg-[#705295]/5"
+                  : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"
+              }`
             }
           >
-            <img 
-              src={profileImage} 
-              alt="Profile" 
+            <img
+              src={profileImage}
+              alt="Profile"
               className="w-full h-full object-cover rounded-full"
             />
           </NavLink>

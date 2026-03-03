@@ -44,9 +44,6 @@ export const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     children: [
-      { path: "my-account", element: <MyAccount /> },
-      { path: "chat", element: <Chat /> },
-      { path: "notifications", element: <Notifications /> },
       {
         path: "provider",
         children: [
@@ -90,6 +87,9 @@ export const router = createBrowserRouter([
           { path: "management/analytics", element: <Analytics /> },
           { path: "management/audit", element: <ComplianceAudit /> },
           { path: "management/docs", element: <DocumentHandling /> },
+          { path: "my-account", element: <MyAccount /> },
+          { path: "chat", element: <Chat /> },
+          { path: "notifications", element: <Notifications /> },
         ],
       },
     ],

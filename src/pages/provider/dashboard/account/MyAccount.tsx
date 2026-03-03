@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useLocation } from "react-router-dom";
 import SectionWrapper from "../../../../components/ui/common/SectionWrapper";
 import Heading from "../../../../components/ui/headings/Heading";
 import Tabs from "../../../../components/ui/tabs/Tabs";
@@ -8,18 +9,27 @@ import { PasswordTab } from "./PasswordTab";
 import { SpecialtiesTab } from "./SpecialtiesTab";
 import { Education } from "./Education";
 import { Experience } from "./Experience";
+import { PaymentHistory } from "./PaymentHistory";
 
-const MY_ACCOUNT_TABS = [
-  "Personal Info",
-  "Password",
-  "Specialties",
-  "Education",
-  "Experience",
-];
-
-// Removed "export" from here
 const MyAccount = () => {
-  const [activeTab, setActiveTab] = useState(MY_ACCOUNT_TABS[0]);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const isAdmin = queryParams.get("admin") === "true";
+
+  const tabs = useMemo(() => {
+    if (isAdmin) {
+      return ["Personal Info", "Password", "Payment History"];
+    }
+    return [
+      "Personal Info",
+      "Password",
+      "Specialties",
+      "Education",
+      "Experience",
+    ];
+  }, [isAdmin]);
+
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -27,6 +37,8 @@ const MyAccount = () => {
         return <PersonalInfo />;
       case "Password":
         return <PasswordTab />;
+      case "Payment History":
+        return <PaymentHistory />;
       case "Specialties":
         return <SpecialtiesTab />;
       case "Education":
@@ -57,15 +69,10 @@ const MyAccount = () => {
         />
       </div>
 
-      <Tabs
-        tabs={MY_ACCOUNT_TABS}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
+      <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="mt-8">{renderContent()}</div>
     </SectionWrapper>
   );
 };
 
-// Add this line at the very bottom
 export default MyAccount;
