@@ -49,7 +49,10 @@ const DocumentHandling = () => {
           label="Upload Documents"
           bgColor="bg-[#EBE5F1]"
           textColor="text-[#705295]"
-          className="font-bold border-none px-6 py-2.5 rounded-xl shadow-sm hover:bg-[#d8cce4] transition-colors"
+          height="h-auto"
+          rounded="rounded-xl"
+          width="w-auto"
+          className="font-bold border border-[#705295] px-6 py-2.5 shadow-sm hover:opacity-90 transition-all"
           onClick={() => setIsModalOpen(true)}
         />
       </div>
