@@ -133,6 +133,38 @@ export const DUMMY_DATA: PatientRecord[] = [
     state: "AL",
   },
 ];
+
+// All Visits Data - Expanded dataset with varied statuses
+export const ALL_VISITS_DATA: PatientRecord[] = (() => {
+  const statuses = [
+    "Completed",
+    "AL",
+    "AL",
+    "Completed",
+    "Completed",
+    "Prescription Sent",
+    "Completed",
+    "Resend Prescription",
+    "Canceled",
+    "Completed",
+  ];
+  
+  return Array(90)
+    .fill(null)
+    .map((_, index) => {
+      const baseData = DUMMY_DATA[index % DUMMY_DATA.length];
+      const statusIndex = index % statuses.length;
+      const statusValue = statuses[statusIndex];
+      
+      return {
+        ...baseData,
+        id: index + 1,
+        status: statusValue === "AL" ? "Pending Review" : statusValue,
+        state: statusValue === "AL" ? "AL" : undefined,
+      };
+    });
+})();
+
 export const ADMIN_DASHBOARD_DATA = [
   {
     id: 1,
