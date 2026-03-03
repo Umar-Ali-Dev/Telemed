@@ -21,11 +21,17 @@ import briefcaseMedicalSolidIcon from "../assets/icons/briefcaseMedicalSolid.svg
 import fileWaveformSolidIcon from "../assets/icons/fileWaveformSolid.svg";
 import adminProviderIcon from "../assets/icons/adminProvider.svg";
 import managementIcon from "../assets/icons/management.svg";
+import activeMenuIcon from "../assets/icons/activeMenu.svg";
+import activeBriefcaseMedicalSolidIcon from "../assets/icons/activebriefcaseMedicalSolid.svg";
+import activeFileWaveformSolidIcon from "../assets/icons/ativeFileWaveformSolid.svg";
+import activeAdminProviderIcon from "../assets/icons/activeAdminProvider.svg";
+import activeManagementIcon from "../assets/icons/actveManagement.svg";
 
 export interface NavItem {
   label: string;
   path?: string; // Optional if it has subItems
   icon: IconType | string; // Can be IconType or SVG path
+  activeIcon?: IconType | string; // Active state icon
   subItems?: { label: string; path: string }[];
 }
 
@@ -53,12 +59,13 @@ export const PROVIDER_LINKS: NavItem[] = [
 ];
 
 export const ADMIN_LINKS: NavItem[] = [
-  { label: "Dashboard", path: "/admin/dashboard", icon: menuIcon },
-  { label: "Consultations", path: "/admin/consultations", icon: briefcaseMedicalSolidIcon },
-  { label: "Patients", path: "/admin/all-patients", icon: fileWaveformSolidIcon },
+  { label: "Dashboard", path: "/admin/dashboard", icon: menuIcon, activeIcon: activeMenuIcon },
+  { label: "Consultations", path: "/admin/consultations", icon: briefcaseMedicalSolidIcon, activeIcon: activeBriefcaseMedicalSolidIcon },
+  { label: "Patients", path: "/admin/all-patients", icon: fileWaveformSolidIcon, activeIcon: activeFileWaveformSolidIcon },
   {
     label: "Providers",
     icon: adminProviderIcon,
+    activeIcon: activeAdminProviderIcon,
     subItems: [
       { label: "All Providers", path: "/admin/all-providers" },
       { label: "Provider Requests", path: "/admin/providers/requests" },
@@ -67,6 +74,7 @@ export const ADMIN_LINKS: NavItem[] = [
   {
     label: "Management",
     icon: managementIcon,
+    activeIcon: activeManagementIcon,
     subItems: [
       { label: "Prescriptions", path: "/admin/management/prescriptions" },
       { label: "Refund Requests", path: "/admin/management/refunds" },

@@ -106,11 +106,15 @@ const Sidebar: React.FC = () => {
                     openMenus[link.label] ? "text-[#705295]" : "text-[#999999]"
                   }`}
                 >
-                  {typeof link.icon === "string" ? (
-                    <img src={link.icon} alt={link.label} className="w-7 h-7" />
-                  ) : (
-                    <link.icon size={28} />
-                  )}
+                  {(() => {
+                    const isActive = link.subItems?.some(sub => pathname === sub.path || pathname.startsWith(sub.path + "/"));
+                    const iconToUse = isActive && link.activeIcon ? link.activeIcon : link.icon;
+                    return typeof iconToUse === "string" ? (
+                      <img src={iconToUse} alt={link.label} className="w-7 h-7" />
+                    ) : (
+                      React.createElement(iconToUse, { size: 28 })
+                    );
+                  })()}
                   <span className="text-[12px] font-medium">{link.label}</span>
                   {openMenus[link.label] ? (
                     <FaChevronUp size={10} className="mt-1" />
@@ -141,12 +145,19 @@ const Sidebar: React.FC = () => {
                   `flex flex-col items-center gap-1 transition-colors ${isActive ? "text-[#705295]" : "text-[#999999] hover:text-[#705295]"}`
                 }
               >
-                {typeof link.icon === "string" ? (
-                  <img src={link.icon} alt={link.label} className="w-7 h-7" />
-                ) : (
-                  <link.icon size={28} />
-                )}
-                <span className="text-[12px] font-medium">{link.label}</span>
+                {({ isActive }) => {
+                  const iconToUse = isActive && link.activeIcon ? link.activeIcon : link.icon;
+                  return (
+                    <>
+                      {typeof iconToUse === "string" ? (
+                        <img src={iconToUse} alt={link.label} className="w-7 h-7" />
+                      ) : (
+                        React.createElement(iconToUse, { size: 28 })
+                      )}
+                      <span className="text-[12px] font-medium">{link.label}</span>
+                    </>
+                  );
+                }}
               </NavLink>
             )}
           </div>
