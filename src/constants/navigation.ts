@@ -26,6 +26,12 @@ import activeBriefcaseMedicalSolidIcon from "../assets/icons/activebriefcaseMedi
 import activeFileWaveformSolidIcon from "../assets/icons/ativeFileWaveformSolid.svg";
 import activeAdminProviderIcon from "../assets/icons/activeAdminProvider.svg";
 import activeManagementIcon from "../assets/icons/actveManagement.svg";
+import activeShieldPlusIcon from "../assets/icons/activeShieldPlus.svg";
+import activeUserListIcon from "../assets/icons/activeUserList.svg";
+import activeUnionIcon from "../assets/icons/activeUnion.svg";
+import activeChatCircleDotsIcon from "../assets/icons/activeChatCircleDots.svg";
+import activeChartLineUpIcon from "../assets/icons/activeChartLineUp.svg";
+import activeNotebookIcon from "../assets/icons/activeNotebook.svg";
 
 export interface NavItem {
   label: string;
@@ -36,25 +42,28 @@ export interface NavItem {
 }
 
 export const PROVIDER_LINKS: NavItem[] = [
-  { label: "Dashboard", path: "/provider/dashboard", icon: LuLayoutDashboard },
-  { label: "New Visits", path: "/provider/new-visits", icon: shieldPlusIcon },
+  { label: "Dashboard", path: "/provider/dashboard", icon: menuIcon, activeIcon: activeMenuIcon },
+  { label: "New Visits", path: "/provider/new-visits", icon: shieldPlusIcon, activeIcon: activeShieldPlusIcon },
   {
     label: "All Visits",
     path: "/provider/all-visits",
     icon: briefcaseMedicalIcon,
+    activeIcon: activeBriefcaseMedicalSolidIcon,
   },
-  { label: "All Patients", path: "/provider/all-patients", icon: userListIcon },
+  { label: "All Patients", path: "/provider/all-patients", icon: userListIcon, activeIcon: activeUserListIcon },
   {
     label: "Flagged Patients",
     path: "/provider/flagged-patients",
     icon: unionIcon,
+    activeIcon: activeUnionIcon,
   },
-  { label: "Messages", path: "/chat", icon: chatCircleDotsIcon },
-  { label: "Statistics", path: "/provider/statistics", icon: chartLineUpIcon },
+  { label: "Messages", path: "/chat", icon: chatCircleDotsIcon, activeIcon: activeChatCircleDotsIcon },
+  { label: "Statistics", path: "/provider/statistics", icon: chartLineUpIcon, activeIcon: activeChartLineUpIcon },
   {
     label: "Activity Logs",
     path: "/provider/activity-logs",
     icon: notebookIcon,
+    activeIcon: activeNotebookIcon,
   },
 ];
 
