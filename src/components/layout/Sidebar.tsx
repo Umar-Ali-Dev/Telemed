@@ -3,10 +3,10 @@ import { NavLink, useLocation } from "react-router-dom";
 import {
   HiOutlineBell,
   HiOutlineChatAlt2,
-  HiOutlineUserCircle,
 } from "react-icons/hi";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { PROVIDER_LINKS, ADMIN_LINKS } from "../../constants/navigation";
+import profileImage from "../../assets/icons/profile.jpg";
 
 const ROLE_STORAGE_KEY = "user_role_context";
 
@@ -175,10 +175,14 @@ const Sidebar: React.FC = () => {
           <NavLink
             to="/my-account"
             className={({ isActive }) =>
-              `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all ${isActive ? "border-[#705295] text-[#705295] bg-[#705295]/5" : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"}`
+              `w-[54px] h-[54px] rounded-full flex items-center justify-center border-2 transition-all overflow-hidden ${isActive ? "border-[#705295] text-[#705295] bg-[#705295]/5" : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"}`
             }
           >
-            <HiOutlineUserCircle size={32} />
+            <img 
+              src={profileImage} 
+              alt="Profile" 
+              className="w-full h-full object-cover rounded-full"
+            />
           </NavLink>
         </div>
       )}
