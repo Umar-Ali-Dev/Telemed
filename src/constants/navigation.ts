@@ -16,6 +16,11 @@ import userListIcon from "../assets/icons/userList.svg";
 import chatCircleDotsIcon from "../assets/icons/chatCircleDots.svg";
 import unionIcon from "../assets/icons/union.svg";
 import notebookIcon from "../assets/icons/notebook.svg";
+import menuIcon from "../assets/icons/menu.svg";
+import briefcaseMedicalSolidIcon from "../assets/icons/briefcaseMedicalSolid.svg";
+import fileWaveformSolidIcon from "../assets/icons/fileWaveformSolid.svg";
+import adminProviderIcon from "../assets/icons/adminProvider.svg";
+import managementIcon from "../assets/icons/management.svg";
 
 export interface NavItem {
   label: string;
@@ -48,12 +53,12 @@ export const PROVIDER_LINKS: NavItem[] = [
 ];
 
 export const ADMIN_LINKS: NavItem[] = [
-  { label: "Dashboard", path: "/admin/dashboard", icon: LuLayoutDashboard },
-  { label: "Consultations", path: "/admin/consultations", icon: LuStethoscope },
-  { label: "Patients", path: "/admin/all-patients", icon: LuUsers },
+  { label: "Dashboard", path: "/admin/dashboard", icon: menuIcon },
+  { label: "Consultations", path: "/admin/consultations", icon: briefcaseMedicalSolidIcon },
+  { label: "Patients", path: "/admin/all-patients", icon: fileWaveformSolidIcon },
   {
     label: "Providers",
-    icon: LuUserPlus,
+    icon: adminProviderIcon,
     subItems: [
       { label: "All Providers", path: "/admin/all-providers" },
       { label: "Provider Requests", path: "/admin/providers/requests" },
@@ -61,7 +66,7 @@ export const ADMIN_LINKS: NavItem[] = [
   },
   {
     label: "Management",
-    icon: LuSettings,
+    icon: managementIcon,
     subItems: [
       { label: "Prescriptions", path: "/admin/management/prescriptions" },
       { label: "Refund Requests", path: "/admin/management/refunds" },

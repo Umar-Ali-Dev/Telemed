@@ -15,8 +15,8 @@ interface ActionMenuProps {
 const ActionMenu = ({ items }: ActionMenuProps) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <Menu.Button className="flex items-center justify-center w-8 h-8 rounded-full bg-[#705295] text-white hover:opacity-90 transition-opacity focus:outline-none">
-        <HiOutlineDotsHorizontal size={20} />
+      <Menu.Button className="flex items-center justify-center w-6 h-6 rounded-full bg-[#705295] text-white hover:opacity-90 transition-opacity focus:outline-none">
+        <HiOutlineDotsHorizontal size={16} />
       </Menu.Button>
 
       <Transition

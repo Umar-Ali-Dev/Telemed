@@ -1,11 +1,12 @@
 import type { TableColumn } from "react-data-table-component";
 import {
-  HiOutlineDocumentText,
   HiOutlineFlag,
   HiOutlinePencil,
   HiOutlineTrash,
 } from "react-icons/hi";
 import fileTextIcon from "../assets/icons/fileText.svg";
+import userDoctorIcon from "../assets/icons/userDoctor.svg";
+import userDoctorFillIcon from "../assets/icons/userDoctorFill.svg";
 
 export interface PatientRecord {
   id: number;
@@ -831,8 +832,6 @@ export const FORM_LAYOUT_CLASS = "max-w-full lg:max-w-[650px] space-y-6";
 export const BUTTON_GROUP_CLASS =
   "flex justify-end gap-4 mt-12 pt-4 border-t border-gray-50";
 
-import { HiOutlineUser } from "react-icons/hi";
-
 export const ADMIN_QUEUE_COLUMNS = [
   {
     name: "Full Name",
@@ -887,11 +886,19 @@ export const ADMIN_QUEUE_COLUMNS = [
     button: true,
     cell: (row: any) => (
       <div className="flex items-center gap-3">
-        <button className="text-[#271100] hover:text-[#705295]">
-          <HiOutlineUser size={20} />
+        <button className="hover:opacity-80 transition-opacity">
+          <img
+            src={userDoctorIcon}
+            alt="Doctor"
+            className="w-6 h-6 object-contain"
+          />
         </button>
-        <button className="text-[#705295] hover:opacity-80">
-          <HiOutlineDocumentText size={20} />
+        <button className="hover:opacity-80 transition-opacity">
+          <img
+            src={fileTextIcon}
+            alt="Document"
+            className="w-6 h-6 object-contain"
+          />
         </button>
       </div>
     ),
@@ -953,19 +960,34 @@ export const ADMIN_CONSULTATION_COLUMNS = [
   {
     name: "Action",
     button: true,
-    cell: (row: any) => (
-      <div className="flex items-center gap-3">
-        <button
-          className="text-[#271100] hover:text-[#705295] disabled:opacity-30"
-          disabled={row.provider !== "----"}
-        >
-          <HiOutlineUser size={20} />
-        </button>
-        <button className="text-[#705295]">
-          <HiOutlineDocumentText size={20} />
-        </button>
-      </div>
-    ),
+    cell: (row: any) => {
+      const hasProvider = row.provider && row.provider !== "----";
+      return (
+        <div className="flex items-center gap-3">
+          <button
+            className={`${
+              hasProvider
+                ? "hover:opacity-80"
+                : "cursor-not-allowed opacity-100"
+            } transition-opacity`}
+            disabled={!hasProvider}
+          >
+            <img
+              src={hasProvider ? userDoctorFillIcon : userDoctorIcon}
+              alt="Doctor"
+              className="w-6 h-6 object-contain"
+            />
+          </button>
+          <button className="hover:opacity-80 transition-opacity">
+            <img
+              src={fileTextIcon}
+              alt="Document"
+              className="w-6 h-6 object-contain"
+            />
+          </button>
+        </div>
+      );
+    },
   },
 ];
 import ActionMenu from "../components/ui/table/ActionMenu";
@@ -973,6 +995,7 @@ import ActionMenu from "../components/ui/table/ActionMenu";
 export const ADMIN_PATIENT_COLUMNS = (
   onEdit: (id: any) => void,
   onFlag: (id: any) => void,
+  onStatusChange?: (id: any, newStatus: string) => void,
 ) => [
   {
     name: "First Name",
@@ -1000,7 +1023,8 @@ export const ADMIN_PATIENT_COLUMNS = (
   {
     name: "Status",
     cell: (row: any) => {
-      // Logic for status colors from image_c44e06.png
+      // Use toggleStatus if available, otherwise default to Active
+      const displayStatus = row.toggleStatus || "Active";
       const colors: any = {
         Active: "text-[#34C759]",
         Inactive: "text-[#FF3B30]",
@@ -1008,43 +1032,112 @@ export const ADMIN_PATIENT_COLUMNS = (
       };
       return (
         <span
-          className={`font-semibold ${colors[row.status] || "text-[#34C759]"}`}
+          className={`font-semibold ${colors[displayStatus] || "text-[#34C759]"}`}
         >
-          {row.status || "Active"}
+          {displayStatus}
         </span>
       );
     },
   },
   {
     name: "Action",
-    cell: (row: any) => (
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
-          {/* Custom Toggle and Document Icon */}
-          <div className="w-8 h-4 bg-[#34C759] rounded-full relative cursor-pointer">
-            <div className="absolute right-1 top-1 w-2 h-2 bg-white rounded-full" />
+    cell: (row: any) => {
+      // Map current status to toggle state
+      // For All Patients page, we use a separate toggleStatus or map from current status
+      // Default: all current statuses show as "Active" (toggle on)
+      const toggleStatus = row.toggleStatus || 
+        (row.status && ["Waiting provider", "Waiting Response", "Scheduled", "Completed", "In Progress"].includes(row.status) 
+          ? "Active" 
+          : row.status === "Inactive" 
+          ? "Inactive" 
+          : row.status === "Flagged" 
+          ? "Flagged" 
+          : "Active");
+
+      const getToggleColor = () => {
+        switch (toggleStatus) {
+          case "Active":
+            return "bg-[#34C759]";
+          case "Inactive":
+            return "bg-[#FF3B30]";
+          case "Flagged":
+            return "bg-[#FFCC00]";
+          default:
+            return "bg-[#34C759]";
+        }
+      };
+
+      const getTogglePosition = () => {
+        switch (toggleStatus) {
+          case "Active":
+            return "translate-x-[16px]"; // Right position: from left-0.5 (2px) to 18px total = 16px translation
+          case "Inactive":
+            return "translate-x-0"; // Left position: stays at left-0.5 (2px)
+          case "Flagged":
+            return "translate-x-[8px]"; // Middle position: from 2px to ~10px = 8px translation
+          default:
+            return "translate-x-[16px]";
+        }
+      };
+
+      const handleToggleClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (onStatusChange) {
+          // Cycle through toggle states: Active -> Inactive -> Flagged -> Active
+          const statusCycle = ["Active", "Inactive", "Flagged"];
+          const currentIndex = statusCycle.indexOf(toggleStatus);
+          const nextIndex = (currentIndex + 1) % statusCycle.length;
+          onStatusChange(row.id, statusCycle[nextIndex]);
+        }
+      };
+
+      return (
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            {/* Functional Toggle */}
+            <button
+              onClick={handleToggleClick}
+              className={`w-8 h-4 ${getToggleColor()} rounded-full relative cursor-pointer transition-colors focus:outline-none`}
+            >
+              <div
+                className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full shadow-sm transition-transform duration-200 ease-in-out ${getTogglePosition()}`}
+              />
+            </button>
+            {/* Separator */}
+            <span className="text-[#A3948C] mx-1">/</span>
+            {/* Document Icon */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                // Handle document click
+              }}
+            >
+              <img
+                src={fileTextIcon}
+                alt="Document"
+                className="w-6 h-6 cursor-pointer object-contain"
+              />
+            </button>
+            {/* Separator */}
+            <span className="text-[#A3948C] mx-1">/</span>
           </div>
-          <HiOutlineDocumentText
-            size={20}
-            className="text-[#705295] cursor-pointer"
+          <ActionMenu
+            items={[
+              {
+                label: "Edit",
+                icon: <HiOutlinePencil size={18} />,
+                onClick: () => onEdit(row.id),
+              },
+              {
+                label: "Flag",
+                icon: <HiOutlineFlag size={18} />,
+                onClick: () => onFlag(row.id),
+              },
+            ]}
           />
         </div>
-        <ActionMenu
-          items={[
-            {
-              label: "Edit",
-              icon: <HiOutlinePencil size={18} />,
-              onClick: () => onEdit(row.id),
-            },
-            {
-              label: "Flag",
-              icon: <HiOutlineFlag size={18} />,
-              onClick: () => onFlag(row.id),
-            },
-          ]}
-        />
-      </div>
-    ),
+      );
+    },
   },
 ];
 import { LuPencil, LuPause, LuClipboardList } from "react-icons/lu";
@@ -1052,6 +1145,7 @@ import { LuPencil, LuPause, LuClipboardList } from "react-icons/lu";
 export const ADMIN_PROVIDER_COLUMNS = (
   handleEdit: (id: any) => void,
   handleViewProfile: (id: any) => void,
+  onStatusChange?: (id: any, newStatus: string) => void,
 ) => [
   {
     name: "Name",
@@ -1079,58 +1173,118 @@ export const ADMIN_PROVIDER_COLUMNS = (
   {
     name: "Status",
     cell: (row: any) => {
+      // Use toggleStatus if available, otherwise default to Active
+      const displayStatus = row.toggleStatus || "Active";
       const colors: any = {
         Active: "text-[#34C759]",
         Inactive: "text-[#FF3B30]",
-        Paused: "text-[#F76D00]",
+        Flagged: "text-[#FFCC00]",
       };
       return (
         <span
-          className={`font-semibold ${colors[row.status] || "text-[#34C759]"}`}
+          className={`font-semibold ${colors[displayStatus] || "text-[#34C759]"}`}
         >
-          {row.status || "Active"}
+          {displayStatus}
         </span>
       );
     },
   },
   {
     name: "Action",
-    cell: (row: any) => (
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
-          {/* Status Toggle Visual */}
-          <div className="w-8 h-4 bg-[#34C759] rounded-full relative cursor-pointer">
-            <div className="absolute right-1 top-1 w-2 h-2 bg-white rounded-full" />
+    cell: (row: any) => {
+      // Map current status to toggle state
+      const toggleStatus = row.toggleStatus || "Active";
+
+      const getToggleColor = () => {
+        switch (toggleStatus) {
+          case "Active":
+            return "bg-[#34C759]";
+          case "Inactive":
+            return "bg-[#FF3B30]";
+          case "Flagged":
+            return "bg-[#FFCC00]";
+          default:
+            return "bg-[#34C759]";
+        }
+      };
+
+      const getTogglePosition = () => {
+        switch (toggleStatus) {
+          case "Active":
+            return "translate-x-[16px]"; // Right position
+          case "Inactive":
+            return "translate-x-0"; // Left position
+          case "Flagged":
+            return "translate-x-[8px]"; // Middle position
+          default:
+            return "translate-x-[16px]";
+        }
+      };
+
+      const handleToggleClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (onStatusChange) {
+          // Cycle through toggle states: Active -> Inactive -> Flagged -> Active
+          const statusCycle = ["Active", "Inactive", "Flagged"];
+          const currentIndex = statusCycle.indexOf(toggleStatus);
+          const nextIndex = (currentIndex + 1) % statusCycle.length;
+          onStatusChange(row.id, statusCycle[nextIndex]);
+        }
+      };
+
+      return (
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            {/* Functional Toggle */}
+            <button
+              onClick={handleToggleClick}
+              className={`w-8 h-4 ${getToggleColor()} rounded-full relative cursor-pointer transition-colors focus:outline-none`}
+            >
+              <div
+                className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full shadow-sm transition-transform duration-200 ease-in-out ${getTogglePosition()}`}
+              />
+            </button>
+            {/* Separator */}
+            <span className="text-[#A3948C] mx-1">/</span>
+            {/* Document Icon */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleViewProfile(row.id);
+              }}
+            >
+              <img
+                src={fileTextIcon}
+                alt="Document"
+                className="w-6 h-6 cursor-pointer object-contain"
+              />
+            </button>
+            {/* Separator */}
+            <span className="text-[#A3948C] mx-1">/</span>
           </div>
-          <HiOutlineDocumentText
-            size={20}
-            className="text-[#705295] cursor-pointer"
-            onClick={() => handleViewProfile(row.id)}
+          {/* Reusable ActionMenu with Provider actions */}
+          <ActionMenu
+            items={[
+              {
+                label: "Edit Details",
+                icon: <LuPencil size={16} />,
+                onClick: () => handleEdit(row.id),
+              },
+              {
+                label: "Paused",
+                icon: <LuPause size={16} />,
+                onClick: () => console.log("Paused", row.id),
+              },
+              {
+                label: "Visits",
+                icon: <LuClipboardList size={16} />,
+                onClick: () => handleViewProfile(row.id),
+              },
+            ]}
           />
         </div>
-
-        {/* Reusable ActionMenu with Provider actions */}
-        <ActionMenu
-          items={[
-            {
-              label: "Edit Details",
-              icon: <LuPencil size={16} />,
-              onClick: () => handleEdit(row.id),
-            },
-            {
-              label: "Paused",
-              icon: <LuPause size={16} />,
-              onClick: () => console.log("Paused", row.id),
-            },
-            {
-              label: "Visits",
-              icon: <LuClipboardList size={16} />,
-              onClick: () => handleViewProfile(row.id),
-            },
-          ]}
-        />
-      </div>
-    ),
+      );
+    },
   },
 ];
 
@@ -1168,9 +1322,10 @@ export const PROVIDER_REQUESTS_COLUMNS = (
     cell: (row: any) => (
       <div className="flex items-center justify-center">
         {/* Document Icon for viewing request details */}
-        <HiOutlineDocumentText
-          size={20}
-          className="text-[#705295] cursor-pointer hover:opacity-80 transition-opacity"
+        <img
+          src={fileTextIcon}
+          alt="Document"
+          className="w-5 h-5 cursor-pointer hover:opacity-80 transition-opacity"
           onClick={() => handleViewRequest(row.id)}
         />
       </div>
@@ -1295,9 +1450,10 @@ export const ALL_PRESCRIPTIONS_COLUMNS = (
     name: "Actions",
     cell: (row: any) => (
       <div className="flex items-center justify-center">
-        <HiOutlineDocumentText
-          size={20}
-          className="text-[#705295] cursor-pointer hover:opacity-80 transition-opacity"
+        <img
+          src={fileTextIcon}
+          alt="Document"
+          className="w-5 h-5 cursor-pointer hover:opacity-80 transition-opacity"
           onClick={() => handleViewDetails(row.id)}
         />
       </div>

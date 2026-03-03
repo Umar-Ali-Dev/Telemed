@@ -15,13 +15,26 @@ import {
 const AdminProviders: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [providerToggleStates, setProviderToggleStates] = useState<Record<number, string>>({});
 
   // Handlers passed to the column definition
   const handleEdit = (id: any) => navigate(`/admin/providers/edit/${id}`);
   const handleViewProfile = (id: any) =>
     navigate(`/admin/provider-profile/${id}`);
+  const handleStatusChange = (id: any, newStatus: string) => {
+    setProviderToggleStates((prev) => ({
+      ...prev,
+      [id]: newStatus,
+    }));
+  };
 
-  const filteredData = ADMIN_DASHBOARD_DATA.filter((item: any) =>
+  // Map data and add toggleStatus, then filter
+  const mappedData = ADMIN_DASHBOARD_DATA.map((item: any) => ({
+    ...item,
+    toggleStatus: providerToggleStates[item.id] || "Active", // Default to Active
+  }));
+
+  const filteredData = mappedData.filter((item: any) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
@@ -54,7 +67,7 @@ const AdminProviders: React.FC = () => {
 
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={ADMIN_PROVIDER_COLUMNS(handleEdit, handleViewProfile)}
+            columns={ADMIN_PROVIDER_COLUMNS(handleEdit, handleViewProfile, handleStatusChange)}
             data={filteredData}
             customStyles={commonTableStyles}
             responsive

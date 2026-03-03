@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { LuClock } from "react-icons/lu";
-import { HiOutlineUserCircle } from "react-icons/hi";
 import instaVisitLogo from "../../assets/icons/instaVisit.svg";
+import profileImage from "../../assets/icons/profile.jpg";
 
 const Navbar: React.FC = () => {
   const [isAvailable, setIsAvailable] = useState(true);
@@ -47,9 +47,13 @@ const Navbar: React.FC = () => {
         </div>
         <Link
           to="/my-account"
-          className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 transition-all hover:bg-gray-50 text-[#999999] hover:text-[#705295]"
+          className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 transition-all hover:bg-gray-50 overflow-hidden"
         >
-          <HiOutlineUserCircle size={28} />
+          <img 
+            src={profileImage} 
+            alt="Profile" 
+            className="w-full h-full object-cover rounded-full"
+          />
         </Link>
       </div>
     </header>
