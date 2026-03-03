@@ -1,14 +1,4 @@
 import type { IconType } from "react-icons";
-import {
-  LuLayoutDashboard,
-  LuStethoscope,
-  LuUsers,
-  LuUserPlus,
-  LuSettings,
-  LuShieldCheck,
-  LuGlobe,
-  LuFileText,
-} from "react-icons/lu";
 import chartLineUpIcon from "../assets/icons/chartLineUp.svg";
 import shieldPlusIcon from "../assets/icons/shieldPlus.svg";
 import briefcaseMedicalIcon from "../assets/icons/briefcaseMedicalSolid.svg";
@@ -42,23 +32,48 @@ export interface NavItem {
 }
 
 export const PROVIDER_LINKS: NavItem[] = [
-  { label: "Dashboard", path: "/provider/dashboard", icon: menuIcon, activeIcon: activeMenuIcon },
-  { label: "New Visits", path: "/provider/new-visits", icon: shieldPlusIcon, activeIcon: activeShieldPlusIcon },
+  {
+    label: "Dashboard",
+    path: "/provider/dashboard",
+    icon: menuIcon,
+    activeIcon: activeMenuIcon,
+  },
+  {
+    label: "New Visits",
+    path: "/provider/new-visits",
+    icon: shieldPlusIcon,
+    activeIcon: activeShieldPlusIcon,
+  },
   {
     label: "All Visits",
     path: "/provider/all-visits",
     icon: briefcaseMedicalIcon,
     activeIcon: activeBriefcaseMedicalSolidIcon,
   },
-  { label: "All Patients", path: "/provider/all-patients", icon: userListIcon, activeIcon: activeUserListIcon },
+  {
+    label: "All Patients",
+    path: "/provider/all-patients",
+    icon: userListIcon,
+    activeIcon: activeUserListIcon,
+  },
   {
     label: "Flagged Patients",
     path: "/provider/flagged-patients",
     icon: unionIcon,
     activeIcon: activeUnionIcon,
   },
-  { label: "Messages", path: "/chat", icon: chatCircleDotsIcon, activeIcon: activeChatCircleDotsIcon },
-  { label: "Statistics", path: "/provider/statistics", icon: chartLineUpIcon, activeIcon: activeChartLineUpIcon },
+  {
+    label: "Messages",
+    path: "/chat",
+    icon: chatCircleDotsIcon,
+    activeIcon: activeChatCircleDotsIcon,
+  },
+  {
+    label: "Statistics",
+    path: "/provider/statistics",
+    icon: chartLineUpIcon,
+    activeIcon: activeChartLineUpIcon,
+  },
   {
     label: "Activity Logs",
     path: "/provider/activity-logs",
@@ -68,9 +83,24 @@ export const PROVIDER_LINKS: NavItem[] = [
 ];
 
 export const ADMIN_LINKS: NavItem[] = [
-  { label: "Dashboard", path: "/admin/dashboard", icon: menuIcon, activeIcon: activeMenuIcon },
-  { label: "Consultations", path: "/admin/consultations", icon: briefcaseMedicalSolidIcon, activeIcon: activeBriefcaseMedicalSolidIcon },
-  { label: "Patients", path: "/admin/all-patients", icon: fileWaveformSolidIcon, activeIcon: activeFileWaveformSolidIcon },
+  {
+    label: "Dashboard",
+    path: "/admin/dashboard",
+    icon: menuIcon,
+    activeIcon: activeMenuIcon,
+  },
+  {
+    label: "Consultations",
+    path: "/admin/consultations",
+    icon: briefcaseMedicalSolidIcon,
+    activeIcon: activeBriefcaseMedicalSolidIcon,
+  },
+  {
+    label: "Patients",
+    path: "/admin/all-patients",
+    icon: fileWaveformSolidIcon,
+    activeIcon: activeFileWaveformSolidIcon,
+  },
   {
     label: "Providers",
     icon: adminProviderIcon,

@@ -26,7 +26,7 @@ const UpdatePharmacyModal = ({ isOpen, onClose }: UpdatePharmacyProps) => {
     },
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (_data: any) => {
     const loadToast = toast.loading("Updating pharmacy information...");
     setTimeout(() => {
       toast.success("Pharmacy updated successfully!", { id: loadToast });
@@ -69,11 +69,8 @@ const UpdatePharmacyModal = ({ isOpen, onClose }: UpdatePharmacyProps) => {
               </label>
               <div className="bg-[#E8F8F0] p-6 rounded-[25px] border border-[#27C273]/10 space-y-3">
                 <p className="text-[#27C273] font-bold text-[16px] flex items-center gap-2">
-                  <img 
-                    src={pharmacyIcon} 
-                    alt="Pharmacy" 
-                    className="w-5 h-5" 
-                  /> Pharmacy:
+                  <img src={pharmacyIcon} alt="Pharmacy" className="w-5 h-5" />{" "}
+                  Pharmacy:
                   <span className="text-[#271100]"> ABC Hawaii Pharmacy.</span>
                 </p>
                 <div className="space-y-2 text-[14px] text-[#271100] font-medium">

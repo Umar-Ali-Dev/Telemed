@@ -1,9 +1,5 @@
 import type { TableColumn } from "react-data-table-component";
-import {
-  HiOutlineFlag,
-  HiOutlinePencil,
-  HiOutlineTrash,
-} from "react-icons/hi";
+import { HiOutlineFlag, HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import fileTextIcon from "../assets/icons/fileText.svg";
 import userDoctorIcon from "../assets/icons/userDoctor.svg";
 import userDoctorFillIcon from "../assets/icons/userDoctorFill.svg";
@@ -37,7 +33,7 @@ export const CARE_QUEUE_COLUMNS: TableColumn<PatientRecord>[] = [
   },
   {
     name: "Action",
-    cell: (row, rowIndex) => {
+    cell: (_row, rowIndex) => {
       const showAccept = rowIndex < 2; // First two rows show Accept
       const showReview = rowIndex >= 2; // Last two rows show Review
 
@@ -148,14 +144,14 @@ export const ALL_VISITS_DATA: PatientRecord[] = (() => {
     "Canceled",
     "Completed",
   ];
-  
+
   return Array(90)
     .fill(null)
     .map((_, index) => {
       const baseData = DUMMY_DATA[index % DUMMY_DATA.length];
       const statusIndex = index % statuses.length;
       const statusValue = statuses[statusIndex];
-      
+
       return {
         ...baseData,
         id: index + 1,
@@ -646,7 +642,7 @@ export const PHARMACY_DUMMY_DATA = [
   // Add more rows to match image_1e1520.png
 ];
 
-export const GET_PATIENT_COLUMNS = (navigate: (path: string) => void) => [
+export const GET_PATIENT_COLUMNS = (_navigate: (path: string) => void) => [
   {
     name: "First Name",
     selector: (row: any) => row.firstName,
@@ -684,20 +680,21 @@ export const GET_PATIENT_COLUMNS = (navigate: (path: string) => void) => [
 
 // All Patients Columns - Updated structure
 export const ALL_PATIENTS_COLUMNS: TableColumn<any>[] = [
-  { name: "Full Name", selector: (row) => `${row.firstName} ${row.lastName}`, sortable: true },
+  {
+    name: "Full Name",
+    selector: (row) => `${row.firstName} ${row.lastName}`,
+    sortable: true,
+  },
   { name: "Email", selector: (row) => row.email, sortable: true },
   { name: "Phone", selector: (row) => row.phone, sortable: true },
   { name: "DOB", selector: (row) => row.dob, sortable: true },
-  { 
-    name: "Release Patient", 
+  {
+    name: "Release Patient",
     cell: (row) => {
       const text = row.releasePatient || "------";
-      const displayText = text.length > 25 ? `${text.substring(0, 25)}...` : text;
-      return (
-        <span className="text-gray-600">
-          {displayText}
-        </span>
-      );
+      const displayText =
+        text.length > 25 ? `${text.substring(0, 25)}...` : text;
+      return <span className="text-gray-600">{displayText}</span>;
     },
     sortable: true,
   },
@@ -709,7 +706,9 @@ export const ALL_PATIENTS_COLUMNS: TableColumn<any>[] = [
         Inactive: "text-[#EF4444]",
       };
       return (
-        <span className={`${statusColors[row.status] || "text-gray-600"} font-medium`}>
+        <span
+          className={`${statusColors[row.status] || "text-gray-600"} font-medium`}
+        >
           {row.status}
         </span>
       );
@@ -730,31 +729,28 @@ export const ALL_PATIENTS_COLUMNS: TableColumn<any>[] = [
 
 // Flagged Patients Columns - Similar to All Patients but with Flagged status
 export const FLAGGED_PATIENTS_COLUMNS: TableColumn<any>[] = [
-  { name: "Full Name", selector: (row) => `${row.firstName} ${row.lastName}`, sortable: true },
+  {
+    name: "Full Name",
+    selector: (row) => `${row.firstName} ${row.lastName}`,
+    sortable: true,
+  },
   { name: "Email", selector: (row) => row.email, sortable: true },
   { name: "Phone", selector: (row) => row.phone, sortable: true },
   { name: "DOB", selector: (row) => row.dob, sortable: true },
-  { 
-    name: "Release Patient", 
+  {
+    name: "Release Patient",
     cell: (row) => {
       const text = row.releasePatient || "------";
-      const displayText = text.length > 25 ? `${text.substring(0, 25)}...` : text;
-      return (
-        <span className="text-gray-600">
-          {displayText}
-        </span>
-      );
+      const displayText =
+        text.length > 25 ? `${text.substring(0, 25)}...` : text;
+      return <span className="text-gray-600">{displayText}</span>;
     },
     sortable: true,
   },
   {
     name: "Status",
     cell: (row) => {
-      return (
-        <span className="text-[#F97316] font-medium">
-          {row.status}
-        </span>
-      );
+      return <span className="text-[#F97316] font-medium">{row.status}</span>;
     },
     sortable: true,
   },
@@ -925,16 +921,27 @@ export const ALL_PATIENTS_DATA: any[] = (() => {
     "------",
     "------",
   ];
-  
-  const statuses = ["Active", "Inactive", "Active", "Active", "Inactive", "Active", "Active", "Inactive", "Active", "Active"];
-  
+
+  const statuses = [
+    "Active",
+    "Inactive",
+    "Active",
+    "Active",
+    "Inactive",
+    "Active",
+    "Active",
+    "Inactive",
+    "Active",
+    "Active",
+  ];
+
   return Array(995)
     .fill(null)
     .map((_, index) => {
       const baseData = PATIENT_LIST_DATA[index % PATIENT_LIST_DATA.length];
       const releaseIndex = index % releasePatientOptions.length;
       const statusIndex = index % statuses.length;
-      
+
       return {
         ...baseData,
         id: index + 1,
@@ -958,13 +965,13 @@ export const FLAGGED_PATIENTS_DATA: any[] = (() => {
     "------",
     "------",
   ];
-  
+
   return Array(90)
     .fill(null)
     .map((_, index) => {
       const baseData = PATIENT_LIST_DATA[index % PATIENT_LIST_DATA.length];
       const releaseIndex = index % releasePatientOptions.length;
-      
+
       return {
         ...baseData,
         id: index + 1,
@@ -1074,7 +1081,7 @@ export const ADMIN_QUEUE_COLUMNS = [
   {
     name: "Action",
     button: true,
-    cell: (row: any) => (
+    cell: (_row: any) => (
       <div className="flex items-center gap-3">
         <button className="hover:opacity-80 transition-opacity">
           <img
@@ -1235,14 +1242,22 @@ export const ADMIN_PATIENT_COLUMNS = (
       // Map current status to toggle state
       // For All Patients page, we use a separate toggleStatus or map from current status
       // Default: all current statuses show as "Active" (toggle on)
-      const toggleStatus = row.toggleStatus || 
-        (row.status && ["Waiting provider", "Waiting Response", "Scheduled", "Completed", "In Progress"].includes(row.status) 
-          ? "Active" 
-          : row.status === "Inactive" 
-          ? "Inactive" 
-          : row.status === "Flagged" 
-          ? "Flagged" 
-          : "Active");
+      const toggleStatus =
+        row.toggleStatus ||
+        (row.status &&
+        [
+          "Waiting provider",
+          "Waiting Response",
+          "Scheduled",
+          "Completed",
+          "In Progress",
+        ].includes(row.status)
+          ? "Active"
+          : row.status === "Inactive"
+            ? "Inactive"
+            : row.status === "Flagged"
+              ? "Flagged"
+              : "Active");
 
       const getToggleColor = () => {
         switch (toggleStatus) {
@@ -1781,14 +1796,26 @@ export const DUMMY_AUDIT_LOGS = [
 
 // Activity Logs Data for Provider
 export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
-  { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 22, 2026",
+    time: "6:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Send prescription" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Log in" },
   { date: "Jan 22, 2026", time: "1:10 pm EST", action: "Add New Provider" },
-  { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Update Patient Recode" },
-  { date: "Jan 20, 2026", time: "11:30 am EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 21, 2026",
+    time: "12:00 pm EST",
+    action: "Update Patient Recode",
+  },
+  {
+    date: "Jan 20, 2026",
+    time: "11:30 am EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Send prescription" },
   { date: "Jan 18, 2026", time: "9:00 am EST", action: "Accept Visit" },
   { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Send prescription" },
@@ -1805,8 +1832,16 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Log in" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
-  { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Update Patient Recode" },
-  { date: "Jan 22, 2026", time: "1:10 pm EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 18, 2026",
+    time: "2:20 pm EST",
+    action: "Update Patient Recode",
+  },
+  {
+    date: "Jan 22, 2026",
+    time: "1:10 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
@@ -1815,8 +1850,16 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
-  { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Update Patient Recode" },
-  { date: "Jan 22, 2026", time: "1:10 pm EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 18, 2026",
+    time: "2:20 pm EST",
+    action: "Update Patient Recode",
+  },
+  {
+    date: "Jan 22, 2026",
+    time: "1:10 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
@@ -1825,8 +1868,16 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
-  { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Update Patient Recode" },
-  { date: "Jan 22, 2026", time: "1:10 pm EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 18, 2026",
+    time: "2:20 pm EST",
+    action: "Update Patient Recode",
+  },
+  {
+    date: "Jan 22, 2026",
+    time: "1:10 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
@@ -1835,8 +1886,16 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
-  { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Update Patient Recode" },
-  { date: "Jan 22, 2026", time: "1:10 pm EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 18, 2026",
+    time: "2:20 pm EST",
+    action: "Update Patient Recode",
+  },
+  {
+    date: "Jan 22, 2026",
+    time: "1:10 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
@@ -1845,8 +1904,16 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
-  { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Update Patient Recode" },
-  { date: "Jan 22, 2026", time: "1:10 pm EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 18, 2026",
+    time: "2:20 pm EST",
+    action: "Update Patient Recode",
+  },
+  {
+    date: "Jan 22, 2026",
+    time: "1:10 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
@@ -1855,8 +1922,16 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
-  { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Update Patient Recode" },
-  { date: "Jan 22, 2026", time: "1:10 pm EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 18, 2026",
+    time: "2:20 pm EST",
+    action: "Update Patient Recode",
+  },
+  {
+    date: "Jan 22, 2026",
+    time: "1:10 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
@@ -1865,8 +1940,16 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
-  { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Update Patient Recode" },
-  { date: "Jan 22, 2026", time: "1:10 pm EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 18, 2026",
+    time: "2:20 pm EST",
+    action: "Update Patient Recode",
+  },
+  {
+    date: "Jan 22, 2026",
+    time: "1:10 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
@@ -1875,8 +1958,16 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
-  { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Update Patient Recode" },
-  { date: "Jan 22, 2026", time: "1:10 pm EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 18, 2026",
+    time: "2:20 pm EST",
+    action: "Update Patient Recode",
+  },
+  {
+    date: "Jan 22, 2026",
+    time: "1:10 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
@@ -1885,8 +1976,16 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
-  { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Update Patient Recode" },
-  { date: "Jan 22, 2026", time: "1:10 pm EST", action: "Logging in to the platform" },
+  {
+    date: "Jan 18, 2026",
+    time: "2:20 pm EST",
+    action: "Update Patient Recode",
+  },
+  {
+    date: "Jan 22, 2026",
+    time: "1:10 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
@@ -1895,5 +1994,9 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
-  { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Update Patient Recode" },
+  {
+    date: "Jan 18, 2026",
+    time: "2:20 pm EST",
+    action: "Update Patient Recode",
+  },
 ];

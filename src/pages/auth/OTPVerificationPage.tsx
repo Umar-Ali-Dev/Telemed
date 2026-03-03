@@ -21,7 +21,7 @@ const OTPVerificationPage: React.FC<OTPProps> = ({
 }) => {
   const { control, handleSubmit } = useForm({ defaultValues: { otp: "" } });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (_data: any) => {
     const loadToast = toast.loading("Verifying...");
     setTimeout(() => {
       toast.success("Verified!", { id: loadToast });

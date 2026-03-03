@@ -21,7 +21,7 @@ const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
 
   const isConfirmed = watch("confirm");
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (_data: any) => {
     const loadToast = toast.loading(
       isEdit ? "Updating prescription..." : "Adding prescription...",
     );
@@ -81,11 +81,12 @@ const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
               Note For Pharmacy
             </label>
             <span className="text-[12px] text-gray-500 flex items-center gap-1">
-              <img 
-                src={nobPharmacyIcon} 
-                alt="Nob Hill Pharmacy" 
-                className="w-4 h-4" 
-              /> Nob Hill Pharmacy
+              <img
+                src={nobPharmacyIcon}
+                alt="Nob Hill Pharmacy"
+                className="w-4 h-4"
+              />{" "}
+              Nob Hill Pharmacy
             </span>
           </div>
           <TextAreaField
