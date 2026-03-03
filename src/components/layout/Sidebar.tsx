@@ -125,7 +125,7 @@ const Sidebar: React.FC = () => {
                         key={sub.path}
                         to={sub.path}
                         className={({ isActive }) =>
-                          `text-[11px] font-medium transition-colors ${isActive ? "text-[#705295]" : "text-[#A3948C]"}`
+                          `block w-full text-[11px] font-medium transition-colors text-center px-1 ${isActive ? "text-[#705295]" : "text-[#A3948C]"}`
                         }
                       >
                         {sub.label}
