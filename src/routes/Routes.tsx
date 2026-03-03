@@ -10,6 +10,7 @@ import AllPatients from "../pages/provider/dashboard/AllPatients";
 import PatientProfile from "../pages/provider/dashboard/profile-components/PatientProfile";
 import MyAccount from "../pages/provider/dashboard/account/MyAccount";
 import Statistics from "../pages/provider/dashboard/Statistics";
+import ActivityLogs from "../pages/provider/dashboard/ActivityLogs";
 
 // Shared Pages
 import Chat from "../pages/chat/Chat";
@@ -51,6 +52,7 @@ export const router = createBrowserRouter([
           { path: "all-visits", element: <AllVisits /> },
           { path: "all-patients", element: <AllPatients /> },
           { path: "statistics", element: <Statistics /> },
+          { path: "activity-logs", element: <ActivityLogs /> },
           { path: "patient/:id", element: <PatientProfile /> },
         ],
       },
