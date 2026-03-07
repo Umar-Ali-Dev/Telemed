@@ -318,7 +318,26 @@ export const CHART_DATA_BAR = [
   { pv: 60 },
 ];
 
-// ... existing constants like CARE_QUEUE_COLUMNS, DUMMY_DATA, etc.
+export const CHART_DATA_LINE_DOTS = [
+  { pv: 15 },
+  { pv: 10 },
+  { pv: 18 },
+  { pv: 14 },
+  { pv: 25 },
+  { pv: 18 },
+  { pv: 12 },
+];
+
+// Used for "Completed" and "Total Income" - Simple Gray Wavy Line
+export const CHART_DATA_LINE_SIMPLE = [
+  { pv: 10 },
+  { pv: 15 },
+  { pv: 8 },
+  { pv: 12 },
+  { pv: 10 },
+  { pv: 14 },
+  { pv: 9 },
+];
 
 export const PATIENT_PROFILE_TABS = [
   "Patient Info",

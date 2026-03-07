@@ -46,7 +46,7 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="bg-white space-y-10 p-6">
+    <div className="bg-white space-y-7 p-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <Heading
           title="Welcome, Mr. Jhon"
@@ -81,21 +81,21 @@ const AdminDashboard: React.FC = () => {
         <StatCard
           label="In Queue"
           value="12"
-          chartType="line"
+          chartType="dot-line"
           chartData={CHART_DATA_LINE}
           icon={<HiOutlineDocumentText size={22} />}
         />
         <StatCard
           label="Completed"
           value="6"
-          chartType="line"
+          chartType="simple-line"
           chartData={CHART_DATA_LINE}
           icon={<HiOutlineHeart size={22} />}
         />
         <StatCard
           label="Total Income"
           value="1,823"
-          chartType="line"
+          chartType="simple-line"
           chartData={CHART_DATA_LINE}
           icon={<HiOutlineTrendingUp size={22} />}
         />

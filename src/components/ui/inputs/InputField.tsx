@@ -38,12 +38,11 @@ function InputField<T extends FieldValues>({
   disabled = false,
 }: InputFieldProps<T>) {
   const [showPassword, setShowPassword] = useState(false);
-  const inputHeight = height || "h-[48px]"; // Adjusted for the standard look in the image
+  const inputHeight = height || "h-[48px]";
   const isPasswordType = type === "password";
 
   return (
     <div className={`flex flex-col gap-2 w-full ${className || ""}`}>
-      {/* Label placed outside the input container */}
       <label
         htmlFor={String(name)}
         className="text-[14px] font-medium text-[#000000]"
@@ -90,8 +89,7 @@ function InputField<T extends FieldValues>({
                 className={`
                   w-full rounded-lg px-4 text-[14px] outline-none transition-all
                   ${inputHeight}
-                  /* Custom Border and Colors */
-                  border border-[#D4CFCC] bg-white text-[#999999]
+                  border border-[#D4CFCC] bg-white text-[#000000]
                   placeholder:text-[#999999]/60
                   ${error ? "border-red-500" : ""}
                   ${disabled ? "bg-gray-100 cursor-not-allowed" : "cursor-text"}

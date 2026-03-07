@@ -1,13 +1,19 @@
 import React from "react";
-import { LineChart, Line, ResponsiveContainer, BarChart, Bar } from "recharts";
+import {
+  LineChart,
+  Line,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  Cell,
+} from "recharts";
 
 interface StatCardProps {
   label: string;
   value: number | string;
   icon: React.ReactNode;
-  chartType: "line" | "bar";
+  chartType: "bar" | "dot-line" | "simple-line"; // Defines the specific chart style
   chartData: any[];
-  color?: string;
 }
 
 const StatCard: React.FC<StatCardProps> = ({
@@ -16,39 +22,62 @@ const StatCard: React.FC<StatCardProps> = ({
   icon,
   chartType,
   chartData,
-  color = "#705295",
 }) => {
   return (
-    <div className="bg-white p-5 rounded-xl flex items-center justify-between min-w-[280px] flex-1 border border-gray-50 shadow-sm">
+    <div className="bg-white p-4 rounded-[10px] flex items-center justify-between border border-gray-100 shadow-sm flex-1 min-w-[260px]">
       <div className="flex items-center gap-4">
-        {/* Rounded Icon Container */}
-        <div className="w-12 h-12 rounded-full bg-[#EBE5F1] flex items-center justify-center text-[#705295]">
+        {/* Purple Icon Container */}
+        <div className="w-12 h-12 rounded-full bg-[#F2EFFF] flex items-center justify-center text-[#705295]">
           {icon}
         </div>
         <div>
-          <h3 className="text-[20px] font-bold text-[#0A1E25] leading-tight">
+          {/* Main Stat Value */}
+          <h3 className="text-[28px] font-bold text-[#0A1E25] leading-tight">
             {value}
           </h3>
-          <p className="text-gray-500 text-sm font-medium">{label}</p>
+          {/* Label Text */}
+          <p className="text-[#A3948C] text-sm font-medium">{label}</p>
         </div>
       </div>
 
+      {/* Reusable Chart Container */}
       <div className="w-24 h-12">
         <ResponsiveContainer width="100%" height="100%">
-          {chartType === "line" ? (
+          {chartType === "bar" ? (
+            <BarChart data={chartData}>
+              {/* Bar Chart with Alternating Colors */}
+              <Bar dataKey="pv" radius={[2, 2, 0, 0]}>
+                {chartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={index % 2 === 0 ? "#705295" : "#D4CFCC"}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          ) : (
             <LineChart data={chartData}>
+              {/* Line Chart Handling both dot-line and simple-line */}
               <Line
                 type="monotone"
                 dataKey="pv"
-                stroke={color}
+                stroke="#D4CFCC" // Base path color
                 strokeWidth={2}
-                dot={false}
+                activeDot={false}
+                {...(chartType === "dot-line"
+                  ? {
+                      dot: {
+                        r: 2,
+                        fill: "#705295",
+                        stroke: "#705295",
+                        strokeWidth: 0,
+                      },
+                    }
+                  : {
+                      dot: false,
+                    })}
               />
             </LineChart>
-          ) : (
-            <BarChart data={chartData}>
-              <Bar dataKey="pv" fill={color} radius={[2, 2, 0, 0]} />
-            </BarChart>
           )}
         </ResponsiveContainer>
       </div>

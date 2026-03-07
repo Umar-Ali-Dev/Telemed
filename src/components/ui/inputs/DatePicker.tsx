@@ -42,7 +42,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
       <style>{`
         .react-datepicker-popper { z-index: 9999 !important; }
-        .react-datepicker-wrapper { width: 100% !important; } /* Fixes full width issue */
+        .react-datepicker-wrapper { width: 100% !important; }
         .react-datepicker { 
           background-color: #FFFFFF !important; 
           border: 1px solid #D4CFCC !important; 
@@ -68,6 +68,9 @@ const DatePicker: React.FC<DatePickerProps> = ({
         rules={rules}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <div className="relative w-full">
+            {/* Calendar Icon positioned on the LEFT */}
+            <LuCalendarDays className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#999999] text-[20px] pointer-events-none z-10" />
+
             <DatePickerComponent
               id={name}
               selected={value}
@@ -85,12 +88,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
               showYearDropdown
               scrollableYearDropdown
               className={`
-                w-full h-[48px] rounded-xl bg-white px-4 text-[14px] text-[#271100] outline-none transition-all
+                w-full h-[48px] rounded-xl bg-white pl-12 pr-4 text-[14px] text-[#271100] outline-none transition-all
                 border ${error ? "border-red-500" : isFocused ? "border-[#705295]" : "border-[#D4CFCC]"}
               `}
             />
-            {/* Positioned inside the input padding */}
-            <LuCalendarDays className="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#999999] text-[20px] pointer-events-none" />
+
             {error && (
               <div className="mt-1">
                 <ErrorsMessage title={error.message} />

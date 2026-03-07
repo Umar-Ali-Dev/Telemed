@@ -42,6 +42,11 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
   return (
     <div className={`relative min-w-[280px] ${className}`}>
+      {/* Search Icon moved to the LEFT side */}
+      <HiOutlineSearch
+        className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none z-10"
+        size={20}
+      />
       <input
         type="text"
         placeholder={placeholder}
@@ -55,8 +60,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
           border-[#D4CFCC] 
           rounded-xl
           py-2.5 
-          pl-4 
-          pr-12 
+          pl-12           
+          pr-4           
           text-[14px] 
           text-[#271100] 
           placeholder-[#999999]/60
@@ -64,10 +69,6 @@ const SearchInput: React.FC<SearchInputProps> = ({
           focus:outline-none 
           transition-all
         "
-      />
-      <HiOutlineSearch
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-        size={20}
       />
     </div>
   );

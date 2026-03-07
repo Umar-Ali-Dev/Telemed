@@ -30,7 +30,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
 
   return (
     <>
-      <Heading title="Login" className="mb-6" />
+      <Heading title="Login" className="mb-6 font-bold" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <InputField
