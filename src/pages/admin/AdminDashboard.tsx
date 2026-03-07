@@ -24,6 +24,7 @@ import {
 } from "../../constants/commonData";
 import { commonTableStyles } from "../../components/ui/table/TableStyles";
 import AssignProviderModal from "../../components/ui/modals/AssignProviderModal";
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard: React.FC = () => {
   const { control } = useForm();
@@ -35,7 +36,10 @@ const AdminDashboard: React.FC = () => {
     setSelectedRequest(row);
     setIsModalOpen(true);
   };
-
+  const navigate = useNavigate();
+  const handleViewDetails = (row: any) => {
+    navigate(`/admin/dashboard/${row.id}`);
+  };
   return (
     <div className="bg-white space-y-7 p-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -110,7 +114,8 @@ const AdminDashboard: React.FC = () => {
 
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={ADMIN_QUEUE_COLUMNS(handleAssignClick)}
+            columns={ADMIN_QUEUE_COLUMNS(handleAssignClick, handleViewDetails)}
+            onRowClicked={handleViewDetails}
             data={ADMIN_DASHBOARD_DATA}
             customStyles={commonTableStyles}
             responsive

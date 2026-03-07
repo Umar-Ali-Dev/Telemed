@@ -1048,7 +1048,10 @@ export const FORM_LAYOUT_CLASS = "max-w-full lg:max-w-[650px] space-y-6";
 export const BUTTON_GROUP_CLASS =
   "flex justify-end gap-4 mt-12 pt-4 border-t border-gray-50";
 
-export const ADMIN_QUEUE_COLUMNS = (handleAssignClick: (row: any) => void) => [
+export const ADMIN_QUEUE_COLUMNS = (
+  handleAssignClick: (row: any) => void,
+  handleViewDetails: (row: any) => void,
+) => [
   {
     name: "Full Name",
     selector: (row: any) => row.name,
@@ -1106,9 +1109,9 @@ export const ADMIN_QUEUE_COLUMNS = (handleAssignClick: (row: any) => void) => [
         row.status?.toLowerCase() === "waiting response";
 
       const getDoctorIconStyle = () => {
-        if (isWaitingResponse) return "brightness-0 cursor-not-allowed"; // Black icon
-        if (isWaitingProvider) return ""; // Grey icon
-        return " cursor-not-allowed"; // Disabled look
+        if (isWaitingResponse) return "brightness-0 cursor-not-allowed";
+        if (isWaitingProvider) return "";
+        return " cursor-not-allowed";
       };
 
       return (
@@ -1116,7 +1119,7 @@ export const ADMIN_QUEUE_COLUMNS = (handleAssignClick: (row: any) => void) => [
           <button
             className={`transition-all ${isWaitingProvider ? "hover:opacity-100 cursor-pointer" : ""}`}
             onClick={(e) => {
-              e.stopPropagation(); // Prevents row click
+              e.stopPropagation();
               if (isWaitingProvider) {
                 handleAssignClick(row);
               }
@@ -1131,7 +1134,10 @@ export const ADMIN_QUEUE_COLUMNS = (handleAssignClick: (row: any) => void) => [
           </button>
           <button
             className="hover:opacity-80 transition-opacity"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleViewDetails(row);
+            }}
           >
             <img
               src={fileTextIcon}
@@ -1144,7 +1150,10 @@ export const ADMIN_QUEUE_COLUMNS = (handleAssignClick: (row: any) => void) => [
     },
   },
 ];
-export const ADMIN_CONSULTATION_COLUMNS = [
+
+export const ADMIN_CONSULTATION_COLUMNS = (
+  handleViewDetails: (row: any) => void,
+) => [
   {
     name: "Full Name",
     selector: (row: any) => row.name,
@@ -1211,6 +1220,7 @@ export const ADMIN_CONSULTATION_COLUMNS = [
                 : "cursor-not-allowed opacity-100"
             } transition-opacity`}
             disabled={!hasProvider}
+            onClick={(e) => e.stopPropagation()}
           >
             <img
               src={hasProvider ? userDoctorFillIcon : userDoctorIcon}
@@ -1218,7 +1228,13 @@ export const ADMIN_CONSULTATION_COLUMNS = [
               className="w-6 h-6 object-contain"
             />
           </button>
-          <button className="hover:opacity-80 transition-opacity">
+          <button
+            className="hover:opacity-80 transition-opacity"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleViewDetails(row);
+            }}
+          >
             <img
               src={fileTextIcon}
               alt="Document"
@@ -1230,6 +1246,7 @@ export const ADMIN_CONSULTATION_COLUMNS = [
     },
   },
 ];
+
 import ActionMenu from "../components/ui/table/ActionMenu";
 
 export const ADMIN_PATIENT_COLUMNS = (

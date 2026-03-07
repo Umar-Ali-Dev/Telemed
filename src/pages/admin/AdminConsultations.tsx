@@ -31,9 +31,11 @@ const AdminConsultations: React.FC = () => {
   const filteredData = ADMIN_DASHBOARD_DATA.filter((item: any) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
-  const handleRowClick = (row: any) => {
-    // Use showProviderInfo=true to enable the extra tab for Admins
-    navigate(`/admin/patient/${row.id}?showProviderInfo=true`);
+  // const handleRowClick = (row: any) => {
+  //   navigate(`/admin/patient/${row.id}?showProviderInfo=true`);
+  // };
+  const handleViewDetails = (row: any) => {
+    navigate(`/admin/consultations/${row.id}`);
   };
   return (
     <SectionWrapper className="m-6">
@@ -63,12 +65,12 @@ const AdminConsultations: React.FC = () => {
 
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={ADMIN_CONSULTATION_COLUMNS}
+            columns={ADMIN_CONSULTATION_COLUMNS(handleViewDetails)}
             data={filteredData}
             customStyles={commonTableStyles}
             responsive
             highlightOnHover
-            onRowClicked={handleRowClick}
+            onRowClicked={handleViewDetails}
             pointerOnHover
           />
         </div>

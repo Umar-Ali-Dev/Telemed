@@ -74,6 +74,10 @@ export const router = createBrowserRouter([
         children: [
           { path: "dashboard", element: <AdminDashboard /> },
           { path: "consultations", element: <AdminConsultations /> },
+          { path: "consultations/:id", element: <DetailPage1 /> },
+          { path: "consultations/:id/details", element: <DetailPage2 /> },
+          { path: "dashboard/:id", element: <DetailPage1 /> },
+          { path: "dashboard/:id/details", element: <DetailPage2 /> },
           { path: "all-patients", element: <AdminPatients /> },
           { path: "patients/edit/:id", element: <EditPatient /> },
           { path: "patient/:id", element: <PatientProfile /> },

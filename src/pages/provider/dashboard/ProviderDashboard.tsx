@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import DataTable from "react-data-table-component";
-import { CARE_QUEUE_COLUMNS, DUMMY_DATA } from "../../../constants/commonData";
+import { useNavigate } from "react-router-dom";
+import {
+  CARE_QUEUE_COLUMNS,
+  DUMMY_DATA,
+  getVisitColumns,
+} from "../../../constants/commonData";
 import Heading from "../../../components/ui/headings/Heading";
 import { commonTableStyles } from "../../../components/ui/table/TableStyles";
 import NavigationCard from "../../../components/ui/cards/NavigationCard";
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
+import CancelReasonModal from "../../../components/ui/modals/CancelReasonModal";
+import type { PatientRecord } from "../../../constants/commonData";
+
 import newVisitsIcon from "../../../assets/icons/newVisits.svg";
 import allVisitsIcon from "../../../assets/icons/allVisits.svg";
 import allPatientsIcon from "../../../assets/icons/allPatients.svg";
@@ -15,6 +23,25 @@ import profileSettingsIcon from "../../../assets/icons/profileSettings.svg";
 import activityLogsIcon from "../../../assets/icons/activityLogs.svg";
 
 const ProviderDashboard: React.FC = () => {
+  const navigate = useNavigate();
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<PatientRecord | null>(null);
+
+  const handleRowClick = (row: PatientRecord) => {
+    navigate(`/provider/new-visits/${row.id}`);
+  };
+
+  const handleCancelClick = (row: PatientRecord) => {
+    setSelectedRow(row);
+    setIsCancelModalOpen(true);
+  };
+
+  const handleCancelSubmit = (reason: string) => {
+    console.log("Cancelling visit for:", selectedRow, "Reason:", reason);
+    setIsCancelModalOpen(false);
+    setSelectedRow(null);
+  };
+
   return (
     <div className="bg-white space-y-10">
       <div className="space-y-6 m-6">
@@ -26,7 +53,6 @@ const ProviderDashboard: React.FC = () => {
       </div>
 
       <SectionWrapper padding="p-4" className="flex m-6 flex-col gap-7">
-        {/* Navigation Cards Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
           <NavigationCard
             label="New Visits"
@@ -62,7 +88,7 @@ const ProviderDashboard: React.FC = () => {
           />
           <NavigationCard
             label="Profile Settings"
-            path="/my-account"
+            path="/provider/my-account"
             icon={profileSettingsIcon}
           />
           <NavigationCard
@@ -72,7 +98,6 @@ const ProviderDashboard: React.FC = () => {
           />
         </div>
 
-        {/* Statistics Cards */}
         <div>
           <Heading
             title="Care Queue Visits"
@@ -81,14 +106,30 @@ const ProviderDashboard: React.FC = () => {
           />
           <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
             <DataTable
-              columns={CARE_QUEUE_COLUMNS}
+              columns={getVisitColumns(
+                handleRowClick,
+                handleCancelClick,
+                CARE_QUEUE_COLUMNS,
+              )}
               data={DUMMY_DATA}
               customStyles={commonTableStyles}
+              onRowClicked={handleRowClick}
               responsive
+              highlightOnHover
+              pointerOnHover
             />
           </div>
         </div>
       </SectionWrapper>
+
+      <CancelReasonModal
+        isOpen={isCancelModalOpen}
+        onClose={() => {
+          setIsCancelModalOpen(false);
+          setSelectedRow(null);
+        }}
+        onSubmit={handleCancelSubmit}
+      />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useLocation } from "react-router-dom"; // Use location to detect role
 import InputField from "../../../../components/ui/inputs/InputField";
 import Button from "../../../../components/ui/button/Button";
 import {
@@ -7,21 +8,27 @@ import {
 } from "../../../../constants/commonData";
 
 export const PersonalInfo = () => {
+  const { pathname } = useLocation();
+  const isAdmin = pathname.startsWith("/admin"); // Role detection
   const { control, handleSubmit } = useForm();
+
   return (
     <div className={FORM_LAYOUT_CLASS}>
       <form
         onSubmit={handleSubmit((data) => console.log(data))}
         className="space-y-6"
       >
-        {/* Prefix Field added */}
-        <InputField
-          name="prefix"
-          control={control}
-          label="Prefix"
-          type="text"
-          placeholder="e.g. Dr."
-        />
+        {/* Only show Prefix for Provider */}
+        {!isAdmin && (
+          <InputField
+            name="prefix"
+            control={control}
+            label="Prefix"
+            type="text"
+            placeholder="e.g. Dr."
+          />
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <InputField
             name="firstName"
@@ -40,6 +47,7 @@ export const PersonalInfo = () => {
             required
           />
         </div>
+
         <InputField
           name="email"
           control={control}
@@ -48,6 +56,8 @@ export const PersonalInfo = () => {
           placeholder="e.g. abc@email.com"
           required
         />
+
+        {/* Only show Phone, NPI, and License fields for Provider or shared as needed */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <InputField
             name="phone"
@@ -57,63 +67,74 @@ export const PersonalInfo = () => {
             placeholder="(000) 000 0000"
             required
           />
+          {!isAdmin && (
+            <InputField
+              name="npi"
+              control={control}
+              label="NPI Number"
+              type="text"
+              placeholder="1234567890"
+              required
+            />
+          )}
+        </div>
+
+        {!isAdmin && (
           <InputField
-            name="npi"
+            name="license"
             control={control}
-            label="NPI Number"
+            label="License Number"
             type="text"
-            placeholder="1234567890"
+            placeholder="***********"
             required
           />
-        </div>
-        <InputField
-          name="license"
-          control={control}
-          label="License Number"
-          type="text"
-          placeholder="***********"
-          required
-        />
-        <InputField
-          name="street"
-          control={control}
-          label="Street"
-          type="text"
-          placeholder="72 Caisson Trace"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="md:col-span-2">
+        )}
+
+        {/* Address section - Hid for Admin based on reference image */}
+        {!isAdmin && (
+          <>
             <InputField
-              name="city"
+              name="street"
               control={control}
-              label="City"
+              label="Street"
               type="text"
-              placeholder="Spanish Fort"
+              placeholder="72 Caisson Trace"
             />
-          </div>
-          <InputField
-            name="state"
-            control={control}
-            label="State"
-            type="text"
-            placeholder="AL"
-          />
-        </div>
-        <InputField
-          name="zip"
-          control={control}
-          label="Zip Code"
-          type="text"
-          placeholder="3724627"
-        />
-        {/* Practice Address Field added */}
-        <InputField
-          name="practiceAddress"
-          control={control}
-          label="Practice Address"
-          type="text"
-          placeholder="72 Caisson Trace."
-        />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="md:col-span-2">
+                <InputField
+                  name="city"
+                  control={control}
+                  label="City"
+                  type="text"
+                  placeholder="Spanish Fort"
+                />
+              </div>
+              <InputField
+                name="state"
+                control={control}
+                label="State"
+                type="text"
+                placeholder="AL"
+              />
+            </div>
+            <InputField
+              name="zip"
+              control={control}
+              label="Zip Code"
+              type="text"
+              placeholder="3724627"
+            />
+            <InputField
+              name="practiceAddress"
+              control={control}
+              label="Practice Address"
+              type="text"
+              placeholder="72 Caisson Trace."
+            />
+          </>
+        )}
+
         <div className={BUTTON_GROUP_CLASS}>
           <Button
             label="Cancel"
