@@ -48,13 +48,14 @@ const ProfileDropdown = () => {
               </Menu.Item>
             )}
 
+            {/* Logout Option */}
             <Menu.Item>
               {({ active }) => (
                 <button
                   onClick={() => console.log("Log Out Triggered")}
                   className={`${
-                    active ? "bg-red-100" : ""
-                  } group flex w-full items-center gap-3 rounded-xl px-4 py-2.5 text-[14px] font-bold text-red-500 transition-colors`}
+                    active ? "bg-orange-50" : ""
+                  } group flex w-full items-center gap-3 rounded-xl px-4 py-2.5 text-[14px] font-bold text-[#F76D00] transition-colors`}
                 >
                   <LuLogOut size={18} />
                   Log Out
