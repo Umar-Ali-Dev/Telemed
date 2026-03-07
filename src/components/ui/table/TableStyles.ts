@@ -8,7 +8,7 @@ export const commonTableStyles: TableStyles = {
   },
   headRow: {
     style: {
-      backgroundColor: "#705295", // Purple header
+      backgroundColor: "#705295",
       minHeight: "52px",
       borderBottomWidth: "0px",
       borderRadius: "12px 12px 0 0",
@@ -16,9 +16,10 @@ export const commonTableStyles: TableStyles = {
   },
   headCells: {
     style: {
-      color: "#FFFFFF", // White header text
+      color: "#FFFFFF",
       fontSize: "14px",
       fontWeight: "600",
+      whiteSpace: "normal", // Allows header text to wrap
     },
   },
   rows: {
@@ -26,11 +27,10 @@ export const commonTableStyles: TableStyles = {
       minHeight: "60px",
       fontSize: "14px",
       color: "#666666",
-      backgroundColor: "##FFFAF7",
+      backgroundColor: "#FFFAF7",
       borderBottomStyle: "solid",
       borderBottomWidth: "1px",
       borderBottomColor: "#D4CFCC",
-      boxShadow: "none",
       "&:hover": {
         backgroundColor: "#F9FAFB",
         cursor: "pointer !important",
@@ -39,9 +39,11 @@ export const commonTableStyles: TableStyles = {
   },
   cells: {
     style: {
-      padding: "8px 16px",
+      padding: "12px 16px",
       border: "none",
       cursor: "pointer",
+      whiteSpace: "normal", // Prevents "..." truncation
+      wordBreak: "break-word", // Ensures long content breaks correctly
     },
   },
 };

@@ -91,7 +91,7 @@ const UpdatePharmacyModal = ({ isOpen, onClose }: UpdatePharmacyProps) => {
             </div>
           </div>
 
-          <div className="rounded-[25px] overflow-hidden border border-[#D4CFCC] h-[340px] shadow-sm">
+          <div className="rounded-[15px] overflow-hidden border border-[#D4CFCC] h-[280px] shadow-sm">
             <img
               src={mapImage}
               className="w-full h-full object-cover"
@@ -106,7 +106,7 @@ const UpdatePharmacyModal = ({ isOpen, onClose }: UpdatePharmacyProps) => {
             textSize="text-[20px]"
             className="font-bold text-[#1A202C]"
           />
-          <div className="rounded-[15px] overflow-hidden bg-[#FFFAF7] min-h-[300px]">
+          <div className="rounded-[15px] overflow-hidden bg-[#FFFAF7] min-h-[300px] custom-table-scrollbar">
             <DataTable
               columns={PHARMACY_COLUMNS}
               data={PHARMACY_DUMMY_DATA}

@@ -14,7 +14,7 @@ const ChatInterface = () => {
   };
 
   return (
-    <div className="lg:col-span-4 h-full min-h-[650px] flex flex-col bg-white border border-gray-100 rounded-[25px] shadow-sm overflow-hidden">
+    <div className="lg:col-span-4 h-full min-h-[650px] flex flex-col bg-white border border-gray-100 rounded-[15px] shadow-sm overflow-hidden">
       {/* Header Section */}
       <div className="p-4 border-b border-gray-100 flex items-center gap-3">
         <div className="relative">

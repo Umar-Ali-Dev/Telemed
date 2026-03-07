@@ -12,6 +12,7 @@ export interface TextAreaFieldProps<T extends FieldValues> {
   placeholder?: string;
   height?: string;
   required?: boolean;
+  rounded?: string; // New optional prop for custom radius
 }
 
 function TextAreaField<T extends FieldValues>({
@@ -21,6 +22,7 @@ function TextAreaField<T extends FieldValues>({
   placeholder,
   height = "h-24",
   required = false,
+  rounded = "rounded-lg", // Default remains rounded-lg
 }: TextAreaFieldProps<T>) {
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -37,7 +39,7 @@ function TextAreaField<T extends FieldValues>({
               {...field}
               placeholder={placeholder}
               className={`
-                w-full rounded-lg px-4 py-3 text-[14px] outline-none border transition-all
+                w-full ${rounded} px-4 py-3 text-[14px] outline-none border transition-all
                 ${height} border-[#D4CFCC] bg-white text-[#271100] resize-none
                 placeholder:text-[#999999]/60
                 ${error ? "border-red-500" : "focus:border-[#705295]"}

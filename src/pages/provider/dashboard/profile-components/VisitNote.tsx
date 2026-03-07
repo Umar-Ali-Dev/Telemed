@@ -71,7 +71,7 @@ const VisitNote = ({ isVisitDetail = false }: VisitNoteProps) => {
               </p>
             </div>
 
-            <div className="bg-white  rounded-[15px] p-6 shadow-sm space-y-4">
+            <div className="bg-white rounded-[15px] p-6 shadow-sm space-y-4">
               <div className="flex items-center gap-2 text-[#A3948C]">
                 <HiOutlineChartBar size={20} />
                 <span className="font-bold text-[16px]">Vitals</span>
@@ -120,6 +120,7 @@ const VisitNote = ({ isVisitDetail = false }: VisitNoteProps) => {
             control={control}
             placeholder="Write Progress Note"
             height="h-36"
+            rounded="rounded-[15px]"
           />
         </div>
 

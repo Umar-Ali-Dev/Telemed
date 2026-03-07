@@ -3,6 +3,52 @@
 .bg-base {
   background-color: #fffaf7;
 }
+/* Custom Scrollbar for DataTables */
+.custom-table-scrollbar .rdt_TableBody::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-table-scrollbar .rdt_TableBody::-webkit-scrollbar-track {
+  background: #fffaf7;
+  border-radius: 10px;
+}
+
+.custom-table-scrollbar .rdt_TableBody::-webkit-scrollbar-thumb {
+  background: #705295;
+  border-radius: 10px;
+  border: 2px solid #fffaf7;
+}
+
+.custom-table-scrollbar .rdt_TableBody::-webkit-scrollbar-thumb:hover {
+  background: #5e447e;
+}
+
+/* Firefox Support */
+.custom-table-scrollbar .rdt_TableBody {
+  scrollbar-width: thin;
+  scrollbar-color: #705295 #fffaf7;
+}
+/* Custom Tooltip Theme */
+.tippy-box[data-theme~="insta-purple"] {
+  background-color: #705295; /* Theme Purple */
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 10px; /* Matching rounded theme */
+  padding: 6px 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the arrow to match the theme color */
+.tippy-box[data-theme~="insta-purple"] .tippy-arrow {
+  color: #705295;
+}
+
+/* Ensure the text inside is clean */
+.tippy-content {
+  padding: 0;
+}
 @layer utilities {
   /* 1. Target the scrollbar and force the track/buttons to disappear */
   .custom-scrollbar::-webkit-scrollbar {

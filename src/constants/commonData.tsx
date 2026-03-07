@@ -611,19 +611,50 @@ export const PRESCRIPTION_DUMMY_DATA = [
     qty: 60,
   },
 ];
+import TruncatedCell from "../components/ui/table/TruncatedCell";
+
 export const PHARMACY_COLUMNS = [
   {
     name: "Pharmacy",
     selector: (row: any) => row.name,
     sortable: true,
     grow: 2,
+    cell: (row: any) => <TruncatedCell content={row.name} />,
   },
-  { name: "City", selector: (row: any) => row.city },
-  { name: "State", selector: (row: any) => row.state, width: "80px" },
-  { name: "Street Address", selector: (row: any) => row.address, grow: 2 },
-  { name: "Zip Code", selector: (row: any) => row.zip },
-  { name: "Phone#", selector: (row: any) => row.phone },
-  { name: "Fax #", selector: (row: any) => row.fax },
+  {
+    name: "City",
+    selector: (row: any) => row.city,
+    cell: (row: any) => <TruncatedCell content={row.city} />,
+  },
+  {
+    name: "State",
+    selector: (row: any) => row.state,
+    width: "80px",
+    cell: (row: any) => (
+      <TruncatedCell content={row.state} className="text-center" />
+    ),
+  },
+  {
+    name: "Street Address",
+    selector: (row: any) => row.address,
+    grow: 2,
+    cell: (row: any) => <TruncatedCell content={row.address} />,
+  },
+  {
+    name: "Zip Code",
+    selector: (row: any) => row.zip,
+    cell: (row: any) => <TruncatedCell content={row.zip} />,
+  },
+  {
+    name: "Phone#",
+    selector: (row: any) => row.phone,
+    cell: (row: any) => <TruncatedCell content={row.phone} />,
+  },
+  {
+    name: "Fax #",
+    selector: (row: any) => row.fax,
+    cell: (row: any) => <TruncatedCell content={row.fax} />,
+  },
   {
     name: "Change",
     cell: () => (
@@ -632,11 +663,9 @@ export const PHARMACY_COLUMNS = [
       </button>
     ),
     ignoreRowClick: true,
-    allowOverflow: true,
     button: true,
   },
 ];
-
 export const PHARMACY_DUMMY_DATA = [
   {
     id: 1,
