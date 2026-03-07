@@ -34,6 +34,7 @@ import SystemControls from "../pages/admin/management/SystemControls";
 import Analytics from "../pages/admin/management/Analytics";
 import ComplianceAudit from "../pages/admin/management/ComplianceAudit";
 import DocumentHandling from "../pages/admin/management/DocumentHandling";
+import SingleProviderRequestDetail from "../pages/admin/providers/SingleProviderRequestDetail";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
           { path: "providers/edit/:id", element: <EditProvider /> },
           { path: "provider-profile/:id", element: <AdminProviderProfile /> },
           { path: "providers/requests", element: <ProviderRequests /> },
+          {
+            path: "providers/requests/:id",
+            element: <SingleProviderRequestDetail />,
+          },
           {
             path: "management/prescriptions",
             element: <AllPrescriptions />,

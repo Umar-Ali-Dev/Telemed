@@ -14,7 +14,9 @@ import { useNavigate } from "react-router-dom";
 const AdminPatients: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const [patientToggleStates, setPatientToggleStates] = useState<Record<number, string>>({});
+  const [patientToggleStates, setPatientToggleStates] = useState<
+    Record<number, string>
+  >({});
 
   const handleEdit = (id: any) => {
     navigate(`/admin/patients/edit/${id}`);
@@ -26,8 +28,9 @@ const AdminPatients: React.FC = () => {
       [id]: newStatus,
     }));
   };
-
-  // Map data and add toggleStatus, then filter
+  const handleViewDetails = (id: any) => {
+    navigate(`/admin/patient/${id}?showAdminDetail=true`);
+  };
   const mappedData = ADMIN_DASHBOARD_DATA.map((item: any) => ({
     ...item,
     toggleStatus: patientToggleStates[item.id] || "Active", // Default to Active
@@ -58,7 +61,12 @@ const AdminPatients: React.FC = () => {
 
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={ADMIN_PATIENT_COLUMNS(handleEdit, handleFlag, handleStatusChange)}
+            columns={ADMIN_PATIENT_COLUMNS(
+              handleEdit,
+              handleFlag,
+              handleStatusChange,
+              handleViewDetails,
+            )}
             data={filteredData}
             customStyles={commonTableStyles}
             responsive

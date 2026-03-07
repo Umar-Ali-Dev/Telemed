@@ -1235,7 +1235,8 @@ import ActionMenu from "../components/ui/table/ActionMenu";
 export const ADMIN_PATIENT_COLUMNS = (
   onEdit: (id: any) => void,
   onFlag: (id: any) => void,
-  onStatusChange?: (id: any, newStatus: string) => void,
+  onStatusChange: (id: any, newStatus: string) => void,
+  onViewDetails: (id: any) => void,
 ) => [
   {
     name: "First Name",
@@ -1263,7 +1264,6 @@ export const ADMIN_PATIENT_COLUMNS = (
   {
     name: "Status",
     cell: (row: any) => {
-      // Use toggleStatus if available, otherwise default to Active
       const displayStatus = row.toggleStatus || "Active";
       const colors: any = {
         Active: "text-[#34C759]",
@@ -1282,25 +1282,7 @@ export const ADMIN_PATIENT_COLUMNS = (
   {
     name: "Action",
     cell: (row: any) => {
-      // Map current status to toggle state
-      // For All Patients page, we use a separate toggleStatus or map from current status
-      // Default: all current statuses show as "Active" (toggle on)
-      const toggleStatus =
-        row.toggleStatus ||
-        (row.status &&
-        [
-          "Waiting provider",
-          "Waiting Response",
-          "Scheduled",
-          "Completed",
-          "In Progress",
-        ].includes(row.status)
-          ? "Active"
-          : row.status === "Inactive"
-            ? "Inactive"
-            : row.status === "Flagged"
-              ? "Flagged"
-              : "Active");
+      const toggleStatus = row.toggleStatus || "Active";
 
       const getToggleColor = () => {
         switch (toggleStatus) {
@@ -1318,11 +1300,11 @@ export const ADMIN_PATIENT_COLUMNS = (
       const getTogglePosition = () => {
         switch (toggleStatus) {
           case "Active":
-            return "translate-x-[16px]"; // Right position: from left-0.5 (2px) to 18px total = 16px translation
+            return "translate-x-[16px]";
           case "Inactive":
-            return "translate-x-0"; // Left position: stays at left-0.5 (2px)
+            return "translate-x-0";
           case "Flagged":
-            return "translate-x-[8px]"; // Middle position: from 2px to ~10px = 8px translation
+            return "translate-x-[8px]";
           default:
             return "translate-x-[16px]";
         }
@@ -1331,7 +1313,6 @@ export const ADMIN_PATIENT_COLUMNS = (
       const handleToggleClick = (e: React.MouseEvent) => {
         e.stopPropagation();
         if (onStatusChange) {
-          // Cycle through toggle states: Active -> Inactive -> Flagged -> Active
           const statusCycle = ["Active", "Inactive", "Flagged"];
           const currentIndex = statusCycle.indexOf(toggleStatus);
           const nextIndex = (currentIndex + 1) % statusCycle.length;
@@ -1342,7 +1323,6 @@ export const ADMIN_PATIENT_COLUMNS = (
       return (
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            {/* Functional Toggle */}
             <button
               onClick={handleToggleClick}
               className={`w-8 h-4 ${getToggleColor()} rounded-full relative cursor-pointer transition-colors focus:outline-none`}
@@ -1351,13 +1331,13 @@ export const ADMIN_PATIENT_COLUMNS = (
                 className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full shadow-sm transition-transform duration-200 ease-in-out ${getTogglePosition()}`}
               />
             </button>
-            {/* Separator */}
+
             <span className="text-[#A3948C] mx-1">/</span>
-            {/* Document Icon */}
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                // Handle document click
+                onViewDetails(row.id);
               }}
             >
               <img
@@ -1366,9 +1346,10 @@ export const ADMIN_PATIENT_COLUMNS = (
                 className="w-6 h-6 cursor-pointer object-contain"
               />
             </button>
-            {/* Separator */}
+
             <span className="text-[#A3948C] mx-1">/</span>
           </div>
+
           <ActionMenu
             items={[
               {
@@ -1551,10 +1532,9 @@ export const PROVIDER_REQUESTS_COLUMNS = (
   {
     name: "Status",
     cell: (row: any) => {
-      // Logic for request-specific status colors
       const colors: any = {
-        Pending: "text-[#F76D00]", // Orange for pending
-        Decline: "text-[#FF3B30]", // Red for decline
+        Pending: "text-[#F76D00]",
+        Decline: "text-[#FF3B30]",
       };
       return (
         <span
@@ -1569,13 +1549,19 @@ export const PROVIDER_REQUESTS_COLUMNS = (
     name: "Action",
     cell: (row: any) => (
       <div className="flex items-center justify-center">
-        {/* Document Icon for viewing request details */}
-        <img
-          src={fileTextIcon}
-          alt="Document"
-          className="w-5 h-5 cursor-pointer hover:opacity-80 transition-opacity"
-          onClick={() => handleViewRequest(row.id)}
-        />
+        <button
+          onClick={(e) => {
+            e.stopPropagation(); // Prevents row-level events if any exist
+            handleViewRequest(row.id);
+          }}
+          className="hover:opacity-80 transition-opacity"
+        >
+          <img
+            src={fileTextIcon}
+            alt="Document"
+            className="w-5 h-5 cursor-pointer object-contain"
+          />
+        </button>
       </div>
     ),
   },

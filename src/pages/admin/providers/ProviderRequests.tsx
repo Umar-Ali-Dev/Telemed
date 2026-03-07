@@ -16,7 +16,7 @@ const ProviderRequests: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleViewRequest = (id: any) => {
-    navigate(`/admin/provider-profile/${id}?isRequest=true`);
+    navigate(`/admin/providers/requests/${id}`);
   };
 
   const filteredData = ADMIN_DASHBOARD_DATA.filter((item: any) =>

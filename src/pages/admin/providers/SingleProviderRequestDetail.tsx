@@ -1,24 +1,39 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
 import InputField from "../../../components/ui/inputs/InputField";
 import SelectField from "../../../components/ui/inputs/SelectField";
-import CheckboxField from "../../../components/ui/inputs/CheckboxField";
 import Button from "../../../components/ui/button/Button";
 import ImageUploadField from "../../../components/ui/inputs/ImageUploadField";
+import Heading from "../../../components/ui/headings/Heading";
 
-const EditProvider = () => {
+const SingleProviderRequestDetail = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const { control, handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => {
-    console.log("Provider Data:", data);
-    navigate(`/admin/all-providers`);
+  const handleApprove = (data: any) => {
+    console.log("Approving Provider:", data);
+    navigate("/admin/providers/requests");
+  };
+
+  const handleDecline = () => {
+    console.log("Declining Provider Request:", id);
+    navigate(-1);
   };
 
   return (
     <SectionWrapper className="m-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <div className="mb-8">
+        <Heading
+          title="Provider Request"
+          highlightText="Detail"
+          textSize="text-[24px]"
+          className="font-bold"
+        />
+      </div>
+
+      <form onSubmit={handleSubmit(handleApprove)} className="space-y-6">
         <ImageUploadField
           name="profileImage"
           control={control}
@@ -137,25 +152,17 @@ const EditProvider = () => {
           </div>
         </div>
 
-        <div className="mt-4">
-          <CheckboxField
-            label="Same as Home Address"
-            name="sameAsHome"
-            control={control}
-          />
-        </div>
-
         <div className="flex justify-end gap-6 pt-10">
           <Button
-            label="Cancel"
-            onClick={() => navigate(-1)}
-            bgColor="bg-transparent"
-            textColor="text-[#A3948C]"
-            width="w-auto"
-            className="font-bold"
+            label="Decline"
+            onClick={handleDecline}
+            bgColor="bg-[#FEE2E2]"
+            textColor="text-[#EF4444]"
+            width="w-[160px]"
+            className="rounded-xl font-bold border-none"
           />
           <Button
-            label="Save"
+            label="Approve"
             type="submit"
             width="w-[160px]"
             className="rounded-xl font-bold"
@@ -166,4 +173,4 @@ const EditProvider = () => {
   );
 };
 
-export default EditProvider;
+export default SingleProviderRequestDetail;
