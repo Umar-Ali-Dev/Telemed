@@ -180,7 +180,7 @@ const Sidebar: React.FC = () => {
       </nav>
 
       <div className="flex flex-col items-center gap-6 py-6 pt-12 border-t border-gray-50 w-full shrink-0">
-        <NavLink
+        {/* <NavLink
           to={notificationPath}
           className={({ isActive }) =>
             `relative w-[39px] h-[39px] rounded-full flex items-center justify-center border-2 transition-all ${isActive ? "border-[#705295] text-[#705295] bg-[#705295]/5" : "border-[#EFE9E6] text-[#999999] hover:bg-gray-50"}`
@@ -188,7 +188,7 @@ const Sidebar: React.FC = () => {
         >
           <HiOutlineBell size={26} />
           <span className="absolute top-0 right-0 w-4 h-4 bg-[#F76D00] border-2 border-white rounded-full"></span>
-        </NavLink>
+        </NavLink> */}
         {!isAdmin && (
           <NavLink
             to={chatPath}

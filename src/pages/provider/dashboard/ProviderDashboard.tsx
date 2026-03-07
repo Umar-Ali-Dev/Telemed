@@ -1,9 +1,6 @@
 import React from "react";
 import DataTable from "react-data-table-component";
-import {
-  CARE_QUEUE_COLUMNS,
-  DUMMY_DATA,
-} from "../../../constants/commonData";
+import { CARE_QUEUE_COLUMNS, DUMMY_DATA } from "../../../constants/commonData";
 import Heading from "../../../components/ui/headings/Heading";
 import { commonTableStyles } from "../../../components/ui/table/TableStyles";
 import NavigationCard from "../../../components/ui/cards/NavigationCard";
@@ -18,7 +15,6 @@ import profileSettingsIcon from "../../../assets/icons/profileSettings.svg";
 import activityLogsIcon from "../../../assets/icons/activityLogs.svg";
 
 const ProviderDashboard: React.FC = () => {
-
   return (
     <div className="bg-white space-y-10">
       <div className="space-y-6 m-6">
@@ -55,7 +51,7 @@ const ProviderDashboard: React.FC = () => {
           />
           <NavigationCard
             label="Chat Messages"
-            path="/chat"
+            path="/provider/chat"
             icon={chatMessagesIcon}
             badge={5}
           />
@@ -92,7 +88,6 @@ const ProviderDashboard: React.FC = () => {
             />
           </div>
         </div>
-
       </SectionWrapper>
     </div>
   );

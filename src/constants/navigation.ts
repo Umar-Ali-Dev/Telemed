@@ -62,12 +62,12 @@ export const PROVIDER_LINKS: NavItem[] = [
     icon: unionIcon,
     activeIcon: activeUnionIcon,
   },
-  {
-    label: "Messages",
-    path: "/chat",
-    icon: chatCircleDotsIcon,
-    activeIcon: activeChatCircleDotsIcon,
-  },
+  // {
+  //   label: "Messages",
+  //   path: "/chat",
+  //   icon: chatCircleDotsIcon,
+  //   activeIcon: activeChatCircleDotsIcon,
+  // },
   {
     label: "Statistics",
     path: "/provider/statistics",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LuClock } from "react-icons/lu";
 import { HiOutlineBell } from "react-icons/hi";
 import instaVisitLogo from "../../assets/icons/instaVisit.svg";
@@ -8,8 +8,17 @@ import ProfileDropdown from "./ProfileDropdown";
 const Navbar: React.FC = () => {
   const [isAvailable, setIsAvailable] = useState(true);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const isProvider = pathname.startsWith("/provider");
+  const isAdmin = pathname.startsWith("/admin");
+
+  const notificationPath = isAdmin
+    ? "/admin/notifications"
+    : "/provider/notifications";
+
+  // Check if the current route is the notification page
+  const isNotificationActive = pathname === notificationPath;
 
   return (
     <header
@@ -23,7 +32,6 @@ const Navbar: React.FC = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        {/* Availability Toggle */}
         <div className="flex items-center gap-4 bg-[#EBE5F1] px-4 py-2 rounded-xl">
           <div className="flex flex-col">
             <span className="text-[14px] font-bold text-[#705295]">
@@ -49,13 +57,24 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          {/* Notification Icon Component */}
-          <button className="relative w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 hover:bg-gray-50 transition-all">
-            <HiOutlineBell size={24} className="text-[#999999]" />
+          {/* Highlighted Notification Icon */}
+          <button
+            onClick={() => navigate(notificationPath)}
+            className={`relative w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all active:scale-95 ${
+              isNotificationActive
+                ? "border-[#705295] text-[#705295] bg-[#705295]/5"
+                : "border-gray-200 text-[#999999] hover:bg-gray-50"
+            }`}
+          >
+            <HiOutlineBell
+              size={24}
+              className={
+                isNotificationActive ? "text-[#705295]" : "text-[#999999]"
+              }
+            />
             <span className="absolute top-2 right-2 w-3 h-3 bg-[#F76D00] border-2 border-white rounded-full"></span>
           </button>
 
-          {/* Your New Separated Component */}
           <ProfileDropdown />
         </div>
       </div>
