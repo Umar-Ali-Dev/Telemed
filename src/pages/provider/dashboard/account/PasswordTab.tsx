@@ -18,6 +18,7 @@ export const PasswordTab = () => {
           control={control}
           label="Current Password"
           type="password"
+          placeholder="Enter current password"
           required
         />
         <InputField
@@ -25,6 +26,7 @@ export const PasswordTab = () => {
           control={control}
           label="New Password"
           type="password"
+          placeholder="Enter new password"
           required
         />
         <InputField
@@ -32,6 +34,7 @@ export const PasswordTab = () => {
           control={control}
           label="Confirm Password"
           type="password"
+          placeholder="Confirm your new password"
           required
         />
         <div className={BUTTON_GROUP_CLASS}>

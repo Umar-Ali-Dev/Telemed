@@ -20,25 +20,27 @@ export const Experience = () => {
           control={control}
           label="Institute"
           type="text"
+          placeholder="e.g. City General Hospital"
         />
         <InputField
           name="instName"
           control={control}
           label="Institution name"
           type="text"
+          placeholder="e.g. Mayo Clinic"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <DatePicker
             name="from"
             control={control}
             label="From"
-            placeholder="Experience from"
+            placeholder="MM/DD/YYYY"
           />
           <DatePicker
             name="to"
             control={control}
             label="To"
-            placeholder="Experience to"
+            placeholder="MM/DD/YYYY"
           />
         </div>
         <button

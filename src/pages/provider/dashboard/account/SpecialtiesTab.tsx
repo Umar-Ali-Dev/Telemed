@@ -19,12 +19,14 @@ export const SpecialtiesTab = () => {
           control={control}
           label="Field of Specialization"
           type="text"
+          placeholder="e.g. Cardiology"
         />
         <InputField
           name="subSpecialty"
           control={control}
           label="Sub-specialty"
           type="text"
+          placeholder="e.g. Interventional Cardiology"
         />
         <button
           type="button"

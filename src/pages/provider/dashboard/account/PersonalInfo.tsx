@@ -14,6 +14,14 @@ export const PersonalInfo = () => {
         onSubmit={handleSubmit((data) => console.log(data))}
         className="space-y-6"
       >
+        {/* Prefix Field added */}
+        <InputField
+          name="prefix"
+          control={control}
+          label="Prefix"
+          type="text"
+          placeholder="e.g. Dr."
+        />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <InputField
             name="firstName"
@@ -97,6 +105,14 @@ export const PersonalInfo = () => {
           label="Zip Code"
           type="text"
           placeholder="3724627"
+        />
+        {/* Practice Address Field added */}
+        <InputField
+          name="practiceAddress"
+          control={control}
+          label="Practice Address"
+          type="text"
+          placeholder="72 Caisson Trace."
         />
         <div className={BUTTON_GROUP_CLASS}>
           <Button

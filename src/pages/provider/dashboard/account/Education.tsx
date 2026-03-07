@@ -21,19 +21,25 @@ export const Education = () => {
           control={control}
           label="Certification name"
           type="text"
+          placeholder="e.g. Board Certified Physician"
         />
         <InputField
           name="instName"
           control={control}
           label="Institution name"
           type="text"
+          placeholder="e.g. Harvard Medical School"
         />
         <DatePicker
           name="year"
           control={control}
           label="Year of certification"
+          placeholder="Select year"
         />
-        <AttachmentField label="Attachment" />
+        <AttachmentField
+          label="Attachment"
+          placeholder="Upload certificate PDF or Image"
+        />
         <button
           type="button"
           className="flex items-center gap-2 text-[#705295] font-medium text-[14px]"
