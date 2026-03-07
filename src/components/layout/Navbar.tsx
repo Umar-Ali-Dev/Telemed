@@ -1,27 +1,29 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { LuClock } from "react-icons/lu";
+import { HiOutlineBell } from "react-icons/hi";
 import instaVisitLogo from "../../assets/icons/instaVisit.svg";
-import profileImage from "../../assets/icons/profile.jpg";
+import ProfileDropdown from "./ProfileDropdown";
 
 const Navbar: React.FC = () => {
   const [isAvailable, setIsAvailable] = useState(true);
+  const { pathname } = useLocation();
+
+  const isProvider = pathname.startsWith("/provider");
 
   return (
     <header
-      className="h-[80px] w-full flex items-center justify-between px-8 sticky top-0 z-10 transition-all border-b border-gray-100"
-      style={{
-        boxShadow: "0px 2px 14px 0px #00000021",
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-      }}
+      className="h-[80px] w-full flex items-center justify-between px-8 sticky top-0 z-10 border-b border-gray-100 bg-white/80 backdrop-blur-md transition-all"
+      style={{ boxShadow: "0px 2px 14px 0px #00000021" }}
     >
       <div className="flex items-center">
-        <img src={instaVisitLogo} alt="Logo" className="h-auto w-auto" />
+        <Link to={isProvider ? "/provider/dashboard" : "/admin/dashboard"}>
+          <img src={instaVisitLogo} alt="Logo" className="h-auto w-auto" />
+        </Link>
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4">
+        {/* Availability Toggle */}
         <div className="flex items-center gap-4 bg-[#EBE5F1] px-4 py-2 rounded-xl">
           <div className="flex flex-col">
             <span className="text-[14px] font-bold text-[#705295]">
@@ -45,16 +47,17 @@ const Navbar: React.FC = () => {
             />
           </button>
         </div>
-        <Link
-          to="/my-account"
-          className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 transition-all hover:bg-gray-50 overflow-hidden"
-        >
-          <img 
-            src={profileImage} 
-            alt="Profile" 
-            className="w-full h-full object-cover rounded-full"
-          />
-        </Link>
+
+        <div className="flex items-center gap-4">
+          {/* Notification Icon Component */}
+          <button className="relative w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 hover:bg-gray-50 transition-all">
+            <HiOutlineBell size={24} className="text-[#999999]" />
+            <span className="absolute top-2 right-2 w-3 h-3 bg-[#F76D00] border-2 border-white rounded-full"></span>
+          </button>
+
+          {/* Your New Separated Component */}
+          <ProfileDropdown />
+        </div>
       </div>
     </header>
   );

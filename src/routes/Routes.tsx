@@ -64,6 +64,9 @@ export const router = createBrowserRouter([
           { path: "statistics", element: <Statistics /> },
           { path: "activity-logs", element: <ActivityLogs /> },
           { path: "patient/:id", element: <PatientProfile /> },
+          { path: "my-account", element: <MyAccount /> },
+          { path: "chat", element: <Chat /> },
+          { path: "notifications", element: <Notifications /> },
         ],
       },
       {
