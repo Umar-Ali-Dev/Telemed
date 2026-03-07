@@ -4,11 +4,10 @@ import { useForm } from "react-hook-form";
 import {
   HiOutlineBriefcase,
   HiOutlineDocumentText,
-  HiOutlineHeart,
   HiOutlineTrendingUp,
+  HiOutlineHeart,
 } from "react-icons/hi";
 
-// UI Components
 import Heading from "../../components/ui/headings/Heading";
 import SectionWrapper from "../../components/ui/common/SectionWrapper";
 import StatCard from "../../components/ui/cards/StatCard";
@@ -16,12 +15,12 @@ import SearchInput from "../../components/ui/inputs/SearchInput";
 import DatePicker from "../../components/ui/inputs/DatePicker";
 import Pagination from "../../components/ui/table/Pagination";
 
-// Constants & Styles
 import {
   ADMIN_QUEUE_COLUMNS,
-  CHART_DATA_LINE,
+  CHART_DATA_LINE_DOTS,
   CHART_DATA_BAR,
   ADMIN_DASHBOARD_DATA,
+  CHART_DATA_LINE,
 } from "../../constants/commonData";
 import { commonTableStyles } from "../../components/ui/table/TableStyles";
 import AssignProviderModal from "../../components/ui/modals/AssignProviderModal";
@@ -32,17 +31,9 @@ const AdminDashboard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
 
-  const handleRowClick = (row: any) => {
+  const handleAssignClick = (row: any) => {
     setSelectedRequest(row);
-    setIsModalOpen(true); // Open popup on row click
-  };
-
-  const handleProviderAssignment = (provider: any) => {
-    console.log(
-      `Assigning ${provider.name} to patient request`,
-      selectedRequest,
-    );
-    // Add your API call here
+    setIsModalOpen(true);
   };
 
   return (
@@ -83,7 +74,7 @@ const AdminDashboard: React.FC = () => {
           label="In Queue"
           value="12"
           chartType="dot-line"
-          chartData={CHART_DATA_LINE}
+          chartData={CHART_DATA_LINE_DOTS}
           icon={<HiOutlineDocumentText size={22} />}
         />
         <StatCard
@@ -119,18 +110,16 @@ const AdminDashboard: React.FC = () => {
 
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={ADMIN_QUEUE_COLUMNS}
+            columns={ADMIN_QUEUE_COLUMNS(handleAssignClick)}
             data={ADMIN_DASHBOARD_DATA}
             customStyles={commonTableStyles}
-            onRowClicked={handleRowClick}
             responsive
             highlightOnHover
-            pointerOnHover
           />
           <AssignProviderModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
-            onAssign={handleProviderAssignment}
+            onAssign={(provider: any) => console.log(provider, selectedRequest)}
           />
         </div>
 

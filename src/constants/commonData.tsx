@@ -1048,7 +1048,7 @@ export const FORM_LAYOUT_CLASS = "max-w-full lg:max-w-[650px] space-y-6";
 export const BUTTON_GROUP_CLASS =
   "flex justify-end gap-4 mt-12 pt-4 border-t border-gray-50";
 
-export const ADMIN_QUEUE_COLUMNS = [
+export const ADMIN_QUEUE_COLUMNS = (handleAssignClick: (row: any) => void) => [
   {
     name: "Full Name",
     selector: (row: any) => row.name,
@@ -1079,7 +1079,6 @@ export const ADMIN_QUEUE_COLUMNS = [
     selector: (row: any) => row.status,
     sortable: true,
     cell: (row: any) => {
-      // Logic for status colors from image_b88118.png
       const getStatusColor = (status: string) => {
         switch (status?.toLowerCase()) {
           case "waiting provider":
@@ -1087,7 +1086,7 @@ export const ADMIN_QUEUE_COLUMNS = [
           case "waiting response":
             return "text-[#FFC107]";
           default:
-            return "text-[#705295]";
+            return "text-[#F76D00]";
         }
       };
       return (
@@ -1100,24 +1099,49 @@ export const ADMIN_QUEUE_COLUMNS = [
   {
     name: "Action",
     button: true,
-    cell: (_row: any) => (
-      <div className="flex items-center gap-3">
-        <button className="hover:opacity-80 transition-opacity">
-          <img
-            src={userDoctorIcon}
-            alt="Doctor"
-            className="w-6 h-6 object-contain"
-          />
-        </button>
-        <button className="hover:opacity-80 transition-opacity">
-          <img
-            src={fileTextIcon}
-            alt="Document"
-            className="w-6 h-6 object-contain"
-          />
-        </button>
-      </div>
-    ),
+    cell: (row: any) => {
+      const isWaitingProvider =
+        row.status?.toLowerCase() === "waiting provider";
+      const isWaitingResponse =
+        row.status?.toLowerCase() === "waiting response";
+
+      const getDoctorIconStyle = () => {
+        if (isWaitingResponse) return "brightness-0"; // Black icon
+        if (isWaitingProvider) return "opacity-50 grayscale"; // Grey icon
+        return " cursor-not-allowed"; // Disabled look
+      };
+
+      return (
+        <div className="flex items-center gap-3">
+          <button
+            className={`transition-all ${isWaitingProvider ? "hover:opacity-100 cursor-pointer" : ""}`}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevents row click
+              if (isWaitingProvider) {
+                handleAssignClick(row);
+              }
+            }}
+            disabled={!isWaitingProvider}
+          >
+            <img
+              src={userDoctorIcon}
+              alt="Doctor"
+              className={`w-6 h-6 object-contain transition-all ${getDoctorIconStyle()}`}
+            />
+          </button>
+          <button
+            className="hover:opacity-80 transition-opacity"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={fileTextIcon}
+              alt="Document"
+              className="w-6 h-6 object-contain"
+            />
+          </button>
+        </div>
+      );
+    },
   },
 ];
 export const ADMIN_CONSULTATION_COLUMNS = [
