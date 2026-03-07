@@ -49,9 +49,10 @@ const AdminDashboard: React.FC = () => {
     <div className="bg-white space-y-7 p-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <Heading
-          title="Welcome, Mr. Jhon"
+          title="Welcome,"
+          highlightText="Mr. Jhon"
           textSize="text-[24px]"
-          className="font-bold text-[#3a2014]"
+          className="font-bold text-[#0A1E25]"
         />
 
         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">

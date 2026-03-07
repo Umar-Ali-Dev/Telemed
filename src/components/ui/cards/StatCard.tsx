@@ -32,7 +32,7 @@ const StatCard: React.FC<StatCardProps> = ({
         </div>
         <div>
           {/* Main Stat Value */}
-          <h3 className="text-[28px] font-bold text-[#0A1E25] leading-tight">
+          <h3 className="text-[18px] font-bold text-[#0A1E25] leading-tight">
             {value}
           </h3>
           {/* Label Text */}
