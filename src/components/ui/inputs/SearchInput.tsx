@@ -7,6 +7,7 @@ interface SearchInputProps {
   value: string;
   onChange: (searchTerm: string) => void;
   className?: string;
+  height?: string;
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
@@ -15,6 +16,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onChange,
   value,
   className = "",
+  height = "45px",
 }) => {
   const [searchTerm, setSearchTerm] = useState(value);
 
@@ -52,9 +54,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
         placeholder={placeholder}
         value={searchTerm}
         onChange={handleSearchChange}
+        style={{ height: height }}
         className="
           w-full 
-          h-[48px]
           bg-white 
           border 
           border-[#D4CFCC] 

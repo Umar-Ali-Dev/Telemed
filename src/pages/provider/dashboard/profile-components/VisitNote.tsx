@@ -3,6 +3,7 @@ import {
   HiOutlinePlus,
   HiOutlineRefresh,
   HiOutlineDocumentText,
+  HiOutlineChartBar,
 } from "react-icons/hi";
 import shieldPlusIcon from "../../../../assets/icons/shieldPlus.svg";
 import pillIcon from "../../../../assets/icons/pill.svg";
@@ -10,6 +11,7 @@ import DataTable from "react-data-table-component";
 import InfoCard from "../../../../components/ui/cards/InfoCard";
 import Heading from "../../../../components/ui/headings/Heading";
 import TextAreaField from "../../../../components/ui/inputs/TextAreaField";
+import VitalsItem from "../../../../components/ui/cards/VitalsItem";
 import { commonTableStyles } from "../../../../components/ui/table/TableStyles";
 import {
   PRESCRIPTION_COLUMNS,
@@ -20,7 +22,11 @@ import UpdatePharmacyModal from "../../../../components/ui/modals/UpdatePharmacy
 import ChatInterface from "./ChatInterface";
 import { useState } from "react";
 
-const VisitNote = () => {
+interface VisitNoteProps {
+  isVisitDetail?: boolean;
+}
+
+const VisitNote = ({ isVisitDetail = false }: VisitNoteProps) => {
   const [isRxModalOpen, setRxModalOpen] = useState(false);
   const [isPharmacyModalOpen, setPharmacyModalOpen] = useState(false);
   const [selectedRx, setSelectedRx] = useState<any>(null);
@@ -41,7 +47,6 @@ const VisitNote = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
-      {/* LEFT AREA: Clinical Documentation */}
       <div className="lg:col-span-8 space-y-8">
         <div className="flex gap-4">
           <InfoCard
@@ -56,6 +61,34 @@ const VisitNote = () => {
           />
         </div>
 
+        {isVisitDetail && (
+          <div className="space-y-6">
+            <div className="bg-white rounded-[15px] p-4 shadow-sm">
+              <p className="text-[#271100] text-[14px]">
+                <span className="font-bold text-[#A3948C] mr-2">Details:</span>I
+                recently hit my head and passed out for a short time—maybe less
+                than half an hour.
+              </p>
+            </div>
+
+            <div className="bg-white  rounded-[15px] p-6 shadow-sm space-y-4">
+              <div className="flex items-center gap-2 text-[#A3948C]">
+                <HiOutlineChartBar size={20} />
+                <span className="font-bold text-[16px]">Vitals</span>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
+                <VitalsItem label="BP:" value="80/120" />
+                <VitalsItem label="Temp:" value="100°F" />
+                <VitalsItem label="Pulse:" value="96" />
+                <VitalsItem label="Height:" value="5'6\" />
+                <VitalsItem label="Weight:" value="134 lbs" />
+                <VitalsItem label="BMI:" value="32.2 lbs" />
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="space-y-3">
           <Heading
             title="User Selected Pharmacy"
@@ -63,19 +96,18 @@ const VisitNote = () => {
             className="font-bold text-[#1A202C]"
           />
           <div className="flex items-center justify-between bg-white border border-[#D4CFCC] rounded-[15px] h-[42px] pl-4 shadow-sm">
-            <span className="text-[#271100] text-[14px] font-medium">
+            <span className="text-[#271100] text-[14px] font-medium truncate pr-4">
               Nob Hill Pharmacy #605, MOORES, SC, 243737, USA
             </span>
             <button
               onClick={() => setPharmacyModalOpen(true)}
-              className="bg-[#705295] text-white px-5 py-2.5 rounded-xl flex items-center gap-2 text-sm font-semibold hover:bg-[#5e447e]"
+              className="bg-[#705295] text-white px-5 py-2.5 rounded-xl flex items-center gap-2 text-sm font-semibold hover:bg-[#5e447e] shrink-0"
             >
               <HiOutlineRefresh size={18} /> Update
             </button>
           </div>
         </div>
 
-        {/* Progress Note using TextAreaField Component */}
         <div className="space-y-3">
           <Heading
             title="Progress Note"
@@ -119,10 +151,8 @@ const VisitNote = () => {
         </div>
       </div>
 
-      {/* RIGHT AREA: Clean Chat Component */}
       <ChatInterface />
 
-      {/* MODALS */}
       <PrescriptionBuilderModal
         isOpen={isRxModalOpen}
         onClose={() => setRxModalOpen(false)}

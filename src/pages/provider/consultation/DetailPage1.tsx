@@ -18,7 +18,7 @@ const DetailPage1: React.FC = () => {
   // Determine the page title based on route
   const getPageTitle = () => {
     if (location.pathname.includes("/new-visits/")) {
-      return "New Visits Details";
+      return "Visits Detail";
     } else if (location.pathname.includes("/all-visits/")) {
       return "All Visits Details";
     } else if (location.pathname.includes("/all-patients/")) {

@@ -106,7 +106,7 @@ function SelectField<T extends FieldValues>({
   required = false,
   className = "",
   placeholder = "Select...",
-  height = "48px",
+  height = "45px",
   disabled = false,
 }: SelectFieldProps<T>) {
   return (

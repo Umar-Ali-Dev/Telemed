@@ -23,20 +23,17 @@ const Pagination = ({
   return (
     <div className="flex items-center justify-between w-full py-4 px-2 select-none mt-1">
       <div className="flex items-center gap-6">
-        {/* Left Arrow Box (35px) */}
         <button
           onClick={() => onChangePage(currentPage - 1)}
           disabled={currentPage === 1}
           className="flex items-center justify-center w-[35px] h-[35px] rounded-lg bg-white border border-gray-100 shadow-sm disabled:opacity-30 transition-all active:scale-95"
         >
-          {/* Dynamic color: black (#271100) when clickable, else muted */}
           <HiArrowLeft
             className={currentPage === 1 ? "text-[#A3948C]" : "text-[#271100]"}
             size={18}
           />
         </button>
 
-        {/* Page Numbers */}
         <div className="flex items-center gap-8">
           {pages.map((p) => (
             <button
@@ -44,7 +41,7 @@ const Pagination = ({
               onClick={() => onChangePage(p)}
               className={`transition-colors outline-none ${
                 currentPage === p
-                  ? "text-[#F76D00] text-[16px] font-semibold"
+                  ? "text-[#705295] text-[16px] font-semibold"
                   : "text-[#271100] text-[12px] font-normal hover:opacity-70"
               }`}
             >
@@ -53,13 +50,11 @@ const Pagination = ({
           ))}
         </div>
 
-        {/* Right Arrow Box (35px) */}
         <button
           onClick={() => onChangePage(currentPage + 1)}
           disabled={currentPage === totalPages}
           className="flex items-center justify-center w-[35px] h-[35px] rounded-lg bg-white border border-gray-100 shadow-sm disabled:opacity-30 transition-all active:scale-95"
         >
-          {/* Dynamic color: black (#271100) when clickable, else muted */}
           <HiArrowRight
             className={
               currentPage === totalPages ? "text-[#A3948C]" : "text-[#271100]"
@@ -68,14 +63,12 @@ const Pagination = ({
           />
         </button>
 
-        {/* Range Text */}
         <span className="text-[#A3948C] text-[12px] font-normal ml-2">
           {limit * (currentPage - 1) + 1} -{" "}
           {Math.min(limit * currentPage, totalRows)} of {totalRows}
         </span>
       </div>
 
-      {/* Rows per page Section */}
       <div className="flex items-center gap-3">
         <span className="text-[#A3948C] text-[14px] font-normal">
           Rows per page

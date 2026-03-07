@@ -16,6 +16,7 @@ interface DatePickerProps {
   dateFormat?: string;
   onChange?: (date: Date | null) => void;
   disablePastDates?: boolean;
+  height?: string;
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -28,9 +29,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
   dateFormat = "MM/dd/yyyy",
   onChange: customOnChange,
   disablePastDates = false,
+  height,
 }) => {
   const isRequired = rules?.required;
   const [isFocused, setIsFocused] = useState(false);
+  const inputHeight = height || "h-[45px]";
 
   return (
     <div className={`flex flex-col gap-2 w-full ${className || ""} text-left`}>
@@ -88,7 +91,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
               showYearDropdown
               scrollableYearDropdown
               className={`
-                w-full h-[48px] rounded-xl bg-white pl-12 pr-4 text-[14px] text-[#271100] outline-none transition-all
+                w-full ${inputHeight} rounded-xl bg-white pl-12 pr-4 text-[14px] text-[#271100] outline-none transition-all
                 border ${error ? "border-red-500" : isFocused ? "border-[#705295]" : "border-[#D4CFCC]"}
               `}
             />

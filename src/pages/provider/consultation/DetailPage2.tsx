@@ -10,10 +10,9 @@ const DetailPage2: React.FC = () => {
   const { id } = useParams();
   const location = useLocation();
 
-  // Determine the page title based on route
   const getPageTitle = () => {
     if (location.pathname.includes("/new-visits/")) {
-      return "New Visits Details";
+      return "Visits Detail";
     } else if (location.pathname.includes("/all-visits/")) {
       return "All Visits Details";
     } else if (location.pathname.includes("/all-patients/")) {
@@ -24,7 +23,6 @@ const DetailPage2: React.FC = () => {
     return "Details";
   };
 
-  // Determine the base path to go back to Page 1
   const getBasePath = () => {
     if (location.pathname.includes("/new-visits/")) {
       return `/provider/new-visits/${id}`;
@@ -38,6 +36,8 @@ const DetailPage2: React.FC = () => {
     return `/provider/new-visits/${id}`;
   };
 
+  const pageTitle = getPageTitle();
+
   return (
     <SectionWrapper className="m-6">
       <div className="flex items-center gap-4 mb-8">
@@ -48,13 +48,13 @@ const DetailPage2: React.FC = () => {
           <FaArrowLeft size={20} />
         </button>
         <Heading
-          title={getPageTitle()}
+          title={pageTitle}
           textSize="text-[24px]"
           className="font-bold text-[#1A202C]"
         />
       </div>
 
-      <VisitNote />
+      <VisitNote isVisitDetail={pageTitle === "Visits Detail"} />
 
       <div className="flex justify-end gap-4 mt-12">
         <Button

@@ -38,7 +38,7 @@ function InputField<T extends FieldValues>({
   disabled = false,
 }: InputFieldProps<T>) {
   const [showPassword, setShowPassword] = useState(false);
-  const inputHeight = height || "h-[48px]";
+  const inputHeight = height || "h-[45px]";
   const isPasswordType = type === "password";
 
   return (

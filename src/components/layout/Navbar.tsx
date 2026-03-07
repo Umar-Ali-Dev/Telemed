@@ -32,29 +32,31 @@ const Navbar: React.FC = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-4 bg-[#EBE5F1] px-4 py-2 rounded-xl">
-          <div className="flex flex-col">
-            <span className="text-[14px] font-bold text-[#705295]">
-              {isAvailable ? "Available" : "Unavailable"}
-            </span>
-            <div className="flex items-center gap-1 text-[11px] text-[#666666]">
-              <LuClock size={12} />
-              <span>Priority Status</span>
+        {isProvider && (
+          <div className="flex items-center gap-4 bg-[#EBE5F1] px-4 py-2 rounded-xl">
+            <div className="flex flex-col">
+              <span className="text-[14px] font-bold text-[#705295]">
+                {isAvailable ? "Available" : "Unavailable"}
+              </span>
+              <div className="flex items-center gap-1 text-[11px] text-[#666666]">
+                <LuClock size={12} />
+                <span>Priority Status</span>
+              </div>
             </div>
-          </div>
-          <button
-            onClick={() => setIsAvailable(!isAvailable)}
-            className={`w-12 h-6 rounded-full p-1 transition-colors duration-200 ease-in-out ${
-              isAvailable ? "bg-[#705295]" : "bg-gray-400"
-            }`}
-          >
-            <div
-              className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-200 ${
-                isAvailable ? "translate-x-6" : "translate-x-0"
+            <button
+              onClick={() => setIsAvailable(!isAvailable)}
+              className={`w-12 h-6 rounded-full p-1 transition-colors duration-200 ease-in-out ${
+                isAvailable ? "bg-[#705295]" : "bg-gray-400"
               }`}
-            />
-          </button>
-        </div>
+            >
+              <div
+                className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-200 ${
+                  isAvailable ? "translate-x-6" : "translate-x-0"
+                }`}
+              />
+            </button>
+          </div>
+        )}
 
         <div className="flex items-center gap-4">
           {/* Highlighted Notification Icon */}
