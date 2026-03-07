@@ -1106,8 +1106,8 @@ export const ADMIN_QUEUE_COLUMNS = (handleAssignClick: (row: any) => void) => [
         row.status?.toLowerCase() === "waiting response";
 
       const getDoctorIconStyle = () => {
-        if (isWaitingResponse) return "brightness-0"; // Black icon
-        if (isWaitingProvider) return "opacity-50 grayscale"; // Grey icon
+        if (isWaitingResponse) return "brightness-0 cursor-not-allowed"; // Black icon
+        if (isWaitingProvider) return ""; // Grey icon
         return " cursor-not-allowed"; // Disabled look
       };
 
