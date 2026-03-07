@@ -40,7 +40,6 @@ const DetailPage2: React.FC = () => {
 
   return (
     <SectionWrapper className="m-6">
-      {/* Header with Back Button */}
       <div className="flex items-center gap-4 mb-8">
         <button
           onClick={() => navigate(-1)}
@@ -55,10 +54,8 @@ const DetailPage2: React.FC = () => {
         />
       </div>
 
-      {/* Visit Note - includes Condition & Symptoms, Medications Needed, Vitals, Pharmacy, Progress Note, Prescriptions, and Chat */}
       <VisitNote />
 
-      {/* Footer Buttons */}
       <div className="flex justify-end gap-4 mt-12">
         <Button
           label="Back"
@@ -68,11 +65,7 @@ const DetailPage2: React.FC = () => {
           className="hover:bg-gray-50 !font-bold"
           onClick={() => navigate(getBasePath())}
         />
-        <Button
-          label="Next"
-          width="w-[120px]"
-          bgColor="bg-[#705295]"
-        />
+        <Button label="Next" width="w-[120px]" bgColor="bg-[#705295]" />
       </div>
     </SectionWrapper>
   );

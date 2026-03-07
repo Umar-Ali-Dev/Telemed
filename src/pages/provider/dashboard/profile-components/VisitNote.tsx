@@ -62,7 +62,7 @@ const VisitNote = () => {
             textSize="text-[16px]"
             className="font-bold text-[#1A202C]"
           />
-          <div className="flex items-center justify-between bg-white border border-[#D4CFCC] rounded-[15px] p-1.5 pl-4 shadow-sm">
+          <div className="flex items-center justify-between bg-white border border-[#D4CFCC] rounded-[15px] h-[42px] pl-4 shadow-sm">
             <span className="text-[#271100] text-[14px] font-medium">
               Nob Hill Pharmacy #605, MOORES, SC, 243737, USA
             </span>
@@ -91,7 +91,7 @@ const VisitNote = () => {
           />
         </div>
 
-        <div className="bg-[#D4CFCC] rounded-[15px] overflow-hidden shadow-sm p-4">
+        <div className="bg-white border border-[#D4CFCC] rounded-[15px] overflow-hidden shadow-sm p-4">
           <div className="flex justify-between items-center pb-4">
             <div className="flex items-center gap-2">
               <HiOutlineDocumentText className="text-[#271100]" size={22} />

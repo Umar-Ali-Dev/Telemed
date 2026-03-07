@@ -67,48 +67,48 @@ const DetailPage1: React.FC = () => {
             Personal Information
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-            <ProfileCard label="First Name" value={DUMMY_PATIENT_DATA.firstName} />
-            <ProfileCard label="Last Name" value={DUMMY_PATIENT_DATA.lastName} />
-            <ProfileCard label="Email Address" value={DUMMY_PATIENT_DATA.email} />
+            <ProfileCard
+              label="First Name"
+              value={DUMMY_PATIENT_DATA.firstName}
+            />
+            <ProfileCard
+              label="Last Name"
+              value={DUMMY_PATIENT_DATA.lastName}
+            />
+            <ProfileCard
+              label="Email Address"
+              value={DUMMY_PATIENT_DATA.email}
+            />
             <ProfileCard label="Date Of Birth" value={DUMMY_PATIENT_DATA.dob} />
-            <ProfileCard label="Vitals" value={`Weight: 130lbs | Height: 5'6" | BMI: 23.0`} />
+            <ProfileCard
+              label="Vitals"
+              value={`Weight: 130lbs | Height: 5'6" | BMI: 23.0`}
+            />
           </div>
         </section>
 
-        {/* Patient Health Information */}
+        {/* Patient Health Information - Grid Layout */}
         <section>
           <h3 className="text-[20px] font-bold text-[#1A202C] mb-6">
             Patient Health Information
           </h3>
-          <div className="space-y-4">
-            <div className="bg-white border border-[#D4CFCC] rounded-[15px] p-4 shadow-sm">
-              <span className="text-[14px] font-medium text-[#1A202C]">Past Medical Problems: </span>
-              <span className="text-[14px] text-[#A3948C]">Asthma.</span>
-            </div>
-            <div className="bg-white border border-[#D4CFCC] rounded-[15px] p-4 shadow-sm">
-              <span className="text-[14px] font-medium text-[#1A202C]">Current Medications: </span>
-              <span className="text-[14px] text-[#A3948C]">
-                {MEDICATION_DUMMY_DATA[0]?.name || "Zoloft"}.
-              </span>
-            </div>
-            <div className="bg-white border border-[#D4CFCC] rounded-[15px] p-4 shadow-sm">
-              <span className="text-[14px] font-medium text-[#1A202C]">Any Known Allergies: </span>
-              <span className="text-[14px] text-[#A3948C]">
-                Yes, Pollen allergy, Mold allergy, Seasonal allergy
-              </span>
-            </div>
-            <div className="bg-white border border-[#D4CFCC] rounded-[15px] p-4 shadow-sm">
-              <span className="text-[14px] font-medium text-[#1A202C]">
-                Are you currently pregnant OR planning to become pregnant?:{" "}
-              </span>
-              <span className="text-[14px] text-[#A3948C]">Yes</span>
-            </div>
-            <div className="bg-white border border-[#D4CFCC] rounded-[15px] p-4 shadow-sm">
-              <span className="text-[14px] font-medium text-[#1A202C]">
-                Are you currently breastfeeding?:{" "}
-              </span>
-              <span className="text-[14px] text-[#A3948C]">Yes</span>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+            <ProfileCard label="Past Medical Problems" value="Asthma." />
+            <ProfileCard
+              label="Current Medications"
+              value={MEDICATION_DUMMY_DATA[0]?.name || "Zoloft."}
+            />
+            <ProfileCard
+              label="Any Known Allergies"
+              value="Yes, Pollen allergy, Mold allergy, Seasonal allergy"
+            />
+            <div className="hidden md:block" />{" "}
+            {/* Spacer for grid alignment */}
+            <ProfileCard
+              label="Are you currently pregnant OR planning to become pregnant?"
+              value="Yes"
+            />
+            <ProfileCard label="Are you currently breastfeeding?" value="Yes" />
           </div>
         </section>
 
