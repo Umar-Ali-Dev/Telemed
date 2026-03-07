@@ -7,7 +7,7 @@ import chatCircleDotsIcon from "../assets/icons/chatCircleDots.svg";
 import unionIcon from "../assets/icons/union.svg";
 import notebookIcon from "../assets/icons/notebook.svg";
 import menuIcon from "../assets/icons/menu.svg";
-import briefcaseMedicalSolidIcon from "../assets/icons/briefcaseMedicalSolid.svg";
+import briefcaseMedicalSolidIcon from "../assets/icons/briefcase-medical-solid.svg";
 import fileWaveformSolidIcon from "../assets/icons/fileWaveformSolid.svg";
 import adminProviderIcon from "../assets/icons/adminProvider.svg";
 import managementIcon from "../assets/icons/management.svg";
