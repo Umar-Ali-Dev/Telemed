@@ -11,36 +11,42 @@ const DetailPage2: React.FC = () => {
   const location = useLocation();
 
   const getPageTitle = () => {
-    if (location.pathname.includes("/new-visits/")) {
-      return "Visits Detail";
-    } else if (location.pathname.includes("/all-visits/")) {
-      return "All Visits Details";
-    } else if (location.pathname.includes("/all-patients/")) {
-      return "Patient Details";
-    } else if (location.pathname.includes("/flagged-patients/")) {
-      return "Flagged Patient Details";
-    }
+    const path = location.pathname;
+    if (path.includes("/new-visits/")) return "Visits Detail";
+    if (path.includes("/all-visits/")) return "All Visits Details";
+    if (path.includes("/all-patients/")) return "Patient Details";
+    if (path.includes("/flagged-patients/")) return "Flagged Patient Details";
+    if (path.includes("/admin/consultations/")) return "Consultation Details";
+    if (path.includes("/admin/dashboard/")) return "Queue Request Details";
+
     return "Details";
   };
 
-  const getBasePath = () => {
-    if (location.pathname.includes("/new-visits/")) {
-      return `/provider/new-visits/${id}`;
-    } else if (location.pathname.includes("/all-visits/")) {
-      return `/provider/all-visits/${id}`;
-    } else if (location.pathname.includes("/all-patients/")) {
-      return `/provider/all-patients/${id}`;
-    } else if (location.pathname.includes("/flagged-patients/")) {
-      return `/provider/flagged-patients/${id}`;
-    }
-    return `/provider/new-visits/${id}`;
+  // Logic to determine the parent list view based on the current URL
+  const getMainListPage = () => {
+    const path = location.pathname;
+
+    // Provider Paths
+    if (path.includes("/provider/new-visits/")) return "/provider/new-visits";
+    if (path.includes("/provider/all-visits/")) return "/provider/all-visits";
+    if (path.includes("/provider/all-patients/"))
+      return "/provider/all-patients";
+    if (path.includes("/provider/flagged-patients/"))
+      return "/provider/flagged-patients";
+
+    // Admin Paths
+    if (path.includes("/admin/consultations/")) return "/admin/consultations";
+    if (path.includes("/admin/dashboard/")) return "/admin/dashboard";
+
+    return "/";
   };
 
   const pageTitle = getPageTitle();
+  const mainListPath = getMainListPage();
 
   return (
     <SectionWrapper className="m-6">
-      <div className="flex items-center gap-4 mb-8">
+      <div className="flex items-center gap-4 ">
         <button
           onClick={() => navigate(-1)}
           className="text-[#0A1E25] hover:text-[#705295] transition-colors"
@@ -54,18 +60,29 @@ const DetailPage2: React.FC = () => {
         />
       </div>
 
-      <VisitNote isVisitDetail={pageTitle === "Visits Detail"} />
+      <VisitNote
+        isVisitDetail={
+          pageTitle === "Visits Detail" || pageTitle === "Consultation Details"
+        }
+      />
 
-      <div className="flex justify-end gap-4 mt-12">
+      <div className="flex justify-end gap-4 ">
         <Button
           label="Back"
           width="w-[120px]"
           bgColor="bg-transparent"
           textColor="text-[#A3948C]"
           className="hover:bg-gray-50 !font-bold"
-          onClick={() => navigate(getBasePath())}
+          // Takes user back to the parent list
+          onClick={() => navigate(mainListPath)}
         />
-        <Button label="Next" width="w-[120px]" bgColor="bg-[#705295]" />
+        <Button
+          label="Next"
+          width="w-[120px]"
+          bgColor="bg-[#705295]"
+          // Now correctly redirects to the main list (e.g., /provider/all-patients)
+          onClick={() => navigate(mainListPath)}
+        />
       </div>
     </SectionWrapper>
   );

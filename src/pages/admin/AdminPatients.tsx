@@ -40,7 +40,7 @@ const AdminPatients: React.FC = () => {
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
   const handleRowClick = (row: any) => {
-    navigate(`/admin/provider-profile/${row.id}`);
+    // navigate(`/admin/provider-profile/${row.id}`);
   };
   return (
     <SectionWrapper className="m-6">

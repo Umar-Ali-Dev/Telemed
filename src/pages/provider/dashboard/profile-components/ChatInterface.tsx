@@ -15,7 +15,6 @@ const ChatInterface = () => {
 
   return (
     <div className="lg:col-span-4 h-full min-h-[650px] flex flex-col bg-white border border-gray-100 rounded-[15px] shadow-sm overflow-hidden">
-      {/* Header Section */}
       <div className="p-4 border-b border-gray-100 flex items-center gap-3">
         <div className="relative">
           <img
@@ -31,13 +30,11 @@ const ChatInterface = () => {
         </div>
       </div>
 
-      {/* Message History */}
       <div className="flex-1 p-4 space-y-6 overflow-y-auto bg-white no-scrollbar">
         <p className="text-center text-[#A3948C] text-[12px]">
           Sat May 10, 2025.
         </p>
 
-        {/* Attachment Card Message */}
         <div className="flex flex-col gap-1 items-start">
           <div className="bg-[#F9F9F9] p-2 rounded-[15px] border border-gray-100 shadow-sm max-w-[210px]">
             <div className="rounded-[12px] overflow-hidden mb-2 h-[80px]">
@@ -55,7 +52,6 @@ const ChatInterface = () => {
         </div>
       </div>
 
-      {/* Chat Input using your InputField component */}
       <form onSubmit={handleSubmit(onSendMessage)} className="p-4 bg-white">
         <div className="relative flex items-center gap-2 px-2 bg-white rounded-[20px]">
           <InputField
@@ -68,8 +64,7 @@ const ChatInterface = () => {
             height="h-[52px]" // Adjusted to match the rounded-20px look
           />
 
-          {/* Absolute positioned actions to match UI */}
-          <div className="absolute right-4 top-[10px] flex items-center gap-2">
+          <div className="absolute right-4 top-[17px] flex items-center gap-2">
             <button type="button" className="text-gray-400 hover:text-gray-600">
               <HiOutlinePaperClip size={20} />
             </button>

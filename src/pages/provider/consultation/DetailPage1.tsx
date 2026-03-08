@@ -15,33 +15,38 @@ const DetailPage1: React.FC = () => {
   const { id } = useParams();
   const location = useLocation();
 
-  // Determine the page title based on route
   const getPageTitle = () => {
-    if (location.pathname.includes("/new-visits/")) {
-      return "Visits Detail";
-    } else if (location.pathname.includes("/all-visits/")) {
-      return "All Visits Details";
-    } else if (location.pathname.includes("/all-patients/")) {
-      return "Patient Details";
-    } else if (location.pathname.includes("/flagged-patients/")) {
+    if (location.pathname.includes("/new-visits/")) return "Visits Detail";
+    if (location.pathname.includes("/all-visits/")) return "All Visits Details";
+    if (location.pathname.includes("/all-patients/")) return "Patient Details";
+    if (location.pathname.includes("/flagged-patients/"))
       return "Flagged Patient Details";
-    }
+    // Admin specific titles
+    if (location.pathname.includes("/admin/consultations/"))
+      return "Consultation Details";
+    if (location.pathname.includes("/admin/dashboard/"))
+      return "Queue Request Details";
+
     return "Details";
   };
 
-  // Determine the base path to navigate to Page 2
   const getNextPath = () => {
-    if (location.pathname.includes("/new-visits/")) {
-      return `/provider/new-visits/${id}/details`;
-    } else if (location.pathname.includes("/all-visits/")) {
-      return `/provider/all-visits/${id}/details`;
-    } else if (location.pathname.includes("/all-patients/")) {
-      return `/provider/all-patients/${id}/details`;
-    } else if (location.pathname.includes("/flagged-patients/")) {
-      return `/provider/flagged-patients/${id}/details`;
-    }
-    return `/provider/new-visits/${id}/details`;
+    const currentPath = location.pathname;
+    return `${currentPath}/details`;
   };
+
+  // const getNextPath = () => {
+  //   if (location.pathname.includes("/new-visits/")) {
+  //     return `/provider/new-visits/${id}/details`;
+  //   } else if (location.pathname.includes("/all-visits/")) {
+  //     return `/provider/all-visits/${id}/details`;
+  //   } else if (location.pathname.includes("/all-patients/")) {
+  //     return `/provider/all-patients/${id}/details`;
+  //   } else if (location.pathname.includes("/flagged-patients/")) {
+  //     return `/provider/flagged-patients/${id}/details`;
+  //   }
+  //   return `/provider/new-visits/${id}/details`;
+  // };
 
   return (
     <SectionWrapper className="m-6">

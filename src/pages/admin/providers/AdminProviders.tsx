@@ -15,7 +15,9 @@ import {
 const AdminProviders: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const [providerToggleStates, setProviderToggleStates] = useState<Record<number, string>>({});
+  const [providerToggleStates, setProviderToggleStates] = useState<
+    Record<number, string>
+  >({});
 
   // Handlers passed to the column definition
   const handleEdit = (id: any) => navigate(`/admin/providers/edit/${id}`);
@@ -57,17 +59,21 @@ const AdminProviders: React.FC = () => {
             <Button
               label="Add New Provider"
               onClick={() => navigate("/admin/providers/add")}
-              bgColor="bg-[#F2EFFF]"
+              bgColor="bg-[#E2D8E3]"
               textColor="text-[#705295]"
               width="w-full sm:w-auto"
-              className="px-6 font-bold border-none"
+              className="px-6 border border-[#9B86B5] font-semibold hover:bg-[#d6cbd7] transition-all rounded-[10px]"
             />
           </div>
         </div>
 
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={ADMIN_PROVIDER_COLUMNS(handleEdit, handleViewProfile, handleStatusChange)}
+            columns={ADMIN_PROVIDER_COLUMNS(
+              handleEdit,
+              handleViewProfile,
+              handleStatusChange,
+            )}
             data={filteredData}
             customStyles={commonTableStyles}
             responsive

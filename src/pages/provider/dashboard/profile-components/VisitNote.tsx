@@ -46,8 +46,8 @@ const VisitNote = ({ isVisitDetail = false }: VisitNoteProps) => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
-      <div className="lg:col-span-8 space-y-8">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-2">
+      <div className="lg:col-span-8 space-y-5">
         <div className="flex gap-4">
           <InfoCard
             icon={<img src={shieldPlusIcon} alt="Shield" className="w-5 h-5" />}
@@ -89,7 +89,7 @@ const VisitNote = ({ isVisitDetail = false }: VisitNoteProps) => {
           </div>
         )}
 
-        <div className="space-y-3">
+        <div className="space-y-1">
           <Heading
             title="User Selected Pharmacy"
             textSize="text-[16px]"
@@ -108,11 +108,11 @@ const VisitNote = ({ isVisitDetail = false }: VisitNoteProps) => {
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="">
           <Heading
             title="Progress Note"
             textSize="text-[16px]"
-            className="font-bold text-[#1A202C]"
+            className="font-bold text-[#1A202C] "
           />
           <TextAreaField
             label=""

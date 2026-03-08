@@ -65,7 +65,7 @@ const AdminProviderProfile = () => {
 
       <div className="min-h-[400px] mt-8">{renderContent()}</div>
 
-      <div className="flex justify-end gap-4 mt-12 border-t pt-8">
+      <div className="flex justify-end gap-4 mt-12  pt-8">
         <Button
           label="Back"
           width="w-[120px]"

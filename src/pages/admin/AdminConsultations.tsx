@@ -8,14 +8,18 @@ import SelectField from "../../components/ui/inputs/SelectField";
 import Pagination from "../../components/ui/table/Pagination";
 import { commonTableStyles } from "../../components/ui/table/TableStyles";
 import {
-  ADMIN_CONSULTATION_COLUMNS,
+  ADMIN_QUEUE_COLUMNS, // Using the unified column array
   ADMIN_DASHBOARD_DATA,
 } from "../../constants/commonData";
 import { useNavigate } from "react-router-dom";
+import AssignProviderModal from "../../components/ui/modals/AssignProviderModal";
 
 const AdminConsultations: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState(null);
+
   const { control } = useForm({
     defaultValues: {
       requestFilter: "all",
@@ -28,15 +32,19 @@ const AdminConsultations: React.FC = () => {
     { label: "Completed", value: "completed" },
   ];
 
-  const filteredData = ADMIN_DASHBOARD_DATA.filter((item: any) =>
-    item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-  // const handleRowClick = (row: any) => {
-  //   navigate(`/admin/patient/${row.id}?showProviderInfo=true`);
-  // };
+  const handleAssignClick = (row: any) => {
+    setSelectedRequest(row);
+    setIsModalOpen(true);
+  };
+
   const handleViewDetails = (row: any) => {
     navigate(`/admin/consultations/${row.id}`);
   };
+
+  const filteredData = ADMIN_DASHBOARD_DATA.filter((item: any) =>
+    item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   return (
     <SectionWrapper className="m-6">
       <div className="space-y-6">
@@ -65,7 +73,7 @@ const AdminConsultations: React.FC = () => {
 
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={ADMIN_CONSULTATION_COLUMNS(handleViewDetails)}
+            columns={ADMIN_QUEUE_COLUMNS(handleAssignClick, handleViewDetails)}
             data={filteredData}
             customStyles={commonTableStyles}
             responsive
@@ -74,6 +82,12 @@ const AdminConsultations: React.FC = () => {
             pointerOnHover
           />
         </div>
+
+        <AssignProviderModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onAssign={(provider: any) => console.log(provider, selectedRequest)}
+        />
 
         <Pagination
           totalRows={filteredData.length > 0 ? 995 : 0}

@@ -177,7 +177,7 @@ export const ADMIN_DASHBOARD_DATA = [
     email: "s.jenkins@outlook.com",
     phone: "(415) 555 0123",
     provider: "Dr. Alina Star",
-    status: "Waiting Response",
+    status: "Provider Respond",
     updatedAt: "02/12/2026",
   },
   {
@@ -186,7 +186,7 @@ export const ADMIN_DASHBOARD_DATA = [
     email: "mchen88@gmail.com",
     phone: "(212) 555 9876",
     provider: "Dr. Marcus Thorne",
-    status: "Scheduled",
+    status: "Completed",
     updatedAt: "02/14/2026",
   },
   {
@@ -194,8 +194,8 @@ export const ADMIN_DASHBOARD_DATA = [
     name: "Elena Rodriguez",
     email: "elena.r@healthmail.com",
     phone: "(305) 555 4433",
-    provider: "----",
-    status: "Waiting provider",
+    provider: "Dr. Sarah Miller",
+    status: "Resend Prescription",
     updatedAt: "02/15/2026",
   },
   {
@@ -204,7 +204,7 @@ export const ADMIN_DASHBOARD_DATA = [
     email: "dwilson@techcorp.com",
     phone: "(617) 555 2211",
     provider: "Dr. Alina Star",
-    status: "Waiting Response",
+    status: "Prescription Sent",
     updatedAt: "02/15/2026",
   },
   {
@@ -212,8 +212,8 @@ export const ADMIN_DASHBOARD_DATA = [
     name: "Amanda Brooks",
     email: "abrooks@gmail.com",
     phone: "(512) 555 8899",
-    provider: "Dr. Sarah Miller",
-    status: "Completed",
+    provider: "Dr. James Lee",
+    status: "Prescription Failed",
     updatedAt: "02/16/2026",
   },
   {
@@ -230,8 +230,8 @@ export const ADMIN_DASHBOARD_DATA = [
     name: "Lisa Thompson",
     email: "lisa.t@icloud.com",
     phone: "(206) 555 3344",
-    provider: "Dr. Alina Star",
-    status: "Waiting Response",
+    provider: "Dr. Robert Fox",
+    status: "Completed",
     updatedAt: "02/18/2026",
   },
   {
@@ -239,8 +239,8 @@ export const ADMIN_DASHBOARD_DATA = [
     name: "Kevin Adams",
     email: "kadams@gmail.com",
     phone: "(404) 555 5500",
-    provider: "Dr. James Lee",
-    status: "In Progress",
+    provider: "Dr. Emily Blunt",
+    status: "Provider Respond",
     updatedAt: "02/18/2026",
   },
   {
@@ -258,7 +258,7 @@ export const ADMIN_DASHBOARD_DATA = [
     email: "j.anderson@yahoo.com",
     phone: "(312) 555 4455",
     provider: "Dr. Alina Star",
-    status: "Waiting Response",
+    status: "Prescription Sent",
     updatedAt: "02/19/2026",
   },
   {
@@ -266,7 +266,7 @@ export const ADMIN_DASHBOARD_DATA = [
     name: "Rachel Moore",
     email: "rachel.m@webmail.com",
     phone: "(215) 555 6677",
-    provider: "Dr. Robert Fox",
+    provider: "Dr. Marcus Thorne",
     status: "Completed",
     updatedAt: "02/20/2026",
   },
@@ -275,8 +275,8 @@ export const ADMIN_DASHBOARD_DATA = [
     name: "Brian White",
     email: "brian.white@gmail.com",
     phone: "(602) 555 8800",
-    provider: "----",
-    status: "Waiting provider",
+    provider: "Dr. Sarah Miller",
+    status: "Resend Prescription",
     updatedAt: "02/20/2026",
   },
   {
@@ -284,8 +284,8 @@ export const ADMIN_DASHBOARD_DATA = [
     name: "Michelle King",
     email: "m.king@outlook.com",
     phone: "(503) 555 9911",
-    provider: "Dr. Alina Star",
-    status: "Waiting Response",
+    provider: "Dr. James Lee",
+    status: "Prescription Failed",
     updatedAt: "02/20/2026",
   },
   {
@@ -293,8 +293,8 @@ export const ADMIN_DASHBOARD_DATA = [
     name: "Jason Scott",
     email: "jason.scott@gmail.com",
     phone: "(415) 555 0099",
-    provider: "Dr. Emily Blunt",
-    status: "Scheduled",
+    provider: "----",
+    status: "Waiting provider",
     updatedAt: "02/20/2026",
   },
 ];
@@ -1115,15 +1115,8 @@ export const ADMIN_QUEUE_COLUMNS = (
       <span className="font-medium text-[#271100]">{row.name}</span>
     ),
   },
-  {
-    name: "Email",
-    selector: (row: any) => row.email,
-    sortable: true,
-  },
-  {
-    name: "Phone",
-    selector: (row: any) => row.phone,
-  },
+  { name: "Email", selector: (row: any) => row.email, sortable: true },
+  { name: "Phone", selector: (row: any) => row.phone },
   {
     name: "Provider",
     selector: (row: any) => row.provider || "----",
@@ -1138,14 +1131,15 @@ export const ADMIN_QUEUE_COLUMNS = (
     sortable: true,
     cell: (row: any) => {
       const getStatusColor = (status: string) => {
-        switch (status?.toLowerCase()) {
-          case "waiting provider":
-            return "text-[#F76D00]";
-          case "waiting response":
-            return "text-[#FFC107]";
-          default:
-            return "text-[#F76D00]";
-        }
+        const s = status?.toLowerCase();
+        if (s === "waiting provider") return "text-[#F76D00]";
+        if (s === "provider respond" || s === "waiting response")
+          return "text-[#0096FF]";
+        if (s === "completed") return "text-[#34C759]";
+        if (s === "resend prescription") return "text-[#A3948C]";
+        if (s === "prescription sent") return "text-[#D156F3]";
+        if (s === "prescription failed") return "text-[#FF3B30]";
+        return "text-[#F76D00]";
       };
       return (
         <span className={`font-semibold ${getStatusColor(row.status)}`}>
@@ -1160,26 +1154,20 @@ export const ADMIN_QUEUE_COLUMNS = (
     cell: (row: any) => {
       const isWaitingProvider =
         row.status?.toLowerCase() === "waiting provider";
-      const isWaitingResponse =
-        row.status?.toLowerCase() === "waiting response";
 
       const getDoctorIconStyle = () => {
-        if (isWaitingResponse) return "brightness-0 cursor-not-allowed";
-        if (isWaitingProvider) return "";
-        return " cursor-not-allowed";
+        if (isWaitingProvider) return "brightness-0 opacity-100";
+        return " grayscale";
       };
 
       return (
         <div className="flex items-center gap-3">
           <button
-            className={`transition-all ${isWaitingProvider ? "hover:opacity-100 cursor-pointer" : ""}`}
+            className="transition-all cursor-pointer hover:opacity-70"
             onClick={(e) => {
               e.stopPropagation();
-              if (isWaitingProvider) {
-                handleAssignClick(row);
-              }
+              handleAssignClick(row);
             }}
-            disabled={!isWaitingProvider}
           >
             <img
               src={userDoctorIcon}
@@ -1188,7 +1176,7 @@ export const ADMIN_QUEUE_COLUMNS = (
             />
           </button>
           <button
-            className="hover:opacity-80 transition-opacity"
+            className="hover:opacity-70 transition-opacity cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               handleViewDetails(row);
@@ -1205,7 +1193,6 @@ export const ADMIN_QUEUE_COLUMNS = (
     },
   },
 ];
-
 export const ADMIN_CONSULTATION_COLUMNS = (
   handleViewDetails: (row: any) => void,
 ) => [
@@ -1340,7 +1327,7 @@ export const ADMIN_PATIENT_COLUMNS = (
       const colors: any = {
         Active: "text-[#34C759]",
         Inactive: "text-[#FF3B30]",
-        Flagged: "text-[#FFCC00]",
+        Flagged: "text-[#FFCC00]", // Matches Flagged status color
       };
       return (
         <span
@@ -1432,7 +1419,11 @@ export const ADMIN_PATIENT_COLUMNS = (
               {
                 label: "Flag",
                 icon: <HiOutlineFlag size={18} />,
-                onClick: () => onFlag(row.id),
+                onClick: () => {
+                  // Triggers both the custom flag logic and the status update to yellow
+                  onFlag(row.id);
+                  onStatusChange(row.id, "Flagged");
+                },
               },
             ]}
           />
@@ -1457,29 +1448,33 @@ export const ADMIN_PROVIDER_COLUMNS = (
         className="cursor-pointer hover:text-[#705295] font-medium"
         onClick={() => handleViewProfile(row.id)}
       >
-        {row.name}
+        <TruncatedCell content={row.name} />
       </span>
     ),
   },
-  { name: "Email", selector: (row: any) => row.email, sortable: true },
+  {
+    name: "Email",
+    selector: (row: any) => row.email,
+    sortable: true,
+    cell: (row: any) => <TruncatedCell content={row.email} />,
+  },
   { name: "Phone", selector: (row: any) => row.phone },
   {
     name: "Education",
-    selector: (row: any) => row.education || "MBBS, BDS", // Matches design
+    selector: (row: any) => row.education || "MBBS, BDS",
   },
   {
     name: "Patient Attended",
-    selector: (row: any) => row.attended || "256", // Matches design
+    selector: (row: any) => row.attended || "256",
   },
   {
     name: "Status",
     cell: (row: any) => {
-      // Use toggleStatus if available, otherwise default to Active
       const displayStatus = row.toggleStatus || "Active";
       const colors: any = {
-        Active: "text-[#34C759]",
-        Inactive: "text-[#FF3B30]",
-        Flagged: "text-[#FFCC00]",
+        Active: "text-[#34C759]", // Green
+        Inactive: "text-[#FF3B30]", // Red
+        Paused: "text-[#FFC107]", // Amber/Yellow
       };
       return (
         <span
@@ -1493,61 +1488,34 @@ export const ADMIN_PROVIDER_COLUMNS = (
   {
     name: "Action",
     cell: (row: any) => {
-      // Map current status to toggle state
       const toggleStatus = row.toggleStatus || "Active";
-
-      const getToggleColor = () => {
-        switch (toggleStatus) {
-          case "Active":
-            return "bg-[#34C759]";
-          case "Inactive":
-            return "bg-[#FF3B30]";
-          case "Flagged":
-            return "bg-[#FFCC00]";
-          default:
-            return "bg-[#34C759]";
-        }
-      };
-
-      const getTogglePosition = () => {
-        switch (toggleStatus) {
-          case "Active":
-            return "translate-x-[16px]"; // Right position
-          case "Inactive":
-            return "translate-x-0"; // Left position
-          case "Flagged":
-            return "translate-x-[8px]"; // Middle position
-          default:
-            return "translate-x-[16px]";
-        }
-      };
 
       const handleToggleClick = (e: React.MouseEvent) => {
         e.stopPropagation();
         if (onStatusChange) {
-          // Cycle through toggle states: Active -> Inactive -> Flagged -> Active
-          const statusCycle = ["Active", "Inactive", "Flagged"];
-          const currentIndex = statusCycle.indexOf(toggleStatus);
-          const nextIndex = (currentIndex + 1) % statusCycle.length;
-          onStatusChange(row.id, statusCycle[nextIndex]);
+          const nextStatus = toggleStatus === "Active" ? "Inactive" : "Active";
+          onStatusChange(row.id, nextStatus);
         }
       };
 
       return (
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            {/* Functional Toggle */}
             <button
               onClick={handleToggleClick}
-              className={`w-8 h-4 ${getToggleColor()} rounded-full relative cursor-pointer transition-colors focus:outline-none`}
+              className={`w-9 h-5 rounded-full relative cursor-pointer transition-colors focus:outline-none ${
+                toggleStatus === "Active" ? "bg-[#34C759]" : "bg-[#D4CFCC]"
+              }`}
             >
               <div
-                className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full shadow-sm transition-transform duration-200 ease-in-out ${getTogglePosition()}`}
+                className={`absolute top-1 left-1 w-3 h-3 bg-white rounded-full shadow-sm transition-transform duration-200 ease-in-out ${
+                  toggleStatus === "Active" ? "translate-x-4" : "translate-x-0"
+                }`}
               />
             </button>
-            {/* Separator */}
+
             <span className="text-[#A3948C] mx-1">/</span>
-            {/* Document Icon */}
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -1557,13 +1525,13 @@ export const ADMIN_PROVIDER_COLUMNS = (
               <img
                 src={fileTextIcon}
                 alt="Document"
-                className="w-6 h-6 cursor-pointer object-contain"
+                className="w-6 h-6 cursor-pointer object-contain hover:opacity-70 transition-opacity"
               />
             </button>
-            {/* Separator */}
+
             <span className="text-[#A3948C] mx-1">/</span>
           </div>
-          {/* Reusable ActionMenu with Provider actions */}
+
           <ActionMenu
             items={[
               {
@@ -1574,7 +1542,9 @@ export const ADMIN_PROVIDER_COLUMNS = (
               {
                 label: "Paused",
                 icon: <LuPause size={16} />,
-                onClick: () => console.log("Paused", row.id),
+                // Trigger the status change to "Paused"
+                onClick: () =>
+                  onStatusChange && onStatusChange(row.id, "Paused"),
               },
               {
                 label: "Visits",
@@ -1588,7 +1558,6 @@ export const ADMIN_PROVIDER_COLUMNS = (
     },
   },
 ];
-
 export const PROVIDER_REQUESTS_COLUMNS = (
   handleViewRequest: (id: any) => void,
 ) => [
