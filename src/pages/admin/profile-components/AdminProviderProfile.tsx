@@ -8,6 +8,7 @@ import ProviderPersonal from "./ProviderPersonal";
 import ProviderSpeciality from "./ProviderSpeciality";
 import ProviderEducation from "./ProviderEducation";
 import ProviderExperience from "./ProviderExperience";
+import ProviderLicense from "./ProviderLicense"; // Import the new component
 import ActivityLogs from "./ActivityLogs";
 
 const AdminProviderProfile = () => {
@@ -17,7 +18,14 @@ const AdminProviderProfile = () => {
   const isRequestMode = queryParams.get("isRequest") === "true";
 
   const tabs = useMemo(() => {
-    const baseTabs = ["Personal Info", "Speciality", "Education", "Experience"];
+    // Added "License" after "Experience"
+    const baseTabs = [
+      "Personal Info",
+      "Speciality",
+      "Education",
+      "Experience",
+      "License",
+    ];
     return isRequestMode ? baseTabs : [...baseTabs, "Activity Logs"];
   }, [isRequestMode]);
 
@@ -33,6 +41,8 @@ const AdminProviderProfile = () => {
         return <ProviderEducation />;
       case "Experience":
         return <ProviderExperience />;
+      case "License": // New case for the License component
+        return <ProviderLicense />;
       case "Activity Logs":
         return <ActivityLogs />;
       default:
@@ -65,7 +75,7 @@ const AdminProviderProfile = () => {
 
       <div className="min-h-[400px] mt-8">{renderContent()}</div>
 
-      <div className="flex justify-end gap-4 mt-12  pt-8">
+      <div className="flex justify-end gap-4 mt-12 pt-8">
         <Button
           label="Back"
           width="w-[120px]"
