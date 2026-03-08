@@ -8,7 +8,7 @@ import Pagination from "../../../components/ui/table/Pagination";
 import { commonTableStyles } from "../../../components/ui/table/TableStyles";
 import {
   PROVIDER_REQUESTS_COLUMNS,
-  ADMIN_DASHBOARD_DATA, // Replace with actual request data if available
+  ADMIN_PROVIDER_REQUEST_DATA, // Replace with actual request data if available
 } from "../../../constants/commonData";
 
 const ProviderRequests: React.FC = () => {
@@ -19,7 +19,7 @@ const ProviderRequests: React.FC = () => {
     navigate(`/admin/providers/requests/${id}`);
   };
 
-  const filteredData = ADMIN_DASHBOARD_DATA.filter((item: any) =>
+  const filteredData = ADMIN_PROVIDER_REQUEST_DATA.filter((item: any) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
