@@ -56,7 +56,7 @@ const SingleProviderRequestDetail = () => {
             control={control}
             type="text"
             placeholder="Enter first name"
-            required
+            disabled={true}
           />
           <InputField
             label="Last name"
@@ -64,7 +64,7 @@ const SingleProviderRequestDetail = () => {
             control={control}
             type="text"
             placeholder="Enter last name"
-            required
+            disabled={true}
           />
 
           <div className="md:col-span-2">
@@ -74,7 +74,7 @@ const SingleProviderRequestDetail = () => {
               control={control}
               type="email"
               placeholder="e.g. abc_john@email.com"
-              required
+              disabled={true}
             />
           </div>
 
@@ -84,6 +84,7 @@ const SingleProviderRequestDetail = () => {
             control={control}
             type="tel"
             placeholder="(000) 000 0000"
+            disabled={true}
           />
           <InputField
             label="NPI Number"
@@ -91,6 +92,7 @@ const SingleProviderRequestDetail = () => {
             control={control}
             type="text"
             placeholder="Enter NPI Number"
+            disabled={true}
           />
 
           <div className="md:col-span-2">
@@ -100,6 +102,7 @@ const SingleProviderRequestDetail = () => {
               control={control}
               options={[{ label: "MD", value: "md" }]}
               placeholder="Select Credentials"
+              disabled={true}
             />
           </div>
 
@@ -110,6 +113,7 @@ const SingleProviderRequestDetail = () => {
               control={control}
               type="text"
               placeholder="*************"
+              disabled={true}
             />
           </div>
 
@@ -119,6 +123,7 @@ const SingleProviderRequestDetail = () => {
             control={control}
             type="text"
             placeholder="MM/DD/YYYY"
+            disabled={true}
           />
           <InputField
             label="License State"
@@ -126,6 +131,7 @@ const SingleProviderRequestDetail = () => {
             control={control}
             type="text"
             placeholder="e.g. AL"
+            disabled={true}
           />
 
           <div className="md:col-span-2">
@@ -135,6 +141,7 @@ const SingleProviderRequestDetail = () => {
               control={control}
               type="text"
               placeholder="72 Caisson Trace,"
+              disabled={true}
             />
           </div>
 
@@ -144,6 +151,7 @@ const SingleProviderRequestDetail = () => {
             control={control}
             type="text"
             placeholder="Spanish Fort"
+            disabled={true}
           />
           <InputField
             label="State"
@@ -151,6 +159,7 @@ const SingleProviderRequestDetail = () => {
             control={control}
             type="text"
             placeholder="AL"
+            disabled={true}
           />
           <InputField
             label="Zip Code"
@@ -158,6 +167,7 @@ const SingleProviderRequestDetail = () => {
             control={control}
             type="text"
             placeholder="********"
+            disabled={true}
           />
 
           <div className="md:col-span-2">
@@ -167,6 +177,7 @@ const SingleProviderRequestDetail = () => {
               control={control}
               type="text"
               placeholder="Enter Practice Address"
+              disabled={true}
             />
           </div>
         </div>

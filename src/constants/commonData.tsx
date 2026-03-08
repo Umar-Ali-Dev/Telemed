@@ -1569,7 +1569,6 @@ export const PROVIDER_REQUESTS_COLUMNS = (
   { name: "Email", selector: (row: any) => row.email, sortable: true },
   { name: "Phone", selector: (row: any) => row.phone },
   { name: "Education", selector: (row: any) => row.education || "MBBS, BDS" },
-  { name: "Patient Attended", selector: (row: any) => row.attended || "256" },
   {
     name: "Status",
     cell: (row: any) => {

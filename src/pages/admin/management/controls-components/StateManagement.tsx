@@ -1,4 +1,7 @@
+import { useState } from "react";
+import SearchInput from "../../../../components/ui/inputs/SearchInput";
 import Pagination from "../../../../components/ui/table/Pagination";
+import Heading from "../../../../components/ui/headings/Heading";
 
 const StateManagement = () => {
   const states = [
@@ -14,28 +17,45 @@ const StateManagement = () => {
     { name: "Georgia", active: true },
     { name: "Hawaii", active: true },
   ];
-
+  const [searchQuery, setSearchQuery] = useState("");
   return (
     <div className="space-y-6">
-      <div className="space-y-3">
-        {states.map((state, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between p-4 bg-white border border-[#D4CFCC] rounded-2xl hover:border-[#705295] transition-all group"
-          >
-            <span className="text-[14px] font-bold text-[#0A1E25]">
-              {state.name}
-            </span>
-            <button
-              type="button"
-              className={`w-10 h-5 rounded-full relative transition-colors duration-200 ${state.active ? "bg-[#34C759]" : "bg-[#717171]"}`}
+      <div className="flex items-center justify-between">
+        <Heading title="States" textSize="25px" />
+        <SearchInput
+          value={searchQuery}
+          onChange={(val) => setSearchQuery(val)}
+          placeholder="Search states..."
+          className="max-w-[400px]" // Reduced width as shown in design
+        />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-3">
+          {states.map((state, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-between p-4 bg-white border border-[#D4CFCC] rounded-2xl hover:border-[#705295] transition-all group"
             >
-              <div
-                className={`absolute top-1 w-3 h-3 bg-white rounded-full transition-all duration-200 ${state.active ? "right-1" : "left-1"}`}
-              />
-            </button>
-          </div>
-        ))}
+              <span className="text-[14px] font-bold text-[#0A1E25]">
+                {state.name}
+              </span>
+              <button
+                type="button"
+                className={`w-10 h-5 rounded-full relative transition-colors duration-200 ${
+                  state.active ? "bg-[#34C759]" : "bg-[#717171]"
+                }`}
+              >
+                <div
+                  className={`absolute top-1 w-3 h-3 bg-white rounded-full transition-all duration-200 ${
+                    state.active ? "right-1" : "left-1"
+                  }`}
+                />
+              </button>
+            </div>
+          ))}
+        </div>
+        {/* Empty div to maintain the 50% width grid layout */}
+        <div className="hidden md:block"></div>
       </div>
 
       <Pagination

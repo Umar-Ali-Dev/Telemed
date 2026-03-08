@@ -56,17 +56,24 @@ export const PersonalInfo = () => {
           placeholder="e.g. abc@email.com"
           required
         />
-
+        <InputField
+          name="phone"
+          control={control}
+          label="Phone Number"
+          type="tel"
+          placeholder="(000) 000 0000"
+          required
+        />
         {/* Only show Phone, NPI, and License fields for Provider or shared as needed */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputField
+          {/* <InputField
             name="phone"
             control={control}
             label="Phone Number"
             type="tel"
             placeholder="(000) 000 0000"
             required
-          />
+          /> */}
           {!isAdmin && (
             <InputField
               name="npi"
@@ -77,18 +84,17 @@ export const PersonalInfo = () => {
               required
             />
           )}
+          {!isAdmin && (
+            <InputField
+              name="license"
+              control={control}
+              label="License Number"
+              type="text"
+              placeholder="***********"
+              required
+            />
+          )}
         </div>
-
-        {!isAdmin && (
-          <InputField
-            name="license"
-            control={control}
-            label="License Number"
-            type="text"
-            placeholder="***********"
-            required
-          />
-        )}
 
         {/* Address section - Hid for Admin based on reference image */}
         {!isAdmin && (
