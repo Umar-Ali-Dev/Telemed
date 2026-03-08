@@ -53,7 +53,9 @@ export const LicenseTab = () => {
             Upload Certificate
           </label>
           <AttachmentField
-            label=""
+            label="Attachment"
+            name="certificationFile"
+            control={control}
             placeholder="Upload certificate PDF or Image"
           />
         </div>

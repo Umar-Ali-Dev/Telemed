@@ -38,6 +38,8 @@ export const Education = () => {
         />
         <AttachmentField
           label="Attachment"
+          name="educationAttachment" // Provide a unique name for the form field
+          control={control}
           placeholder="Upload certificate PDF or Image"
         />
         <button
