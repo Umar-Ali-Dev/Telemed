@@ -39,7 +39,7 @@ const UpdatePharmacyModal = ({ isOpen, onClose }: UpdatePharmacyProps) => {
       isOpen={isOpen}
       onClose={onClose}
       title="Update Pharmacy"
-      width="max-w-[1100px]"
+      width="max-w-[1200px]"
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <p className="text-[#A3948C] text-[16px] font-medium">

@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import Modal from "./Modal";
 import InputField from "../inputs/InputField";
 import TextAreaField from "../inputs/TextAreaField";
-import CheckboxField from "../inputs/CheckboxField"; // Import new component
+import CheckboxField from "../inputs/CheckboxField";
 import nobPharmacyIcon from "../../../assets/icons/nobPharmacy.svg";
 
 const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
@@ -12,6 +12,7 @@ const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
     defaultValues: {
       drugSearch: initialData?.name || "",
       quantity: initialData?.qty || "",
+      refill: initialData?.refill || "", // Initialized new refill value
       dosage: initialData?.dosage || "",
       instructions: initialData?.instructions || "",
       pharmacyNote: "",
@@ -50,10 +51,19 @@ const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
           required
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Updated Grid to 3 columns for Quantity, Refill, and Dosage */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InputField
             label="Total Quantity"
             name="quantity"
+            control={control}
+            type="number"
+            placeholder="0"
+            required
+          />
+          <InputField
+            label="Refill"
+            name="refill"
             control={control}
             type="number"
             placeholder="0"
@@ -73,6 +83,7 @@ const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
           name="instructions"
           control={control}
           placeholder="Add Instructions..."
+          rounded="rounded-[15px]"
         />
 
         <div className="relative">
@@ -95,10 +106,10 @@ const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
             control={control}
             placeholder="Write Here..."
             height="h-20"
+            rounded="rounded-[15px]"
           />
         </div>
 
-        {/* Clean, Reusable Checkbox Component */}
         <CheckboxField
           label="I confirm that the above prescriptions & instructions are correct."
           name="confirm"

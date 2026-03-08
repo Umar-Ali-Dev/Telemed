@@ -57,26 +57,28 @@ const NewVisits: React.FC = () => {
   return (
     <SectionWrapper className="m-6">
       <div className="space-y-6">
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => navigate("/provider/dashboard")}
-            className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            <HiOutlineArrowLeft size={24} className="text-[#271100]" />
-          </button>
-          <Heading
-            title="New Visits"
-            textSize="text-[24px]"
-            className="font-bold text-[#1A202C]"
-          />
-        </div>
+        <div className="flex items-center gap-4 justify-between">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate("/provider/dashboard")}
+              className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              <HiOutlineArrowLeft size={24} className="text-[#271100]" />
+            </button>
+            <Heading
+              title="New Visits"
+              textSize="text-[24px]"
+              className="font-bold text-[#1A202C]"
+            />
+          </div>
 
-        <div className="flex justify-end">
-          <SearchInput
-            value={searchQuery}
-            onChange={(val) => setSearchQuery(val)}
-            placeholder="Patient name"
-          />
+          <div className="flex justify-end">
+            <SearchInput
+              value={searchQuery}
+              onChange={(val) => setSearchQuery(val)}
+              placeholder="Patient name"
+            />
+          </div>
         </div>
 
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">

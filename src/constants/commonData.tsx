@@ -561,31 +561,54 @@ export const PRESCRIPTION_COLUMNS = [
     name: "Name/Strength/Form",
     selector: (row: any) => row.name,
     sortable: true,
+    cell: (row: any) => <TruncatedCell content={row.name} />,
   },
-  { name: "Instructions", selector: (row: any) => row.instructions, grow: 2 },
-  { name: "RXStatus", selector: (row: any) => row.status },
-  { name: "Qty", selector: (row: any) => row.qty, width: "80px" },
+  {
+    name: "Instructions",
+    selector: (row: any) => row.instructions,
+    grow: 2,
+    cell: (row: any) => <TruncatedCell content={row.instructions} />,
+  },
+  {
+    name: "Refill",
+    selector: (row: any) => row.refill,
+    width: "80px",
+    center: true,
+  },
+  {
+    name: "RXStatus",
+    selector: (row: any) => row.status,
+    cell: (row: any) => (
+      <span className="text-[#34C759] font-medium">{row.status}</span>
+    ),
+  },
+  {
+    name: "Qty",
+    selector: (row: any) => row.qty,
+    width: "80px",
+    center: true,
+  },
   {
     name: "Actions",
     cell: () => (
       <div className="flex gap-4">
-        <button className="text-gray-400 hover:text-blue-500">
-          <HiOutlinePencil size={18} />
+        <button className="text-[#A3948C] hover:text-[#705295] transition-colors">
+          <HiOutlinePencil size={20} />
         </button>
-        <button className="text-orange-500 hover:text-red-700">
-          <HiOutlineTrash size={18} />
+        <button className="text-[#F76D00] hover:text-red-600 transition-colors">
+          <HiOutlineTrash size={20} />
         </button>
       </div>
     ),
     width: "100px",
   },
 ];
-
 export const PRESCRIPTION_DUMMY_DATA = [
   {
     id: 1,
     name: "Zoloft 50 MG Tablet",
     instructions: "Take 1 cap orally once a day",
+    refill: 2,
     status: "Entered",
     qty: 30,
   },
@@ -593,6 +616,7 @@ export const PRESCRIPTION_DUMMY_DATA = [
     id: 2,
     name: "Zoloft 50 MG Tablet",
     instructions: "Take 1 cap orally once a day",
+    refill: 2,
     status: "Entered",
     qty: 90,
   },
@@ -600,6 +624,7 @@ export const PRESCRIPTION_DUMMY_DATA = [
     id: 3,
     name: "Zoloft 50 MG Tablet",
     instructions: "Take 1 cap orally once a day",
+    refill: 2,
     status: "Entered",
     qty: 60,
   },
@@ -607,6 +632,7 @@ export const PRESCRIPTION_DUMMY_DATA = [
     id: 4,
     name: "Zoloft 50 MG Tablet",
     instructions: "Take 1 cap orally once a day",
+    refill: 2,
     status: "Entered",
     qty: 60,
   },
