@@ -70,9 +70,9 @@ const AllPatients: React.FC = () => {
             }}
             paginationComponent={() => (
               <Pagination
-                totalRows={filteredPatients.length}
+                totalRows={6}
                 currentPage={1}
-                totalPages={Math.ceil(filteredPatients.length / 15)}
+                totalPages={6}
                 limit={15}
                 onChangePage={() => {}}
                 onChangeLimit={() => {}}

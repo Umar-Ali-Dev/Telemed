@@ -3,51 +3,71 @@ import InputField from "../../../../components/ui/inputs/InputField";
 import DatePicker from "../../../../components/ui/inputs/DatePicker";
 import AttachmentField from "../../../../components/ui/inputs/AttachmentField";
 import Button from "../../../../components/ui/button/Button";
-import { HiOutlinePlusCircle } from "react-icons/hi";
+import { HiPlus } from "react-icons/hi";
 import {
   BUTTON_GROUP_CLASS,
   FORM_LAYOUT_CLASS,
 } from "../../../../constants/commonData";
+
 export const Education = () => {
   const { control, handleSubmit } = useForm();
+
   return (
     <div className={FORM_LAYOUT_CLASS}>
       <form
         onSubmit={handleSubmit((data) => console.log(data))}
         className="space-y-6"
       >
+        {/* Field 1: Degree Name */}
         <InputField
-          name="certName"
+          name="degreeName"
           control={control}
-          label="Certification name"
+          label="Degree Name"
           type="text"
-          placeholder="e.g. Board Certified Physician"
+          placeholder="Enter name of degree"
         />
+
+        {/* Field 2: Name of School */}
         <InputField
-          name="instName"
+          name="schoolName"
           control={control}
-          label="Institution name"
+          label="Name of School"
           type="text"
-          placeholder="e.g. Harvard Medical School"
+          placeholder="Name of School you get degree from"
         />
+
+        {/* Field 3: Graduation Date */}
         <DatePicker
-          name="year"
+          name="graduationDate"
           control={control}
-          label="Year of certification"
-          placeholder="Select year"
+          label="Graduation Date"
+          placeholder="DD/MM/YYYY"
         />
-        <AttachmentField
-          label="Attachment"
-          name="educationAttachment" // Provide a unique name for the form field
-          control={control}
-          placeholder="Upload certificate PDF or Image"
-        />
-        <button
-          type="button"
-          className="flex items-center gap-2 text-[#705295] font-medium text-[14px]"
-        >
-          <HiOutlinePlusCircle size={20} /> Add More
-        </button>
+
+        {/* Field 4: Upload Certificate */}
+        <div className="space-y-4">
+          <AttachmentField
+            label="Upload Certificate"
+            name="educationAttachment"
+            control={control}
+            placeholder="No file attached"
+          />
+
+          {/* Add More Button Styled as per Image */}
+          <div className="flex justify-center md:justify-end">
+            <button
+              type="button"
+              className="flex items-center gap-2 text-[#705295] font-bold text-[14px] hover:opacity-80 transition-opacity"
+            >
+              <div className="bg-[#705295] text-white rounded-full p-0.5">
+                <HiPlus size={16} />
+              </div>
+              Add More
+            </button>
+          </div>
+        </div>
+
+        {/* Action Footer */}
         <div className={BUTTON_GROUP_CLASS}>
           <Button
             label="Cancel"

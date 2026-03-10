@@ -54,7 +54,7 @@ const UpdatePharmacyModal = ({ isOpen, onClose }: UpdatePharmacyProps) => {
                 name="searchPharmacy"
                 control={control}
                 type="text"
-                placeholder="By name, state & zip-code"
+                placeholder="Search by Pharmacy name, City and State, or Zip Code"
                 className="!gap-1"
               />
               <HiOutlineSearch

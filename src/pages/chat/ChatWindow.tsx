@@ -63,7 +63,7 @@ const ChatWindow: React.FC = () => {
           </button>
         </div>
         <button className="w-[48px] h-[48px] bg-[#705295] text-white rounded-[15px] flex items-center justify-center shadow-lg active:scale-95 transition-all">
-          <IoSend size={20} className="rotate-[-25deg]" />
+          <IoSend size={20} />
         </button>
       </div>
     </div>

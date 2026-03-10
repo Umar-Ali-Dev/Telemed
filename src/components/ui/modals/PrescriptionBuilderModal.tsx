@@ -5,6 +5,7 @@ import InputField from "../inputs/InputField";
 import TextAreaField from "../inputs/TextAreaField";
 import CheckboxField from "../inputs/CheckboxField";
 import nobPharmacyIcon from "../../../assets/icons/nobPharmacy.svg";
+import SelectField from "../inputs/SelectField";
 
 const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
   const isEdit = !!initialData;
@@ -19,6 +20,10 @@ const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
       confirm: false,
     },
   });
+  const refillOptions = Array.from({ length: 11 }, (_, i) => ({
+    value: i + 1,
+    label: (i + 1).toString(),
+  }));
 
   const isConfirmed = watch("confirm");
 
@@ -61,12 +66,12 @@ const PrescriptionBuilderModal = ({ isOpen, onClose, initialData }: any) => {
             placeholder="0"
             required
           />
-          <InputField
+          <SelectField
             label="Refill"
             name="refill"
             control={control}
-            type="number"
-            placeholder="0"
+            options={refillOptions}
+            placeholder="Select"
             required
           />
           <InputField

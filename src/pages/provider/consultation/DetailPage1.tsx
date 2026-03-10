@@ -34,19 +34,17 @@ const DetailPage1: React.FC = () => {
     const currentPath = location.pathname;
     return `${currentPath}/details`;
   };
+  const handleNextNavigation = () => {
+    const currentPath = location.pathname;
 
-  // const getNextPath = () => {
-  //   if (location.pathname.includes("/new-visits/")) {
-  //     return `/provider/new-visits/${id}/details`;
-  //   } else if (location.pathname.includes("/all-visits/")) {
-  //     return `/provider/all-visits/${id}/details`;
-  //   } else if (location.pathname.includes("/all-patients/")) {
-  //     return `/provider/all-patients/${id}/details`;
-  //   } else if (location.pathname.includes("/flagged-patients/")) {
-  //     return `/provider/flagged-patients/${id}/details`;
-  //   }
-  //   return `/provider/new-visits/${id}/details`;
-  // };
+    if (currentPath.includes("/all-patients/")) {
+      // For All Patients, take user back to the main list
+      navigate("/provider/all-patients");
+    } else {
+      // For all other routes (New Visits, All Visits, etc.), proceed to the next detail page
+      navigate(getNextPath());
+    }
+  };
 
   return (
     <SectionWrapper className="m-6">
@@ -137,10 +135,10 @@ const DetailPage1: React.FC = () => {
           onClick={() => navigate(-1)}
         />
         <Button
-          label="Next"
+          label={location.pathname.includes("/all-patients/") ? "Done" : "Next"}
           width="w-[120px]"
           bgColor="bg-[#705295]"
-          onClick={() => navigate(getNextPath())}
+          onClick={handleNextNavigation}
         />
       </div>
     </SectionWrapper>

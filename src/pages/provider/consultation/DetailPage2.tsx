@@ -77,7 +77,7 @@ const DetailPage2: React.FC = () => {
           onClick={() => navigate(mainListPath)}
         />
         <Button
-          label="Next"
+          label="Send RX"
           width="w-[120px]"
           bgColor="bg-[#705295]"
           // Now correctly redirects to the main list (e.g., /provider/all-patients)

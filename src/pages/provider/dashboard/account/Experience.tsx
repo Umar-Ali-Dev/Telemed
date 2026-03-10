@@ -1,54 +1,74 @@
+import React from "react";
 import { useForm } from "react-hook-form";
+import { HiPlus } from "react-icons/hi";
 import InputField from "../../../../components/ui/inputs/InputField";
 import DatePicker from "../../../../components/ui/inputs/DatePicker";
+import AttachmentField from "../../../../components/ui/inputs/AttachmentField";
 import Button from "../../../../components/ui/button/Button";
-import { HiOutlinePlusCircle } from "react-icons/hi";
 import {
   BUTTON_GROUP_CLASS,
   FORM_LAYOUT_CLASS,
 } from "../../../../constants/commonData";
+
 export const Experience = () => {
   const { control, handleSubmit } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log("Experience Data:", data);
+  };
+
   return (
     <div className={FORM_LAYOUT_CLASS}>
-      <form
-        onSubmit={handleSubmit((data) => console.log(data))}
-        className="space-y-6"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        {/* Full Width Field */}
         <InputField
-          name="institute"
+          label="Name of Certification"
+          name="certName"
           control={control}
-          label="Institute"
           type="text"
-          placeholder="e.g. City General Hospital"
+          placeholder="Name of Certification"
         />
-        <InputField
-          name="instName"
-          control={control}
-          label="Institution name"
-          type="text"
-          placeholder="e.g. Mayo Clinic"
-        />
+
+        {/* 2-Column Grid for Dates */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <DatePicker
-            name="from"
+            label="Start Date"
+            name="startDate"
             control={control}
-            label="From"
-            placeholder="MM/DD/YYYY"
+            placeholder="DD/MM/YYYY"
           />
           <DatePicker
-            name="to"
+            label="Expiration Date"
+            name="expiryDate"
             control={control}
-            label="To"
-            placeholder="MM/DD/YYYY"
+            placeholder="DD/MM/YYYY"
           />
         </div>
-        <button
-          type="button"
-          className="flex items-center gap-2 text-[#705295] font-medium text-[14px]"
-        >
-          <HiOutlinePlusCircle size={20} /> Add More
-        </button>
+
+        {/* Upload Field with Paperclip Icon */}
+        <div className="space-y-4">
+          <AttachmentField
+            label="Upload Certificate"
+            name="educationAttachment"
+            control={control}
+            placeholder="Select year when certification was obtained"
+          />
+
+          {/* Right-Aligned Add More Button */}
+          <div className="flex justify-center md:justify-end">
+            <button
+              type="button"
+              className="flex items-center gap-2 text-[#705295] font-bold text-[14px] hover:opacity-80 transition-opacity"
+            >
+              <div className="bg-[#705295] text-white rounded-full p-0.5">
+                <HiPlus size={16} />
+              </div>
+              Add More
+            </button>
+          </div>
+        </div>
+
+        {/* Standard Action Footer */}
         <div className={BUTTON_GROUP_CLASS}>
           <Button
             label="Cancel"
