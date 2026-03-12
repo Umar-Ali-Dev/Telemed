@@ -2264,3 +2264,83 @@ export const getVisitColumns = (
     return col;
   });
 };
+export const DISEASES_DATA = [
+  {
+    title: "Respiratory Diseases",
+    items: [
+      "Common Cold",
+      "Flu (Influenza)",
+      "Asthma",
+      "Bronchitis",
+      "Pneumonia",
+    ],
+  },
+  {
+    title: "Digestive System Diseases",
+    items: [
+      "Diarrhea",
+      "Constipation",
+      "Gastritis",
+      "Acid Reflux (GERD)",
+      "Food Poisoning",
+    ],
+  },
+  {
+    title: "Infectious Diseases",
+    items: ["Fever", "Malaria", "Dengue", "Typhoid", "Tuberculosis (TB)"],
+  },
+  {
+    title: "Heart & Blood Diseases",
+    items: [
+      "High Blood Pressure",
+      "Low Blood Pressure",
+      "Anemia",
+      "Heart Disease",
+    ],
+  },
+  {
+    title: "Nervous Disorders",
+    items: ["Headache", "Migraine", "Epilepsy", "Stroke"],
+  },
+];
+
+export const MEDICATIONS_DATA = [
+  {
+    title: "Pain & Fever",
+    items: ["Paracetamol", "Ibuprofen", "Aspirin", "Diclofenac"],
+  },
+  {
+    title: "Antibiotics",
+    items: [
+      "Amoxicillin",
+      "Azithromycin",
+      "Ciprofloxacin",
+      "Cefixime",
+      "Metronidazole",
+    ],
+  },
+  {
+    title: "Cold, Cough & Allergy",
+    items: [
+      "Cetirizine",
+      "Loratadine",
+      "Diphenhydramine",
+      "Dextromethorphan",
+      "Phenylephrine",
+    ],
+  },
+  {
+    title: "Gastrointestinal",
+    items: [
+      "Omeprazole",
+      "Pantoprazole",
+      "Ranitidine",
+      "Antacids",
+      "Loperamide",
+    ],
+  },
+  {
+    title: "Mental Health",
+    items: ["Diazepam", "Alprazolam", "Fluoxetine", "Amitriptyline"],
+  },
+];

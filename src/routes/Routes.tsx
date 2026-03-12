@@ -35,11 +35,29 @@ import Analytics from "../pages/admin/management/Analytics";
 import ComplianceAudit from "../pages/admin/management/ComplianceAudit";
 import DocumentHandling from "../pages/admin/management/DocumentHandling";
 import SingleProviderRequestDetail from "../pages/admin/providers/SingleProviderRequestDetail";
+import LandingPage from "../pages/LandingPage";
+import LandingLayout from "../layouts/LandingLayout";
+import TelehealthServices from "../components/ui/landing/TelehealthServices";
+import RequestAsynchronousVisit from "../components/ui/landing/RequestAsynchronousVisit";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <AuthModal />,
+    element: <LandingLayout />,
+    children: [
+      {
+        path: "/",
+        element: <LandingPage />,
+      },
+      {
+        path: "telehealth-services",
+        element: <TelehealthServices />,
+      },
+      {
+        path: "request-visit",
+        element: <RequestAsynchronousVisit />,
+      },
+    ],
   },
   {
     path: "/",
@@ -48,6 +66,7 @@ export const router = createBrowserRouter([
       {
         path: "provider",
         children: [
+          { path: "login", element: <AuthModal /> },
           { path: "dashboard", element: <ProviderDashboard /> },
           { path: "new-visits", element: <NewVisits /> },
           { path: "new-visits/:id", element: <DetailPage1 /> },
@@ -72,6 +91,7 @@ export const router = createBrowserRouter([
       {
         path: "admin",
         children: [
+          { path: "login", element: <AuthModal /> },
           { path: "dashboard", element: <AdminDashboard /> },
           { path: "consultations", element: <AdminConsultations /> },
           { path: "consultations/:id", element: <DetailPage1 /> },
