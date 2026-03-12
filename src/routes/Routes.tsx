@@ -64,7 +64,7 @@ export const router = createBrowserRouter([
     path: "/login",
     element: <AuthModal />,
   },
-  { path: "/admin/login", element: <AdminLoginPage /> },
+  { path: "/admin", element: <AdminLoginPage /> },
 
   {
     path: "/",
