@@ -39,6 +39,7 @@ import LandingPage from "../pages/LandingPage";
 import LandingLayout from "../layouts/LandingLayout";
 import TelehealthServices from "../components/ui/landing/TelehealthServices";
 import RequestAsynchronousVisit from "../components/ui/landing/RequestAsynchronousVisit";
+import AdminLoginPage from "../pages/auth/AdminLoginPage";
 
 export const router = createBrowserRouter([
   {
@@ -60,13 +61,18 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: "/login",
+    element: <AuthModal />,
+  },
+  { path: "/admin/login", element: <AdminLoginPage /> },
+
+  {
     path: "/",
     element: <MainLayout />,
     children: [
       {
         path: "provider",
         children: [
-          { path: "login", element: <AuthModal /> },
           { path: "dashboard", element: <ProviderDashboard /> },
           { path: "new-visits", element: <NewVisits /> },
           { path: "new-visits/:id", element: <DetailPage1 /> },
@@ -91,7 +97,6 @@ export const router = createBrowserRouter([
       {
         path: "admin",
         children: [
-          { path: "login", element: <AuthModal /> },
           { path: "dashboard", element: <AdminDashboard /> },
           { path: "consultations", element: <AdminConsultations /> },
           { path: "consultations/:id", element: <DetailPage1 /> },
