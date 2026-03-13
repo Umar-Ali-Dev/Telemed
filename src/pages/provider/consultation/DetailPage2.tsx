@@ -66,7 +66,7 @@ const DetailPage2: React.FC = () => {
         }
       />
 
-      <div className="flex justify-end gap-4 ">
+      <div className="flex justify-end gap-4 mt-5 ">
         <Button
           label="Back"
           width="w-[120px]"

@@ -3,7 +3,7 @@ import InputField from "../../../../components/ui/inputs/InputField";
 import DatePicker from "../../../../components/ui/inputs/DatePicker";
 import AttachmentField from "../../../../components/ui/inputs/AttachmentField";
 import Button from "../../../../components/ui/button/Button";
-import { HiPlus } from "react-icons/hi";
+import { HiOutlinePlusCircle, HiPlus } from "react-icons/hi";
 import {
   BUTTON_GROUP_CLASS,
   FORM_LAYOUT_CLASS,
@@ -54,15 +54,12 @@ export const Education = () => {
           />
 
           {/* Add More Button Styled as per Image */}
-          <div className="flex justify-center md:justify-end">
+          <div className="flex justify-end ">
             <button
               type="button"
-              className="flex items-center gap-2 text-[#705295] font-bold text-[14px] hover:opacity-80 transition-opacity"
+              className="flex items-center gap-2 text-[#705295] font-medium text-[14px]"
             >
-              <div className="bg-[#705295] text-white rounded-full p-0.5">
-                <HiPlus size={16} />
-              </div>
-              Add More
+              <HiOutlinePlusCircle size={20} /> Add More
             </button>
           </div>
         </div>

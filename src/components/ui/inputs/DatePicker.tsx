@@ -71,8 +71,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
         rules={rules}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <div className="relative w-full">
-            {/* Calendar Icon positioned on the LEFT */}
-            <LuCalendarDays className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#999999] text-[20px] pointer-events-none z-10" />
+            {/* Calendar Icon positioned on the RIGHT */}
+            <LuCalendarDays className="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#999999] text-[20px] pointer-events-none z-10" />
 
             <DatePickerComponent
               id={name}
@@ -91,7 +91,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
               showYearDropdown
               scrollableYearDropdown
               className={`
-                w-full ${inputHeight} rounded-xl bg-white pl-12 pr-4 text-[14px] text-[#271100] outline-none transition-all
+                w-full ${inputHeight} rounded-xl bg-white pl-4 pr-12 text-[14px] text-[#271100] outline-none transition-all
                 border ${error ? "border-red-500" : isFocused ? "border-[#705295]" : "border-[#D4CFCC]"}
               `}
             />

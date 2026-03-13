@@ -23,7 +23,7 @@ const PatientDataContent = ({ data }: PatientDataContentProps) => {
       </section>
 
       {/* Health Equity Info */}
-      <section>
+      {/* <section>
         <h3 className="text-[20px] font-bold text-[#1A202C] mb-6">
           Health Equity Info.
         </h3>
@@ -39,7 +39,7 @@ const PatientDataContent = ({ data }: PatientDataContentProps) => {
           <ProfileCard label="Pronouns" value={data.pronouns} />
           <ProfileCard label="Orientation" value={data.orientation} />
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

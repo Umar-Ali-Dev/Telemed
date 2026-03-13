@@ -66,7 +66,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
           pr-4           
           text-[14px] 
           text-[#271100] 
-          placeholder-[#999999]/60
+          placeholder-[#999999]
           focus:border-[#705295]
           focus:outline-none 
           transition-all

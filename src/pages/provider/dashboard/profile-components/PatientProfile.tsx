@@ -13,7 +13,7 @@ import Attachments from "../profile-components/Attachments";
 import Allergies from "../profile-components/Allergies";
 import VisitNote from "../profile-components/VisitNote";
 import ProviderInfo from "../profile-components/ProviderInfo";
-import InternalAdminNotes from "../profile-components/InternalAdminNotes"; // New
+import InternalAdminNotes from "../profile-components/InternalAdminNotes";
 
 import {
   PATIENT_PROFILE_TABS,
@@ -31,12 +31,10 @@ const PatientProfile = () => {
   const hideVisitNote = queryParams.get("hideVisitNote") === "true";
 
   const availableTabs = useMemo(() => {
-    // Mode 1: Admin Patient Detail (Alexis John view)
     if (showAdminDetail) {
       return ["Patient Info", "Internal Admin Notes"];
     }
 
-    // Mode 2: Standard Provider or Admin Consultation view
     let tabs = [...PATIENT_PROFILE_TABS];
 
     if (isAdminPath) {
@@ -52,6 +50,9 @@ const PatientProfile = () => {
 
   const [activeTab, setActiveTab] = useState(availableTabs[0]);
 
+  // Logic to check if we are on the last tab
+  const isLastTab = activeTab === availableTabs[availableTabs.length - 1];
+
   const renderContent = () => {
     switch (activeTab) {
       case "Patient Info":
@@ -59,7 +60,7 @@ const PatientProfile = () => {
       case "Provider Info":
         return <ProviderInfo />;
       case "Internal Admin Notes":
-        return <InternalAdminNotes />; //
+        return <InternalAdminNotes />;
       case "Health History":
         return <HealthHistory />;
       case "Medication History":
@@ -77,7 +78,6 @@ const PatientProfile = () => {
 
   return (
     <SectionWrapper className="m-6">
-      {/* Dynamic Header */}
       <div className="flex items-center gap-4 mb-8">
         <div className="w-14 h-14 rounded-xl overflow-hidden bg-gray-100">
           <img
@@ -104,7 +104,6 @@ const PatientProfile = () => {
 
       <div className="min-h-[300px] mt-8">{renderContent()}</div>
 
-      {/* Standardized Footer */}
       <div className="flex justify-end gap-4 mt-12">
         <Button
           label="Back"
@@ -118,6 +117,10 @@ const PatientProfile = () => {
           label="Next"
           width="w-[120px]"
           bgColor="bg-[#705295]"
+          // Pass disabled prop when on the last tab
+          disabled={isLastTab}
+          // Button.tsx already handles disabled:opacity-50
+          className={isLastTab ? "cursor-not-allowed" : ""}
           onClick={() => {
             const currentIndex = availableTabs.indexOf(activeTab);
             if (currentIndex < availableTabs.length - 1) {

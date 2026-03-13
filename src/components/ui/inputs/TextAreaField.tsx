@@ -41,7 +41,7 @@ function TextAreaField<T extends FieldValues>({
               className={`
                 w-full ${rounded} px-4 py-3 text-[14px] outline-none border transition-all
                 ${height} border-[#D4CFCC] bg-white text-[#271100] resize-none
-                placeholder:text-[#999999]/60
+                placeholder:text-[#999999]
                 ${error ? "border-red-500" : "focus:border-[#705295]"}
               `}
               value={field.value ?? ""}

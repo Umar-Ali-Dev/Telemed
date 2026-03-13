@@ -42,7 +42,9 @@ const monthlyData = [
 ];
 
 const AsynchronousVisitsChart: React.FC = () => {
-  const [selectedRange, setSelectedRange] = useState<"daily" | "weekly" | "monthly">("daily");
+  const [selectedRange, setSelectedRange] = useState<
+    "daily" | "weekly" | "monthly"
+  >("daily");
 
   const getData = () => {
     switch (selectedRange) {
@@ -64,7 +66,9 @@ const AsynchronousVisitsChart: React.FC = () => {
       {/* Header Section */}
       <div className="flex justify-between items-start mb-8">
         <div>
-          <h2 className="text-[24px] font-bold text-[#0A1E25]">Asynchronous Visits</h2>
+          <h2 className="text-[24px] font-bold text-[#0A1E25]">
+            Asynchronous Visits
+          </h2>
         </div>
 
         {/* Range Toggles */}
@@ -107,7 +111,7 @@ const AsynchronousVisitsChart: React.FC = () => {
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}
-            margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+            margin={{ top: 10, right: 10, left: -20, bottom: 5 }}
           >
             <defs>
               <linearGradient id="colorPurple" x1="0" y1="0" x2="0" y2="1">

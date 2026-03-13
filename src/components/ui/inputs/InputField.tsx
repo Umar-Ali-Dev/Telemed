@@ -90,7 +90,7 @@ function InputField<T extends FieldValues>({
                   w-full rounded-lg px-4 text-[14px] outline-none transition-all
                   ${inputHeight}
                   border border-[#D4CFCC] bg-white text-[#000000]
-                  placeholder:text-[#999999]/60
+                  placeholder:text-[#999999]
                   ${error ? "border-red-500" : ""}
                   ${disabled ? "bg-gray-100 cursor-not-allowed" : "cursor-text"}
                 `}

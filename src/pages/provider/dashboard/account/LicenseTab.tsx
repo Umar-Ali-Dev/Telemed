@@ -49,26 +49,20 @@ export const LicenseTab = () => {
         />
 
         <div className="space-y-2">
-          <label className="text-[14px] font-medium text-[#000000]">
-            Upload Certificate
-          </label>
           <AttachmentField
-            label="Attachment"
+            label=" Upload Certificate"
             name="certificationFile"
             control={control}
             placeholder="Upload certificate PDF or Image"
           />
         </div>
 
-        <div className="flex justify-center md:justify-end">
+        <div className="flex justify-end ">
           <button
             type="button"
-            className="flex items-center gap-2 text-[#705295] font-bold text-[14px] hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 text-[#705295] font-medium text-[14px]"
           >
-            <div className="bg-[#705295] text-white rounded-full p-0.5">
-              <HiPlus size={16} />
-            </div>
-            Add More
+            <HiOutlinePlusCircle size={20} /> Add More
           </button>
         </div>
 

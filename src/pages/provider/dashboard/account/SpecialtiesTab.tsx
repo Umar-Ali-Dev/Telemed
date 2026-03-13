@@ -28,12 +28,14 @@ export const SpecialtiesTab = () => {
           type="text"
           placeholder="e.g. Interventional Cardiology"
         />
-        <button
-          type="button"
-          className="flex items-center gap-2 text-[#705295] font-medium text-[14px]"
-        >
-          <HiOutlinePlusCircle size={20} /> Add More
-        </button>
+        <div className="flex justify-end ">
+          <button
+            type="button"
+            className="flex items-center gap-2 text-[#705295] font-medium text-[14px]"
+          >
+            <HiOutlinePlusCircle size={20} /> Add More
+          </button>
+        </div>
         <div className={BUTTON_GROUP_CLASS}>
           <Button
             label="Cancel"

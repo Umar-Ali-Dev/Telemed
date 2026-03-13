@@ -12,6 +12,7 @@ import InfoCard from "../../../../components/ui/cards/InfoCard";
 import Heading from "../../../../components/ui/headings/Heading";
 import TextAreaField from "../../../../components/ui/inputs/TextAreaField";
 import VitalsItem from "../../../../components/ui/cards/VitalsItem";
+import pulse from "../../../../assets/icons/Pulse.svg";
 import { commonTableStyles } from "../../../../components/ui/table/TableStyles";
 import {
   PRESCRIPTION_COLUMNS,
@@ -73,7 +74,7 @@ const VisitNote = ({ isVisitDetail = false }: VisitNoteProps) => {
 
             <div className="bg-white rounded-[15px] p-6 shadow-sm space-y-4">
               <div className="flex items-center gap-2 text-[#A3948C]">
-                <HiOutlineChartBar size={20} />
+                <img src={pulse} alt="" className="w-5 h-5" />
                 <span className="font-bold text-[16px]">Vitals</span>
               </div>
 
@@ -81,7 +82,7 @@ const VisitNote = ({ isVisitDetail = false }: VisitNoteProps) => {
                 <VitalsItem label="BP:" value="80/120" />
                 <VitalsItem label="Temp:" value="100°F" />
                 <VitalsItem label="Pulse:" value="96" />
-                <VitalsItem label="Height:" value="5'6\" />
+                <VitalsItem label="Height:" value={`5'6"`} />
                 <VitalsItem label="Weight:" value="134 lbs" />
                 <VitalsItem label="BMI:" value="32.2 lbs" />
               </div>

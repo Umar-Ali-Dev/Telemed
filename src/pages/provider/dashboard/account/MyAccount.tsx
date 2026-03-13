@@ -81,7 +81,7 @@ const MyAccount: React.FC = () => {
                 className={`pb-4 text-[14px] font-bold transition-all relative ${
                   activeTab === tab
                     ? "text-[#705295]"
-                    : "text-[#A3948C] hover:text-[#705295]"
+                    : "text-[#666666] hover:text-[#705295]"
                 }`}
               >
                 {tab}
