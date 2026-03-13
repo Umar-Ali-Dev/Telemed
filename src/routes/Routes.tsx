@@ -40,6 +40,7 @@ import LandingLayout from "../layouts/LandingLayout";
 import TelehealthServices from "../components/ui/landing/TelehealthServices";
 import RequestAsynchronousVisit from "../components/ui/landing/RequestAsynchronousVisit";
 import AdminLoginPage from "../pages/auth/AdminLoginPage";
+import MobileAppExperience from "../components/ui/landing/MobileAppExperience";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "request-visit",
         element: <RequestAsynchronousVisit />,
+      },
+      {
+        path: "download-app",
+        element: <MobileAppExperience />,
       },
     ],
   },

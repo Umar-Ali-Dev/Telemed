@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-12 ">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
@@ -21,7 +23,10 @@ const Hero = () => {
               with a secure, easy-to-use InstaVisitRx designed for licensed
               providers.
             </p>
-            <button className="bg-white text-[#705295] font-bold py-4 px-10 rounded-xl w-fit transition-all hover:bg-gray-100 shadow-lg">
+            <button
+              onClick={() => navigate("/login")}
+              className="bg-white text-[#705295] font-bold py-4 px-10 rounded-xl w-fit transition-all hover:bg-gray-100 shadow-lg"
+            >
               Join as Provider
             </button>
           </div>
@@ -41,7 +46,10 @@ const Hero = () => {
               concerns, and get professional medical guidance from trusted
               providers in minutes (more immediate)
             </h2>
-            <button className="bg-[#705295] text-white font-bold py-4 px-10 rounded-xl w-fit transition-all hover:bg-[#5e447e] shadow-lg">
+            <button
+              onClick={() => navigate("/telehealth-services")}
+              className="bg-[#705295] text-white font-bold py-4 px-10 rounded-xl w-fit transition-all hover:bg-[#5e447e] shadow-lg active:scale-95"
+            >
               Request Treatment Now
             </button>
           </div>

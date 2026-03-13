@@ -323,6 +323,7 @@ const RequestAsynchronousVisit = () => {
             Back
           </button>
           <Button
+            onClick={() => navigate("/download-app")}
             label="Submit Request"
             type="submit"
             width="w-[180px]"

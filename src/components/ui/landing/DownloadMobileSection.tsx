@@ -1,27 +1,20 @@
 import React from "react";
-// Using your specified assets
-// import downloadBg from "../../../assets/images/DownloadMobileBg.svg";
+import downloadBg from "../../../assets/images/DownloadMobileBg.svg";
 import mobilePhones from "../../../assets/images/Mobile.svg";
 
 const DownloadMobileSection = () => {
   return (
-    <section className="py-12 flex justify-center items-center w-full">
-      {/* Background container with fixed height 338px
-        Using relative positioning to allow the phone image to overflow.
-      */}
+    <section className="py-12 flex justify-center items-center w-full mt-10">
       <div
-        className="w-full max-w-[1440px] rounded-[32px] overflow-visible relative flex items-center"
+        className="w-full max-w-[1440px] overflow-visible relative flex items-center bg-no-repeat bg-cover bg-center"
         style={{
           height: "338px",
-          //   backgroundImage: `url(${downloadBg})`,
-          backgroundColor: "snow",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundImage: `url("${downloadBg}")`,
+          backgroundColor: "#F9F6FB",
         }}
       >
         <div className="w-full h-full flex items-center px-12 md:px-20">
           <div className="max-w-[480px] z-10">
-            {/* Title with brand purple highlight */}
             <h2 className="text-[32px] md:text-[45px] font-bold text-[#0A1E25] leading-tight mb-4">
               Download Our <span className="text-[#705295]">Mobile App</span>
             </h2>
@@ -32,7 +25,6 @@ const DownloadMobileSection = () => {
               requests, and receive updates on the go.
             </p>
 
-            {/* App Store / Play Store Buttons */}
             <div className="flex items-center gap-4">
               <a href="#" className="transition-transform hover:scale-105">
                 <img
@@ -52,11 +44,7 @@ const DownloadMobileSection = () => {
           </div>
         </div>
 
-        {/* Phone image with fixed height 475px
-          Positioned absolute with bottom-0 to allow it to "stand" on the bottom 
-          and overflow upward beyond the 338px background.
-        */}
-        <div className="absolute right-10 -bottom-17  pointer-events-none hidden lg:block">
+        <div className="absolute right-10 bottom-0 pointer-events-none hidden lg:block translate-y-[16%]">
           <img
             src={mobilePhones}
             alt="InstaVisit Mobile App"

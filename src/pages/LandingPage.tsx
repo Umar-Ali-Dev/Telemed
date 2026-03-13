@@ -7,12 +7,16 @@ import MainContainer from "../components/ui/MainContainer";
 
 export default function LandingPage() {
   return (
-    <MainContainer>
-      <Hero />
-      <RecommendedTreatments />
-      <HealthcareSolutions />
+    <div>
+      <MainContainer>
+        <Hero />
+        <RecommendedTreatments />
+        <HealthcareSolutions />
+      </MainContainer>
       <DownloadMobileSection />
-      <FAQSection />
-    </MainContainer>
+      <MainContainer>
+        <FAQSection />
+      </MainContainer>
+    </div>
   );
 }

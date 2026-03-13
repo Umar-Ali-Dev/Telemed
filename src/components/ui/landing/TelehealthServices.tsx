@@ -2,19 +2,27 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi";
 import SectionWrapper from "../common/SectionWrapper";
-import MainContainer from "../MainContainer"; // Using MainContainer as the primary wrapper
+import MainContainer from "../MainContainer";
 import { DISEASES_DATA, MEDICATIONS_DATA } from "../../../constants/commonData";
 
 // --- Internal Sub-Components ---
 
-const BulletItem = ({ text }: { text: string }) => (
-  <div className="flex items-center gap-2 mb-1.5">
-    <div className="w-1.5 h-1.5 rounded-full bg-[#A3948C]" />
-    <span className="text-[#666666] text-[14px] font-normal leading-tight">
-      {text}
-    </span>
-  </div>
-);
+const BulletItem = ({ text }: { text: string }) => {
+  const navigate = useNavigate(); // Initialize navigation for individual items
+
+  return (
+    <div
+      // Click handler to redirect to the request visit route
+      onClick={() => navigate("/request-visit")}
+      className="flex items-center gap-2 mb-1.5 cursor-pointer group w-fit transition-all active:scale-95"
+    >
+      <div className="w-1.5 h-1.5 rounded-full bg-[#A3948C] group-hover:bg-[#705295] transition-colors" />
+      <span className="text-[#666666] text-[14px] font-normal leading-tight group-hover:text-[#705295] group-hover:underline transition-all">
+        {text}
+      </span>
+    </div>
+  );
+};
 
 const ServiceGroup = ({ title, items }: { title: string; items: string[] }) => (
   <div className="flex flex-col">
@@ -36,7 +44,6 @@ const TelehealthServices = () => {
 
   return (
     <MainContainer className="bg-white min-h-screen pb-12">
-      {/* Page Header aligned within the MainContainer */}
       <div className="flex items-center gap-4 py-8">
         <button
           onClick={() => navigate(-1)}
