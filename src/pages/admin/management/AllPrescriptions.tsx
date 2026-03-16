@@ -1,26 +1,23 @@
 import React, { useState } from "react";
 import DataTable from "react-data-table-component";
+import { useNavigate } from "react-router-dom"; // Import for navigation
 import Heading from "../../../components/ui/headings/Heading";
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
 import SearchInput from "../../../components/ui/inputs/SearchInput";
 import Pagination from "../../../components/ui/table/Pagination";
-import PrescriptionDetails from "./PrescriptionDetails";
 import { commonTableStyles } from "../../../components/ui/table/TableStyles";
 import {
   ALL_PRESCRIPTIONS_COLUMNS,
   DUMMY_PRESCRIPTIONS,
 } from "../../../constants/commonData";
-import Modal from "../../../components/ui/modals/Modal";
 
 const AllPrescriptions: React.FC = () => {
+  const navigate = useNavigate(); // Initialize navigate
   const [searchQuery, setSearchQuery] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPrescription, setSelectedPrescription] = useState<any>(null);
 
+  // Update handler to navigate instead of opening modal
   const handleViewDetails = (id: any) => {
-    const details = DUMMY_PRESCRIPTIONS.find((p) => p.id === id);
-    setSelectedPrescription(details);
-    setIsModalOpen(true);
+    navigate(`/admin/management/prescriptions/${id}`);
   };
 
   const filteredData = DUMMY_PRESCRIPTIONS.filter((item) =>
@@ -65,15 +62,6 @@ const AllPrescriptions: React.FC = () => {
           onChangeLimit={() => {}}
         />
       </div>
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title="Prescription Details"
-        width="max-w-4xl"
-      >
-        <PrescriptionDetails data={selectedPrescription} />
-      </Modal>
     </SectionWrapper>
   );
 };

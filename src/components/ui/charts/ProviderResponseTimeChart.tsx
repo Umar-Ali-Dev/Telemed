@@ -24,8 +24,12 @@ const ProviderResponseTimeChart: React.FC = () => {
     <div className="bg-white p-6 rounded-[24px] border border-gray-100 shadow-sm h-full">
       {/* Header Section */}
       <div className="mb-6">
-        <h3 className="text-[18px] font-bold text-[#0A1E25]">Request Response Time</h3>
-        <p className="text-[#A3948C] text-[12px] mt-1 font-medium">Last 7 Days</p>
+        <h3 className="text-[18px] font-bold text-[#0A1E25]">
+          Request Response Time
+        </h3>
+        <p className="text-[#A3948C] text-[12px] mt-1 font-medium">
+          Last 7 Days
+        </p>
       </div>
 
       {/* Chart Area */}
@@ -33,7 +37,7 @@ const ProviderResponseTimeChart: React.FC = () => {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data}
-            margin={{ top: 5, right: 5, left: -25, bottom: 0 }}
+            margin={{ top: 5, right: 5, left: -25, bottom: 10 }}
           >
             <CartesianGrid vertical={false} horizontal={false} />
 

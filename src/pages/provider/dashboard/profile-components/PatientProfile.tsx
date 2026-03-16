@@ -113,21 +113,19 @@ const PatientProfile = () => {
           className="hover:bg-gray-50 !font-bold"
           onClick={() => navigate(-1)}
         />
-        <Button
-          label="Next"
-          width="w-[120px]"
-          bgColor="bg-[#705295]"
-          // Pass disabled prop when on the last tab
-          disabled={isLastTab}
-          // Button.tsx already handles disabled:opacity-50
-          className={isLastTab ? "cursor-not-allowed" : ""}
-          onClick={() => {
-            const currentIndex = availableTabs.indexOf(activeTab);
-            if (currentIndex < availableTabs.length - 1) {
-              setActiveTab(availableTabs[currentIndex + 1]);
-            }
-          }}
-        />
+        {!isLastTab && (
+          <Button
+            label="Next"
+            width="w-[120px]"
+            bgColor="bg-[#705295]"
+            onClick={() => {
+              const currentIndex = availableTabs.indexOf(activeTab);
+              if (currentIndex < availableTabs.length - 1) {
+                setActiveTab(availableTabs[currentIndex + 1]);
+              }
+            }}
+          />
+        )}
       </div>
     </SectionWrapper>
   );

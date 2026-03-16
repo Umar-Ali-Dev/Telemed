@@ -8,7 +8,7 @@ import ProviderPersonal from "./ProviderPersonal";
 import ProviderSpeciality from "./ProviderSpeciality";
 import ProviderEducation from "./ProviderEducation";
 import ProviderExperience from "./ProviderExperience";
-import ProviderLicense from "./ProviderLicense"; // Import the new component
+import ProviderLicense from "./ProviderLicense";
 import ActivityLogs from "./ActivityLogs";
 
 const AdminProviderProfile = () => {
@@ -18,7 +18,6 @@ const AdminProviderProfile = () => {
   const isRequestMode = queryParams.get("isRequest") === "true";
 
   const tabs = useMemo(() => {
-    // Added "License" after "Experience"
     const baseTabs = [
       "Personal Info",
       "Speciality",
@@ -31,6 +30,9 @@ const AdminProviderProfile = () => {
 
   const [activeTab, setActiveTab] = useState("Personal Info");
 
+  // Logic to detect if the current tab is the last one
+  const isLastTab = activeTab === tabs[tabs.length - 1];
+
   const renderContent = () => {
     switch (activeTab) {
       case "Personal Info":
@@ -41,12 +43,19 @@ const AdminProviderProfile = () => {
         return <ProviderEducation />;
       case "Experience":
         return <ProviderExperience />;
-      case "License": // New case for the License component
+      case "License":
         return <ProviderLicense />;
       case "Activity Logs":
         return <ActivityLogs />;
       default:
         return <ProviderPersonal />;
+    }
+  };
+
+  const handleNext = () => {
+    const currentIndex = tabs.indexOf(activeTab);
+    if (currentIndex < tabs.length - 1) {
+      setActiveTab(tabs[currentIndex + 1]);
     }
   };
 
@@ -81,20 +90,19 @@ const AdminProviderProfile = () => {
           width="w-[120px]"
           bgColor="bg-transparent"
           textColor="text-[#A3948C]"
-          className="hover:bg-gray-50 !font-bold"
+          className="hover:bg-gray-100 !font-bold"
           onClick={() => navigate(-1)}
         />
-        <Button
-          label="Next"
-          width="w-[120px]"
-          bgColor="bg-[#705295]"
-          onClick={() => {
-            const currentIndex = tabs.indexOf(activeTab);
-            if (currentIndex < tabs.length - 1) {
-              setActiveTab(tabs[currentIndex + 1]);
-            }
-          }}
-        />
+
+        {/* Only render Next button if it is NOT the last tab */}
+        {!isLastTab && (
+          <Button
+            label="Next"
+            width="w-[120px]"
+            bgColor="bg-[#705295]"
+            onClick={handleNext}
+          />
+        )}
       </div>
     </SectionWrapper>
   );

@@ -6,7 +6,7 @@ const NotificationsManagement = () => {
 
   return (
     <div className="bg-white p-8 rounded-[20px] shadow-sm max-w-[450px] border border-gray-50">
-      <h3 className="text-[16px] font-bold text-[#0A1E25] mb-2">
+      <h3 className="text-[20px] font-bold text-[#0A1E25] mb-2">
         Notifications Management
       </h3>
       <p className="text-[#A3948C] text-[14px] mb-8">

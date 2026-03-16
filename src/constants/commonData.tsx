@@ -68,7 +68,7 @@ export const PAST_VISITS_COLUMNS: TableColumn<PatientRecord>[] = [
       const colors: any = {
         "Prescription Sent": "text-[#3B82F6]",
         Completed: "text-[#22C55E]",
-        "Resend Prescription": "text-[#92400E]",
+        "ReLogging in to the platform": "text-[#92400E]",
       };
       return (
         <span
@@ -140,7 +140,7 @@ export const ALL_VISITS_DATA: PatientRecord[] = (() => {
     "Completed",
     "Prescription Sent",
     "Completed",
-    "Resend Prescription",
+    "ReLogging in to the platform",
     "Canceled",
     "Completed",
   ];
@@ -195,7 +195,7 @@ export const ADMIN_DASHBOARD_DATA = [
     email: "elena.r@healthmail.com",
     phone: "(305) 555 4433",
     provider: "Dr. Sarah Miller",
-    status: "Resend Prescription",
+    status: "ReLogging in to the platform",
     updatedAt: "02/15/2026",
   },
   {
@@ -276,7 +276,7 @@ export const ADMIN_DASHBOARD_DATA = [
     email: "brian.white@gmail.com",
     phone: "(602) 555 8800",
     provider: "Dr. Sarah Miller",
-    status: "Resend Prescription",
+    status: "ReLogging in to the platform",
     updatedAt: "02/20/2026",
   },
   {
@@ -1273,7 +1273,7 @@ export const ADMIN_QUEUE_COLUMNS = (
         if (s === "provider respond" || s === "waiting response")
           return "text-[#0096FF]";
         if (s === "completed") return "text-[#34C759]";
-        if (s === "resend prescription") return "text-[#A3948C]";
+        if (s === "reLogging in to the platform") return "text-[#A3948C]";
         if (s === "prescription sent") return "text-[#D156F3]";
         if (s === "prescription failed") return "text-[#FF3B30]";
         return "text-[#F76D00]";
@@ -1368,7 +1368,7 @@ export const ADMIN_CONSULTATION_COLUMNS = (
             return "text-[#00A3FF]";
           case "Completed":
             return "text-[#34C759]";
-          case "Resend Prescription":
+          case "ReLogging in to the platform":
             return "text-[#A3948C]";
           case "Prescription Sent":
             return "text-[#D149D1]";
@@ -1715,7 +1715,7 @@ export const PROVIDER_REQUESTS_COLUMNS = (
       };
       return (
         <span
-          className={`font-semibold ${colors[row.status] || "text-[#F76D00]"}`}
+          className={`font-semibold ${colors[row.status] || "text-red-500"}`}
         >
           {row.status || "Pending"}
         </span>
@@ -1758,7 +1758,7 @@ export const DUMMY_PRESCRIPTIONS = [
     patientName: "Sarah Jenkins",
     providerName: "Dr. Alina Star",
     pharmacyName: "HealthPlus Pharmacy",
-    status: "Resend Prescription",
+    status: "ReLogging in to the platform",
   },
   {
     id: 3,
@@ -1806,7 +1806,7 @@ export const DUMMY_PRESCRIPTIONS = [
     patientName: "Linda White",
     providerName: "Dr. Robert Fox",
     pharmacyName: "CVS Pharmacy",
-    status: "Resend Prescription",
+    status: "ReLogging in to the platform",
   },
   {
     id: 9,
@@ -1845,7 +1845,7 @@ export const ALL_PRESCRIPTIONS_COLUMNS = (
     cell: (row: any) => {
       const colors: any = {
         "Prescription Sent": "text-[#34C759]",
-        "Resend Prescription": "text-[#A3948C]",
+        "ReLogging in to the platform": "text-[#A3948C]",
         "Prescription Failed": "text-[#F76D00]",
       };
       return (
@@ -1956,37 +1956,37 @@ export const DUMMY_AUDIT_LOGS = [
   {
     id: 2,
     dateTime: "Jan 22, 2026 at 6:00 pm EST",
-    action: "Send prescription",
+    action: "Logging in to the platform",
   },
   {
     id: 3,
     dateTime: "Jan 22, 2026 at 6:00 pm EST",
-    action: "Send prescription",
+    action: "Logging in to the platform",
   },
   {
     id: 4,
     dateTime: "Jan 22, 2026 at 6:00 pm EST",
-    action: "Send prescription",
+    action: "Logging in to the platform",
   },
   {
     id: 5,
     dateTime: "Jan 22, 2026 at 6:00 pm EST",
-    action: "Send prescription",
+    action: "Logging in to the platform",
   },
   {
     id: 6,
     dateTime: "Jan 22, 2026 at 6:00 pm EST",
-    action: "Send prescription",
+    action: "Logging in to the platform",
   },
   {
     id: 7,
     dateTime: "Jan 22, 2026 at 6:00 pm EST",
-    action: "Send prescription",
+    action: "Logging in to the platform",
   },
   {
     id: 8,
     dateTime: "Jan 22, 2026 at 6:00 pm EST",
-    action: "Send prescription",
+    action: "Logging in to the platform",
   },
   {
     id: 9,
@@ -2007,7 +2007,11 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
     time: "6:00 pm EST",
     action: "Logging in to the platform",
   },
-  { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 21, 2026",
+    time: "5:30 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "2:20 pm EST", action: "Log in" },
@@ -2038,11 +2042,19 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
     time: "1:10 pm EST",
     action: "Logging in to the platform",
   },
-  { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 21, 2026",
+    time: "12:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "9:00 am EST", action: "Log in" },
-  { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 22, 2026",
+    time: "6:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
@@ -2056,11 +2068,19 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
     time: "1:10 pm EST",
     action: "Logging in to the platform",
   },
-  { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 21, 2026",
+    time: "12:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "9:00 am EST", action: "Log in" },
-  { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 22, 2026",
+    time: "6:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
@@ -2074,11 +2094,19 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
     time: "1:10 pm EST",
     action: "Logging in to the platform",
   },
-  { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 21, 2026",
+    time: "12:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "9:00 am EST", action: "Log in" },
-  { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 22, 2026",
+    time: "6:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
@@ -2092,11 +2120,19 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
     time: "1:10 pm EST",
     action: "Logging in to the platform",
   },
-  { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 21, 2026",
+    time: "12:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "9:00 am EST", action: "Log in" },
-  { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 22, 2026",
+    time: "6:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
@@ -2110,11 +2146,19 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
     time: "1:10 pm EST",
     action: "Logging in to the platform",
   },
-  { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 21, 2026",
+    time: "12:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "9:00 am EST", action: "Log in" },
-  { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 22, 2026",
+    time: "6:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
@@ -2128,11 +2172,19 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
     time: "1:10 pm EST",
     action: "Logging in to the platform",
   },
-  { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 21, 2026",
+    time: "12:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "9:00 am EST", action: "Log in" },
-  { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 22, 2026",
+    time: "6:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
@@ -2146,11 +2198,19 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
     time: "1:10 pm EST",
     action: "Logging in to the platform",
   },
-  { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 21, 2026",
+    time: "12:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "9:00 am EST", action: "Log in" },
-  { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 22, 2026",
+    time: "6:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
@@ -2164,11 +2224,19 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
     time: "1:10 pm EST",
     action: "Logging in to the platform",
   },
-  { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 21, 2026",
+    time: "12:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "9:00 am EST", action: "Log in" },
-  { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 22, 2026",
+    time: "6:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },
@@ -2182,11 +2250,19 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
     time: "1:10 pm EST",
     action: "Logging in to the platform",
   },
-  { date: "Jan 21, 2026", time: "12:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 21, 2026",
+    time: "12:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 20, 2026", time: "11:30 am EST", action: "Accept Visit" },
   { date: "Jan 19, 2026", time: "10:15 am EST", action: "Review Visit" },
   { date: "Jan 18, 2026", time: "9:00 am EST", action: "Log in" },
-  { date: "Jan 22, 2026", time: "6:00 pm EST", action: "Send prescription" },
+  {
+    date: "Jan 22, 2026",
+    time: "6:00 pm EST",
+    action: "Logging in to the platform",
+  },
   { date: "Jan 21, 2026", time: "5:30 pm EST", action: "Accept Visit" },
   { date: "Jan 20, 2026", time: "4:15 pm EST", action: "Review Visit" },
   { date: "Jan 19, 2026", time: "3:45 pm EST", action: "Add New Provider" },

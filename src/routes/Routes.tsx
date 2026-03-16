@@ -41,6 +41,7 @@ import TelehealthServices from "../components/ui/landing/TelehealthServices";
 import RequestAsynchronousVisit from "../components/ui/landing/RequestAsynchronousVisit";
 import AdminLoginPage from "../pages/auth/AdminLoginPage";
 import MobileAppExperience from "../components/ui/landing/MobileAppExperience";
+import PrescriptionDetailPage from "../pages/admin/management/PrescriptionDetailPage";
 
 export const router = createBrowserRouter([
   {
@@ -123,6 +124,10 @@ export const router = createBrowserRouter([
           {
             path: "management/prescriptions",
             element: <AllPrescriptions />,
+          },
+          {
+            path: "management/prescriptions/:id",
+            element: <PrescriptionDetailPage />,
           },
           { path: "management/refunds", element: <AllRefundRequests /> },
           { path: "management/controls", element: <SystemControls /> },

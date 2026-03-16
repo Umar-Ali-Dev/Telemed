@@ -2,10 +2,10 @@ import React from "react";
 
 const LOGS = [
   { date: "Jan 22, 2026", action: "Logging in to the platform" },
-  { date: "Jan 23, 2026", action: "Send prescription" },
-  { date: "Jan 23, 2026", action: "Send prescription" },
-  { date: "Jan 23, 2026", action: "Send prescription" },
-  { date: "Jan 23, 2026", action: "Send prescription" },
+  { date: "Jan 23, 2026", action: "Logging in to the platform" },
+  { date: "Jan 23, 2026", action: "Logging in to the platform" },
+  { date: "Jan 23, 2026", action: "Logging in to the platform" },
+  { date: "Jan 23, 2026", action: "Logging in to the platform" },
 ];
 
 const ActivityLogs: React.FC = () => {
