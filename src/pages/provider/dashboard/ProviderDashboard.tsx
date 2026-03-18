@@ -41,11 +41,12 @@ const ProviderDashboard: React.FC = () => {
 
   // 2. Add handleAcceptVisit logic to change status to "Reviewing"
   const handleAcceptVisit = (id: number) => {
-    setVisitsData((prevData) =>
-      prevData.map((visit) =>
-        visit.id === id ? { ...visit, status: "Reviewing" } : visit,
-      ),
-    );
+    // setVisitsData((prevData) =>
+    //   prevData.map((visit) =>
+    //     visit.id === id ? { ...visit, status: "Reviewing" } : visit,
+    //   ),
+    // );
+    navigate(`/provider/new-visits/${id}`);
   };
 
   const handleCancelSubmit = (reason: string) => {

@@ -32,11 +32,12 @@ const NewVisits: React.FC = () => {
 
   // Handler to transition Accept -> Review
   const handleAcceptVisit = (id: number) => {
-    setVisitsData((prev) =>
-      prev.map((visit) =>
-        visit.id === id ? { ...visit, status: "Reviewing" } : visit,
-      ),
-    );
+    // setVisitsData((prev) =>
+    //   prev.map((visit) =>
+    //     visit.id === id ? { ...visit, status: "Reviewing" } : visit,
+    //   ),
+    // );
+    navigate(`/provider/new-visits/${id}`);
   };
 
   const handleCancelClick = (row: PatientRecord) => {
