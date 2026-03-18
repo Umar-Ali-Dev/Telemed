@@ -32,40 +32,24 @@ const AdminDashboard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
 
+  const filteredData = ADMIN_DASHBOARD_DATA.filter(
+    (item) =>
+      item.status === "Waiting provider" &&
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   const handleAssignClick = (row: any) => {
     setSelectedRequest(row);
     setIsModalOpen(true);
   };
+
   const navigate = useNavigate();
   const handleViewDetails = (row: any) => {
-    navigate(`/admin/dashboard/${row.id}`);
+    navigate(`/admin/patient/${row.id}`);
   };
+
   return (
-    <div className="bg-white space-y-7 p-6">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <Heading
-          title="Welcome,"
-          highlightText="Mr. Jhon"
-          textSize="text-[24px]"
-          className="font-bold text-[#0A1E25]"
-        />
-
-        <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-          <DatePicker
-            name="startDate"
-            control={control}
-            placeholder="01 Dec 2025"
-            className="sm:w-[180px]"
-          />
-          <DatePicker
-            name="endDate"
-            control={control}
-            placeholder="12 Jan 2025"
-            className="sm:w-[180px]"
-          />
-        </div>
-      </div>
-
+    <div className="space-y-8 p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           label="Total Requests"
@@ -116,7 +100,7 @@ const AdminDashboard: React.FC = () => {
           <DataTable
             columns={ADMIN_QUEUE_COLUMNS(handleAssignClick, handleViewDetails)}
             onRowClicked={handleViewDetails}
-            data={ADMIN_DASHBOARD_DATA}
+            data={filteredData}
             customStyles={commonTableStyles}
             responsive
             highlightOnHover
@@ -129,9 +113,9 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         <Pagination
-          totalRows={995}
+          totalRows={filteredData.length}
           currentPage={1}
-          totalPages={8}
+          totalPages={Math.ceil(filteredData.length / 15) || 1}
           limit={15}
           onChangePage={() => {}}
           onChangeLimit={() => {}}
