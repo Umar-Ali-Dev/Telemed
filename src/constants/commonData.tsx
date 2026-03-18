@@ -592,6 +592,7 @@ export const DUMMY_PATIENT_DATA = {
   pronouns: "She/Her",
   orientation: "Straight",
   profileImage: "https://i.imgur.com/8K9mS9E.png",
+  gender: "Male",
 };
 
 export const MEDICATION_COLUMNS = [
@@ -978,16 +979,29 @@ export const GET_PATIENT_COLUMNS = (_navigate: (path: string) => void) => [
   },
 ];
 
-// All Patients Columns - Updated structure
-export const ALL_PATIENTS_COLUMNS: TableColumn<any>[] = [
+export const ALL_PATIENTS_COLUMNS = (
+  handleViewDetails: (row: any) => void,
+): TableColumn<any>[] => [
   {
     name: "Full Name",
     selector: (row) => `${row.firstName} ${row.lastName}`,
     sortable: true,
   },
-  { name: "Email", selector: (row) => row.email, sortable: true },
-  { name: "Phone", selector: (row) => row.phone, sortable: true },
-  { name: "DOB", selector: (row) => row.dob, sortable: true },
+  {
+    name: "Email",
+    selector: (row) => row.email,
+    sortable: true,
+  },
+  {
+    name: "Phone",
+    selector: (row) => row.phone,
+    sortable: true,
+  },
+  {
+    name: "DOB",
+    selector: (row) => row.dob,
+    sortable: true,
+  },
   {
     name: "Release Patient",
     cell: (row) => {
@@ -1007,7 +1021,9 @@ export const ALL_PATIENTS_COLUMNS: TableColumn<any>[] = [
       };
       return (
         <span
-          className={`${statusColors[row.status] || "text-gray-600"} font-medium`}
+          className={`${
+            statusColors[row.status] || "text-gray-600"
+          } font-medium`}
         >
           {row.status}
         </span>
@@ -1017,18 +1033,23 @@ export const ALL_PATIENTS_COLUMNS: TableColumn<any>[] = [
   },
   {
     name: "Action",
-    cell: () => (
+    cell: (row) => (
       <img
         src={fileTextIcon}
         alt="Document"
-        className="cursor-pointer w-6 h-6"
+        className="cursor-pointer w-6 h-6 hover:opacity-70 transition-opacity"
+        onClick={(e) => {
+          e.stopPropagation(); // Prevents the DataTable's onRowClicked from firing
+          handleViewDetails(row);
+        }}
       />
     ),
   },
 ];
 
-// Flagged Patients Columns - Similar to All Patients but with Flagged status
-export const FLAGGED_PATIENTS_COLUMNS: TableColumn<any>[] = [
+export const FLAGGED_PATIENTS_COLUMNS = (
+  handleViewDetails: (row: any) => void,
+): TableColumn<any>[] => [
   {
     name: "Full Name",
     selector: (row) => `${row.firstName} ${row.lastName}`,
@@ -1056,11 +1077,15 @@ export const FLAGGED_PATIENTS_COLUMNS: TableColumn<any>[] = [
   },
   {
     name: "Action",
-    cell: () => (
+    cell: (row) => (
       <img
         src={fileTextIcon}
         alt="Document"
-        className="cursor-pointer w-6 h-6"
+        className="cursor-pointer w-6 h-6 hover:opacity-70 transition-opacity"
+        onClick={(e) => {
+          e.stopPropagation(); // Prevents row click
+          handleViewDetails(row);
+        }}
       />
     ),
   },

@@ -22,21 +22,20 @@ const FlaggedPatients: React.FC = () => {
       .includes(searchQuery.toLowerCase()),
   );
 
-  const handleRowClick = (row: any) => {
+  const handleViewDetails = (row: any) => {
     navigate(`/provider/flagged-patients/${row.id}`);
   };
 
   return (
     <SectionWrapper className="m-6">
       <div className="space-y-6">
-        {/* Header with Back Arrow and Title */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
-              onClick={() => navigate("/provider/dashboard")}
-              className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-50 transition-colors"
+              onClick={() => navigate(-1)}
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
             >
-              <HiOutlineArrowLeft size={24} className="text-[#271100]" />
+              <HiOutlineArrowLeft size={24} className="text-[#1A202C]" />
             </button>
             <Heading
               title="Flagged Patients"
@@ -45,7 +44,6 @@ const FlaggedPatients: React.FC = () => {
             />
           </div>
 
-          {/* Search Bar */}
           <SearchInput
             value={searchQuery}
             onChange={(val) => setSearchQuery(val)}
@@ -53,13 +51,11 @@ const FlaggedPatients: React.FC = () => {
           />
         </div>
 
-        {/* Professional Table Container */}
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={FLAGGED_PATIENTS_COLUMNS}
+            columns={FLAGGED_PATIENTS_COLUMNS(handleViewDetails)}
             data={filteredPatients}
             customStyles={commonTableStyles}
-            onRowClicked={handleRowClick}
             pagination
             paginationPerPage={15}
             paginationComponentOptions={{
@@ -80,7 +76,6 @@ const FlaggedPatients: React.FC = () => {
             )}
             responsive
             highlightOnHover
-            pointerOnHover
           />
         </div>
       </div>

@@ -9,12 +9,22 @@ import {
   DUMMY_PATIENT_DATA,
   MEDICATION_DUMMY_DATA,
 } from "../../../constants/commonData";
+import { useState } from "react";
+import { HiFlag, HiOutlineFlag } from "react-icons/hi";
+import toast from "react-hot-toast";
 
 const DetailPage1: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
+  const isPatientPath =
+    location.pathname.includes("/all-patients/") ||
+    location.pathname.includes("/flagged-patients/");
 
+  // Initialize based on path
+  const [isFlagged, setIsFlagged] = useState(
+    location.pathname.includes("/flagged-patients/"),
+  );
   const getPageTitle = () => {
     if (location.pathname.includes("/new-visits/")) return "Visits Detail";
     if (location.pathname.includes("/all-visits/")) return "All Visits Details";
@@ -29,7 +39,12 @@ const DetailPage1: React.FC = () => {
 
     return "Details";
   };
+  const handleFlagToggle = () => {
+    const nextState = !isFlagged;
+    setIsFlagged(nextState);
 
+    toast.success(nextState ? "Patient flagged successfully" : "Flag removed");
+  };
   const getNextPath = () => {
     const currentPath = location.pathname;
     return `${currentPath}/details`;
@@ -49,18 +64,39 @@ const DetailPage1: React.FC = () => {
   return (
     <SectionWrapper className="m-6">
       {/* Header with Back Button */}
-      <div className="flex items-center gap-4 mb-8">
-        <button
-          onClick={() => navigate(-1)}
-          className="text-[#0A1E25] hover:text-[#705295] transition-colors"
-        >
-          <FaArrowLeft size={20} />
-        </button>
-        <Heading
-          title={getPageTitle()}
-          textSize="text-[24px]"
-          className="font-bold text-[#1A202C]"
-        />
+      <div className="flex justify-between items-center mb-8">
+        <div className="flex items-center gap-4 ">
+          <button
+            onClick={() => navigate(-1)}
+            className="text-[#0A1E25] hover:text-[#705295] transition-colors"
+          >
+            <FaArrowLeft size={20} />
+          </button>
+          <Heading
+            title={getPageTitle()}
+            textSize="text-[24px]"
+            className="font-bold text-[#1A202C]"
+          />
+        </div>
+        {isPatientPath && (
+          <button
+            onClick={handleFlagToggle}
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold transition-all   ${
+              isFlagged
+                ? "bg-[#FFF8F2] text-[#FF8D28] "
+                : "bg-white text-[#A3948C] b hover:bg-gray-50"
+            }`}
+          >
+            {isFlagged ? (
+              <HiFlag size={20} className="text-[#FF8D28]" />
+            ) : (
+              <HiOutlineFlag size={20} />
+            )}
+            <span className="text-[14px]">
+              {isFlagged ? "Patient Flagged" : "Flag Patient"}
+            </span>
+          </button>
+        )}
       </div>
 
       <div className="space-y-8">
@@ -134,12 +170,14 @@ const DetailPage1: React.FC = () => {
           className="hover:bg-gray-50 !font-bold"
           onClick={() => navigate(-1)}
         />
-        <Button
-          label={location.pathname.includes("/all-patients/") ? "Done" : "Next"}
-          width="w-[120px]"
-          bgColor="bg-[#705295]"
-          onClick={handleNextNavigation}
-        />
+        {!isPatientPath && (
+          <Button
+            label="Next"
+            width="w-[120px]"
+            bgColor="bg-[#705295]"
+            onClick={() => navigate(`/provider/dashboard/${id}/details`)}
+          />
+        )}
       </div>
     </SectionWrapper>
   );

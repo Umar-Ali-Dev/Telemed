@@ -25,7 +25,9 @@ const AllPatients: React.FC = () => {
   const handleRowClick = (row: any) => {
     navigate(`/provider/all-patients/${row.id}`);
   };
-
+  const handleViewDetails = (row: any) => {
+    navigate(`/provider/all-patients/${row.id}`);
+  };
   return (
     <SectionWrapper className="m-6">
       <div className="space-y-6">
@@ -56,10 +58,10 @@ const AllPatients: React.FC = () => {
         {/* Professional Table Container */}
         <div className="rounded-xl overflow-hidden bg-[#FFFAF7]">
           <DataTable
-            columns={ALL_PATIENTS_COLUMNS}
+            columns={ALL_PATIENTS_COLUMNS(handleViewDetails)}
             data={filteredPatients}
             customStyles={commonTableStyles}
-            onRowClicked={handleRowClick}
+            // onRowClicked={handleRowClick}
             pagination
             paginationPerPage={15}
             paginationComponentOptions={{
