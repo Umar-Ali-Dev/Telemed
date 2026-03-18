@@ -9,17 +9,11 @@ import ResponseTimeChart from "../../../components/ui/charts/ResponseTimeChart";
 const Analytics: React.FC = () => {
   return (
     <SectionWrapper padding="p-6" className="space-y-6">
-      <div className="bg-white p-8 rounded-[24px] border border-gray-100 shadow-sm">
-        <TotalVisitsChart />
-      </div>
+      <TotalVisitsChart />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-[24px] border border-gray-100 shadow-sm">
-          <RevenueOverviewChart />
-        </div>
-        <div className="bg-white p-6 rounded-[24px] border border-gray-100 shadow-sm">
-          <ResponseTimeChart />
-        </div>
+        <RevenueOverviewChart />
+        <ResponseTimeChart />
       </div>
     </SectionWrapper>
   );

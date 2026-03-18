@@ -12,30 +12,7 @@ import { FaArrowLeft } from "react-icons/fa";
 const SingleProviderRequestDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { control, handleSubmit } = useForm({
-    // Use realistic data here so the "value" in InputField isn't just the name of the field
-    defaultValues: {
-      profileImage: "https://via.placeholder.com/150",
-      firstName: "John",
-      lastName: "Smith",
-      dob: "05/12/1980",
-      gender: "Male",
-      email: "john.smith@medical.com",
-      phone: "+1 (555) 123-4567",
-      specialization: "Orthopedic Surgery",
-      npi: "1234567890",
-      credentials: "md",
-      license: "OS-99887766",
-      licenseExp: "12/31/2025",
-      licenseState: "AL",
-      practiceName: "Spanish Fort Medical Center",
-      street: "72 Caisson Trace",
-      city: "Spanish Fort",
-      state: "AL",
-      zip: "36527",
-      practiceAddress: "72 Caisson Trace, Spanish Fort, AL 36527",
-    },
-  });
+  const { control, handleSubmit } = useForm();
 
   const handleApprove = (data: any) => {
     console.log("Approving Provider:", data);

@@ -43,59 +43,50 @@ function InputField<T extends FieldValues>({
 
   return (
     <div className={`flex flex-col gap-2 w-full ${className || ""}`}>
-      <label
-        htmlFor={String(name)}
-        className="text-[14px] font-medium text-[#000000]"
-      >
-        {label}
-        {required && !hideStar && <span className="ml-1 text-red-500">*</span>}
+      <label className="text-[14px] font-medium text-[#000000]">
+        {label}{" "}
+        {!hideStar && required && <span className="text-red-500">*</span>}
       </label>
 
       <Controller
         name={name}
         control={control}
         rules={{
-          ...(required ? { required: `${label} is required` } : {}),
-          ...(type === "email"
-            ? {
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Invalid email address",
-                },
-              }
-            : {}),
+          required: required ? `${label} is required` : false,
           ...rules,
         }}
         render={({ field, fieldState: { error } }) => {
+          // Internal handler to ensure both react-hook-form and custom logic trigger
           const handleInternalChange = (
             e: React.ChangeEvent<HTMLInputElement>,
           ) => {
-            const val =
-              type === "number" ? e.target.valueAsNumber : e.target.value;
-            field.onChange(val);
-            if (customOnChange) customOnChange(val);
+            const val = e.target.value;
+            field.onChange(val); // This updates the react-hook-form state
+            if (customOnChange) customOnChange(val); // This triggers your custom logic
           };
 
           return (
             <div className="relative w-full">
               <input
-                {...field}
-                id={String(name)}
+                {...field} // Spread field to include value, name, onBlur, and ref
                 type={
                   isPasswordType ? (showPassword ? "text" : "password") : type
                 }
                 placeholder={placeholder}
                 disabled={disabled}
+                /* Force the value to use the field value from Controller. 
+                   The nullish coalescing ensures it's never 'undefined' (which causes controlled vs uncontrolled errors)
+                */
+                value={field.value ?? ""}
+                onChange={handleInternalChange}
                 className={`
                   w-full rounded-lg px-4 text-[14px] outline-none transition-all
                   ${inputHeight}
-                  border border-[#D4CFCC] bg-white text-[#000000]
+                  border bg-white text-[#000000]
                   placeholder:text-[#999999]
-                  ${error ? "border-red-500" : ""}
-                  ${disabled ? "bg-gray-100 cursor-not-allowed" : "cursor-text"}
+                  ${error ? "border-red-500" : "border-[#D4CFCC] focus:border-[#705295]"}
+                  ${disabled ? "bg-gray-100 cursor-not-allowed opacity-80" : "cursor-text"}
                 `}
-                value={field.value ?? ""}
-                onChange={handleInternalChange}
               />
 
               {isPasswordType && (

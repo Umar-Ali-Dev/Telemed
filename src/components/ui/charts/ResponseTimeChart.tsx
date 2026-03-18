@@ -39,7 +39,7 @@ const ResponseTimeChart = () => (
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={data}
-          margin={{ top: 5, right: 5, left: -25, bottom: 0 }}
+          margin={{ top: 5, right: 5, left: -25, bottom: 8 }}
         >
           {/* No grid lines in this specific design */}
           <CartesianGrid vertical={false} horizontal={false} />

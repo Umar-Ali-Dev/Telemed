@@ -10,6 +10,7 @@ import ProviderEducation from "./ProviderEducation";
 import ProviderExperience from "./ProviderExperience";
 import ProviderLicense from "./ProviderLicense";
 import ActivityLogs from "./ActivityLogs";
+import { Experience } from "../../provider/dashboard/account/Experience";
 
 const AdminProviderProfile = () => {
   const navigate = useNavigate();

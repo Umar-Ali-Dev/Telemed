@@ -38,7 +38,7 @@ function AttachmentField<T extends FieldValues>({
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <div className="relative w-full">
             <label
-              className={`relative flex items-center w-full h-[48px] bg-white border rounded-xl px-4 cursor-pointer transition-all group shadow-sm ${error ? "border-red-500" : "border-[#D4CFCC] hover:border-[#705295]"}`}
+              className={`relative flex items-center w-full h-[48px] bg-white border rounded-xl px-4 cursor-pointer transition-all group  ${error ? "border-red-500" : "border-[#D4CFCC] hover:border-[#705295]"}`}
             >
               <input
                 type="file"
