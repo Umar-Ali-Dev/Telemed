@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiArrowLeft } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
@@ -9,9 +9,11 @@ import SelectField from "../../../components/ui/inputs/SelectField";
 import SearchInput from "../../../components/ui/inputs/SearchInput";
 import CheckboxField from "../../../components/ui/inputs/CheckboxField";
 import Button from "../../../components/ui/button/Button";
-
+import UpdatePharmacyModal from "../modals/UpdatePharmacyModal";
+import pharmacyIcon from "../../../assets/icons/pharmacy.svg";
 const RequestAsynchronousVisit = () => {
   const navigate = useNavigate();
+  const [isPharmacyModalOpen, setIsPharmacyModalOpen] = useState(false);
   const { control, handleSubmit, watch, setValue } = useForm({
     defaultValues: {
       searchPharmacy: "",
@@ -70,19 +72,38 @@ const RequestAsynchronousVisit = () => {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <SectionWrapper>
-          <h2 className="text-[18px] font-bold text-[#0A1E25] mb-6">
-            Choose Pharmacy
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <SearchInput
-              value={watch("searchPharmacy")}
-              onChange={(val) => setValue("searchPharmacy", val)}
-              placeholder="By name, state & zip-code"
-              className="w-full"
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-start gap-4">
+              <div className="bg-[#F2EFFF] p-3 rounded-xl min-w-[56px] h-[56px] flex items-center justify-center">
+                <img src={pharmacyIcon} alt="Pharmacy" className="w-8 h-8" />
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-[18px] font-bold text-[#0A1E25]">
+                  Choose Pharmacy
+                </h2>
+                <div className="text-[#666666] text-[14px] leading-relaxed">
+                  <p className="font-semibold text-[#1A202C]">
+                    Walgreens Pharmacy
+                  </p>
+                  <p>1234 Main St, Los Angeles, CA 90001</p>
+                  <p>(555) 123-4567</p>
+                </div>
+              </div>
+            </div>
+
+            <Button
+              label="Update Pharmacy"
+              onClick={() => setIsPharmacyModalOpen(true)}
+              width="w-full md:w-[180px]"
+              bgColor="bg-[#705295]"
+              className="rounded-xl py-2.5 font-bold text-[14px]"
             />
           </div>
         </SectionWrapper>
-
+        <UpdatePharmacyModal
+          isOpen={isPharmacyModalOpen}
+          onClose={() => setIsPharmacyModalOpen(false)}
+        />
         <SectionWrapper>
           <h2 className="text-[18px] font-bold text-[#0A1E25] mb-8">
             Patient Information

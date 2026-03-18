@@ -17,7 +17,7 @@ type AuthPage =
   | "resetPassword";
 
 const AuthModal = () => {
-  const [currentPage, setCurrentPage] = useState<AuthPage>("login");
+  const [currentPage, setCurrentPage] = useState<AuthPage>("signUp");
   const [userEmail, setUserEmail] = useState<string>("");
   const [flowType, setFlowType] = useState<"auth" | "reset">("auth");
 
