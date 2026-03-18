@@ -2388,66 +2388,62 @@ export const ACTIVITY_LOGS_DATA: ActivityLog[] = [
   },
 ];
 
+// constants/commonData.ts
+
 export const getVisitColumns = (
   handleRowClick: (row: PatientRecord) => void,
   handleCancelClick: (row: PatientRecord) => void,
   baseColumns: any[],
+  handleAcceptVisit?: (id: number) => void, // Changed type to number
 ) => {
   return baseColumns.map((col) => {
     if (col.name === "Action") {
       return {
         ...col,
-        cell: (row: PatientRecord, rowIndex?: number) => {
-          // If the row has a state (like 'AL'), show action buttons
-          if (row.state === "AL" || row.status === "Pending") {
-            const isOddRow = (rowIndex || 0) % 2 === 0;
-            const showAccept = isOddRow;
-            const showReview = !isOddRow;
+        cell: (row: PatientRecord) => {
+          const isReviewing = row.status === "Reviewing";
 
-            return (
-              <div className="flex gap-3">
+          return (
+            <div className="flex gap-3 items-center">
+              {/* Show Cancel button only if not in Reviewing status */}
+              {!isReviewing && (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleCancelClick(row); // Opens Cancel Modal
+                    handleCancelClick(row);
                   }}
                   className="px-4 py-1.5 rounded-md font-medium text-sm text-gray-600 hover:bg-gray-100 transition-colors"
                 >
                   Cancel
                 </button>
-                {showAccept && (
-                  <button
-                    onClick={(e) => e.stopPropagation()}
-                    className="bg-[#705295] text-white px-4 py-1.5 rounded-md font-medium text-sm hover:bg-[#5a3f7a] transition-colors"
-                  >
-                    Accept
-                  </button>
-                )}
-                {showReview && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRowClick(row); // Navigate to details
-                    }}
-                    className="text-[#705295] bg-[#EBE5F1] border border-[#705295] px-4 py-1.5 rounded-md font-medium text-sm hover:bg-[#EBE5F1] transition-colors"
-                  >
-                    Review
-                  </button>
-                )}
-              </div>
-            );
-          }
-          // Default: Show document icon for navigation
-          return (
-            <img
-              src={fileTextIcon}
-              alt="Document"
-              className="cursor-pointer w-6 h-6 hover:opacity-80 transition-opacity"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleRowClick(row);
-              }}
-            />
+              )}
+
+              {/* Dynamic Action Button */}
+              {!isReviewing ? (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // No more TS error here because types match
+                    if (handleAcceptVisit) {
+                      handleAcceptVisit(row.id);
+                    }
+                  }}
+                  className="bg-[#705295] text-white px-4 py-1.5 rounded-md font-medium text-sm hover:bg-[#5a3f7a] transition-colors"
+                >
+                  Accept
+                </button>
+              ) : (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRowClick(row);
+                  }}
+                  className="text-[#705295] bg-[#EBE5F1] border border-[#705295] px-4 py-1.5 rounded-md font-medium text-sm hover:bg-[#dfd7e7] transition-colors"
+                >
+                  Review
+                </button>
+              )}
+            </div>
           );
         },
       };
