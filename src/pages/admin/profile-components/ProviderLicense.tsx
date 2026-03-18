@@ -62,6 +62,7 @@ const ProviderLicense: React.FC = () => {
                   name={attachment.name as any}
                   control={control}
                   placeholder={attachment.placeholder}
+                  readOnly={true}
                 />
               ))}
             </div>

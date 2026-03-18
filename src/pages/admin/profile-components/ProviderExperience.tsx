@@ -60,6 +60,7 @@ const ProviderExperience: React.FC = () => {
                 name={`cert_${index}` as any}
                 control={control}
                 placeholder="Certificate"
+                readOnly={true}
               />
             </div>
           </div>

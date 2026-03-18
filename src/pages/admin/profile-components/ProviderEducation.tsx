@@ -76,6 +76,7 @@ const ProviderEducation: React.FC = () => {
                   key={idx}
                   name={attachment.name as any}
                   control={control}
+                  readOnly={true}
                 />
               ))}
             </div>
