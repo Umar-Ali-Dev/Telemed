@@ -1,5 +1,9 @@
+import React, { useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { HiFlag, HiOutlineFlag } from "react-icons/hi";
+import toast from "react-hot-toast";
+
 import SectionWrapper from "../../../components/ui/common/SectionWrapper";
 import Heading from "../../../components/ui/headings/Heading";
 import Button from "../../../components/ui/button/Button";
@@ -9,101 +13,89 @@ import {
   DUMMY_PATIENT_DATA,
   MEDICATION_DUMMY_DATA,
 } from "../../../constants/commonData";
-import { useState } from "react";
-import { HiFlag, HiOutlineFlag } from "react-icons/hi";
-import toast from "react-hot-toast";
 
 const DetailPage1: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
+
+  // Determine if we are in a simple "Profile View" (where Next shouldn't show)
   const isPatientPath =
     location.pathname.includes("/all-patients/") ||
     location.pathname.includes("/flagged-patients/");
 
-  // Initialize based on path
+  // State for flagging logic
   const [isFlagged, setIsFlagged] = useState(
     location.pathname.includes("/flagged-patients/"),
   );
+
+  // Dynamic Page Title based on Route
   const getPageTitle = () => {
+    if (location.pathname.includes("/consultations/"))
+      return "Consultation Detail";
     if (location.pathname.includes("/new-visits/")) return "Visits Detail";
     if (location.pathname.includes("/all-visits/")) return "All Visits Details";
-    if (location.pathname.includes("/all-patients/")) return "Patient Details";
-    if (location.pathname.includes("/flagged-patients/"))
-      return "Flagged Patient Details";
-    // Admin specific titles
-    if (location.pathname.includes("/admin/consultations/"))
-      return "Consultation Details";
-    if (location.pathname.includes("/admin/dashboard/"))
-      return "Queue Request Details";
+    return "Patient Details";
+  };
 
-    return "Details";
-  };
-  const handleFlagToggle = () => {
-    const nextState = !isFlagged;
-    setIsFlagged(nextState);
-
-    toast.success(nextState ? "Patient flagged successfully" : "Flag removed");
-  };
-  const getNextPath = () => {
-    const currentPath = location.pathname;
-    return `${currentPath}/details`;
-  };
+  /**
+   * DYNAMIC REDIRECT LOGIC
+   * Takes the current URL (e.g., /provider/new-visits/1)
+   * and appends /details to reach the next step.
+   */
   const handleNextNavigation = () => {
     const currentPath = location.pathname;
-
-    if (currentPath.includes("/all-patients/")) {
-      // For All Patients, take user back to the main list
-      navigate("/provider/all-patients");
-    } else {
-      // For all other routes (New Visits, All Visits, etc.), proceed to the next detail page
-      navigate(getNextPath());
+    // Check to ensure we don't accidentally double-append if the user clicks fast
+    if (!currentPath.endsWith("/details")) {
+      navigate(`${currentPath}/details`);
     }
+  };
+
+  const handleToggleFlag = () => {
+    setIsFlagged(!isFlagged);
+    toast.success(
+      isFlagged ? "Patient unflagged" : "Patient flagged successfully",
+    );
   };
 
   return (
     <SectionWrapper className="m-6">
-      {/* Header with Back Button */}
-      <div className="flex justify-between items-center mb-8">
-        <div className="flex items-center gap-4 ">
+      <div className="flex flex-col gap-8">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate(-1)}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <FaArrowLeft size={20} className="text-[#271100]" />
+            </button>
+            <Heading
+              title={getPageTitle()}
+              textSize="text-[24px]"
+              className="font-bold text-[#1A202C]"
+            />
+          </div>
+
           <button
-            onClick={() => navigate(-1)}
-            className="text-[#0A1E25] hover:text-[#705295] transition-colors"
-          >
-            <FaArrowLeft size={20} />
-          </button>
-          <Heading
-            title={getPageTitle()}
-            textSize="text-[24px]"
-            className="font-bold text-[#1A202C]"
-          />
-        </div>
-        {isPatientPath && (
-          <button
-            onClick={handleFlagToggle}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold transition-all   ${
+            onClick={handleToggleFlag}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${
               isFlagged
-                ? "bg-[#FFF8F2] text-[#FF8D28] "
-                : "bg-white text-[#A3948C] b hover:bg-gray-50"
+                ? "bg-red-50 border-red-200 text-red-600"
+                : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
             }`}
           >
-            {isFlagged ? (
-              <HiFlag size={20} className="text-[#FF8D28]" />
-            ) : (
-              <HiOutlineFlag size={20} />
-            )}
-            <span className="text-[14px]">
-              {isFlagged ? "Patient Flagged" : "Flag Patient"}
+            {isFlagged ? <HiFlag size={20} /> : <HiOutlineFlag size={20} />}
+            <span className="font-semibold text-[14px]">
+              {isFlagged ? "Flagged" : "Flag Patient"}
             </span>
           </button>
-        )}
-      </div>
+        </div>
 
-      <div className="space-y-8">
-        {/* Personal Information */}
-        <section>
-          <h3 className="text-[20px] font-bold text-[#1A202C] mb-6">
-            Personal Information
+        {/* Patient Profile Information */}
+        <section className="space-y-6">
+          <h3 className="text-[20px] font-bold text-[#1A202C]">
+            Patient Profile
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
             <ProfileCard
@@ -118,66 +110,63 @@ const DetailPage1: React.FC = () => {
               label="Email Address"
               value={DUMMY_PATIENT_DATA.email}
             />
-            <ProfileCard label="Date Of Birth" value={DUMMY_PATIENT_DATA.dob} />
             <ProfileCard
-              label="Vitals"
-              value={`Weight: 130lbs | Height: 5'6" | BMI: 23.0`}
+              label="Phone Number"
+              value={DUMMY_PATIENT_DATA.phone}
             />
+            <ProfileCard label="Date of Birth" value={DUMMY_PATIENT_DATA.dob} />
+            <ProfileCard label="Gender" value={DUMMY_PATIENT_DATA.gender} />
+            <ProfileCard label="Address" value={DUMMY_PATIENT_DATA.address} />
           </div>
         </section>
 
-        {/* Patient Health Information - Grid Layout */}
-        <section>
-          <h3 className="text-[20px] font-bold text-[#1A202C] mb-6">
-            Patient Health Information
+        {/* Medical History Section */}
+        <section className="space-y-6">
+          <h3 className="text-[20px] font-bold text-[#1A202C]">
+            Medical History
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-            <ProfileCard label="Past Medical Problems" value="Asthma." />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
             <ProfileCard
-              label="Current Medications"
-              value={MEDICATION_DUMMY_DATA[0]?.name || "Zoloft."}
+              label="Are you currently taking any medications?"
+              value={MEDICATION_DUMMY_DATA[0]?.name || "None reported."}
             />
             <ProfileCard
               label="Any Known Allergies"
-              value="Yes, Pollen allergy, Mold allergy, Seasonal allergy"
+              value="Pollen, Mold, Seasonal"
             />
-            <div className="hidden md:block" />{" "}
-            {/* Spacer for grid alignment */}
-            <ProfileCard
-              label="Are you currently pregnant OR planning to become pregnant?"
-              value="Yes"
-            />
-            <ProfileCard label="Are you currently breastfeeding?" value="Yes" />
+            <ProfileCard label="Currently pregnant or planning?" value="No" />
+            <ProfileCard label="Currently breastfeeding?" value="No" />
           </div>
         </section>
 
-        {/* Attachments - using existing component */}
-        <section>
-          <h3 className="text-[20px] font-bold text-[#1A202C] mb-6">
-            Attachments
-          </h3>
+        {/* Attachments Section */}
+        <section className="space-y-6">
+          <h3 className="text-[20px] font-bold text-[#1A202C]">Attachments</h3>
           <Attachments />
         </section>
-      </div>
 
-      {/* Footer Buttons */}
-      <div className="flex justify-end gap-4 mt-12">
-        <Button
-          label="Back"
-          width="w-[120px]"
-          bgColor="bg-transparent"
-          textColor="text-[#A3948C]"
-          className="hover:bg-gray-50 !font-bold"
-          onClick={() => navigate(-1)}
-        />
-        {!isPatientPath && (
+        {/* Footer Navigation Buttons */}
+        <div className="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-100">
           <Button
-            label="Next"
+            label="Back"
             width="w-[120px]"
-            bgColor="bg-[#705295]"
-            onClick={() => navigate(`/provider/dashboard/${id}/details`)}
+            bgColor="bg-white"
+            textColor="text-[#A3948C]"
+            className="border border-gray-200 hover:bg-gray-50 !font-bold"
+            onClick={() => navigate(-1)}
           />
-        )}
+
+          {!isPatientPath && (
+            <Button
+              label="Next"
+              width="w-[120px]"
+              bgColor="bg-[#705295]"
+              textColor="text-white"
+              className="hover:opacity-90 !font-bold"
+              onClick={handleNextNavigation}
+            />
+          )}
+        </div>
       </div>
     </SectionWrapper>
   );
