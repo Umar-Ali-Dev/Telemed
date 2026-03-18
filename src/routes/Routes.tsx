@@ -112,7 +112,10 @@ export const router = createBrowserRouter([
           { path: "dashboard/:id/details", element: <DetailPage2 /> },
           { path: "all-patients", element: <AdminPatients /> },
           { path: "patients/edit/:id", element: <EditPatient /> },
-          { path: "patient/:id", element: <PatientProfile /> },
+          // { path: "patient/:id", element: <PatientProfile /> },
+          { path: "patient/:id", element: <DetailPage1 /> },
+          { path: "patient/:id/details", element: <DetailPage1 /> },
+
           { path: "all-providers", element: <AdminProviders /> },
           { path: "providers/add", element: <EditProvider /> },
           { path: "providers/edit/:id", element: <EditProvider /> },
