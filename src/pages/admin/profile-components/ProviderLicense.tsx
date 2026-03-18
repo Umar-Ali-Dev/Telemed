@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import InfoDisplay from "../../../components/ui/cards/InfoDisplay";
 import CertificationThumbnail from "../../../components/ui/inputs/CertificationThumbnail";
+import { CERTIFICATE_IMAGES } from "../../../constants/commonData";
 
 const LICENSE_DATA = [
   {
@@ -11,14 +12,28 @@ const LICENSE_DATA = [
     expirationDate: "2020",
     supervisingProvider: "Dr. Jabar Haider",
     attachments: [
-      { name: "license_1_cert_1", placeholder: "Certificate" },
-      { name: "license_1_cert_2", placeholder: "Certificate" },
+      {
+        name: "license_1_cert_1",
+        placeholder: "Certificate",
+        url: CERTIFICATE_IMAGES[4], // Using index 4 from your shared images
+      },
+      {
+        name: "license_1_cert_2",
+        placeholder: "Certificate",
+        url: CERTIFICATE_IMAGES[5], // Using index 5 from your shared images
+      },
     ],
   },
 ];
 
 const ProviderLicense: React.FC = () => {
-  const { control } = useForm();
+  // Pass the image URLs into defaultValues so CertificationThumbnail renders the preview
+  const { control } = useForm({
+    defaultValues: {
+      license_1_cert_1: LICENSE_DATA[0].attachments[0].url,
+      license_1_cert_2: LICENSE_DATA[0].attachments[1].url,
+    },
+  });
 
   return (
     <div className="space-y-12 animate-fadeIn">
@@ -54,7 +69,7 @@ const ProviderLicense: React.FC = () => {
 
           {/* Separator for multiple licenses */}
           {index !== LICENSE_DATA.length - 1 && (
-            <hr className="border-[#D4CFCC] mt-8" />
+            <hr className="border-gray-100" />
           )}
         </div>
       ))}

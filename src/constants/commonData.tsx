@@ -1350,6 +1350,18 @@ export const NOTIFICATION_DATA = [
     ],
   },
 ];
+// 8 Different Professional Certificate/Document Image Links
+export const CERTIFICATE_IMAGES = [
+  "https://images.unsplash.com/photo-1589330694653-ded6df03f754?q=80&w=400&h=300&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1626778098039-4799cdd1479d?q=80&w=400&h=300&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1544650039-22886fbb4323?q=80&w=400&h=300&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1606326666490-4521b4a093a2?q=80&w=400&h=300&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1621243804936-775306a8f2e3?q=80&w=400&h=300&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=400&h=300&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=400&h=300&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=400&h=300&auto=format&fit=crop",
+];
+
 export const FORM_LAYOUT_CLASS = "max-w-full lg:max-w-[650px] space-y-6";
 export const BUTTON_GROUP_CLASS =
   "flex justify-end gap-4 mt-12 pt-4 border-t border-gray-50";
