@@ -1403,21 +1403,27 @@ export const ADMIN_QUEUE_COLUMNS = (
     name: "Action",
     button: true,
     cell: (row: any) => {
-      const isWaitingProvider =
-        row.status?.toLowerCase() === "waiting provider";
+      const status = row.status?.toLowerCase();
+      const isWaitingProvider = status === "waiting provider";
+      const isCompleted = status === "completed"; // Check for completed status
 
       const getDoctorIconStyle = () => {
         if (isWaitingProvider) return "brightness-0 opacity-100";
-        return " grayscale";
+        if (isCompleted) return " grayscale cursor-not-allowed"; // Style for completed
+        return "grayscale";
       };
 
       return (
         <div className="flex items-center gap-3">
           <button
-            className="transition-all cursor-pointer hover:opacity-70"
+            // Disable pointer events if status is completed
+            className={`transition-all ${isCompleted ? "cursor-not-allowed" : "cursor-pointer hover:opacity-70"}`}
             onClick={(e) => {
               e.stopPropagation();
-              handleAssignClick(row);
+              // ONLY call assign if the status is NOT completed
+              if (!isCompleted) {
+                handleAssignClick(row);
+              }
             }}
           >
             <img
@@ -1426,6 +1432,7 @@ export const ADMIN_QUEUE_COLUMNS = (
               className={`w-6 h-6 object-contain transition-all ${getDoctorIconStyle()}`}
             />
           </button>
+
           <button
             className="hover:opacity-70 transition-opacity cursor-pointer"
             onClick={(e) => {
@@ -2394,7 +2401,7 @@ export const getVisitColumns = (
   handleRowClick: (row: PatientRecord) => void,
   handleCancelClick: (row: PatientRecord) => void,
   baseColumns: any[],
-  handleAcceptVisit?: (id: number) => void, // Changed type to number
+  handleAcceptVisit?: (id: number) => void,
 ) => {
   return baseColumns.map((col) => {
     if (col.name === "Action") {
@@ -2405,25 +2412,22 @@ export const getVisitColumns = (
 
           return (
             <div className="flex gap-3 items-center">
-              {/* Show Cancel button only if not in Reviewing status */}
-              {!isReviewing && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleCancelClick(row);
-                  }}
-                  className="px-4 py-1.5 rounded-md font-medium text-sm text-gray-600 hover:bg-gray-100 transition-colors"
-                >
-                  Cancel
-                </button>
-              )}
+              {/* Cancel button now appears for all statuses */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Stop row click
+                  handleCancelClick(row);
+                }}
+                className="px-4 py-1.5 rounded-md font-medium text-sm text-gray-600 hover:bg-gray-100 transition-colors"
+              >
+                Cancel
+              </button>
 
-              {/* Dynamic Action Button */}
+              {/* Dynamic Action Button toggles between Accept and Review */}
               {!isReviewing ? (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    // No more TS error here because types match
                     if (handleAcceptVisit) {
                       handleAcceptVisit(row.id);
                     }

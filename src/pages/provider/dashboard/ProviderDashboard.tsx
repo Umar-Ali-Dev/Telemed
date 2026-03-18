@@ -24,6 +24,9 @@ import activityLogsIcon from "../../../assets/icons/activityLogs.svg";
 
 const ProviderDashboard: React.FC = () => {
   const navigate = useNavigate();
+
+  // 1. Initialize data in state to allow status updates (e.g., Accept -> Reviewing)
+  const [visitsData, setVisitsData] = useState<PatientRecord[]>(DUMMY_DATA);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<PatientRecord | null>(null);
 
@@ -36,8 +39,21 @@ const ProviderDashboard: React.FC = () => {
     setIsCancelModalOpen(true);
   };
 
+  // 2. Add handleAcceptVisit logic to change status to "Reviewing"
+  const handleAcceptVisit = (id: number) => {
+    setVisitsData((prevData) =>
+      prevData.map((visit) =>
+        visit.id === id ? { ...visit, status: "Reviewing" } : visit,
+      ),
+    );
+  };
+
   const handleCancelSubmit = (reason: string) => {
     console.log("Cancelling visit for:", selectedRow, "Reason:", reason);
+    // Remove the cancelled visit from the list
+    if (selectedRow) {
+      setVisitsData((prev) => prev.filter((v) => v.id !== selectedRow.id));
+    }
     setIsCancelModalOpen(false);
     setSelectedRow(null);
   };
@@ -110,8 +126,9 @@ const ProviderDashboard: React.FC = () => {
                 handleRowClick,
                 handleCancelClick,
                 CARE_QUEUE_COLUMNS,
+                handleAcceptVisit, // 3. Pass the handler to the column generator
               )}
-              data={DUMMY_DATA}
+              data={visitsData} // 4. Use state data instead of DUMMY_DATA
               customStyles={commonTableStyles}
               onRowClicked={handleRowClick}
               responsive
