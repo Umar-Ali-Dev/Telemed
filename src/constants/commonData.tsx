@@ -2020,6 +2020,11 @@ export const REFUND_REQUESTS_COLUMNS = (
     sortable: true,
   },
   {
+    name: "Cancellation Reason",
+    selector: (row: any) => row.patientName,
+    sortable: true,
+  },
+  {
     name: "Status",
     cell: (row: any) => {
       const colors: any = {
