@@ -1664,6 +1664,7 @@ export const ADMIN_PROVIDER_COLUMNS = (
   handleEdit: (id: any) => void,
   handleViewProfile: (id: any) => void,
   onStatusChange?: (id: any, newStatus: string) => void,
+  handleViewVisits?: (id: any) => void,
 ) => [
   {
     name: "Name",
@@ -1775,7 +1776,7 @@ export const ADMIN_PROVIDER_COLUMNS = (
               {
                 label: "Visits",
                 icon: <LuClipboardList size={16} />,
-                onClick: () => handleViewProfile(row.id),
+                onClick: () => handleViewVisits && handleViewVisits(row.id),
               },
             ]}
           />

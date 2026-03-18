@@ -42,6 +42,7 @@ import RequestAsynchronousVisit from "../components/ui/landing/RequestAsynchrono
 import AdminLoginPage from "../pages/auth/AdminLoginPage";
 import MobileAppExperience from "../components/ui/landing/MobileAppExperience";
 import PrescriptionDetailPage from "../pages/admin/management/PrescriptionDetailPage";
+import ProviderVisits from "../pages/admin/providers/ProviderVisits";
 
 export const router = createBrowserRouter([
   {
@@ -121,6 +122,7 @@ export const router = createBrowserRouter([
             path: "providers/requests/:id",
             element: <SingleProviderRequestDetail />,
           },
+          { path: "providers/visits", element: <ProviderVisits /> },
           {
             path: "management/prescriptions",
             element: <AllPrescriptions />,

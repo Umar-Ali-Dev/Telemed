@@ -29,7 +29,7 @@ const AdminProviders: React.FC = () => {
       [id]: newStatus,
     }));
   };
-
+  const handleViewVisits = (id: any) => navigate("/admin/providers/visits");
   // Map data and add toggleStatus, then filter
   const mappedData = ADMIN_DASHBOARD_DATA.map((item: any) => ({
     ...item,
@@ -73,6 +73,7 @@ const AdminProviders: React.FC = () => {
               handleEdit,
               handleViewProfile,
               handleStatusChange,
+              handleViewVisits,
             )}
             data={filteredData}
             customStyles={commonTableStyles}
