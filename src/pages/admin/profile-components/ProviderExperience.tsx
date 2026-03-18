@@ -7,7 +7,7 @@ import { CERTIFICATE_IMAGES } from "../../../constants/commonData";
 const EXPERIENCE_DATA = [
   {
     id: 1,
-    title: "Senior Doctor - AIOM University, UI - 2020.",
+    title: "12 years - AIM institute",
     degree: "MBBS Specialization",
     hospital: "AIOM University, UI",
     startDate: "2020",
@@ -18,11 +18,11 @@ const EXPERIENCE_DATA = [
   },
   {
     id: 2,
-    title: "Intern Doctor - AIOM University, UI - 2018.",
-    degree: "Medical Internship",
+    title: "12 years - AIM institute",
+    degree: "MBBS Specialization",
     hospital: "AIOM University, UI",
-    startDate: "2018",
-    endDate: "2020",
+    startDate: "2020",
+    endDate: "2022",
     description:
       "Progress notes are the written notes that you'll add to your patient's chart when any changes occur.",
     certificateUrl: CERTIFICATE_IMAGES[1],
@@ -46,10 +46,9 @@ const ProviderExperience: React.FC = () => {
 
           {/* Grid for Experience Details - Matches Education spacing */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
-            <InfoDisplay label="Degree Name" value={item.degree} />
-            <InfoDisplay label="Hospital / University" value={item.hospital} />
+            <InfoDisplay label="Name Of Certification" value={item.degree} />
             <InfoDisplay label="Start Date" value={item.startDate} />
-            <InfoDisplay label="End Date" value={item.endDate} />
+            <InfoDisplay label="Expiration Date " value={item.endDate} />
           </div>
 
           {/* Attachment Section - Matches Education labeling and layout */}
