@@ -22,3 +22,19 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# ─── Backend (NestJS) ────────────────────────────────────────────────────────
+backend/node_modules
+backend/dist
+backend/build
+backend/.env
+backend/.env.*
+!backend/.env.example
+backend/coverage
+backend/.nyc_output
+backend/.temp
+backend/.tmp
+backend/pids
+backend/*.pid
+backend/*.seed
+backend/*.pid.lock
