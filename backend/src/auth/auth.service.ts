@@ -495,6 +495,17 @@ export class AuthService {
     }
   }
 
+  // ─── Resend OTP ──────────────────────────────────────────────────────────────
+
+  async resendOtp(email: string, purpose: OtpPurpose): Promise<{ message: string }> {
+    const user = await this.usersService.findByEmail(email);
+    // Always return same message to prevent email enumeration
+    if (!user) return { message: 'If that email exists, a new OTP has been sent.' };
+
+    await this.createAndSendOtp(user, purpose);
+    return { message: 'A new OTP has been sent to your email.' };
+  }
+
   // ─── Logout ───────────────────────────────────────────────────────────────────
 
   async logout(req: Request, res: Response): Promise<{ message: string }> {

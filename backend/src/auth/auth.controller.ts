@@ -17,6 +17,7 @@ import { Roles } from './decorators/roles.decorator';
 
 import { LoginDto } from './dto/login.dto';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
+import { ResendOtpDto } from './dto/resend-otp.dto';
 import { RegisterProviderDto } from './dto/register-provider.dto';
 import { RegisterPatientDto } from './dto/register-patient.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
@@ -48,6 +49,14 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     return this.authService.verifyOtp(dto, req, res);
+  }
+
+  // POST /api/v1/auth/resend-otp
+  // Body: { email, purpose }
+  @Post('resend-otp')
+  @HttpCode(HttpStatus.OK)
+  resendOtp(@Body() dto: ResendOtpDto) {
+    return this.authService.resendOtp(dto.email, dto.purpose);
   }
 
   // POST /api/v1/auth/register/provider

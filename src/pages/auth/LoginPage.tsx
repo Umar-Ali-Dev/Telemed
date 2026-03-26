@@ -1,31 +1,36 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Heading from "../../components/ui/headings/Heading";
 import InputField from "../../components/ui/inputs/InputField";
 import Button from "../../components/ui/button/Button";
+import { login } from "../../api/auth";
 
 interface LoginPageProps {
   onNavigate: (page: "forgotPassword" | "signUp") => void;
   onLoginSuccess: (email: string) => void;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({
-  onNavigate,
-  onLoginSuccess,
-}) => {
+const LoginPage: React.FC<LoginPageProps> = ({ onNavigate, onLoginSuccess }) => {
   const { control, handleSubmit } = useForm({
     defaultValues: { email: "", password: "" },
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: { email: string; password: string }) => {
+    setIsLoading(true);
     const loadToast = toast.loading("Checking credentials...");
-    setTimeout(() => {
-      toast.success("Credentials accepted!", { id: loadToast });
+    try {
+      await login(data.email, data.password);
+      toast.success("OTP sent to your email!", { id: loadToast });
       onLoginSuccess(data.email);
-    }, 1000);
+    } catch (err: any) {
+      toast.error(err?.message ?? "Invalid credentials", { id: loadToast });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -60,7 +65,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
           </button>
         </div>
         <div className="mt-4">
-          <Button type="submit" label="Login" />
+          <Button type="submit" label={isLoading ? "Checking..." : "Login"} disabled={isLoading} />
         </div>
       </form>
       <div className="mt-6 text-center text-[14px] text-[#999999]">

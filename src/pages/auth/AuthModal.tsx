@@ -8,6 +8,7 @@ import ForgotPasswordPage from "./ForgotPasswordPage";
 import OTPVerificationPage from "./OTPVerificationPage";
 import ResetPasswordPage from "./ResetPasswordPage";
 import instaVisitLogo from "../../assets/icons/instaVisit.svg";
+import type { OtpPurpose } from "../../constants/roles";
 
 type AuthPage =
   | "login"
@@ -17,16 +18,28 @@ type AuthPage =
   | "resetPassword";
 
 const AuthModal = () => {
-  const [currentPage, setCurrentPage] = useState<AuthPage>("login");
+  // Read ?token= from URL on initial render — used for provider set-password flow
+  const urlToken = new URLSearchParams(window.location.search).get("token") ?? "";
+
+  const [currentPage, setCurrentPage] = useState<AuthPage>(urlToken ? "resetPassword" : "login");
   const [userEmail, setUserEmail] = useState<string>("");
-  const [flowType, setFlowType] = useState<"auth" | "reset">("auth");
+  const [otpPurpose, setOtpPurpose] = useState<OtpPurpose>("login");
+  const [verifiedOtp, setVerifiedOtp] = useState<string>("");
+  const [setPasswordToken] = useState<string>(urlToken);
 
   const navigateTo = (page: AuthPage) => setCurrentPage(page);
 
-  const handleStartOTP = (email: string, type: "auth" | "reset") => {
+  // Called after login or signup — go to OTP page with the correct purpose
+  const handleStartOtp = (email: string, purpose: OtpPurpose) => {
     setUserEmail(email);
-    setFlowType(type);
+    setOtpPurpose(purpose);
     setCurrentPage("otpVerification");
+  };
+
+  // Called after OTP verified in forgot-password flow — carry OTP to reset page
+  const handleOtpVerifiedForReset = (otp: string) => {
+    setVerifiedOtp(otp);
+    setCurrentPage("resetPassword");
   };
 
   return (
@@ -41,30 +54,36 @@ const AuthModal = () => {
           {currentPage === "login" && (
             <LoginPage
               onNavigate={navigateTo}
-              onLoginSuccess={(email) => handleStartOTP(email, "auth")}
+              onLoginSuccess={(email) => handleStartOtp(email, "login")}
             />
           )}
           {currentPage === "signUp" && (
             <SignUpPage
               onNavigate={navigateTo}
-              onSignUpSuccess={(email) => handleStartOTP(email, "auth")}
+              onSignUpSuccess={(email) => handleStartOtp(email, "email_verification")}
             />
           )}
           {currentPage === "forgotPassword" && (
             <ForgotPasswordPage
               onNavigate={navigateTo}
-              onForgotSuccess={(email) => handleStartOTP(email, "reset")}
+              onForgotSuccess={(email) => handleStartOtp(email, "password_reset")}
             />
           )}
           {currentPage === "otpVerification" && (
             <OTPVerificationPage
               onNavigate={navigateTo}
               userEmail={userEmail}
-              nextStep={flowType === "reset" ? "resetPassword" : "dashboard"}
+              purpose={otpPurpose}
+              onOtpVerifiedForReset={handleOtpVerifiedForReset}
             />
           )}
           {currentPage === "resetPassword" && (
-            <ResetPasswordPage onNavigate={navigateTo} />
+            <ResetPasswordPage
+              onNavigate={navigateTo}
+              userEmail={userEmail}
+              verifiedOtp={verifiedOtp}
+              setPasswordToken={setPasswordToken}
+            />
           )}
         </div>
       </div>

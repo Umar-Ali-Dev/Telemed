@@ -1,30 +1,35 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowLeft } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Heading from "../../components/ui/headings/Heading";
 import InputField from "../../components/ui/inputs/InputField";
 import Button from "../../components/ui/button/Button";
+import { forgotPassword } from "../../api/auth";
 
 interface ForgotProps {
   onNavigate: (page: any) => void;
   onForgotSuccess: (email: string) => void;
 }
 
-const ForgotPasswordPage: React.FC<ForgotProps> = ({
-  onNavigate,
-  onForgotSuccess,
-}) => {
+const ForgotPasswordPage: React.FC<ForgotProps> = ({ onNavigate, onForgotSuccess }) => {
   const { control, handleSubmit } = useForm({ defaultValues: { email: "" } });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: { email: string }) => {
+    setIsLoading(true);
     const loadToast = toast.loading("Requesting OTP...");
-    setTimeout(() => {
+    try {
+      await forgotPassword(data.email);
       toast.success("OTP sent!", { id: loadToast });
       onForgotSuccess(data.email);
-    }, 1200);
+    } catch (err: any) {
+      toast.error(err?.message ?? "Something went wrong", { id: loadToast });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -51,7 +56,7 @@ const ForgotPasswordPage: React.FC<ForgotProps> = ({
           />
         </div>
         <div className="mt-4">
-          <Button type="submit" label="Next" />
+          <Button type="submit" label={isLoading ? "Sending..." : "Next"} disabled={isLoading} />
         </div>
       </form>
     </>
